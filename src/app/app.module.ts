@@ -11,11 +11,13 @@ import { ApiService } from './services/remote/remote-call.service';
 import { AppComponent }  from './app.component';
 import { LoginPageComponent }  from './page_components/login.component';
 import {SignUpPageComponent} from "./page_components/signup.component";
+import {DashboardPageComponent} from "./page_components/dashboard.component";
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
     {path: 'login', component: LoginPageComponent},
-    {path: 'signup', component: SignUpPageComponent}
+    {path: 'signup', component: SignUpPageComponent},
+    {path: 'dashboard', component: DashboardPageComponent}
 
 ];
 
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginPageComponent,
-    SignUpPageComponent
+    SignUpPageComponent,
+    DashboardPageComponent
     ],
   providers: [
     ApiService
