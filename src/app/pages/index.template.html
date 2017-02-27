@@ -1,10 +1,27 @@
+<md-sidenav-container class="container sidenav-container-style">
 
-<md-toolbar>
-    <button md-button routerLink="/login">Login</button>
-    <button md-button routerLink="/signup">Sign Up</button>
-    <button md-button routerLink="/dashboard">Dashboard</button>
-</md-toolbar>
+  <md-toolbar color="primary">
+    <md-icon id="hamburger" (click)="sidenav.open()">&#xE5D2;</md-icon>
+    <!--<button *ngIf="!getUserLogged()" md-button routerLink="/login">Login</button>
+    <button *ngIf="!getUserLogged()" md-button routerLink="/register">Register</button>
+    <button *ngIf="getUserLogged()" md-button routerLink="/welcome">Home</button>
+    <button *ngIf="getUserLogged()" md-button routerLink="/procedure-list">Procedures</button>-->
+    <button md-button *ngIf="isLogged()" routerLink="/dashboard">Dashboard</button>
+    <button md-button *ngIf="isLogged()">Logout</button>
+
+    <button md-button *ngIf="!isLogged()" routerLink="/login">Login</button>
+    <button md-button *ngIf="!isLogged()" routerLink="/signup">Sign Up</button>
+  </md-toolbar>
+
+  <md-sidenav #sidenav class="sidenav sidenav-style">
+    <div class="side-menu">
+      Project
+    </div>
+  </md-sidenav>
+</md-sidenav-container>
 
 <div class="container">
-  <router-outlet></router-outlet>
+  <router-outlet>
+
+  </router-outlet>
 </div>

@@ -10,6 +10,50 @@ body {
 }
 
 .container{
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.sidenav {
+  width: 75%;
+}
+
+md-icon#hamburger {
+  display: none;
+}
+
+@media (max-width: 600px) {
+    body {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      min-height: 600px;
+    }
+
+    md-icon#hamburger {
+      display: block;
+    }
+}
+
+
+.sidenav-container-style{
+  position: fixed;
+  top: 0;
+  /*background-image: url(/app/res/background.png);
+  background-repeat:no-repeat;
+  background-position: bottom;*/
+  bottom: 0;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.side-menu{
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.sidenav-style {
+  width: 75%;
 }
