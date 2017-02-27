@@ -4,29 +4,36 @@ import { MaterialModule } from "@angular/material";
 import { Routes, RouterModule } from "@angular/router";
 import {HttpModule} from '@angular/http';
 
+//services
+import { ApiService } from './services/remote/remote-call.service';
+
 //pageComponents
 import { AppComponent }  from './app.component';
 import { LoginPageComponent }  from './page_components/login.component';
-
-//services
-import { ApiService } from './services/remote/remote-call.service';
+import {SignUpPageComponent} from "./page_components/signup.component";
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
     {path: 'login', component: LoginPageComponent},
+    {path: 'signup', component: SignUpPageComponent}
+
 ];
 
 @NgModule({
-  imports:      [ 
-    BrowserModule, 
+  imports:      [
+    BrowserModule,
     MaterialModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
     ],
-  declarations: [ 
+  declarations: [
     AppComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    SignUpPageComponent
     ],
+  providers: [
+    ApiService
+  ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
