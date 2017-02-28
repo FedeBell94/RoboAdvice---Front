@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { MaterialModule } from "@angular/material";
+import { Routes, RouterModule } from "@angular/router";
 import { HttpModule } from '@angular/http';
 import { HttpInterceptorModule } from 'ng-http-interceptor';
 
@@ -10,13 +11,19 @@ import { AuthService } from './services/remote/authentication.service';
 
 //pageComponents
 import { AppComponent }  from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginPageComponent }  from './page_components/login.component';
+import { SignUpPageComponent } from "./page_components/signup.component";
+import { DashboardPageComponent } from "./page_components/dashboard.component";
 
-import { DashboardModule } from './dashboard/dashboard.module';
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { MaterialModule } from "@angular/material";
+const appRoutes: Routes = [
+    {path: '', component: LoginPageComponent},
+    {path: 'login', component: LoginPageComponent},
+    {path: 'signup', component: SignUpPageComponent},
+    {path: 'dashboard', component: DashboardPageComponent},
+    { path: '**', redirectTo: '' }
+
+
+];
 
 @NgModule({
   imports:      [
@@ -24,19 +31,15 @@ import { MaterialModule } from "@angular/material";
     MaterialModule,
     HttpInterceptorModule,
     HttpModule,
-    MaterialModule,
-    BrowserModule,
-    DashboardModule,
-    SidebarModule,
-    NavbarModule,
-    FooterModule,
-    RouterModule.forRoot([])
-  ],
+    RouterModule.forRoot(appRoutes),
+    ],
   declarations: [
     AppComponent,
-    DashboardComponent
-  ],
-  providers:[
+    LoginPageComponent,
+    SignUpPageComponent,
+    DashboardPageComponent
+    ],
+  providers: [
     ApiService,
     AuthService
   ],

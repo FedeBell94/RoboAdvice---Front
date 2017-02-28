@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
-
-declare var $:any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-app',
-  moduleId: module.id,
-  templateUrl: 'app.component.html'
+  templateUrl: `app/pages/index.template.html`,
 })
+export class AppComponent  {
+  name = 'Angular';
 
-export class AppComponent implements OnInit{
-  ngOnInit(){
-    $.getScript('../assets/js/material-dashboard.js');
-    $.getScript('../assets/js/initMenu.js');
+  isLogged(){
+    //da sviluppare, aspettiamo la spring security
+    return false;
   }
+
 }
