@@ -13,7 +13,7 @@
     <form class="login-form">
 
       <md-input-container class="full-width">
-        <input type="email" mdInput placeholder="Email">
+        <input type="email" mdInput #user placeholder="Email">
       </md-input-container>
 
       <br>
@@ -25,6 +25,6 @@
     </form>
   </md-card-content>
   <md-card-actions>
-    <button md-button>Login</button>
+    <button md-button (click)="doLogin(user.value, pwd.value)">Login</button>
   </md-card-actions>
 </md-card>

@@ -3,9 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from "@angular/material";
 import { Routes, RouterModule } from "@angular/router";
 import { HttpModule } from '@angular/http';
+import { HttpInterceptorModule } from 'ng-http-interceptor';
 
 //services
 import { ApiService } from './services/remote/remote-call.service';
+import { AuthService } from './services/remote/authentication.service';
 
 //pageComponents
 import { AppComponent }  from './app.component';
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
   imports:      [
     BrowserModule,
     MaterialModule,
+    HttpInterceptorModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
     ],
@@ -35,7 +38,8 @@ const appRoutes: Routes = [
     DashboardPageComponent
     ],
   providers: [
-    ApiService
+    ApiService,
+    AuthService
   ],
   bootstrap:    [ AppComponent ]
 })
