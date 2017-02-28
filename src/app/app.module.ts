@@ -1,42 +1,34 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from "@angular/material";
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-//services
-import { ApiService } from './services/remote/remote-call.service';
+import { AppComponent }   from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-//pageComponents
-import { AppComponent }  from './app.component';
-import { LoginPageComponent }  from './page_components/login.component';
-import { SignUpPageComponent } from "./page_components/signup.component";
-import { DashboardPageComponent } from "./page_components/dashboard.component";
-
-const appRoutes: Routes = [
-    {path: '', component: LoginPageComponent},
-    {path: 'login', component: LoginPageComponent},
-    {path: 'signup', component: SignUpPageComponent},
-    {path: 'dashboard', component: DashboardPageComponent},
-    { path: '**', redirectTo: '' }
-
-
-];
+import { DashboardModule } from './dashboard/dashboard.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { FooterModule } from './shared/footer/footer.module';
+import { NavbarModule} from './shared/navbar/navbar.module';
+import { MaterialModule } from "@angular/material";
+import { ApiService } from "./services/remote/remote-call.service";
 
 @NgModule({
   imports:      [
-    BrowserModule,
-    MaterialModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
-    ],
+    MaterialModule,
+    BrowserModule,
+    DashboardModule,
+    SidebarModule,
+    NavbarModule,
+    FooterModule,
+    RouterModule.forRoot([])
+  ],
   declarations: [
     AppComponent,
-    LoginPageComponent,
-    SignUpPageComponent,
-    DashboardPageComponent
-    ],
-  providers: [
+    DashboardComponent
+  ],
+  providers:[
     ApiService
   ],
   bootstrap:    [ AppComponent ]
