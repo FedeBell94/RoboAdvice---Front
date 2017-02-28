@@ -3,7 +3,6 @@
    *DA MODIFICARE, E' solo una BOZZA*
    **********************************
 -->
-
 <div class="box">
   <div id="header">
     <h1 id="logintoregister">Login</h1>
@@ -21,7 +20,7 @@
       <span class="bar"></span>
       <label>Password</label>
     </div>
-    <button id="buttonlogintoregister" type="submit">Login</button>
+    <button id="buttonlogintoregister" type="submit" (click)="doLogin(user.value, pwd.value)" >Login</button>
   </form>
   <div id="footer-box"><p class="footer-text">Not a member?<span class="sign-up"><a routerLink="/signup">&nbsp;Sign up now</a></span></p></div>
 </div>
