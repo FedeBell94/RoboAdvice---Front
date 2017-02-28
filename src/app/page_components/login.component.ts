@@ -4,7 +4,8 @@ import { AuthService } from "../services/remote/authentication.service";
 
 @Component({
     selector: "login-page",
-    templateUrl: "/app/pages/login-page.template.html"
+    templateUrl: "app/pages/login-page.template.html",
+    styleUrls: ['app/css/login-signup-page.css']
 })
 export class LoginPageComponent {
     constructor(private auth: AuthService) {}

@@ -8,6 +8,11 @@ export class AuthService {
     constructor(
         private apis: ApiService
     ) { }
+    private logged:boolean = false;
+
+    isLogged() {
+        return this.logged;
+    }
 
     login(user: string, password: string) {
         return this.apis.post("greeting", {}).map((res)=>{

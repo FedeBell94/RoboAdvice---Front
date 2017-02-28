@@ -3,28 +3,24 @@
    *DA MODIFICARE, E' solo una BOZZA*
    **********************************
 -->
-
-<md-card class="login-card">
-  <md-card-header>
-    <md-card-title>Login</md-card-title>
-  </md-card-header>
-  <!--<img md-card-image src="assets/img/examples/shiba2.jpg">-->
-  <md-card-content>
-    <form class="login-form">
-
-      <md-input-container class="full-width">
-        <input type="email" mdInput #user placeholder="Email">
-      </md-input-container>
-
-      <br>
-
-      <md-input-container class="full-width">
-        <input minlength="8" maxlength="16" type="password" #pwd mdInput placeholder="Password">
-      </md-input-container>
-
-    </form>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button (click)="doLogin(user.value, pwd.value)">Login</button>
-  </md-card-actions>
-</md-card>
+<div class="box">
+  <div id="header">
+    <h1 id="logintoregister">Login</h1>
+  </div>
+  <form>
+    <div class="group">
+      <input class="inputMaterial" type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Email</label>
+    </div>
+    <div class="group">
+      <input class="inputMaterial" type="password" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Password</label>
+    </div>
+    <button id="buttonlogintoregister" type="submit" (click)="doLogin(user.value, pwd.value)" >Login</button>
+  </form>
+  <div id="footer-box"><p class="footer-text">Not a member?<span class="sign-up"><a routerLink="/signup">&nbsp;Sign up now</a></span></p></div>
+</div>
