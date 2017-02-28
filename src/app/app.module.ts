@@ -17,7 +17,9 @@ const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
     {path: 'login', component: LoginPageComponent},
     {path: 'signup', component: SignUpPageComponent},
-    {path: 'dashboard', component: DashboardPageComponent}
+    {path: 'dashboard', component: DashboardPageComponent},
+    { path: '**', redirectTo: '' }
+
 
 ];
 
