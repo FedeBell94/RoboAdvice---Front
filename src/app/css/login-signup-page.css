@@ -24,6 +24,21 @@ html{
 }
 
 
+@media screen and (max-width: 480px) {
+  .box{
+    width:300px;
+  }
+
+  .box button{
+    width:200px !important;
+  }
+
+  .inputMaterial {
+    width:200px !important;
+  }
+
+}
+
 .box h1{
   margin-left: 40px;
   padding-bottom: 30px;
@@ -101,7 +116,7 @@ label 				 {
 .inputMaterial:focus ~ label, .inputMaterial:valid ~ label 		{
   top:-20px;
   font-size:14px;
-  color: #009688;
+  color: #3f51b5;
 }
 
 /* BOTTOM BARS ================================= */
@@ -112,7 +127,7 @@ label 				 {
   width:0;
   bottom:1px;
   position:absolute;
-  background: #009688;
+  background: #3f51b5;
   transition:0.2s ease all;
   -moz-transition:0.2s ease all;
   -webkit-transition:0.2s ease all;
@@ -171,4 +186,9 @@ label 				 {
 
 .sign-up:hover{
   color: #b2dfdb;
+}
+
+a{
+  text-decoration: none;
+  color:white;
 }
