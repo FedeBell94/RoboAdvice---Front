@@ -24,6 +24,18 @@ body {
   box-shadow: 6px 0 12px rgba(35, 38, 53, 0.4);
   padding-top: 24px;
 }
+.sidebar-container.open {
+  display: block;
+}
+.sidebar-container.close {
+  display: block;
+}
+.sidebar-overlay.open {
+  display: none;
+}
+.sidebar-overlay.close {
+  display: none;
+}
 
 .sidebar-button.mat-button:hover {
   border-right: inset 4px #4B8220;
@@ -85,8 +97,14 @@ md-icon#hamburger {
       z-index: 202;
       left: -100%;
     }
+    .sidebar-overlay.open,
     .sidebar-container.open {
       animation: slide 0.2s forwards;
+      display: block;
+    }
+    .sidebar-overlay.close,
+    .sidebar-container.close {
+      display: none;
     }
     
     @keyframes slide {

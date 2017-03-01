@@ -14,22 +14,34 @@ export class AppComponent  {
 
   toggleSidenav() {
     this.snisOpen = !this.snisOpen;
-    let sidenav = document.getElementById("sidenav");
-    let overlay = document.getElementById("sidebar-overlay");
     if (this.snisOpen) {
+      this.openSidenav();
+    } else {
+      this.closeSidenav();
+    }
+  }
+
+  openSidenav() {
+      let sidenav = document.getElementById("sidenav");
+      let overlay = document.getElementById("sidebar-overlay");
       sidenav.classList.add("open");
       overlay.classList.add("open");
-      sidenav.style.display = "block";
-      overlay.style.display = "block";
-    } else {
-      sidenav.classList.remove("open");
-      overlay.classList.remove("open");
-      sidenav.style.display = "none";
-      overlay.style.display = "none";
-
-    }
+      
+      sidenav.classList.remove("close");
+      overlay.classList.remove("close");
 
   }
+  closeSidenav() {
+      let sidenav = document.getElementById("sidenav");
+      let overlay = document.getElementById("sidebar-overlay");
+
+      sidenav.classList.remove("open");
+      overlay.classList.remove("open");
+      
+      sidenav.classList.add("close");
+      overlay.classList.add("close");
+  }
+
 
 
 }
