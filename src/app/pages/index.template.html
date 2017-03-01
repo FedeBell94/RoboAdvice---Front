@@ -1,18 +1,18 @@
 
-<md-toolbar color="primary">
-  <!--<button *ngIf="!getUserLogged()" md-button routerLink="/login">Login</button>
-  <button *ngIf="!getUserLogged()" md-button routerLink="/register">Register</button>
-  <button *ngIf="getUserLogged()" md-button routerLink="/welcome">Home</button>
-  <button *ngIf="getUserLogged()" md-button routerLink="/procedure-list">Procedures</button>-->
-  <button md-button *ngIf="isLogged()" routerLink="/dashboard">Dashboard</button>
-  <button md-button *ngIf="isLogged()">Logout</button>
-
-  <button md-button *ngIf="!isLogged()" routerLink="/login">Login</button>
-  <button md-button *ngIf="!isLogged()" routerLink="/signup">Sign Up</button>
+<md-toolbar color="primary" style="z-index: 10">
+  <md-icon id="hamburger" (click)="toggleSidenav()">&#9776;</md-icon>
 </md-toolbar>
 
-<router-outlet>
-
-</router-outlet>
-
-
+<div class="container-layout">
+  <div class="sidebar-container" id="sidenav">
+    <div class="sidenav">
+      <button class="sidebar-button" (click)="toggleSidenav()" md-button routerLink="/dashboard"><md-icon>home</md-icon> Dashboard</button>
+      <button class="sidebar-button" (click)="toggleSidenav()" md-button routerLink="/signup"><md-icon>create</md-icon> Sign Up</button>
+      <button class="sidebar-button" (click)="toggleSidenav()" md-button routerLink="/login"><md-icon>account_circle</md-icon> Login</button>
+    </div>
+  </div>
+  <div class="app-container">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="sidebar-overlay" id="sidebar-overlay" (click)="toggleSidenav()"></div>
+</div>

@@ -1,26 +1,72 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
-
 body {
   margin: 0;
   padding: 0;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  font-family: "Roboto";
 }
 
-.container{
-  margin-left: 10%;
-  margin-right: 10%;
+.container-layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
-.sidenav {
-  width: 75%;
+.sidebar-container {
+  width: 20%;
+  min-width: 150px;
+  height: 100%;
+  background-color: #1A2668;
+  box-sizing: border-box;
+  box-shadow: 6px 0 12px rgba(35, 38, 53, 0.4);
+  padding-top: 24px;
+}
+
+.sidebar-button.mat-button:hover {
+  border-right: inset 4px #4B8220;
+}
+
+.sidebar-button.mat-button,
+.sidebar-button span,
+.sidebar-button div {
+  width: 100%;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.807);
+  font-weight: 500;
+  font-size: 12px;
+  vertical-align: middle;
+}
+.sidebar-overlay {
+    z-index: 201;
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-button span md-icon {
+  font-size: 18px;
+}
+
+.app-container {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  background-color: #fafafa;
+  padding: 24px;
 }
 
 md-icon#hamburger {
   display: none;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
 }
+
 
 @media (max-width: 600px) {
     body {
@@ -32,28 +78,23 @@ md-icon#hamburger {
       min-height: 600px;
     }
 
+    .sidebar-container {
+      display: none;
+      position: fixed;
+      width: 75%;
+      z-index: 202;
+      left: -100%;
+    }
+    .sidebar-container.open {
+      animation: slide 0.2s forwards;
+    }
+    
+    @keyframes slide {
+      100% { left: 0; }
+    }
+
     md-icon#hamburger {
       display: block;
     }
 }
 
-
-.sidenav-container-style{
-  position: fixed;
-  top: 0;
-  /*background-image: url(/app/res/background.png);
-  background-repeat:no-repeat;
-  background-position: bottom;*/
-  bottom: 0;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.side-menu{
-  margin-left: 10%;
-  margin-top: 20px;
-}
-
-.sidenav-style {
-  width: 75%;
-}
