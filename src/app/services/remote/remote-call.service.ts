@@ -35,7 +35,7 @@ export class ApiService {
         return this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError);
     }
 
-    post(action: string, params: Object): Observable<any> {
+    post(action: string, params: any): Observable<any> {
         let headers = new Headers();
         headers.append('Accept', 'application/json')
         headers.append('Content-Type', 'application/json');
@@ -45,10 +45,17 @@ export class ApiService {
     }
 
     private extractData(res: Response) {
+        /// {   response: 0 (errore) | 1+ (ok),
+        ///     errorCode: (intero univoco),
+        ///     errorString: (string di messaggio dell'errore),
+        ///     data: (dati se non errori) }
         this.callCount--;
         let body = res.json();
         //console.log(body)
-        return res || { };
+        if (body.response == 0)
+            //error there
+            console.log( new Date().toDateString() + " SERVER API ERROR " + body.errorCode + ": " + body.errorString);
+        return body || { };
     }
 
     private handleError (error: Response | any) {

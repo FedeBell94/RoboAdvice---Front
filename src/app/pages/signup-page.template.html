@@ -4,24 +4,18 @@
   </div>
   <form>
     <div class="group">
-      <input class="inputMaterial" type="text" required>
+      <input class="inputMaterial" type="text" #email required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Email</label>
     </div>
     <div class="group">
-      <input class="inputMaterial" type="password" required>
+      <input class="inputMaterial" type="password" #password required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Password</label>
     </div>
-    <div class="group">
-      <input class="inputMaterial" type="password" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Confirm Password</label>
-    </div>
-    <button id="buttonSignup" type="submit">Sign Up</button>
+    <button id="buttonSignup" type="button" (click)="submitRegistration(email.value, password.value)">Sign Up</button>
   </form>
   <div id="footer-box"><p class="footer-text">Have you an account?<span class="sign-up"><a routerLink="/login">&nbsp;Login now</a></span></p></div>
 </div>

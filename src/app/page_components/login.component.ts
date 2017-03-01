@@ -16,7 +16,13 @@ export class LoginPageComponent {
             console.log("not logged in " + res);
             return res;
         }).subscribe((data:any)=> {
-            console.log("logged in!!!");
+            if (data.response > 0) {
+                console.log("user logged: " + data.data.email);
+                //print modal to user
+                return;
+            }
+            //error on login
+            console.log("error on login: " + data.errorString);
         });
     }
     

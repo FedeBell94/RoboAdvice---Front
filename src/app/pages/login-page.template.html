@@ -9,18 +9,18 @@
   </div>
   <form>
     <div class="group">
-      <input class="inputMaterial" type="text" required>
+      <input class="inputMaterial" #user type="text" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Email</label>
     </div>
     <div class="group">
-      <input class="inputMaterial" type="password" required>
+      <input class="inputMaterial" #pwd type="password" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Password</label>
     </div>
-    <button id="buttonlogintoregister" type="submit" (click)="doLogin(user.value, pwd.value)" >Login</button>
+    <button id="buttonlogintoregister" type="button" (click)="doLogin(user.value, pwd.value)" >Login</button>
   </form>
   <div id="footer-box"><p class="footer-text">Not a member?<span class="sign-up"><a routerLink="/signup">&nbsp;Sign up now</a></span></p></div>
 </div>

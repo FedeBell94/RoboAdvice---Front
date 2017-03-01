@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from './services/remote/authentication.service';
+
 @Component({
   selector: 'my-app',
   templateUrl: `app/pages/index.template.html`,
 })
 export class AppComponent  {
-  name = 'Angular';
+  constructor(
+    private auth: AuthService,
+  ){ }
+
   private snisOpen: boolean = false;
+  
   isLogged(){
     //da sviluppare, aspettiamo la spring security
-    return false;
+    return this.auth.isLogged();
   }
 
   toggleSidenav() {
@@ -42,6 +48,9 @@ export class AppComponent  {
       overlay.classList.add("close");
   }
 
-
+  logout() {
+    this.auth.logout();
+    this.closeSidenav();
+  }
 
 }
