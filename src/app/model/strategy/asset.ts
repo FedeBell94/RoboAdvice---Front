@@ -3,8 +3,8 @@
  */
 
 export class Asset {
-  bonds: number;
-  stocks: number;
-  forex: number;
-  commodities: number;
+  a1: number;
+  a2: number;
+  a3: number;
+  a4: number;
 }

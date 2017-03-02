@@ -41,8 +41,10 @@ export class SurveyPageComponent {
   sendMyStrategy(my_strategy: Strategy){
     console.log("Uploading my strategy...");
     console.log(my_strategy.asset_class);
-    this.apiService.post("updateStrategy", my_strategy.asset_class);
-    console.log("Uploaded!");
+    this.apiService.post("updateStrategy", my_strategy.asset_class).subscribe(()=>{
+      console.log("Uploaded!");
+    });
+
 
   }
 
