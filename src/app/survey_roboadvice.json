@@ -1,5 +1,5 @@
 {
-  "questions": [ 
+  "questions": [
     {
       "textQuestion": "PROFESSIONE",
       "answers": [
@@ -26,7 +26,7 @@
         {
           "text": "Studente",
           "scores": [5, 1, 0, 0, 0]
-        }  
+        }
       ]
     },
     {
@@ -149,7 +149,7 @@
           "scores": [1, 1, 1, 1, 1]
         },
         {
-          "text": "Non risponde,
+          "text": "Non risponde",
           "scores": [0, 0, 0, 0, 0]
         }
       ]
@@ -176,7 +176,7 @@
       ]
     },
     {
-      "textQuestion": "QUAL è LA SUA FONTE DI REDDITO",
+      "textQuestion": "QUAL E' LA SUA FONTE DI REDDITO",
       "answers": [
         {
           "text": "Solo reddito da lavoro/pensione",
@@ -201,7 +201,7 @@
       ]
     },
     {
-      "textQuestion": "QUAL è LA SUA CONSISTENZA PATRIMONIALE IN TERMINI DI PRODOTTI FINANZIARI, IMMOBILI E LIQUIDITà",
+      "textQuestion": "QUAL E' LA SUA CONSISTENZA PATRIMONIALE IN TERMINI DI PRODOTTI FINANZIARI, IMMOBILI E LIQUIDITA'",
       "answers": [
         {
           "text": "Inferiore a 200.000",
@@ -226,7 +226,7 @@
         {
           "text": "Non risponde",
           "scores": [0, 0, 0, 0, 0]
-        },  
+        }
       ]
     },
     {
@@ -280,7 +280,7 @@
       ]
     },
     {
-      "textQuestion": "QUAL è L'OBIETTIVO DEI SUOI INVESTIMENTI",
+      "textQuestion": "QUAL E' L'OBIETTIVO DEI SUOI INVESTIMENTI",
       "answers": [
         {
           "text": "Conservazione del patrimonio",
@@ -301,9 +301,11 @@
         {
           "text": "Non risponde",
           "scores": [0, 0, 0, 0, 0]
-        },
-          {
-      "textQuestion": "QUAL è IL PERIODO DI TEMPO PER IL QUALE DESIDERA CONSERVARE L'INVESTIMENTO",
+        }
+      ]
+    },
+    {
+      "textQuestion": "QUAL E' IL PERIODO DI TEMPO PER IL QUALE DESIDERA CONSERVARE L'INVESTIMENTO",
       "answers": [
         {
           "text": "Meno di 1 anno",
@@ -324,16 +326,18 @@
         {
           "text": "Non risponde",
           "scores": [0, 0, 0, 0, 0]
-        },
-          {
-      "textQuestion": "QUAL è LA SUA REAZIONE AI MOVIMENTI NEGATIVI DI MERCATO",
+        }
+      ]
+    },
+    {
+      "textQuestion": "QUAL E' LA SUA REAZIONE AI MOVIMENTI NEGATIVI DI MERCATO",
       "answers": [
         {
           "text": "Disinvesto immediatamente perche non sono disposto ad accettare ulteriori perdite",
           "scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Mantengo l'ivestimento in attesa che recuperi valore",
+          "text": "Mantengo l'investimento in attesa che recuperi valore",
           "scores": [0, 0, 0, 3, 3]
         },
         {

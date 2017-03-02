@@ -8,18 +8,22 @@ import { HttpInterceptorModule } from 'ng-http-interceptor';
 //services
 import { ApiService } from './services/remote/remote-call.service';
 import { AuthService } from './services/remote/authentication.service';
+import { ManageJsonService } from "./services/manageJson.service";
 
 //pageComponents
 import { AppComponent }  from './app.component';
 import { LoginPageComponent }  from './page_components/login.component';
 import { SignUpPageComponent } from "./page_components/signup.component";
 import { DashboardPageComponent } from "./page_components/dashboard.component";
+import {SurveyPageComponent} from "./page_components/survey.component";
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
     {path: 'login', component: LoginPageComponent},
     {path: 'signup', component: SignUpPageComponent},
     {path: 'dashboard', component: DashboardPageComponent},
+    {path: 'survey', component: SurveyPageComponent},
+
     { path: '**', redirectTo: '' }
 
 
@@ -37,11 +41,13 @@ const appRoutes: Routes = [
     AppComponent,
     LoginPageComponent,
     SignUpPageComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+    SurveyPageComponent
     ],
   providers: [
     ApiService,
-    AuthService
+    AuthService,
+    ManageJsonService
   ],
   bootstrap:    [ AppComponent ]
 })
