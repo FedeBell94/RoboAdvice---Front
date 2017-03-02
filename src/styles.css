@@ -11,7 +11,7 @@ body {
 
 .container-layout {
   width: 100%;
-  height: 100%;
+  height: 92%;
   display: flex;
 }
 
@@ -19,7 +19,7 @@ body {
   width: 20%;
   min-width: 150px;
   height: 100%;
-  background-color: #1A2668;
+  background-color: #050a0d;
   box-sizing: border-box;
   box-shadow: 6px 0 12px rgba(35, 38, 53, 0.4);
   padding-top: 24px;
@@ -66,9 +66,13 @@ body {
 
 .app-container {
   margin: 0 auto;
-  height: 100%;
   width: 100%;
-  background-color: #fafafa;
+ /* FF3.6-15 */
+  background: -webkit-linear-gradient(bottom left, rgba(88,166,205,1) 0%, rgba(66,99,162,1) 100%);
+  background: -moz-linear-gradient(bottom left, rgba(88,166,205,1) 0%, rgba(66,99,162,1) 100%);
+  background: -o-linear-gradient(bottom left, rgba(88,166,205,1) 0%, rgba(66,99,162,1) 100%);
+  background: linear-gradient(to top right, rgba(88,166,205,1) 0%, rgba(66,99,162,1) 100%); /* Chrome10-25,Safari5.1-6 */
+ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   padding: 24px;
   overflow-y: scroll;
 }
@@ -117,3 +121,30 @@ md-icon#hamburger {
     }
 }
 
+md-card.box-form {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+md-card.box-form  md-card-content {
+  text-align: center;
+}
+
+md-card.box-form md-card-actions {
+  text-align: center;
+  padding-bottom: 18px;
+}
+
+md-card md-card-header div.mat-card-header-text md-card-title.mat-card-title {
+  color: #538dc7;
+  font-size: 2em;
+}
+
+md-card.box-form md-card-content button {
+  width: 75%;
+  color: white;
+}
+
+.mat-card>md-card-action.mat-card-actions:last-child {
+  margin-bottom: unset;
+}

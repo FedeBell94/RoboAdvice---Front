@@ -17,12 +17,14 @@ div.pie-chart-container:after {
     content: '';
 }
 
+div.pie-chart-portrait.pie-chart-container:after {
+    padding-top: 200%;
+}
+
 @media (max-width: 600px) {
     div.pie-chart-container:after {
     padding-top: 200%;
-    display: block;
-    content: '';
-}
+    }
 }
 
 pie-chart {

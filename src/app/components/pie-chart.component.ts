@@ -18,6 +18,7 @@ export class PieChartComponent {
     @Input() title: string;
     @Input() titleColor: string | CanvasGradient | CanvasPattern;
     @Input() legendaTextColor: string | CanvasGradient | CanvasPattern;
+    @Input() portrait: boolean = false;
     @ViewChild('chartCanvas') canvas: ElementRef;
 
 
@@ -40,13 +41,13 @@ export class PieChartComponent {
         let values = this.values || [35, 35, 25, 5];
         let innerStrings = values.map(v=>v.toString()+"%");
         let labels = this.labels || ["Pippo", "Pluto", "Minnie", "Donald"];
-        let colors = this.colors || ["#4D3DCC", "#6E3AC2", "#3D78CC", "#3A96C2"];
+        let colors = this.colors || ["#3c4eb9", "#1b70ef", "#00abff", "#40daf1"];
         let textColor = this.textColor || "#fff";
         let title = this.title || "Title";
         let titleColor = this.titleColor || "#3F51B5";
         let legendaTextColor = this.legendaTextColor;
 
-        let angles = [];
+        let angles: number[] = [];
         let total = 0;
         for (let i = 0; i < values.length; i++) { total += values[i]; };     //getting the total
         angles[0] = values[0] * Math.PI * 2 / total;
@@ -104,7 +105,7 @@ export class PieChartComponent {
         ctx.font = fontSize + "px Roboto";
         ctx.textBaseline = "middle";
 
-        let textCoords = [];
+        let textCoords: any[] = [];
         for (let i = 0; i < values.length; i++) {
             let angle = (angles[i] - (angles[i - 1] || 0)) / 2 + (angles[i - 1] || 0)
             textCoords.push(

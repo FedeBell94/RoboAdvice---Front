@@ -1,5 +1,5 @@
-<div class="pie-chart-container">
-    <canvas #chartCanvas class="pieChartCanvas" id="asdasdasd" (window:resize)="rePaint()">
+<div class="pie-chart-container" [class.pie-chart-portrait]="portrait">
+    <canvas #chartCanvas class="pieChartCanvas" (window:resize)="rePaint()">
 
     </canvas>
 </div>
