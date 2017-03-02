@@ -1,7 +1,7 @@
 {
-  "survey": [ 
+  "questions": [ 
     {
-      "question": "Domanda numero 1",
+      "textQuestion": "Domanda numero 1",
       "answers": [
         {
           "text": "testo risposta1.1",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "question": "Domanda numero 2",
+      "textQuestion": "Domanda numero 2",
       "answers": [
         {
           "text": "testo risposta2.1",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "question": "Domanda numero 3",
+      "textQuestion": "Domanda numero 3",
       "answers": [
         {
           "text": "testo risposta3.1",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "question": "Domanda numero 4",
+      "textQuestion": "Domanda numero 4",
       "answers": [
         {
           "text": "testo risposta4.1",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "question": "Domanda numero 5",
+      "textQuestion": "Domanda numero 5",
       "answers": [
         {
           "text": "testo risposta5.1",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "question": "Domanda numero 6",
+      "textQuestion": "Domanda numero 6",
       "answers": [
         {
           "text": "testo risposta6.1",
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "question": "Domanda numero 7",
+      "textQuestion": "Domanda numero 7",
       "answers": [
         {
           "text": "testo risposta7.1",
@@ -176,7 +176,7 @@
       ]
     },
     {
-      "question": "Domanda numero 8",
+      "textQuestion": "Domanda numero 8",
       "answers": [
         {
           "text": "testo risposta8.1",
@@ -201,7 +201,7 @@
       ]
     },
     {
-      "question": "Domanda numero 9",
+      "textQuestion": "Domanda numero 9",
       "answers": [
         {
           "text": "testo risposta9.1",
@@ -226,7 +226,7 @@
       ]
     },
     {
-      "question": "Domanda numero 10",
+      "textQuestion": "Domanda numero 10",
       "answers": [
         {
           "text": "testo risposta10.1",
@@ -251,7 +251,7 @@
       ]
     },
     {
-      "question": "Domanda numero 11",
+      "textQuestion": "Domanda numero 11",
       "answers": [
         {
           "text": "testo risposta11.1",
@@ -276,7 +276,7 @@
       ]
     },
     {
-      "question": "Domanda numero 12",
+      "textQuestion": "Domanda numero 12",
       "answers": [
         {
           "text": "testo risposta12.1",
