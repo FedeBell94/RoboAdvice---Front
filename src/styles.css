@@ -70,6 +70,7 @@ body {
   width: 100%;
   background-color: #fafafa;
   padding: 24px;
+  overflow-y: scroll;
 }
 
 md-icon#hamburger {

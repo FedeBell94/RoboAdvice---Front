@@ -7,5 +7,6 @@
         "**/.DS_Store": true,
         "**/*.js": true,
         "**/*.map": true
-    }
+    },
+    "editor.minimap.enabled": true
 }

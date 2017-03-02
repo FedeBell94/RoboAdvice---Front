@@ -1,0 +1,31 @@
+canvas.pieChartCanvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    image-rendering: crisp-edges;
+}
+
+div.pie-chart-container {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+div.pie-chart-container:after {
+    padding-top: 50%;
+    /* 16:9 ratio */
+    display: block;
+    content: '';
+}
+
+@media (max-width: 600px) {
+    div.pie-chart-container:after {
+    padding-top: 200%;
+    display: block;
+    content: '';
+}
+}
+
+pie-chart {
+    width: 100%;
+    height: 100%;
+}
