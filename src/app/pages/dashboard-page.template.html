@@ -1,8 +1,8 @@
-<md-sidenav-container class="left-navigation">
-  <md-sidenav #start mode="side" opened="true" style="background-color: azure">
-    Entry
-  </md-sidenav>
-  <div class="demo-sidenav-content">
-    <p>Dashboard works</p>
-  </div>
-</md-sidenav-container>
+<md-card style="width: 200px; height: 400px;">
+  <pie-chart
+    [title]="'Strategy'"
+    [values]="[20, 80]"
+    [labels]="['Bonds', 'Forex']"
+    [legendaTextColor]="'#000'"
+  ></pie-chart>
+</md-card>

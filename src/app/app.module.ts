@@ -15,6 +15,9 @@ import { LoginPageComponent }  from './page_components/login.component';
 import { SignUpPageComponent } from "./page_components/signup.component";
 import { DashboardPageComponent } from "./page_components/dashboard.component";
 
+//other components
+import { PieChartComponent } from './components/pie-chart.component';
+
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
     {path: 'login', component: LoginPageComponent},
@@ -37,7 +40,9 @@ const appRoutes: Routes = [
     AppComponent,
     LoginPageComponent,
     SignUpPageComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+
+    PieChartComponent,
     ],
   providers: [
     ApiService,
