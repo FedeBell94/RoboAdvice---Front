@@ -1,302 +1,352 @@
 {
   "questions": [ 
     {
-      "textQuestion": "Domanda numero 1",
+      "textQuestion": "PROFESSIONE",
       "answers": [
         {
-          "text": "testo risposta1.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Lavoratore autonomo / libero professionista",
+          "scores": [0, 0, 0, 2, 4]
         },
         {
-          "text": "testo risposta1.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Lavoratore dipendente con contratto a tempo indeterminato",
+          "scores": [1, 1, 2, 1, 1]
         },
         {
-          "text": "testo risposta1.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Occupato con tempo determinato progetto",
+          "scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "testo risposta1.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Pensionato",
+          "scores": [3, 3, 0, 0, 0]
         },
         {
-          "text": "testo risposta1.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non occupato",
+          "scores": [4, 2, 0, 0, 0]
+        },
+        {
+          "text": "Studente",
+          "scores": [5, 1, 0, 0, 0]
+        }  
+      ]
+    },
+    {
+      "textQuestion": "LIVELLO DI ISTRUZIONE",
+      "answers": [
+        {
+          "text": "Nessun titolo di studio",
+          "scores": [4, 2, 0, 0, 0]
+        },
+        {
+          "text": "Licenza Elementare",
+          "scores": [3, 2, 1, 0, 0]
+        },
+        {
+          "text": "Licenza Media",
+          "scores": [2, 1, 1, 1, 1]
+        },
+        {
+          "text": "Diploma Scuola Superiore",
+          "scores": [1, 1, 2, 1, 1]
+        },
+        {
+          "text": "Laurea",
+          "scores": [0, 1, 1, 2, 2]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 2",
+      "textQuestion": "E' AGGIORNATO SULL'ANDAMENTO DEI MERCATI FINANZIARI",
       "answers": [
         {
-          "text": "testo risposta2.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Mi aggiorno regolarmente una volta al mese",
+          "scores": [1, 2, 3, 0, 0]
         },
         {
-          "text": "testo risposta2.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Mi aggiorno regolarmente una volta alla settimana",
+          "scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "testo risposta2.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Mi aggiorno regolarmente una volta al giorno",
+          "scores": [0, 0, 1, 2, 3]
         },
         {
-          "text": "testo risposta2.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "No",
+          "scores": [5, 1, 0, 0, 0]
         },
         {
-          "text": "testo risposta2.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 3",
+      "textQuestion": "CON QUALE FREQUENZA OPERA SUL DOSSIER TITOLI",
       "answers": [
         {
-          "text": "testo risposta3.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Almeno settimanale",
+          "scores": [0, 0, 0, 2, 4]
         },
         {
-          "text": "testo risposta3.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Almeno mensile",
+          "scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "testo risposta3.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Almeno trimestrale",
+          "scores": [1, 1, 2, 1, 1]
         },
         {
-          "text": "testo risposta3.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Altro",
+          "scores": [3, 0, 0, 0, 3]
         },
         {
-          "text": "testo risposta3.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 4",
+      "textQuestion": "IN CHE TIPOLOGIA DI PRODOTTI FINANZIARI INVESTE O HA INVESTITO",
       "answers": [
         {
-          "text": "testo risposta4.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monetario",
+          "scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "testo risposta4.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monoterario/ Obbligazioni non strutturate",
+          "scores": [0, 1, 2, 3, 0]
         },
         {
-          "text": "testo risposta4.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Nessuna",
+          "scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "testo risposta4.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento",
+          "scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "testo risposta4.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento/ azioni / prodotti finanziari assicurativi",
+          "scores": [1, 1, 1, 1, 1]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 5",
+      "textQuestion": "QUALI TIPOLOGIE DI PRODOTTI FINANZIARI CONOSCE",
       "answers": [
         {
-          "text": "testo risposta5.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monetario",
+          "scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "testo risposta5.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monoterario/obbligazioni non strutturate",
+          "scores": [0, 1, 4, 1, 0]
         },
         {
-          "text": "testo risposta5.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento",
+          "scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "testo risposta5.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento/ azioni / prodotti finanziari assicurativi",
+          "scores": [1, 1, 1, 1, 1]
         },
         {
-          "text": "testo risposta5.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde,
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 6",
+      "textQuestion": "QUALI TIPOLOGIE DI SERVIZI FINANZIARI CONOSCE",
       "answers": [
         {
-          "text": "testo risposta6.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Nessuno",
+          "scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "testo risposta6.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Collocamento e compravendita",
+          "scores": [0, 1, 2, 2, 1]
         },
         {
-          "text": "testo risposta6.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Collocamento, compravendita e gestione portafogli",
+          "scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "testo risposta6.4",
-          "scores": [1, 3, 2, 5, 2]
-        },
-        {
-          "text": "testo risposta6.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 7",
+      "textQuestion": "QUAL è LA SUA FONTE DI REDDITO",
       "answers": [
         {
-          "text": "testo risposta7.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Solo reddito da lavoro/pensione",
+          "scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "testo risposta7.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Reddito da lavoro/pensione e da immobili",
+          "scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "testo risposta7.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Solo da immobili",
+          "scores": [0, 3, 3, 0, 0]
         },
         {
-          "text": "testo risposta7.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Altro",
+          "scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "testo risposta7.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 8",
+      "textQuestion": "QUAL è LA SUA CONSISTENZA PATRIMONIALE IN TERMINI DI PRODOTTI FINANZIARI, IMMOBILI E LIQUIDITà",
       "answers": [
         {
-          "text": "testo risposta8.1",
+          "text": "Inferiore a 200.000",
+          "scores": [4, 2, 0, 0, 0]
+        },
+        {
+          "text": "200.000 - 500.000",
+          "scores": [2, 2, 2, 0, 0]
+        },
+        {
+          "text": "500.000 - 1.000.000",
+          "scores": [1, 1, 2, 2, 0]
+        },
+        {
+          "text": "1.000.000 - 3.000.000",
+          "scores": [0, 1, 1, 2, 2]
+        },
+        {
+          "text": "oltre 3.000.000",
+          "scores": [0, 0, 0, 3, 3]
+        },
+        {
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
+        },  
+      ]
+    },
+    {
+      "textQuestion": "IN TERMINI DI PERCENTUALI, QUANTO RIESCE A RISPARMIARE DEL SUO REDDITO ANNUO NETTO",
+      "answers": [
+        {
+          "text": "Nulla",
+          "scores": [5, 1, 0, 0, 0]
+        },
+        {
+          "text": "Meno del 10%",
+          "scores": [4, 2, 0, 0, 0]
+        },
+        {
+          "text": "Tra il 10% e il 30%",
+          "scores": [0, 0, 4, 1, 1]
+        },
+        {
+          "text": "Oltre il 30%",
           "scores": [1, 3, 2, 5, 2]
         },
         {
-          "text": "testo risposta8.2",
-          "scores": [1, 3, 2, 5, 2]
-        },
-        {
-          "text": "testo risposta8.3",
-          "scores": [1, 3, 2, 5, 2]
-        },
-        {
-          "text": "testo risposta8.4",
-          "scores": [1, 3, 2, 5, 2]
-        },
-        {
-          "text": "testo risposta8.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 9",
+      "textQuestion": "QUALE PERCENTUALE DEI SUOI RISPARMI INVESTE IN PRODOTTI FINANZIARI",
       "answers": [
         {
-          "text": "testo risposta9.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Più del 30%",
+          "scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "testo risposta9.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Dal 10% al 30%",
+          "scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "testo risposta9.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Meno del 10%",
+          "scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "testo risposta9.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Nulla",
+          "scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "testo risposta9.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "Domanda numero 10",
+      "textQuestion": "QUAL è L'OBIETTIVO DEI SUOI INVESTIMENTI",
       "answers": [
         {
-          "text": "testo risposta10.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Conservazione del patrimonio",
+          "scores": [5, 1, 0, 0, 0]
         },
         {
-          "text": "testo risposta10.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Proteggere nel tempo il capitale investito e ricevere fllussi di cassa periodici, accettando rischi contenuti",
+          "scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "testo risposta10.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Crescita del capitale nel medio-lungo periodo, pur accettando il rischio di oscillazioni di valore nel breve periodo",
+          "scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "testo risposta10.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Crescita significativa del capitale nel medio-lungo periodo, sopportando anche forti oscillazioni di valore",
+          "scores": [0, 0, 1, 2, 3]
         },
         {
-          "text": "testo risposta10.5",
-          "scores": [1, 3, 2, 5, 2]
-        }
-      ]
-    },
-    {
-      "textQuestion": "Domanda numero 11",
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
+        },
+          {
+      "textQuestion": "QUAL è IL PERIODO DI TEMPO PER IL QUALE DESIDERA CONSERVARE L'INVESTIMENTO",
       "answers": [
         {
-          "text": "testo risposta11.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Meno di 1 anno",
+          "scores": [0, 0, 1, 2, 3]
         },
         {
-          "text": "testo risposta11.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Tra 1 e 3 anni ",
+          "scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "testo risposta11.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Tra 3 e 5 anni",
+          "scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "testo risposta11.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Più di 5 anni",
+          "scores": [ 4, 2, 0, 0, 0]
         },
         {
-          "text": "testo risposta11.5",
-          "scores": [1, 3, 2, 5, 2]
-        }
-      ]
-    },
-    {
-      "textQuestion": "Domanda numero 12",
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
+        },
+          {
+      "textQuestion": "QUAL è LA SUA REAZIONE AI MOVIMENTI NEGATIVI DI MERCATO",
       "answers": [
         {
-          "text": "testo risposta12.1",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Disinvesto immediatamente perche non sono disposto ad accettare ulteriori perdite",
+          "scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "testo risposta12.2",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Mantengo l'ivestimento in attesa che recuperi valore",
+          "scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "testo risposta12.3",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Attendo un guadagno di valore rispetto all'investimento",
+          "scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "testo risposta12.4",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Aumento il mio investimento per acquistare quotazioni più favorevoli",
+          "scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "testo risposta12.5",
-          "scores": [1, 3, 2, 5, 2]
+          "text": "Non risponde",
+          "scores": [0, 0, 0, 0, 0]
         }
       ]
     }
