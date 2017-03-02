@@ -22,6 +22,10 @@ export class PieChartComponent {
 
 
     ngOnInit() {
+        this.rePaint();
+    }
+
+    rePaint() {
         setTimeout(()=>this.printChart(), 1);
     }
 
