@@ -4,14 +4,14 @@
     </md-card-header>
     <md-card-content>
         <md-input-container class="input-full-width">
-            <input mdInput placeholder="Email" #user required>
+            <input type="text" mdInput placeholder="Email" #user required>
         </md-input-container>
         <md-input-container class="input-full-width">
-            <input mdInput placeholder="Password" #pwd required>
+            <input type="password" mdInput placeholder="Password" #pwd required>
         </md-input-container>
         <button md-raised-button (click)="doLogin(user.value, pwd.value)">Login</button>
     </md-card-content>
     <md-card-actions>
-        Not a member? <a routerLink="/signup">Sign up now!</a>  
+        Not a member? <a routerLink="/signup">Sign up now!</a>
     </md-card-actions>
 </md-card>

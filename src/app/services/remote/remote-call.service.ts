@@ -7,17 +7,18 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
-    private apiUrl = 'http://localhost:8080/';  // URL to web API
+    //private apiUrl = 'http://localhost:8080/';  // URL to web API
+    private apiUrl = 'http://192.168.2.136:8080/';
     private callCount = 0;
 
-    constructor ( 
+    constructor (
             private http: Http,
             private interceptor: HttpInterceptorService,
         ) {
             interceptor.request().addInterceptor((req: any, method: string) => {
                 console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
                 return req;
-            }); 
+            });
             interceptor.response().addInterceptor((res: any, method: string)=> {
                 this.callCount--;
                 res.subscribe((data: any)=>{
@@ -26,6 +27,11 @@ export class ApiService {
                 return res;
             });
         }
+
+
+    setToken(userToken: string){
+      document.cookie = userToken;
+    }
 
     get(action: string, params: Object): Observable<any> {
         let reqAction = action + "?";
@@ -37,8 +43,10 @@ export class ApiService {
 
     post(action: string, params: any): Observable<any> {
         let headers = new Headers();
-        headers.append('Accept', 'application/json')
+        headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
+        headers.append('Access-Control-Allow-Credentials', 'true');
+        headers.append('User-Token', document.cookie);
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.apiUrl + action, params, options).map(this.extractData).catch(this.handleError);

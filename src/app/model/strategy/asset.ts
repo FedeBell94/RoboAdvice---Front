@@ -3,8 +3,8 @@
  */
 
 export class Asset {
-  a1: number;
-  a2: number;
-  a3: number;
-  a4: number;
+  "1": number;
+  "2": number;
+  "3": number;
+  "4": number;
 }

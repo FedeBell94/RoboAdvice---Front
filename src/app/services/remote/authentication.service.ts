@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpInterceptorService } from 'ng-http-interceptor';
 
 import { ApiService } from './remote-call.service';
 
@@ -23,6 +22,7 @@ export class AuthService {
         }).map((res)=>{
             if (res.response > 0) {
                 this.logged = true;
+                this.apis.setToken(res.data.userToken);
                 this.router.navigate(["/dashboard"]);
             }
             return res;
