@@ -15,11 +15,11 @@ export class ApiService {
             private http: Http,
             private interceptor: HttpInterceptorService,
         ) {
-            interceptor.request().addInterceptor((req: any, method: string) => {
+            /*interceptor.request().addInterceptor((req: any, method: string) => {
                 //console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
                 return req;
             });
-            /*interceptor.response().addInterceptor((res: any, method: string)=> {
+            interceptor.response().addInterceptor((res: any, method: string)=> {
                 this.callCount--;
                 res.share().subscribe((data: any)=>{
                     //console.log( new Date().toDateString() + " - INTERCEPTED RESPONSE: " + data);
