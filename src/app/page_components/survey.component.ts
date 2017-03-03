@@ -41,7 +41,7 @@ export class SurveyPageComponent {
   sendMyStrategy(my_strategy: Strategy){
     console.log("Uploading my strategy...");
     console.log(my_strategy.asset_class);
-    this.apiService.post("updateStrategy", my_strategy.asset_class).subscribe(()=>{
+    this.apiService.post("strategy", my_strategy.asset_class).subscribe(()=>{
       console.log("Uploaded!");
     });
 
@@ -101,7 +101,8 @@ export class SurveyPageComponent {
                 console.log("Growth: "+  this.totalScore[3]);
                 console.log("Stocks: "+  this.totalScore[4]);
                 this.choiceStrategy();
-                this.routes.navigate(["/dashboard"]);
+                this.idAnswer = -1;
+              this.routes.navigate(["/dashboard"]);
             }
             this.idAnswer = -1;
         }
