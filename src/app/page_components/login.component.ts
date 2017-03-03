@@ -13,7 +13,7 @@ export class LoginPageComponent {
     doLogin(user:string, password:string) {
         this.auth.login(user, password).catch((res)=>{
             return res;
-        }).subscribe((data:any)=> {
+        }).share().subscribe((data:any)=> {
             if (data.response > 0) {
                 //TODO: print modal to user
                 return;

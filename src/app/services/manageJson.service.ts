@@ -16,7 +16,9 @@ export class ManageJsonService {
   ) { }
 
   getFromJson(fileJson: string): Observable<any> {
-    return this.http.get(this.path + fileJson).map((res: Response) => res.json());
+    return this.http.get(this.path + fileJson).share().map(
+      (res: Response) => res.json()
+      );
   }
 
 }

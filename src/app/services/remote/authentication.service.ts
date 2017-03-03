@@ -53,7 +53,7 @@ export class AuthService {
         return this.apis.post("registerUser", {
             email: email,
             password: password
-        });
+        }).share();
     }
 
     logout() {
