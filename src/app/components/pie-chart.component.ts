@@ -32,8 +32,8 @@ export class PieChartComponent {
 
     private printChart() {
         //setting up canvas
-        this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth * 16;
-        this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight * 16;
+        this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth * 8;
+        this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight * 8;
         let ctx: CanvasRenderingContext2D = this.canvas.nativeElement.getContext("2d");
         let landscape = this.canvas.nativeElement.width >= this.canvas.nativeElement.height; //calculate if i'm landscape or portrait
 

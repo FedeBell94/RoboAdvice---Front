@@ -1,11 +1,33 @@
+
 #strategy-card {
+    max-width: 400px;
+    width: 100%;
+}
+#change-strategy-card {
     max-width: 200px;
+    width: 100%;
+}
+
+.strategy-value-container {
+    display: flex;
+}
+
+.strategy-slider {
+    width: 100%;
+}
+
+.strategy-fab {
+    width: 18px;
+    height: 18px;
 }
 
 @media (max-width: 480px) {
+
     #strategy-card {
-        width: unset;
-        margin: 0 auto;
         max-width: unset;
     }
+    #change-strategy-card {
+        max-width: unset;
+    }
+
 }

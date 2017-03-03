@@ -1,9 +1,47 @@
-<md-card id="strategy-card">
-  <pie-chart
-    [title]="'Strategy'"
-    [values]="[20, 24, 36, 20]"
-    [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-    [legendaTextColor]="'#000'"
-    [portrait]="true"
-  ></pie-chart>
-</md-card>
+<div class="flex-board">
+    <div class="my-card" id="strategy-card">
+        <pie-chart
+          title="Strategy"
+          [values]="[20, 24, 36, 20]"
+          [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+          legendaTextColor="#000"
+          [portrait]="false"
+        ></pie-chart>
+    </div>
+    <div class="my-card" id="change-strategy-card">
+        <div class="strategy-value-container">
+            <button md-mini-fab class="strategy-fab"></button>
+            <md-slider
+                class="strategy-slider"
+                [max]="100"
+                [min]="0"
+                [step]="1"
+                [thumb-label]="true">
+            </md-slider>
+        </div>
+        <md-slider
+            class="strategy-slider"
+            [max]="100"
+            [min]="0"
+            [step]="1"
+            [thumb-label]="true">
+        </md-slider>
+        <md-slider
+            class="strategy-slider"
+            [max]="100"
+            [min]="0"
+            [step]="1"
+            [thumb-label]="true">
+        </md-slider>
+        <md-slider
+            class="strategy-slider"
+            [max]="100"
+            [min]="0"
+            [step]="1"
+            [thumb-label]="true">
+        </md-slider>
+        <!--<strategy-setter
+
+        ></strategy-setter>-->
+    </div>
+</div>
