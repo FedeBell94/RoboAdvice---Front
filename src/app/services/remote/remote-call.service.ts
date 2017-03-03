@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ApiService {
     //private apiUrl = 'http://localhost:8080/';  // URL to web API
-    private apiUrl = 'http://192.168.2.136:8080/';
+    private apiUrl = 'http://localhost:8080/';
     private callCount = 0;
 
     constructor (
@@ -16,40 +16,43 @@ export class ApiService {
             private interceptor: HttpInterceptorService,
         ) {
             interceptor.request().addInterceptor((req: any, method: string) => {
-                console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
+                //console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
                 return req;
             });
             interceptor.response().addInterceptor((res: any, method: string)=> {
                 this.callCount--;
                 res.subscribe((data: any)=>{
-                    console.log( new Date().toDateString() + " - INTERCEPTED RESPONSE: " + data);
+                    //console.log( new Date().toDateString() + " - INTERCEPTED RESPONSE: " + data);
                 });
                 return res;
             });
         }
 
-
-    setToken(userToken: string){
-      document.cookie = userToken;
+    private defaultOptions: RequestOptions;
+    setDefaultRequestOptions(options: RequestOptions) {
+        this.defaultOptions = options;
     }
 
-    get(action: string, params: Object): Observable<any> {
+    get(action: string, params: Object, options?: RequestOptions): Observable<any> {
         let reqAction = action + "?";
         for (let p in params) reqAction = reqAction + p + "=" + params[p] + "&";
         reqAction = reqAction.substr(0, reqAction.length - 1);
         console.log("requesting to: " + reqAction);
+        if (options) return this.http.get(this.apiUrl + reqAction, options).map(this.extractData).catch(this.handleError);
+        if (this.defaultOptions) return this.http.get(this.apiUrl + reqAction, this.defaultOptions).map(this.extractData).catch(this.handleError);
         return this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError);
     }
 
-    post(action: string, params: any): Observable<any> {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-Type', 'application/json');
-        headers.append('Access-Control-Allow-Credentials', 'true');
-        headers.append('User-Token', document.cookie);
-        let options = new RequestOptions({ headers: headers });
+    post(action: string, params: any, options?: RequestOptions): Observable<any> {
+        let headers: Headers;
+        if (!options && !this.defaultOptions) {
+            headers = new Headers();
+            headers.append('Accept', 'application/json');
+            headers.append('Content-Type', 'application/json');
+        }
+        let opts = options || this.defaultOptions || new RequestOptions({ headers: headers });
 
-        return this.http.post(this.apiUrl + action, params, options).map(this.extractData).catch(this.handleError);
+        return this.http.post(this.apiUrl + action, params, opts).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {
@@ -57,7 +60,6 @@ export class ApiService {
         ///     errorCode: (intero univoco),
         ///     errorString: (string di messaggio dell'errore),
         ///     data: (dati se non errori) }
-        this.callCount--;
         let body = res.json();
         //console.log(body)
         if (body.response == 0)

@@ -1,0 +1,11 @@
+#strategy-card {
+    max-width: 200px;
+}
+
+@media (max-width: 480px) {
+    #strategy-card {
+        width: unset;
+        margin: 0 auto;
+        max-width: unset;
+    }
+}

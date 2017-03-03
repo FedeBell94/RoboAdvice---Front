@@ -11,14 +11,11 @@ export class LoginPageComponent {
     constructor(private auth: AuthService) {}
 
     doLogin(user:string, password:string) {
-        console.log("trying to login with user=" + user + " and pwd=" + password);
         this.auth.login(user, password).catch((res)=>{
-            console.log("not logged in " + res);
             return res;
         }).subscribe((data:any)=> {
             if (data.response > 0) {
-                console.log("user logged: " + data.data.email);
-                //print modal to user
+                //TODO: print modal to user
                 return;
             }
             //error on login
