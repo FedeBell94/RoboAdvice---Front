@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ApiService {
     //private apiUrl = 'http://localhost:8080/';  // URL to web API
-    private apiUrl = 'http://localhost:8080/';
+    private apiUrl = 'http://192.168.2.136:8080/';
     private callCount = 0;
 
     constructor (
