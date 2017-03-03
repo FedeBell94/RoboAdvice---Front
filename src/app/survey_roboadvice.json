@@ -1,356 +1,356 @@
 {
-  "questions": [
+  "Questions": [
     {
-      "textQuestion": "PROFESSIONE",
-      "answers": [
+      "TextQuestion": "PROFESSION"
+      "Answers": [
         {
-          "text": "Lavoratore autonomo / libero professionista",
-          "scores": [0, 0, 0, 2, 4]
+          "Text": "Self-employed / freelancer"
+          "Scores": [0, 0, 0, 2, 4]
         },
         {
-          "text": "Lavoratore dipendente con contratto a tempo indeterminato",
-          "scores": [1, 1, 2, 1, 1]
+          "Text": "Employee with a permanent contract",
+          "Scores": [1, 1, 2, 1, 1]
         },
         {
-          "text": "Occupato con tempo determinato progetto",
-          "scores": [2, 2, 2, 0, 0]
+          "Text": "Employee with specific project time"
+          "Scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "Pensionato",
-          "scores": [3, 3, 0, 0, 0]
+          "Text": "Retired"
+          "Scores": [3, 3, 0, 0, 0]
         },
         {
-          "text": "Non occupato",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Not assigned"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Studente",
-          "scores": [5, 1, 0, 0, 0]
+          "Text": "Student"
+          "Scores": [5, 1, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "LIVELLO DI ISTRUZIONE",
-      "answers": [
+      "TextQuestion": "EDUCATION LEVEL"
+      "Answers": [
         {
-          "text": "Nessun titolo di studio",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "No educational degree"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Licenza Elementare",
-          "scores": [3, 2, 1, 0, 0]
+          "Text": "Primary License"
+          "Scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "Licenza Media",
-          "scores": [2, 1, 1, 1, 1]
+          "Text": "Middle License"
+          "Scores": [2, 1, 1, 1, 1]
         },
         {
-          "text": "Diploma Scuola Superiore",
-          "scores": [1, 1, 2, 1, 1]
+          "Text": "High School"
+          "Scores": [1, 1, 2, 1, 1]
         },
         {
-          "text": "Laurea",
-          "scores": [0, 1, 1, 2, 2]
+          "Text": "Degree"
+          "Scores": [0, 1, 1, 2, 2]
         }
       ]
     },
     {
-      "textQuestion": "E' AGGIORNATO SULL'ANDAMENTO DEI MERCATI FINANZIARI",
-      "answers": [
+      "TextQuestion": " ARE YOU UPDATED ON FINANCIAL MARKETS"
+      "Answers": [
         {
-          "text": "Mi aggiorno regolarmente una volta al mese",
-          "scores": [1, 2, 3, 0, 0]
+          "Text": "I update regularly once a month"
+          "Scores": [1, 2, 3, 0, 0]
         },
         {
-          "text": "Mi aggiorno regolarmente una volta alla settimana",
-          "scores": [0, 2, 2, 2, 0]
+          "Text": "I  regularly update  once a week"
+          "Scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "Mi aggiorno regolarmente una volta al giorno",
-          "scores": [0, 0, 1, 2, 3]
+          "Text": "I regularly update once a day"
+          "Scores": [0, 0, 1, 2, 3]
         },
         {
-          "text": "No",
-          "scores": [5, 1, 0, 0, 0]
+          "Text": "No"
+          "Scores": [5, 1, 0, 0, 0]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "CON QUALE FREQUENZA OPERA SUL DOSSIER TITOLI",
-      "answers": [
+      "TextQuestion": "HOW OFTEN WORK DOSSIER ON SECURITIES"
+      "Answers": [
         {
-          "text": "Almeno settimanale",
-          "scores": [0, 0, 0, 2, 4]
+          "Text": "At least weekly"
+          "Scores": [0, 0, 0, 2, 4]
         },
         {
-          "text": "Almeno mensile",
-          "scores": [0, 0, 2, 2, 2]
+          "Text": "At least monthly,"
+          "Scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "Almeno trimestrale",
-          "scores": [1, 1, 2, 1, 1]
+          "Text": "At least quarterly"
+          "Scores": [1, 1, 2, 1, 1]
         },
         {
-          "text": "Altro",
-          "scores": [3, 0, 0, 0, 3]
+          "Text": "Other"
+          "Scores": [3, 0, 0, 0, 3]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "IN CHE TIPOLOGIA DI PRODOTTI FINANZIARI INVESTE O HA INVESTITO",
-      "answers": [
+      "TextQuestion": "IN THAT TYPE OF FINANCIAL PRODUCTS OR HAS INVESTED "
+      "Answers": [
         {
-          "text": "Strumenti del mercato monetario",
-          "scores": [0, 2, 2, 2, 0]
+          "Text": "Money market instruments"
+          "Scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "Strumenti del mercato monoterario/ Obbligazioni non strutturate",
-          "scores": [0, 1, 2, 3, 0]
+          "Text": "Money market  / Bonds"
+          "Scores": [0, 1, 2, 3, 0]
         },
         {
-          "text": "Nessuna",
-          "scores": [3, 2, 1, 0, 0]
+          "Text": "No one"
+          "Scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento",
-          "scores": [3, 2, 1, 0, 0]
+          "Text": "Mutual funds / Money market instruments / Bonds"
+          "Scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento/ azioni / prodotti finanziari assicurativi",
-          "scores": [1, 1, 1, 1, 1]
+          "Text": "Money market  / Non-structured bonds / Financial insurance products",
+          "Scores": [1, 1, 1, 1, 1]
         }
       ]
     },
     {
-      "textQuestion": "QUALI TIPOLOGIE DI PRODOTTI FINANZIARI CONOSCE",
-      "answers": [
+      "TextQuestion": "WHAT TYPES OF FINANCIAL PRODUCTS KNOWS"
+      "Answers": [
         {
-          "text": "Strumenti del mercato monetario",
-          "scores": [0, 2, 2, 2, 0]
+          "Text": "Money market instruments"
+          "Scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "Strumenti del mercato monoterario/obbligazioni non strutturate",
-          "scores": [0, 1, 4, 1, 0]
+          "Text": "Money market instruments / Bonds"
+          "Scores": [0, 1, 4, 1, 0]
         },
         {
-          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento",
-          "scores": [2, 2, 2, 0, 0]
+          "Text": "Mutual funds / Money market  / Bonds"
+          "Scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "Strumenti del mercato monetario/ obbligazioni non strutturate/ fondi comuni di investimento/ azioni / prodotti finanziari assicurativi",
-          "scores": [1, 1, 1, 1, 1]
+          "Text": "Money market  / Bonds /  Shared mutual funds ",
+          "Scores": [1, 1, 1, 1, 1]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUALI TIPOLOGIE DI SERVIZI FINANZIARI CONOSCE",
-      "answers": [
+      "TextQuestion": "WHAT TYPES OF FINANCIAL SERVICES KNOWS"
+      "Answers": [
         {
-          "text": "Nessuno",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "None"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Collocamento e compravendita",
-          "scores": [0, 1, 2, 2, 1]
+          "Text": "Distribution and Trade"
+          "Scores": [0, 1, 2, 2, 1]
         },
         {
-          "text": "Collocamento, compravendita e gestione portafogli",
-          "scores": [0, 0, 2, 2, 2]
+          "Text": "Distribution, trading and portfolio management",
+          "Scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUAL E' LA SUA FONTE DI REDDITO",
-      "answers": [
+      "TextQuestion": "WHAT 'ITS REVENUE SOURCES"
+      "Answers": [
         {
-          "text": "Solo reddito da lavoro/pensione",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Only earned income / pension"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Reddito da lavoro/pensione e da immobili",
-          "scores": [3, 2, 1, 0, 0]
+          "Text": "Employment Income / retirement and estate"
+          "Scores": [3, 2, 1, 0, 0]
         },
         {
-          "text": "Solo da immobili",
-          "scores": [0, 3, 3, 0, 0]
+          "Text": "Only by real estate",
+          "Scores": [0, 3, 3, 0, 0]
         },
         {
-          "text": "Altro",
-          "scores": [0, 0, 2, 2, 2]
+          "Text": "Other"
+          "Scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUAL E' LA SUA CONSISTENZA PATRIMONIALE IN TERMINI DI PRODOTTI FINANZIARI, IMMOBILI E LIQUIDITA'",
-      "answers": [
+      "TextQuestion": "WHAT 'YOUR CONSISTENCY STATEMENT IN TERMS OF FINANCIAL PRODUCTS, BUILDINGS AND LIQUIDITY'"
+      "Answers": [
         {
-          "text": "Inferiore a 200.000",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Less than 200,000"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "200.000 - 500.000",
-          "scores": [2, 2, 2, 0, 0]
+          "Text": "200,000 to 500,000",
+          "Scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "500.000 - 1.000.000",
-          "scores": [1, 1, 2, 2, 0]
+          "Text": "500000-1000000"
+          "Scores": [1, 1, 2, 2, 0]
         },
         {
-          "text": "1.000.000 - 3.000.000",
-          "scores": [0, 1, 1, 2, 2]
+          "Text": "from 1 million to 3 million"
+          "Scores": [0, 1, 1, 2, 2]
         },
         {
-          "text": "oltre 3.000.000",
-          "scores": [0, 0, 0, 3, 3]
+          "Text": "3,000,000"
+          "Scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "IN TERMINI DI PERCENTUALI, QUANTO RIESCE A RISPARMIARE DEL SUO REDDITO ANNUO NETTO",
-      "answers": [
+      "TextQuestion": "IN TERMS OF PERCENTAGE, AS CAN SAVE HIS INCOME NET ANNUAL"
+      "Answers": [
         {
-          "text": "Nulla",
-          "scores": [5, 1, 0, 0, 0]
+          "Text": "Nothing"
+          "Scores": [5, 1, 0, 0, 0]
         },
         {
-          "text": "Meno del 10%",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Less than 10%",
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Tra il 10% e il 30%",
-          "scores": [0, 0, 4, 1, 1]
+          "Text": "Between 10% and 30%",
+          "Scores": [0, 0, 4, 1, 1]
         },
         {
-          "text": "Oltre il 30%",
-          "scores": [1, 3, 2, 5, 2]
+          "Text": "More than 30%",
+          "Scores": [1, 3, 2, 5, 2]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUALE PERCENTUALE DEI SUOI RISPARMI INVESTE IN PRODOTTI FINANZIARI",
-      "answers": [
+      "TextQuestion": "WHAT PERCENTAGE OF ITS SAVINGS INVESTS IN FINANCIAL PRODUCTS"
+      "Answers": [
         {
-          "text": "Più del 30%",
-          "scores": [0, 0, 0, 3, 3]
+          "Text": "More than 30%",
+          "Scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "Dal 10% al 30%",
-          "scores": [0, 0, 2, 2, 2]
+          "Text": "10% to 30%",
+          "Scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "Meno del 10%",
-          "scores": [2, 2, 2, 0, 0]
+          "Text": "Less than 10%",
+          "Scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "Nulla",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Nothing"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUAL E' L'OBIETTIVO DEI SUOI INVESTIMENTI",
-      "answers": [
+      "TextQuestion": "WHAT IS THE AIM OF ITS INVESTMENT"
+      "Answers": [
         {
-          "text": "Conservazione del patrimonio",
-          "scores": [5, 1, 0, 0, 0]
+          "Text": "Heritage conservation"
+          "Scores": [5, 1, 0, 0, 0]
         },
         {
-          "text": "Proteggere nel tempo il capitale investito e ricevere fllussi di cassa periodici, accettando rischi contenuti",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Protect the investment and receive periodic cash streams, accepting risks contained"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Crescita del capitale nel medio-lungo periodo, pur accettando il rischio di oscillazioni di valore nel breve periodo",
-          "scores": [0, 2, 2, 2, 0]
+          "Text": "Capital growth in the medium to long term while accepting the risk of fluctuations in value in the short term",
+          "Scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "Crescita significativa del capitale nel medio-lungo periodo, sopportando anche forti oscillazioni di valore",
-          "scores": [0, 0, 1, 2, 3]
+          "Text": "Significant growth of capital over the medium to long term, even enduring strong price fluctuations",
+          "Scores": [0, 0, 1, 2, 3]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUAL E' IL PERIODO DI TEMPO PER IL QUALE DESIDERA CONSERVARE L'INVESTIMENTO",
-      "answers": [
+      "TextQuestion": "WHAT IS THE TIME PERIOD FOR WHICH YOU WISH TO KEEP THE INVESTMENT"
+      "Answers": [
         {
-          "text": "Meno di 1 anno",
-          "scores": [0, 0, 1, 2, 3]
+          "Text": "Less than one year"
+          "Scores": [0, 0, 1, 2, 3]
         },
         {
-          "text": "Tra 1 e 3 anni ",
-          "scores": [0, 0, 2, 2, 2]
+          "Text": "Between 1 and 3 years",
+          "Scores": [0, 0, 2, 2, 2]
         },
         {
-          "text": "Tra 3 e 5 anni",
-          "scores": [0, 2, 2, 2, 0]
+          "Text": "Between 3 and 5 years",
+          "Scores": [0, 2, 2, 2, 0]
         },
         {
-          "text": "Più di 5 anni",
-          "scores": [ 4, 2, 0, 0, 0]
+          "Text": "More than five years"
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     },
     {
-      "textQuestion": "QUAL E' LA SUA REAZIONE AI MOVIMENTI NEGATIVI DI MERCATO",
-      "answers": [
+      "TextQuestion": "WHAT IS HIS REACTION TO MARKET MOVEMENTS NEGATIVE"
+      "Answers": [
         {
-          "text": "Disinvesto immediatamente perche non sono disposto ad accettare ulteriori perdite",
-          "scores": [4, 2, 0, 0, 0]
+          "Text": "Disinvesto immediately because they are not willing to accept further losses",
+          "Scores": [4, 2, 0, 0, 0]
         },
         {
-          "text": "Mantengo l'investimento in attesa che recuperi valore",
-          "scores": [0, 0, 0, 3, 3]
+          "Text": "I keep waiting for the investment value recoveries"
+          "Scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "Attendo un guadagno di valore rispetto all'investimento",
-          "scores": [2, 2, 2, 0, 0]
+          "Text": "I look a gain with respect to the investment value",
+          "Scores": [2, 2, 2, 0, 0]
         },
         {
-          "text": "Aumento il mio investimento per acquistare quotazioni più favorevoli",
-          "scores": [0, 0, 0, 3, 3]
+          "Text": "Increase my investment to buy more favorable prices"
+          "Scores": [0, 0, 0, 3, 3]
         },
         {
-          "text": "Non risponde",
-          "scores": [0, 0, 0, 0, 0]
+          "Text": "Not Responding"
+          "Scores": [0, 0, 0, 0, 0]
         }
       ]
     }
