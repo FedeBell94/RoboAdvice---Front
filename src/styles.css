@@ -141,7 +141,7 @@ md-icon#hamburger {
     .sidebar-container.close {
       display: none;
     }
-    
+
     @keyframes slide {
       100% { left: 0; }
     }
@@ -177,4 +177,9 @@ md-card.box-form md-card-content button {
 
 md-card.mat-card>md-card-action.mat-card-actions:last-child {
   margin-bottom: unset;
+}
+
+
+.input-full-width {
+  width: 100%;
 }

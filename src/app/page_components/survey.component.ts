@@ -23,6 +23,10 @@ export class SurveyPageComponent {
 
   totalScore: number[] = [0, 0, 0, 0, 0]; //0: Bonds, 1: Income, 2: Balanced, 3: Growth, 4: Stocks
 
+  private tabs: any;
+
+  private count: number = -1;
+
   constructor(
     private jsonService: ManageJsonService,
     private apiService: ApiService,
@@ -42,7 +46,7 @@ export class SurveyPageComponent {
     console.log("Uploading my strategy...");
     console.log(my_strategy.asset_class);
     this.apiService.post("strategy", my_strategy.asset_class).subscribe(()=>{
-      console.log("Uploaded!");
+      console.log("Sent My Strategy!");
     });
 
 
@@ -91,19 +95,7 @@ export class SurveyPageComponent {
               this.totalScore[i] += this.questions[idTab].answers[this.idAnswer].scores[i];
             }
 
-            if (idTab != this.questions.length - 1) {
-                document.getElementById("md-tab-label-0-" + (idTab + 1)).click();
-            }else{
-                //END---> Now SEND DATA and redirect to dashboard.
-                console.log("Bonds: "+   this.totalScore[0]);
-                console.log("Income: "+  this.totalScore[1]);
-                console.log("Balanced: "+this.totalScore[2]);
-                console.log("Growth: "+  this.totalScore[3]);
-                console.log("Stocks: "+  this.totalScore[4]);
-                this.choiceStrategy();
-                this.idAnswer = -1;
-              this.routes.navigate(["/dashboard"]);
-            }
+            document.getElementById("md-tab-label-0-" + (idTab + 1)).click();
             this.idAnswer = -1;
         }
     }
@@ -111,6 +103,23 @@ export class SurveyPageComponent {
 
   setAnswer(answ: number){
     this.idAnswer = answ;
+  }
+
+  submitStrategyAndUsername(username: string){
+    if (username != ""){
+      this.choiceStrategy();
+      console.log("Strategy sent:");
+      console.log("Bonds: "+   this.totalScore[0]);
+      console.log("Income: "+  this.totalScore[1]);
+      console.log("Balanced: "+this.totalScore[2]);
+      console.log("Growth: "+  this.totalScore[3]);
+      console.log("Stocks: "+  this.totalScore[4]);
+
+      this.apiService.post("updateUserUsername",  { username : username }).subscribe(()=>{
+        console.log("Username " + username + " sent successfully!");
+        this.routes.navigate(["/dashboard"]);
+      });
+    }
   }
 
 }
