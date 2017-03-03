@@ -19,13 +19,13 @@ export class ApiService {
                 //console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
                 return req;
             });
-            interceptor.response().addInterceptor((res: any, method: string)=> {
+            /*interceptor.response().addInterceptor((res: any, method: string)=> {
                 this.callCount--;
-                res.subscribe((data: any)=>{
+                res.share().subscribe((data: any)=>{
                     //console.log( new Date().toDateString() + " - INTERCEPTED RESPONSE: " + data);
                 });
                 return res;
-            });
+            });*/
         }
 
     private defaultOptions: RequestOptions;
@@ -40,7 +40,7 @@ export class ApiService {
         console.log("requesting to: " + reqAction);
         if (options) return this.http.get(this.apiUrl + reqAction, options).map(this.extractData).catch(this.handleError);
         if (this.defaultOptions) return this.http.get(this.apiUrl + reqAction, this.defaultOptions).map(this.extractData).catch(this.handleError);
-        return this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError);
+        return this.http.get(this.apiUrl + reqAction).share().map(this.extractData).catch(this.handleError);
     }
 
     post(action: string, params: any, options?: RequestOptions): Observable<any> {
@@ -52,7 +52,7 @@ export class ApiService {
         }
         let opts = options || this.defaultOptions || new RequestOptions({ headers: headers });
 
-        return this.http.post(this.apiUrl + action, params, opts).map(this.extractData).catch(this.handleError);
+        return this.http.post(this.apiUrl + action, params, opts).share().map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {
