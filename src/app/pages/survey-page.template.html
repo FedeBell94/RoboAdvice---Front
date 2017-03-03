@@ -1,5 +1,5 @@
 <md-tab-group>
-  <md-tab id="tab{{i+1}}" label="tab" *ngFor="let question of questions; let i = index">
+  <md-tab id="tab{{i}}" label="tab" *ngFor="let question of questions; let i = index">
     <md-card>
       <md-card-header>
         <md-card-title><h2>{{question.textQuestion}}</h2></md-card-title>
@@ -20,6 +20,25 @@
       </md-card-content>
       <md-card-actions>
         <button md-button (click)="submitQuestion(i)">NEXT</button>
+      </md-card-actions>
+    </md-card>
+  </md-tab>
+
+  <!-- Choose an username -->
+  <md-tab id="tab" label="tab">
+    <md-card>
+      <md-card-header>
+        <md-card-title><h1>Choose a Username</h1></md-card-title>
+      </md-card-header>
+      <md-card-content style="padding-top: 30px">
+
+        <md-input-container class="input-full-width">
+          <input type="text" mdInput placeholder="Username" #username required>
+        </md-input-container>
+
+      </md-card-content>
+      <md-card-actions>
+        <button md-button (click)="submitStrategyAndUsername(username.value)">SAVE</button>
       </md-card-actions>
     </md-card>
   </md-tab>
