@@ -7,6 +7,7 @@ import { ManageJsonService } from "../services/manageJson.service";
 import { Question } from "../model/survey/question";
 import { Strategy } from "../model/strategy/strategy";
 import { ApiService } from "../services/remote/remote-call.service";
+import { StrategyService } from "../services/strategy.service";
 
 @Component({
   selector: "survey-page",
@@ -29,7 +30,7 @@ export class SurveyPageComponent {
 
   constructor(
     private jsonService: ManageJsonService,
-    private apiService: ApiService,
+    private apiService: StrategyService,
     private routes: Router
   ) {  }
 
@@ -45,7 +46,7 @@ export class SurveyPageComponent {
   sendMyStrategy(my_strategy: Strategy){
     console.log("Uploading my strategy...");
     console.log(my_strategy.asset_class);
-    this.apiService.post("strategy", my_strategy.asset_class).subscribe(()=>{
+    this.apiService.saveStrategy(my_strategy).subscribe(()=>{
       console.log("Sent My Strategy!");
     });
 

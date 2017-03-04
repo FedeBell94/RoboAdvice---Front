@@ -19,6 +19,10 @@ export class AuthService {
         return this.logged;
     }
 
+    getUser() {
+        return this.currentUser;
+    }
+
     login(email: string, password: string) {
         return this.apis.post("loginUser", {
             email: email,

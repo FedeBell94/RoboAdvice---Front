@@ -10,6 +10,7 @@ import { HttpInterceptorModule } from 'ng-http-interceptor';
 import { ApiService } from './services/remote/remote-call.service';
 import { AuthService } from './services/remote/authentication.service';
 import { ManageJsonService } from "./services/manageJson.service";
+import { StrategyService } from "./services/strategy.service";
 
 //pageComponents
 import { AppComponent }  from './app.component';
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
   providers: [
     ApiService,
     AuthService,
-    ManageJsonService
+    ManageJsonService,
+    StrategyService,
   ],
   bootstrap:    [ AppComponent ]
 })

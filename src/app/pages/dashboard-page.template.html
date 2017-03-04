@@ -1,102 +1,13 @@
 <div class="flex-board">
     <div class="my-card" id="strategy-card">
         <pie-chart
-          tile="Strategy"
-          [values]="[20, 24, 36, 20]"
-          [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-          legendaTextColor="#000"
-          [portrait]="false"
+            #strategyPieChart
+            title="Strategy"
+            [values]="strategyValues"
+            [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+            legendaTextColor="#000"
+            [portrait]="false"
+            (save)="saveStrategy($event)"
         ></pie-chart>
-    </div>
-    <div class="my-card" id="change-strategy-card">
-        <md-grid-list cols="11" rowHeight="12px">
-            <md-grid-tile
-                colspan="2"
-                rowspan="2">
-                <button md-mini-fab class="strategy-fab"></button>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1">
-                <md-slider
-                    class="strategy-slider"
-                    [max]="100"
-                    [min]="0"
-                    [step]="1"
-                    [thumb-label]="true">
-                    Stocks
-                </md-slider>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1"
-            ></md-grid-tile>
-        </md-grid-list>
-        <md-grid-list cols="11" rowHeight="12px">
-            <md-grid-tile
-                colspan="2"
-                rowspan="2">
-                <button md-mini-fab class="strategy-fab"></button>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1">
-                <md-slider
-                    class="strategy-slider"
-                    [max]="100"
-                    [min]="0"
-                    [step]="1"
-                    [thumb-label]="true">
-                </md-slider>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1"
-            ></md-grid-tile>
-        </md-grid-list>
-        <md-grid-list cols="11" rowHeight="12px">
-            <md-grid-tile
-                colspan="2"
-                rowspan="2">
-                <button md-mini-fab class="strategy-fab"></button>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1">
-                <md-slider
-                    class="strategy-slider"
-                    [max]="100"
-                    [min]="0"
-                    [step]="1"
-                    [thumb-label]="true">
-                </md-slider>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1"
-            ></md-grid-tile>
-        </md-grid-list>
-        <md-grid-list cols="11" rowHeight="12px">
-            <md-grid-tile
-                colspan="2"
-                rowspan="2">
-                <button md-mini-fab class="strategy-fab"></button>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1">
-                <md-slider
-                    class="strategy-slider"
-                    [max]="100"
-                    [min]="0"
-                    [step]="1"
-                    [thumb-label]="true">
-                </md-slider>
-            </md-grid-tile>
-            <md-grid-tile
-                colspan="9"
-                rowspan="1"
-            ></md-grid-tile>
-        </md-grid-list>
     </div>
 </div>

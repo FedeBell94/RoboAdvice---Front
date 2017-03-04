@@ -1,33 +1,33 @@
 canvas.pieChartCanvas {
-    position: absolute;
     width: 100%;
     height: 100%;
     image-rendering: crisp-edges;
 }
 
-div.pie-chart-container {
+div.pie-chart-slider {
+}
+
+.pie-chart-actions {
+    text-align: right;
+}
+
+md-grid-tile {
+    overflow: unset;
+}
+.strategy-value-container {
+    display: flex;
+}
+
+.strategy-slider {
     width: 100%;
-    position: relative;
-    display: inline-block;
-}
-div.pie-chart-container:after {
-    padding-top: 50%;
-    /* 16:9 ratio */
-    display: block;
-    content: '';
+    height: 32px;
+    min-width: unset;
 }
 
-div.pie-chart-portrait.pie-chart-container:after {
-    padding-top: 200%;
-}
-
-@media (max-width: 600px) {
-    div.pie-chart-container:after {
-    padding-top: 200%;
-    }
-}
-
-pie-chart {
-    width: 100%;
-    height: 100%;
+.strategy-fab {
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }

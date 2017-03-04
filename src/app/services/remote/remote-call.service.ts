@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HttpInterceptorService } from 'ng-http-interceptor';
 import { Observable } from 'rxjs/Observable';
@@ -7,13 +8,14 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
-    //private apiUrl = 'http://localhost:8080/';  // URL to web API
-    private apiUrl = 'http://192.168.2.136:8080/';
+    private apiUrl = 'http://localhost:8080/';  // URL to web API
+    //private apiUrl = 'http://192.168.2.136:8080/';
     private callCount = 0;
 
     constructor (
             private http: Http,
             private interceptor: HttpInterceptorService,
+            private router: Router,
         ) {
             /*interceptor.request().addInterceptor((req: any, method: string) => {
                 //console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
@@ -33,11 +35,13 @@ export class ApiService {
         this.defaultOptions = options;
     }
 
-    get(action: string, params: Object, options?: RequestOptions): Observable<any> {
-        let reqAction = action + "?";
-        for (let p in params) reqAction = reqAction + p + "=" + params[p] + "&";
-        reqAction = reqAction.substr(0, reqAction.length - 1);
-        console.log("requesting to: " + reqAction);
+    get(action: string, params?: Object, options?: RequestOptions): Observable<any> {
+        let reqAction = action;
+        if (params) {
+            reqAction += "?";
+            for (let p in params) reqAction = reqAction + p + "=" + params[p] + "&";
+            reqAction = reqAction.substr(0, reqAction.length - 1);
+        }
         if (options) return this.http.get(this.apiUrl + reqAction, options).map(this.extractData).catch(this.handleError);
         if (this.defaultOptions) return this.http.get(this.apiUrl + reqAction, this.defaultOptions).map(this.extractData).catch(this.handleError);
         return this.http.get(this.apiUrl + reqAction).share().map(this.extractData).catch(this.handleError);
@@ -62,9 +66,17 @@ export class ApiService {
         ///     data: (dati se non errori) }
         let body = res.json();
         //console.log(body)
-        if (body.response == 0)
+        if (body.response == 0) {
             //error there
             console.log( new Date().toDateString() + " SERVER API ERROR " + body.errorCode + ": " + body.errorString);
+            switch(body.errorCode) {
+                case 999:
+                    //auth error
+                    //TODO: display a message to the user
+                    this.router.navigate(["login"]);
+                    break;
+            }
+        }
         return body || { };
     }
 
