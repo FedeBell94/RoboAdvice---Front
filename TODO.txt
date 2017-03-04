@@ -1,0 +1,18 @@
+Questo file è utilizzato per elencare cose da fare, soprattutto se sono piccolezze o dettagli;
+
+Di fianco ad ogni task (prima) mettiamo un valore indicante la priorità, un valore decrescente da 0 a 100 dove:
+    0-10 sono task da svolgere entro lo sprint
+    11-50 sono task di importanza relativamente alta
+    51-100 dettagli
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+Survey:
+    2: Va rimossa la voce dal menu laterale
+    5: Vanno sistemate le scritte (la lunghezza di alcune risposte, nonché il senso logico; la traduzione automatizzata non era un gran che) di modo che non eccedano la card in modalità telefono
+    15: I valori dati alle risposte sono tutti = e con poco criterio, vanno ristudiati
+    80: Il form finale di scelta dell'username potrebbe essere un po' più esplicativo, playful
+
+Strategy:
+    80: Mostrare il nome della strategy (eg. di fianco al titolo) in una input, da poter modificare
+    100: Dare la possibilità di mostrare la strategy in landscape
