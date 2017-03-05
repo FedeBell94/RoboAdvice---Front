@@ -66,6 +66,10 @@ export class AuthService {
         //da chiamare l'API giusta
     }
 
+    updateUsername(username: string) {
+        return this.apis.post("updateUserUsername",  { username : username });
+    }
+
 
     setAuthToken(userToken: string){
         document.cookie = "authToken=" + userToken + ";";

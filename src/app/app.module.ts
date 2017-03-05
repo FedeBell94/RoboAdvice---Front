@@ -4,6 +4,7 @@ import { MaterialModule, MdIconModule } from "@angular/material";
 import { Routes, RouterModule } from "@angular/router";
 import { HttpModule } from '@angular/http';
 import { HttpInterceptorModule } from 'ng-http-interceptor';
+import { AmChartsModule } from "./directives/am-charts";
 
 
 //services
@@ -21,6 +22,7 @@ import {SurveyPageComponent} from "./page_components/survey.component";
 
 //other components
 import { PieChartComponent } from './components/pie-chart.component';
+import { AreaChartComponent } from './components/area-chart.component';
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
@@ -41,6 +43,7 @@ const appRoutes: Routes = [
     HttpInterceptorModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    AmChartsModule,
     ],
   declarations: [
     AppComponent,
@@ -48,7 +51,8 @@ const appRoutes: Routes = [
     SignUpPageComponent,
     DashboardPageComponent,
     SurveyPageComponent,
-    PieChartComponent
+    PieChartComponent,
+    AreaChartComponent
     ],
   providers: [
     ApiService,

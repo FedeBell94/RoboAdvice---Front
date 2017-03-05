@@ -118,24 +118,5 @@ export class PieChartComponent {
             ctx.font = fontSize + "px Roboto";
             ctx.fillText(innerStrings[i], textCoords[i].x - ctx.measureText(innerStrings[i]).width / 2, textCoords[i].y + fontSize / 2);
         }
-        /*
-        //legenda
-        ctx.font = (fontSize / 3 * 2) + "px Roboto";
-        let maxLabelLenght = 0;
-        for (let i = 0; i < values.length; i++) if (maxLabelLenght < ctx.measureText(labels[i] || "").width) maxLabelLenght = ctx.measureText(labels[i]).width;
-        //TODO: resizing if exceed
-        let lineSpace = legendaArea.width / values.length;
-        for (let i = 0; i < values.length; i++) {
-            
-            //color
-            ctx.fillStyle = colors[i];
-            ctx.beginPath();
-            ctx.arc(legendaArea.x + lineSpace / 2, legendaArea.y + i * lineSpace + lineSpace / 2, lineSpace / 4, 0, 2 * Math.PI);
-            ctx.fill();
-
-            //label
-            ctx.fillStyle = legendaTextColor || colors[i];
-            ctx.fillText(labels[i] || "", legendaArea.x + lineSpace, legendaArea.y + i * lineSpace + lineSpace / 2);
-        }*/
     }
 }

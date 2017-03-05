@@ -8,6 +8,7 @@ import { Question } from "../model/survey/question";
 import { Strategy } from "../model/strategy/strategy";
 import { ApiService } from "../services/remote/remote-call.service";
 import { StrategyService } from "../services/strategy.service";
+import { AuthService } from "../services/remote/authentication.service";
 
 @Component({
   selector: "survey-page",
@@ -31,7 +32,8 @@ export class SurveyPageComponent {
   constructor(
     private jsonService: ManageJsonService,
     private apiService: StrategyService,
-    private routes: Router
+    private auth: AuthService,
+    private routes: Router,
   ) {  }
 
   ngOnInit() {
@@ -116,7 +118,7 @@ export class SurveyPageComponent {
       console.log("Growth: "+  this.totalScore[3]);
       console.log("Stocks: "+  this.totalScore[4]);
 
-      this.apiService.post("updateUserUsername",  { username : username }).subscribe(()=>{
+      this.auth.updateUsername(username).share().subscribe(()=>{
         console.log("Username " + username + " sent successfully!");
         this.routes.navigate(["/dashboard"]);
       });
