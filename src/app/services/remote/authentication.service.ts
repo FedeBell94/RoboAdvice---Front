@@ -47,9 +47,10 @@ export class AuthService {
     }
 
     logout() {
-        this.logged = false;
-        this.router.navigate(["login"]);
-        //da chiamare l'API giusta
+        this.apis.post("logoutUser", {}).share().subscribe(()=>{
+            this.logged = false;
+            this.router.navigate(["login"]);
+        });
     }
 
     updateUsername(username: string) {

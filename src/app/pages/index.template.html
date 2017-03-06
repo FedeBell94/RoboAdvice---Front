@@ -1,12 +1,12 @@
 
 <md-toolbar color="primary" style="z-index: 10">
   <md-icon id="hamburger" (click)="toggleSidenav()">&#9776;</md-icon>
+  <span *ngIf="getUsername()">{{getUsername()}}</span>
 </md-toolbar>
 
 <div class="container-layout">
   <div class="sidebar-container" id="sidenav">
     <div class="sidenav">
-      <button class="sidebar-button" (click)="closeSidenav()" md-button routerLink="/survey"><md-icon>description</md-icon> Survey</button>
       <button class="sidebar-button" (click)="closeSidenav()" md-button *ngIf="isLogged()" routerLink="/dashboard"><md-icon>home</md-icon> Dashboard</button>
       <button class="sidebar-button" (click)="closeSidenav()" md-button *ngIf="!isLogged()" routerLink="/signup"><md-icon>create</md-icon> Sign Up</button>
       <button class="sidebar-button" (click)="closeSidenav()" md-button *ngIf="!isLogged()" routerLink="/login"><md-icon>account_circle</md-icon> Login</button>
