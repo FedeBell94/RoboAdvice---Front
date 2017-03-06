@@ -33,8 +33,8 @@ export class AppComponent  {
     }
   }
 
-  getUsername() {
-    if (this.auth.getUser()) return this.auth.getUser().username;
+  getUsername(): any {
+    if (this.auth.isLogged()) return this.auth.getUser().username;
     return false;
   }
 

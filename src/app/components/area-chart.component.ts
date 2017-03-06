@@ -25,6 +25,8 @@ export class AreaChartComponent {
 
     private getNewOptions() {
         return {
+	        "color": "#fff",
+	        "fontFamily": "Roboto",
             "type": "serial",
             "categoryField": "date",
             "dataDateFormat": "YYYY-MM-DD",
@@ -38,6 +40,7 @@ export class AreaChartComponent {
             },
             "graphs": [
                 {
+                    "type": "smoothedLine",
                     "fillAlphas": 0.7,
                     "id": "AmGraph-1",
                     "lineAlpha": 0,
@@ -45,6 +48,7 @@ export class AreaChartComponent {
                     "valueField": "c1"
                 },
                 {
+                    "type": "smoothedLine",
                     "fillAlphas": 0.7,
                     "id": "AmGraph-2",
                     "lineAlpha": 0,
