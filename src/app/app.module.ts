@@ -13,18 +13,19 @@ import { AuthService } from './services/remote/authentication.service';
 import { ManageJsonService } from "./services/manageJson.service";
 import { StrategyService } from "./services/strategy.service";
 import { PortfolioService } from "./services/portfolio.service";
-
+import { DialogsService } from "./services/dialog.services";
 
 //pageComponents
 import { AppComponent }  from './app.component';
 import { LoginPageComponent }  from './page_components/login.component';
 import { SignUpPageComponent } from "./page_components/signup.component";
 import { DashboardPageComponent } from "./page_components/dashboard.component";
-import {SurveyPageComponent} from "./page_components/survey.component";
+import { SurveyPageComponent } from "./page_components/survey.component";
 
 //other components
 import { PieChartComponent } from './components/pie-chart.component';
 import { AreaChartComponent } from './components/area-chart.component';
+import { ConfirmDialog } from "./page_components/confirm-dialog.components";
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
@@ -54,14 +55,22 @@ const appRoutes: Routes = [
     DashboardPageComponent,
     SurveyPageComponent,
     PieChartComponent,
-    AreaChartComponent
+    AreaChartComponent,
+    ConfirmDialog,
     ],
   providers: [
     ApiService,
     AuthService,
     ManageJsonService,
     StrategyService,
-    PortfolioService
+    PortfolioService,
+    DialogsService
+  ],
+  exports: [
+    ConfirmDialog,
+  ],
+  entryComponents: [
+    ConfirmDialog,
   ],
   bootstrap:    [ AppComponent ]
 })
