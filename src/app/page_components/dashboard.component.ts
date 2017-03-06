@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../services/remote/authentication.service';
 import { StrategyService } from '../services/strategy.service';
+import { PortfolioService } from '../services/portfolio.service';
 
 import { PieChartComponent } from '../components/pie-chart.component';
 
@@ -19,10 +20,12 @@ export class DashboardPageComponent {
     private auth: AuthService,
     private router: Router,
     private strategyService: StrategyService,
+    private portfolio: PortfolioService,
   ) { }
   @ViewChild('strategyPieChart') pieChart: any;
 
   strategyValues:number[];
+  areaChartData: any;
 
   ngOnInit() {
     if (!this.auth.isLogged()) {
@@ -38,6 +41,8 @@ export class DashboardPageComponent {
         this.pieChart.rePaint();
       }
     });
+
+    this.areaChartData = this.portfolio.getHistory();
   }
 
   saveStrategy(event: any) {

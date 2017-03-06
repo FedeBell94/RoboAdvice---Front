@@ -12,6 +12,8 @@ import { ApiService } from './services/remote/remote-call.service';
 import { AuthService } from './services/remote/authentication.service';
 import { ManageJsonService } from "./services/manageJson.service";
 import { StrategyService } from "./services/strategy.service";
+import { PortfolioService } from "./services/portfolio.service";
+
 
 //pageComponents
 import { AppComponent }  from './app.component';
@@ -59,6 +61,7 @@ const appRoutes: Routes = [
     AuthService,
     ManageJsonService,
     StrategyService,
+    PortfolioService
   ],
   bootstrap:    [ AppComponent ]
 })

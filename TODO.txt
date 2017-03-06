@@ -21,8 +21,5 @@ Strategy:
 Dashboard:
     13: Mostrare il worth con indicazione della positività o negatività dell'andamento
 
-Authentication:
-    11: Auto-login
-
 Toolbar:
     50: mostrare username utente nella Toolbar
