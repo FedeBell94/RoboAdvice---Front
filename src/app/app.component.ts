@@ -33,6 +33,11 @@ export class AppComponent  {
     }
   }
 
+  getUsername() {
+    if (this.auth.getUser()) return this.auth.getUser().username;
+    return false;
+  }
+
   openSidenav() {
       let sidenav = document.getElementById("sidenav");
       let overlay = document.getElementById("sidebar-overlay");
