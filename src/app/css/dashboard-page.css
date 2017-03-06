@@ -13,4 +13,8 @@
         max-width: unset;
     }
 
+    #area-chart-card {
+        padding: 24px 0;
+    }
+
 }

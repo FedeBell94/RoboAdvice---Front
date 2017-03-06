@@ -37,7 +37,7 @@ export class DashboardPageComponent {
         this.strategyValues = data.data.map((el: any)=>{ return el.percentage; });
         this.pieChart.rePaint();
       }
-    }); 
+    });
   }
 
   saveStrategy(event: any) {

@@ -38,12 +38,10 @@ export class AreaChartComponent {
                 "#990000"
             ],
             "categoryAxis": {
-                "parseDates": true
+                "parseDates": true,
+                "ignoreAxisWidth": true
             },
             "chartCursor": {
-                "enabled": true
-            },
-            "chartScrollbar": {
                 "enabled": true
             },
             "trendLines": [],
@@ -52,29 +50,28 @@ export class AreaChartComponent {
                     "fillAlphas": 0.7,
                     "id": "AmGraph-1",
                     "lineAlpha": 0,
-                    "title": "graph 1",
+                    "title": "Bonds",
                     "valueField": "column-1"
                 },
                 {
                     "fillAlphas": 0.7,
                     "id": "AmGraph-2",
                     "lineAlpha": 0,
-                    "title": "graph 2",
+                    "title": "Forex",
                     "valueField": "column-2"
                 },
                 {
                     "fillAlphas": 0.7,
                     "id": "AmGraph-3",
                     "lineAlpha": 0,
-                    "title": "graph 3",
+                    "title": "Stocks",
                     "valueField": "column-3"
                 }
             ],
             "guides": [],
             "valueAxes": [
                 {
-                    "id": "ValueAxis-1",
-                    "title": "Axis title"
+                    "id": "ValueAxis-1"
                 }
             ],
             "allLabels": [],
@@ -86,7 +83,7 @@ export class AreaChartComponent {
                 {
                     "id": "Title-1",
                     "size": 15,
-                    "text": "Chart Title"
+                    "text": "Portfolio History"
                 }
             ],
             "dataProvider": [
