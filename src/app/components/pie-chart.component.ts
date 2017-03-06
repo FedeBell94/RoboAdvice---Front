@@ -42,11 +42,9 @@ export class PieChartComponent {
 
     totalPercentage(): number{
         let tmp: number = 0;
-        console.log(this.values.length);
         for (var i = 0; i < this.values.length - 1; i++) {
           tmp += this.values[i];
         }
-        console.log("La max percentage è: " + tmp);
         return tmp;
     }
 
@@ -55,21 +53,15 @@ export class PieChartComponent {
     }
 
     valueChanged(event: any, i:number) {
-        console.log("entro in valueChanged");
-        console.log(event.value);
         let newTotPercentage: number = this.totalPercentage() - this.values[i] + event.value;
-        console.log("la nuova percentuale sarebbe: " + newTotPercentage);
         if (newTotPercentage > 100){
             this.values[4] = 0;
-            console.log("newPercentage > 100");
+            this.values[i] = 100 - (this.totalPercentage() - this.values[i]);
         }else{
             this.values[i] = event.value;
             this.values[4] = 100 - this.totalPercentage();
-            console.log("newPercentage <= 100");
         }
-
         this.rePaint();
-        //console.log(event);
     }
 
     saveStrategy() {

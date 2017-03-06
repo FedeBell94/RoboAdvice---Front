@@ -51,7 +51,7 @@ export class DashboardPageComponent {
       //output is: [25, 25, 25, 25], in the same order of value passed
 
       if (event[4] == 0) {  //Check if the 'empty' portion is 0%
-          event.splice(event.length);
+          event.pop();
           let str: Strategy = new Strategy();
           for (let i = 0; i < event.length; i++) {
             let asset = new Asset();
@@ -62,7 +62,7 @@ export class DashboardPageComponent {
           str.name = "Custom";
           this.strategyService.saveStrategy(str).share().subscribe((data) => {
             //TODO: tell the user all is ok with a modal
-
+            console.log("Strategy saved");
 
             event.push(0);
           });
