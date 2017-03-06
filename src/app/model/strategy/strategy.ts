@@ -7,6 +7,6 @@ export class Strategy {
   constructor() {
     this.asset_class = new Array<Asset>();
   }
-  name: String;
+  name: string;
   asset_class: Asset[];
 }
