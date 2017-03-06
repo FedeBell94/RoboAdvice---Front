@@ -9,6 +9,7 @@ import { Strategy } from "../model/strategy/strategy";
 import { ApiService } from "../services/remote/remote-call.service";
 import { StrategyService } from "../services/strategy.service";
 import { AuthService } from "../services/remote/authentication.service";
+import {DialogsService} from "../services/dialog.services";
 
 @Component({
   selector: "survey-page",
@@ -25,6 +26,8 @@ export class SurveyPageComponent {
 
   totalScore: number[] = [0, 0, 0, 0, 0]; //0: Bonds, 1: Income, 2: Balanced, 3: Growth, 4: Stocks
 
+  strategySelected: string;
+
   private tabs: any;
 
   private count: number = -1;
@@ -34,6 +37,7 @@ export class SurveyPageComponent {
     private apiService: StrategyService,
     private auth: AuthService,
     private routes: Router,
+    private dialogsService: DialogsService,
   ) {  }
 
   ngOnInit() {
@@ -51,8 +55,10 @@ export class SurveyPageComponent {
     this.apiService.saveStrategy(my_strategy).subscribe(()=>{
       console.log("Sent My Strategy!");
     });
+  }
 
-
+  public openDialog(username: string) {
+    this.submitStrategyAndUsername(username);
   }
 
   choiceStrategy() {
@@ -67,22 +73,27 @@ export class SurveyPageComponent {
       switch (true){
         case (x < 20):
           console.log("Stocks");
+          this.strategySelected = this.strategies[4].name;
           this.sendMyStrategy(this.strategies[4]);
           break;
         case (x >= 20 && x < 40):
           console.log("Growth");
+          this.strategySelected = this.strategies[3].name;
           this.sendMyStrategy(this.strategies[3]);
           break;
         case (x >= 40 && x < 60):
           console.log("Balanced");
+          this.strategySelected = this.strategies[2].name;
           this.sendMyStrategy(this.strategies[2]);
           break;
         case (x >= 60 && x < 80):
           console.log("Income");
+          this.strategySelected = this.strategies[1].name;
           this.sendMyStrategy(this.strategies[1]);
           break;
         case (x >= 80):
           console.log("Bonds");
+          this.strategySelected = this.strategies[0].name;
           this.sendMyStrategy(this.strategies[0]);
           break;
       }
@@ -120,7 +131,10 @@ export class SurveyPageComponent {
 
       this.auth.updateUsername(username).share().subscribe(()=>{
         console.log("Username " + username + " sent successfully!");
-        this.routes.navigate(["/dashboard"]);
+        this.dialogsService
+          .confirm(this.strategySelected, 'This is your default strategy based on MIFID')
+          .subscribe(() => this.routes.navigate(["/dashboard"]));
+
       });
     }
   }
