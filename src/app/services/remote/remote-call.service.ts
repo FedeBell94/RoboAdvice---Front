@@ -73,7 +73,7 @@ export class ApiService {
                 case 999:
                     //auth error
                     //TODO: display a message to the user
-                    this.router.navigate(["login"]);
+                    //this.router.navigate(["login"]);
                     break;
             }
         }
