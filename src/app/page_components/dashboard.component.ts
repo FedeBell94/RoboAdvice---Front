@@ -38,6 +38,7 @@ export class DashboardPageComponent {
       console.log("strategy has arrived: " + JSON.stringify(data.data));
       if (data.response > 0) {
         this.strategyValues = data.data.map((el: any)=>{ return el.percentage; });
+        this.strategyValues.push(0);
         this.pieChart.rePaint();
       }
     });
@@ -46,18 +47,27 @@ export class DashboardPageComponent {
   }
 
   saveStrategy(event: any) {
-    //called on 'save' event emitted from pie-chart on 'Save' button
-    //output is: [25, 25, 25, 25], in the same order of value passed
-    let str: Strategy = new Strategy();
-    for (let i = 0; i < event.length; i++) {
-      let asset = new Asset();
-      asset.assetClassId = i + 1; //server has 1-based ids
-      asset.percentage = event[i];
-      str.asset_class.push(asset);
-    }
-    str.name = "Custom";
-    this.strategyService.saveStrategy(str).share().subscribe((data)=> {
-      //TODO: tell the user all is ok with a modal
-    });
+      //called on 'save' event emitted from pie-chart on 'Save' button
+      //output is: [25, 25, 25, 25], in the same order of value passed
+
+      if (event[4] == 0) {  //Check if the 'empty' portion is 0%
+          event.splice(event.length);
+          let str: Strategy = new Strategy();
+          for (let i = 0; i < event.length; i++) {
+            let asset = new Asset();
+            asset.assetClassId = i + 1; //server has 1-based ids
+            asset.percentage = event[i];
+            str.asset_class.push(asset);
+          }
+          str.name = "Custom";
+          this.strategyService.saveStrategy(str).share().subscribe((data) => {
+            //TODO: tell the user all is ok with a modal
+
+
+            event.push(0);
+          });
+      }else{
+            //TODO: tell the user that must be complete all the percentage
+      }
   }
 }
