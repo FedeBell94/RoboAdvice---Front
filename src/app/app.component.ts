@@ -12,6 +12,12 @@ export class AppComponent  {
   ){ }
 
   private snisOpen: boolean = false;
+
+  ngOnInit() {
+    this.auth.checkSession().share().subscribe(()=> {
+      console.log("logged in");
+    });
+  }
   
   isLogged(){
     //da sviluppare, aspettiamo la spring security
