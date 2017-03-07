@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './services/remote/authentication.service';
+import { PortfolioService } from './services/portfolio.service';
 
 @Component({
   selector: 'my-app',
@@ -11,14 +12,23 @@ export class AppComponent  {
   constructor(
     private auth: AuthService,
     private router: Router,
+    private portfolio: PortfolioService,
   ){ }
 
   private snisOpen: boolean = false;
 
   ngOnInit() {
     this.auth.checkSession().share().subscribe((data)=> {
-      if (data.response == 0) this.router.navigate(["/login"]);
+      if (data.response == 0) {
+          this.router.navigate(["/login"]);
+      } else {
+        this.portfolio.getLastPortfolio().subscribe((data)=>{
+            console.log("from component:=> ", data);
+        });
+      }
     });
+
+    
   }
   
   isLogged(){

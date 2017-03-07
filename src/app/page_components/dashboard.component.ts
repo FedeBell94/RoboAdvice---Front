@@ -43,7 +43,11 @@ export class DashboardPageComponent {
       }
     });
 
-    this.areaChartData = this.portfolio.getHistory();
+    this.areaChartData = ()=> { 
+      let opts = this.portfolio.getCachedPortfolioHistoryChartOptions(); 
+      console.log("got opts: ", opts);
+      return opts;
+    };
   }
 
   saveStrategy(event: any) {

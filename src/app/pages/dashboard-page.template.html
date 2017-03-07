@@ -11,8 +11,8 @@
         ></pie-chart>
     </div>
     <div class="my-card" id="area-chart-card">
-        <area-chart
-            [data]="areaChartData"
+        <area-chart *ngIf="areaChartData && areaChartData()"
+            [data]="areaChartData()"
         ></area-chart>
     </div>
 </div>
