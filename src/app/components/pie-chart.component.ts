@@ -68,7 +68,7 @@ export class PieChartComponent {
 
   public openDialog() {
     this.dialogsService
-      .confirm().share().subscribe((res)=> {
+      .confirm('You are changing your strategy','Are You sure???').share().subscribe((res)=> {
         if (res==true) this.saveStrategy();
           });
 

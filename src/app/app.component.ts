@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from './services/remote/authentication.service';
 
@@ -9,13 +10,14 @@ import { AuthService } from './services/remote/authentication.service';
 export class AppComponent  {
   constructor(
     private auth: AuthService,
+    private router: Router,
   ){ }
 
   private snisOpen: boolean = false;
 
   ngOnInit() {
-    this.auth.checkSession().share().subscribe(()=> {
-      console.log("logged in");
+    this.auth.checkSession().share().subscribe((data)=> {
+      if (data.response == 0) this.router.navigate(["/login"]);
     });
   }
   

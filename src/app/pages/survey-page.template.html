@@ -1,49 +1,39 @@
 <md-tab-group>
   <md-tab id="tab{{i}}" label="tab" *ngFor="let question of questions; let i = index">
-    <md-card>
-      <md-card-header>
-        <md-card-title><h2>{{question.textQuestion}}</h2></md-card-title>
-        <md-card-subtitle>{{i+1}}/{{questions.length}}</md-card-subtitle>
-      </md-card-header>
-      <md-card-content style="padding-top: 30px">
+    <div class="flex-board">
+        <div class="my-card">
+            <h2>{{question.textQuestion}}</h2>
+            <h5>{{i+1}}/{{questions.length}}</h5>
 
-        <md-radio-group class="style-radio-group" style="padding-top: 20px">
-          <md-radio-button
-              class="style-radio-button"
-              *ngFor="let answer of question.answers; let y = index"
-              [value] = "y"
-              (click) = setAnswer(y)>
-            {{answer.text}}
-          </md-radio-button>
-        </md-radio-group>
-
-      </md-card-content>
-      <md-card-actions>
-        <button md-button (click)="submitQuestion(i)">NEXT</button>
-      </md-card-actions>
-    </md-card>
+            <md-radio-group class="style-radio-group" style="padding-top: 20px">
+                <md-radio-button
+                                  class="style-radio-button"
+                                  *ngFor="let answer of question.answers; let y = index"
+                                  [value] = "y"
+                                  (click) = setAnswer(y)>
+                    {{answer.text}}
+                </md-radio-button>
+            </md-radio-group>
+            <div class="right">
+                <button md-button (click)="submitQuestion(i)">NEXT</button>
+            </div>
+        </div>
+    </div>
   </md-tab>
 
   <!-- Choose an username -->
   <md-tab id="tab" label="tab">
-    <md-card>
-      <md-card-header>
-        <md-card-title><h1>Choose a Username</h1></md-card-title>
-      </md-card-header>
-      <md-card-content style="padding-top: 30px">
-
-        <md-input-container class="input-full-width">
-          <input type="text" mdInput placeholder="Username" #username required>
-        </md-input-container>
-
-      </md-card-content>
-      <md-card-actions>
-
-          <button md-button (click)="openDialog(username.value)">Continue</button>
-
-
-          <!--<button md-button (click)="submitStrategyAndUsername(username.value)">SAVE</button>-->
-      </md-card-actions>
-    </md-card>
+    <div class="flex-board">
+        <div class="my-card">
+            <h1>Choose a Username</h1>
+            <md-input-container class="input-full-width">
+                <input type="text" mdInput placeholder="Username" #username required>
+            </md-input-container>
+            <div class="right">
+                <button md-button (click)="openDialog(username.value)">Continue</button>
+            </div>
+        </div>
+    </div>
   </md-tab>
 </md-tab-group>
+

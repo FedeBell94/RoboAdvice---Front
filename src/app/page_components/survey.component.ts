@@ -52,7 +52,7 @@ export class SurveyPageComponent {
   sendMyStrategy(my_strategy: Strategy){
     console.log("Uploading my strategy...");
     console.log(my_strategy.asset_class);
-    this.apiService.saveStrategy(my_strategy).subscribe(()=>{
+    this.apiService.saveStrategy(my_strategy).share().subscribe((data)=>{
       console.log("Sent My Strategy!");
     });
   }
@@ -129,12 +129,17 @@ export class SurveyPageComponent {
       console.log("Growth: "+  this.totalScore[3]);
       console.log("Stocks: "+  this.totalScore[4]);
 
-      this.auth.updateUsername(username).share().subscribe(()=>{
-        console.log("Username " + username + " sent successfully!");
-        this.dialogsService
-          .success(this.strategySelected, 'This is your default strategy based on MIFID')
-          .subscribe(() => this.routes.navigate(["/dashboard"]));
-
+      this.auth.updateUsername(username).share().subscribe((data)=>{
+        if (data.response > 0) {
+            this.dialogsService
+                              .success(this.strategySelected, 'This is your default strategy based on MIFID')
+                              .subscribe(() => {
+                                  this.auth.saveUser(data.data);
+                                  this.routes.navigate(["/dashboard"]);
+                              });
+        } else {
+          this.dialogsService.error('SORRY, Something went wrong', 'Try again later');
+        }
       });
     }
   }
