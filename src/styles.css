@@ -218,5 +218,9 @@ md-dialog-container cdk-focus-trap .cdk-focus-trap-content confirm-dialog * {
 */
 
 .mat-fab, .mat-mini-fab, .mat-raised-button {
-      background-color: #00abff !important;
+  background-color: #00abff !important;
+}
+
+.mat-toolbar, .mat-toolbar .mat-toolbar-row {
+  justify-content: space-between;
 }
