@@ -131,10 +131,10 @@ export class SurveyPageComponent {
 
       this.auth.updateUsername(username).share().subscribe((data)=>{
         if (data.response > 0) {
-            this.dialogsService
+          this.auth.saveUser(data.data);
+          this.dialogsService
                               .success(this.strategySelected, 'This is your default strategy based on MIFID')
                               .subscribe(() => {
-                                  this.auth.saveUser(data.data);
                                   this.routes.navigate(["/dashboard"]);
                               });
         } else {
