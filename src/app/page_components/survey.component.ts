@@ -9,7 +9,7 @@ import { Strategy } from "../model/strategy/strategy";
 import { ApiService } from "../services/remote/remote-call.service";
 import { StrategyService } from "../services/strategy.service";
 import { AuthService } from "../services/remote/authentication.service";
-import {DialogsService} from "../services/dialog.services";
+import {DialogsService} from "../modals/modalservices/dialog.services";
 
 @Component({
   selector: "survey-page",
@@ -132,7 +132,7 @@ export class SurveyPageComponent {
       this.auth.updateUsername(username).share().subscribe((data)=>{
         if (data.response > 0) {
             this.dialogsService
-                              .confirm(this.strategySelected, 'This is your default strategy based on MIFID')
+                              .success(this.strategySelected, 'This is your default strategy based on MIFID')
                               .subscribe(() => {
                                   this.auth.saveUser(data.data);
                                   this.routes.navigate(["/dashboard"]);
@@ -141,8 +141,6 @@ export class SurveyPageComponent {
           //something gone wrong,
           //TODO: show user a message with the error
         }
-        
-
       });
     }
   }

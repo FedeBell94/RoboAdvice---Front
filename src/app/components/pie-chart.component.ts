@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/remote/authentication.service';
+import {DialogsService} from "../modals/modalservices/dialog.services";
 
 @Component({
   selector: "pie-chart",
@@ -10,6 +11,7 @@ import { AuthService } from '../services/remote/authentication.service';
 })
 export class PieChartComponent {
     constructor(
+      private dialogsService: DialogsService,
     ) { }
     @Input() values: number[] = [20, 20, 20, 20, 10];
     @Input() labels: string[] = ["Pippo", "Pluto", "Minnie", "Donald", "empty"];
@@ -63,6 +65,14 @@ export class PieChartComponent {
         }
         this.rePaint();
     }
+
+  public openDialog() {
+    this.dialogsService
+      .confirm().share().subscribe((res)=> {
+        if (res==true) this.saveStrategy();
+          });
+
+  }
 
     saveStrategy() {
       this.save.emit(this.values);
