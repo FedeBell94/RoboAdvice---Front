@@ -138,8 +138,7 @@ export class SurveyPageComponent {
                                   this.routes.navigate(["/dashboard"]);
                               });
         } else {
-          //something gone wrong,
-          //TODO: show user a message with the error
+          this.dialogsService.error('SORRY, Something went wrong', 'Try again later');
         }
       });
     }

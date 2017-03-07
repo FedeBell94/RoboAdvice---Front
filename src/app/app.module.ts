@@ -25,7 +25,6 @@ import { SurveyPageComponent } from "./page_components/survey.component";
 //other components
 import { PieChartComponent } from './components/pie-chart.component';
 import { AreaChartComponent } from './components/area-chart.component';
-import { SuccessDialog } from "./modals/modalscomponent/success-dialog.components";
 import {ConfirmDialog} from "./modals/modalscomponent/confirm-dialog.components";
 
 const appRoutes: Routes = [
@@ -57,7 +56,6 @@ const appRoutes: Routes = [
     SurveyPageComponent,
     PieChartComponent,
     AreaChartComponent,
-    SuccessDialog,
     ConfirmDialog,
     ],
   providers: [
