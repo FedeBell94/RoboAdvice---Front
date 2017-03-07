@@ -1,6 +1,6 @@
 <md-toolbar color="primary" style="z-index: 10">
   <md-icon id="hamburger" (click)="toggleSidenav()">&#9776;</md-icon>
-  <span *ngIf="getUsername()">{{getUsername()}}</span>
+  <span class="toolbar-username" *ngIf="getUsername()">{{getUsername()}}</span>
   <worth
     *ngIf="getUsername()"
     [myWorth]="10000"

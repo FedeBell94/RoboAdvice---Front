@@ -205,7 +205,7 @@ md-card.mat-card>md-card-action.mat-card-actions:last-child {
 }
 
 md-dialog-container cdk-focus-trap .cdk-focus-trap-content confirm-dialog * {
-  color: #000;  
+  color: #000;
 }
 
 
@@ -223,4 +223,10 @@ md-dialog-container cdk-focus-trap .cdk-focus-trap-content confirm-dialog * {
 
 .mat-toolbar, .mat-toolbar .mat-toolbar-row {
   justify-content: space-between;
+}
+
+@media (max-width: 500px) {
+  .toolbar-username{
+    display: none;
+  }
 }
