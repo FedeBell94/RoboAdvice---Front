@@ -4,25 +4,27 @@
         <canvas #chartCanvas class="pieChartCanvas" (window:resize)="rePaint()"></canvas>
     </div>
 
-    <div class="pie-chart-slider" *ngFor="let ac of values; let i = index">
+    <div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
         <md-grid-list cols="11" rowHeight="12px">
             <md-grid-tile
                 colspan="2"
                 rowspan="2">
-                <div class="strategy-fab" [style.background-color]="colors[i]"></div>
+                <div class="strategy-fab" [style.background-color]="colors[i]">
+                  <p class="letterInside">{{lettersStrategy[i]}}</p>
+                </div>
             </md-grid-tile>
             <md-grid-tile
                 colspan="9"
                 rowspan="1">
                 <md-slider
                     class="strategy-slider"
-                    [value]="ac"
-                    [max]="getMax(i)"
+                    [value]="getValues(i)"
+                    [max]="100"
                     [min]="0"
                     [step]="1"
                     [thumb-label]="true"
-                    (change)="valueChanged($event, i)">
-                </md-slider>
+                    (change)="valueChanged($event, i)"
+                ></md-slider>
             </md-grid-tile>
             <md-grid-tile
                 colspan="9"

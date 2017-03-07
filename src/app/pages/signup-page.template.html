@@ -1,17 +1,16 @@
-<md-card class="box-form">
-    <md-card-header>
-      <md-card-title>Register</md-card-title>
-    </md-card-header>
-    <md-card-content>
+<div class="flex-board">
+    <div class="my-card">
+        <h1>Register</h1>
         <md-input-container class="input-full-width">
             <input type="text" mdInput placeholder="Email" #email required>
         </md-input-container>
         <md-input-container class="input-full-width">
             <input type="password" mdInput placeholder="Password" #password required>
         </md-input-container>
-        <button md-raised-button (click)="submitRegistration(email.value, password.value)">Sign Up</button>
-    </md-card-content>
-    <md-card-actions>
-        Do you have an account? <a routerLink="/login">Login now!</a>
-    </md-card-actions>
-</md-card>
+        <div class="center">
+            <button md-raised-button class="form-send-button" (click)="submitRegistration(email.value, password.value)">Sign Up</button>
+            <br><br>
+            <span>Do you have an account? <a routerLink="/login">Login now!</a></span>
+        </div>
+    </div>
+</div>

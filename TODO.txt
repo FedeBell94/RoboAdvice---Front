@@ -8,7 +8,6 @@ Di fianco ad ogni task (prima) mettiamo un valore indicante la priorità, un val
 ///////////////////////////////////////////////////////////////////////////////////////
 
 Survey:
-    2: Va rimossa la voce dal menu laterale
     5: Vanno sistemate le scritte (la lunghezza di alcune risposte, nonché il senso logico; la traduzione automatizzata non era un gran che) di modo che non eccedano la card in modalità telefono
     15: I valori dati alle risposte sono tutti = e con poco criterio, vanno ristudiati
     80: Il form finale di scelta dell'username potrebbe essere un po' più esplicativo, playful
@@ -20,6 +19,3 @@ Strategy:
 
 Dashboard:
     13: Mostrare il worth con indicazione della positività o negatività dell'andamento
-
-Toolbar:
-    50: mostrare username utente nella Toolbar

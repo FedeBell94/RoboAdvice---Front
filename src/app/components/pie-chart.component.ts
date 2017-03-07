@@ -13,9 +13,9 @@ export class PieChartComponent {
     constructor(
       private dialogsService: DialogsService,
     ) { }
-    @Input() values: number[] = [20, 20, 20, 40];
-    @Input() labels: string[] = ["Pippo", "Pluto", "Minnie", "Donald"];
-    @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ["#3c4eb9", "#1b70ef", "#00abff", "#40daf1"];
+    @Input() values: number[] = [20, 20, 20, 20, 10];
+    @Input() labels: string[] = ["Pippo", "Pluto", "Minnie", "Donald", "empty"];
+    @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ["#3c4eb9", "#1b70ef", "#00abff", "#40daf1", "#4A861E"];
     @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";
     @Input() title: string;
     @Input() titleColor: string | CanvasGradient | CanvasPattern;
@@ -23,6 +23,8 @@ export class PieChartComponent {
     @Input() portrait: boolean = false;
     @ViewChild('chartCanvas') canvas: ElementRef;
     @Output() save = new EventEmitter();
+
+    lettersStrategy : string[] = ['B', 'F', 'S', 'C', 'empty'];
 
     getMax(i:number) {
         let tot = 0;
@@ -32,7 +34,7 @@ export class PieChartComponent {
 
 
     ngOnInit() {
-        if (!this.values) this.values = [20, 20, 20, 40];
+        if (!this.values) this.values = [20, 20, 20, 20, 10];
         this.rePaint();
     }
 
@@ -40,10 +42,28 @@ export class PieChartComponent {
         setTimeout(()=>this.printChart(), 1);
     }
 
+    totalPercentage(): number{
+        let tmp: number = 0;
+        for (var i = 0; i < this.values.length - 1; i++) {
+          tmp += this.values[i];
+        }
+        return tmp;
+    }
+
+    getValues(index: number){
+        return this.values[index];
+    }
+
     valueChanged(event: any, i:number) {
-        this.values[i] = event.value;
+        let newTotPercentage: number = this.totalPercentage() - this.values[i] + event.value;
+        if (newTotPercentage > 100){
+            this.values[4] = 0;
+            this.values[i] = 100 - (this.totalPercentage() - this.values[i]);
+        }else{
+            this.values[i] = event.value;
+            this.values[4] = 100 - this.totalPercentage();
+        }
         this.rePaint();
-        console.log(event);
     }
 
   public openDialog() {
@@ -55,7 +75,7 @@ export class PieChartComponent {
   }
 
     saveStrategy() {
-        this.save.emit(this.values);
+      this.save.emit(this.values);
     }
 
     private printChart() {

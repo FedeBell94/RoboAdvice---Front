@@ -14,6 +14,8 @@ export class PortfolioService {
 
     getHistory() {
         return {
+	        "color": "#fff",
+	        "fontFamily": "Roboto",
             "type": "serial",
             "categoryField": "date",
             "dataDateFormat": "YYYY-MM-DD",
@@ -33,7 +35,7 @@ export class PortfolioService {
                 "#333333",
                 "#990000"
             ],
-            "fontSize": 15,
+            "fontSize": 12,
             "categoryAxis": {
                 "parseDates": true,
                 "ignoreAxisWidth": true
@@ -44,6 +46,7 @@ export class PortfolioService {
             },
             "graphs": [
                 {
+                    "type": "smoothedLine",
                     "fillAlphas": 0.7,
                     "id": "AmGraph-1",
                     "lineAlpha": 0,
@@ -51,6 +54,7 @@ export class PortfolioService {
                     "valueField": "column-1"
                 },
                 {
+                    "type": "smoothedLine",
                     "fillAlphas": 0.7,
                     "id": "AmGraph-2",
                     "lineAlpha": 0,
@@ -58,6 +62,7 @@ export class PortfolioService {
                     "valueField": "column-2"
                 },
                 {
+                    "type": "smoothedLine",
                     "fillAlphas": 0.7,
                     "id": "AmGraph-3",
                     "lineAlpha": 0,
@@ -72,7 +77,8 @@ export class PortfolioService {
             ],
             "balloon": {},
             "legend": {
-                "enabled": true
+                "enabled": true,
+                "color": "#fff"
             },
             "titles": [
                 {
