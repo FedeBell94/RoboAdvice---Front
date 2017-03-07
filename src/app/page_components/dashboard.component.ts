@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/remote/authentication.service';
 import { StrategyService } from '../services/strategy.service';
 import { PortfolioService } from '../services/portfolio.service';
+import {DialogsService} from "../modals/modalservices/dialog.services";
 
-import { PieChartComponent } from '../components/pie-chart.component';
 
 import { Strategy } from '../model/strategy/strategy';
 import { Asset } from '../model/strategy/asset';
@@ -21,6 +21,7 @@ export class DashboardPageComponent {
     private router: Router,
     private strategyService: StrategyService,
     private portfolio: PortfolioService,
+    private dialogsService: DialogsService
   ) { }
   @ViewChild('strategyPieChart') pieChart: any;
 
@@ -32,7 +33,9 @@ export class DashboardPageComponent {
       this.router.navigate(["login"]);
       return;
     } else {
-      //TODO: if (this.auth.getUser().username == null) this.router.navigate(["survey"]); return;
+      if (this.auth.getUser().username == null) {
+        this.router.navigate(["survey"]);
+      }
     }
     this.strategyService.getStrategy().share().subscribe((data)=> {
       console.log("strategy has arrived: " + JSON.stringify(data.data));
@@ -65,13 +68,13 @@ export class DashboardPageComponent {
           }
           str.name = "Custom";
           this.strategyService.saveStrategy(str).share().subscribe((data) => {
-            //TODO: tell the user all is ok with a modal
+           this.dialogsService.confirm('You have changed your strategy','')
             console.log("Strategy saved");
 
             event.push(0);
           });
       }else{
-            //TODO: tell the user that must be complete all the percentage
+            this.dialogsService.error('Somenthing went wrong','Try again later');
       }
   }
 }
