@@ -18,9 +18,17 @@ export class WorthComponent {
   ) { }
 
   @Input() myWorth: number;
+  @Input() myProfLoss: number;
 
   ngOnInit() {
 
+  }
+
+  isLoss(): boolean{
+    if (this.myProfLoss < 0) 
+      return true;
+    else
+      return false;
   }
 
 }
