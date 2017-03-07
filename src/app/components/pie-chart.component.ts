@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/remote/authentication.service';
+import {DialogsService} from "../modals/modalservices/dialog.services";
 
 @Component({
   selector: "pie-chart",
@@ -10,6 +11,7 @@ import { AuthService } from '../services/remote/authentication.service';
 })
 export class PieChartComponent {
     constructor(
+      private dialogsService: DialogsService,
     ) { }
     @Input() values: number[] = [20, 20, 20, 40];
     @Input() labels: string[] = ["Pippo", "Pluto", "Minnie", "Donald"];
@@ -44,6 +46,14 @@ export class PieChartComponent {
         console.log(event);
     }
 
+  public openDialog() {
+    this.dialogsService
+      .confirm().share().subscribe((res)=> {
+        if (res==true) this.saveStrategy();
+          });
+
+  }
+
     saveStrategy() {
         this.save.emit(this.values);
     }
@@ -77,12 +87,12 @@ export class PieChartComponent {
             height: internalWidth
         }
 
-        let pieCenter = { 
+        let pieCenter = {
                 x: pieArea.x + pieArea.width / 2,
-                y: pieArea.y + pieArea.height / 2 
+                y: pieArea.y + pieArea.height / 2
             };
-        
-        
+
+
         let ray = pieArea.width / 2;
         ctx.font = fontSize + "px Roboto";
         ctx.textBaseline = "middle";
