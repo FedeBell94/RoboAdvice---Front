@@ -4,7 +4,7 @@
 import { Observable } from 'rxjs/Rx';
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
-import {ConfirmDialog} from "../modalscomponent/confirm-dialog.components";
+import {ConfirmDialog} from "../modalscomponent/confirm-dialog.component";
 
 @Injectable()
 export class DialogsService {

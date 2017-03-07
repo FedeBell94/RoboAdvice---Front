@@ -161,17 +161,21 @@ export class PortfolioService {
     }
 
     getLastPortfolio() {
-        let ret: any[] = [];
-        for (let i = 0; i < 4; i++) {
-            let lastVal = (this.cachedData.data.length > 0 ? this.cachedData.data[this.cachedData.data.length -1][this.cachedData.graphs[i].valueField] : 0);
-            let beforeLastVal = (this.cachedData.data.length > 1 ? lastVal - this.cachedData.data[this.cachedData.data.length -2][this.cachedData.graphs[i].valueField] : 0);
-            ret.push({
-                assetClass: this.cachedData.graphs[i].title,
-                value: lastVal,
-                profLoss: beforeLastVal
-            });
-        }
-        return ret;
+      if (!this.cachedData) {
+        this.forceDownolad();
+        return null;
+      }
+      let ret: any[] = [];
+      for (let i = 0; i < 4; i++) {
+        let lastVal = (this.cachedData.data.length > 0 ? this.cachedData.data[this.cachedData.data.length -1][this.cachedData.graphs[i].valueField] : 0);
+        let beforeLastVal = (this.cachedData.data.length > 1 ? lastVal - this.cachedData.data[this.cachedData.data.length -2][this.cachedData.graphs[i].valueField] : 0);
+        ret.push({
+          assetClass: this.cachedData.graphs[i].title,
+          value: lastVal,
+          profLoss: beforeLastVal
+        });
+      }
+      return ret;
     }
 
     getWorth() {

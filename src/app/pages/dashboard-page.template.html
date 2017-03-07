@@ -1,16 +1,11 @@
 <div class="flex-board">
-    <div class="asset-class-line">
-        <div class="asset-class-card my-card">
-
-        </div>
-        <div class="asset-class-card my-card">
-            
-        </div>
-        <div class="asset-class-card my-card">
-            
-        </div>
-        <div class="asset-class-card my-card">
-            
+    <div class="asset-class-line" *ngIf="areaChartData && areaChartData()">
+        <div class="asset-class-card my-card" *ngFor="let aC of getPortfolio()">
+            <asset-class-chip
+                [label]="aC.assetClass"
+                [value]="aC.value"
+                [profLoss]="aC.profLoss"
+            ></asset-class-chip>
         </div>
     </div>
     <div class="my-card" id="strategy-card">

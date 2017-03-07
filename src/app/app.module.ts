@@ -26,7 +26,8 @@ import { SurveyPageComponent } from "./page_components/survey.component";
 import { PieChartComponent } from './components/pie-chart.component';
 import { AreaChartComponent } from './components/area-chart.component';
 import { WorthComponent } from "./components/worth.component";
-import {ConfirmDialog} from "./modals/modalscomponent/confirm-dialog.components";
+import { ConfirmDialog } from "./modals/modalscomponent/confirm-dialog.component";
+import { AssetClassChipComponent } from "./components/asset-class-chip.component";
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     AreaChartComponent,
     ConfirmDialog,
     WorthComponent,
+    AssetClassChipComponent,
     ],
   providers: [
     ApiService,
@@ -66,7 +68,7 @@ const appRoutes: Routes = [
     ManageJsonService,
     StrategyService,
     PortfolioService,
-    DialogsService
+    DialogsService,
   ],
   exports: [
     ConfirmDialog,
