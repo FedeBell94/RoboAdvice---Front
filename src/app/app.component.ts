@@ -22,7 +22,7 @@ export class AppComponent  {
       if (data.response == 0) {
           this.router.navigate(["/login"]);
       } else {
-        this.portfolio.getLastPortfolio().share().subscribe((data)=>{
+        this.portfolio.forceDownolad().share().subscribe((data)=>{
           
         });
       }
