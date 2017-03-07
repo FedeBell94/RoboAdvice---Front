@@ -76,6 +76,13 @@ export class AuthService {
         });
     }
 
+    saveUser(user: any) {
+        this.currentUser = new User();
+        this.currentUser.email = user.email;
+        this.currentUser.id = user.id;
+        this.currentUser.username = user.username;
+    }
+
     private estractCookie(cookieName: string) {
         let value = "; " + document.cookie;
         let parts: any = value.split(";");
@@ -92,13 +99,6 @@ export class AuthService {
         headers.append('User-Token', this.getAuthToken());
         let options = new RequestOptions({ headers: headers });
         this.apis.setDefaultRequestOptions(options);
-    }
-
-    private saveUser(user: any) {
-        this.currentUser = new User();
-        this.currentUser.email = user.email;
-        this.currentUser.id = user.id;
-        this.currentUser.username = user.username;
     }
 
     private logInWithUser(user: any) {
