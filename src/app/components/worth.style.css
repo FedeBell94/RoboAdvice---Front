@@ -1,0 +1,19 @@
+.img-worth{
+  margin-top: 12px;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+.money{
+  margin-top: 20px;
+  font-size: 22px;
+}

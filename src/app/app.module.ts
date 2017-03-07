@@ -26,7 +26,8 @@ import { SurveyPageComponent } from "./page_components/survey.component";
 import { PieChartComponent } from './components/pie-chart.component';
 import { AreaChartComponent } from './components/area-chart.component';
 import { SuccessDialog } from "./modals/modalscomponent/success-dialog.components";
-import {ConfirmDialog} from "./modals/modalscomponent/confirm-dialog.components";
+import { ConfirmDialog } from "./modals/modalscomponent/confirm-dialog.components";
+import { WorthComponent } from "./components/worth.component";
 
 const appRoutes: Routes = [
     {path: '', component: LoginPageComponent},
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     AreaChartComponent,
     SuccessDialog,
     ConfirmDialog,
+    WorthComponent,
     ],
   providers: [
     ApiService,

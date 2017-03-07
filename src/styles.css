@@ -209,5 +209,9 @@ md-card.mat-card>md-card-action.mat-card-actions:last-child {
 */
 
 .mat-fab, .mat-mini-fab, .mat-raised-button {
-      background-color: #00abff !important;
+  background-color: #00abff !important;
+}
+
+.mat-toolbar, .mat-toolbar .mat-toolbar-row {
+  justify-content: space-between;
 }
