@@ -3,8 +3,8 @@
   <span *ngIf="getUsername()">{{getUsername()}}</span>
   <worth
     *ngIf="getUsername()"
-    [myWorth]="10000"
-    [myProfLoss]="-30"
+    [myWorth]="getWorth() || 10000"
+    [myProfLoss]="getProfLoss() || 0"
   ></worth>
 </md-toolbar>
 

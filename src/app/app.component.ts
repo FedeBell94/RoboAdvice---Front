@@ -22,15 +22,21 @@ export class AppComponent  {
       if (data.response == 0) {
           this.router.navigate(["/login"]);
       } else {
-        this.portfolio.getLastPortfolio().subscribe((data)=>{
-            console.log("from component:=> ", data);
+        this.portfolio.getLastPortfolio().share().subscribe((data)=>{
+          
         });
       }
     });
-
-    
   }
-  
+
+  getWorth() {
+    return this.portfolio.getWorth();
+  }
+
+  getProfLoss() {
+    return this.portfolio.getProfLoss();
+  }
+
   isLogged(){
     //da sviluppare, aspettiamo la spring security
     return this.auth.isLogged();

@@ -25,8 +25,10 @@ export class DashboardPageComponent {
   ) { }
   @ViewChild('strategyPieChart') pieChart: any;
 
-  strategyValues:number[];
-  areaChartData: any;
+  strategyValues: number[];
+  areaChartData() {
+    return this.portfolio.getCachedPortfolioHistoryChartOptions();
+  };
 
   ngOnInit() {
     if (!this.auth.isLogged()) {
@@ -45,12 +47,6 @@ export class DashboardPageComponent {
         this.pieChart.rePaint();
       }
     });
-
-    this.areaChartData = ()=> { 
-      let opts = this.portfolio.getCachedPortfolioHistoryChartOptions(); 
-      console.log("got opts: ", opts);
-      return opts;
-    };
   }
 
   saveStrategy(event: any) {

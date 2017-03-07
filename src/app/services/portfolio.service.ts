@@ -31,21 +31,21 @@ export class PortfolioService {
 
     private estractData(data: any) {
         this.cachedData = data.data;
+        console.log(this.cachedData);
 
         //current worth
         if (this.cachedData.data.length > 0) this.cachedWorth = this.sumAssetClasses(this.cachedData.data[this.cachedData.data.length - 1]);  //ok
         else this.cachedWorth = 10000;
-        //console.log("current worth: ", this.cachedWorth);
+        console.log("current worth: ", this.cachedWorth);
         //yesterday's worth
-        if (this.cachedData.data.length > 2) this.cachedYesterdayWorth = this.sumAssetClasses(this.cachedData.data[this.cachedData.data.length - 2]);
+        if (this.cachedData.data.length > 1) this.cachedYesterdayWorth = this.sumAssetClasses(this.cachedData.data[this.cachedData.data.length - 2]);
         else this.cachedYesterdayWorth = 10000;
-        //console.log("yesterday's worth: ", this.cachedYesterdayWorth);
+        console.log("yesterday's worth: ", this.cachedYesterdayWorth);
         //options
         this.cachedPortfolioHistoryChartOptions = this.getOptions();
         //console.log("options: ", this.cachedPortfolioHistoryChartOptions);
 
 
-        //console.log(this.cachedData);
     }
 
     private getOptions() {
@@ -96,7 +96,7 @@ export class PortfolioService {
     private getGraphs() {
         return [{
             "type": "smoothedLine",
-            "fillAlphas": 0.3,
+            "fillAlphas": 0.6,
             "id": "AmGraph-1",
             "lineAlpha": 0,
             "title": "Bonds",
@@ -104,7 +104,7 @@ export class PortfolioService {
         },
         {
             "type": "smoothedLine",
-            "fillAlphas": 0.3,
+            "fillAlphas": 0.6,
             "id": "AmGraph-2",
             "lineAlpha": 0,
             "title": "Forex",
@@ -112,7 +112,7 @@ export class PortfolioService {
         },
         {
             "type": "smoothedLine",
-            "fillAlphas": 0.3,
+            "fillAlphas": 0.6,
             "id": "AmGraph-3",
             "lineAlpha": 0,
             "title": "Stocks",
@@ -120,8 +120,8 @@ export class PortfolioService {
         },
         {
             "type": "smoothedLine",
-            "fillAlphas": 0.3,
-            "id": "AmGraph-3",
+            "fillAlphas": 0.6,
+            "id": "AmGraph-4",
             "lineAlpha": 0,
             "title": "Commodities",
             "valueField": "column4"

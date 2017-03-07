@@ -1,11 +1,38 @@
+.asset-class-line {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.asset-class-line .my-card:last-child {
+    margin-right: 24px;
+}
+
+.asset-class-card {
+    width: 20%;
+    min-height: 30px;
+}
 
 #strategy-card {
     max-width: 400px;
     width: 100%;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 780px) {
+    .asset-class-card {
+        width: 45%;
+    }
+    .asset-class-line .my-card,
+    .asset-class-line .my-card:last-child {
+    margin-right: 0px;
+}
+}
 
+@media (max-width: 480px) {
+    .asset-class-card {
+        width: 100%;
+    }
     #strategy-card {
         max-width: unset;
     }
