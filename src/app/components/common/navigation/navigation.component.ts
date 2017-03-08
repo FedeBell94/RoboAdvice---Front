@@ -7,7 +7,8 @@ declare var jQuery:any;
 
 @Component({
     selector: 'navigation',
-    templateUrl: 'navigation.template.html'
+    templateUrl: 'navigation.template.html',
+    styleUrls: ['navigation.style.css']
 })
 
 export class NavigationComponent {
@@ -23,6 +24,11 @@ export class NavigationComponent {
 
     activeRoute(routename: string): boolean{
         return this.router.url.indexOf(routename) > -1;
+    }
+
+    getUsername(): any {
+        if (this.auth.isLogged()) return this.auth.getUser().username;
+        return false;
     }
 
     logout(){
