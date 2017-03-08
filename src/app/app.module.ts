@@ -1,81 +1,57 @@
-import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule, MdIconModule } from "@angular/material";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { HttpInterceptorModule } from 'ng-http-interceptor';
-import { AmChartsModule } from "./directives/am-charts";
+import {RouterModule} from "@angular/router";
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
+import {ROUTES} from "./app.routes";
+import {AppComponent} from './app.component';
 
-//services
-import { ApiService } from './services/remote/remote-call.service';
-import { AuthService } from './services/remote/authentication.service';
-import { ManageJsonService } from "./services/manageJson.service";
-import { StrategyService } from "./services/strategy.service";
-import { PortfolioService } from "./services/portfolio.service";
-import { DialogsService } from "./modals/modalservices/dialog.services";
+// App services
+import {ApiService} from "./services/remote/remote-call.service";
+import {AuthService} from "./services/remote/authentication.service";
+import {PortfolioService} from "./services/portfolio.service";
+import {StrategyService} from "./services/strategy.service";
 
-//pageComponents
-import { AppComponent }  from './app.component';
-import { LoginPageComponent }  from './page_components/login.component';
-import { SignUpPageComponent } from "./page_components/signup.component";
-import { DashboardPageComponent } from "./page_components/dashboard.component";
-import { SurveyPageComponent } from "./page_components/survey.component";
+// App views
+import {MainViewModule} from "./views/main-view/main-view.module";
+import {MinorViewModule} from "./views/minor-view/minor-view.module";
+import {LoginModule} from "./views/login/login.module";
+import {RegisterModule} from "./views/register/register.module";
 
-//other components
-import { PieChartComponent } from './components/pie-chart.component';
-import { AreaChartComponent } from './components/area-chart.component';
-import { WorthComponent } from "./components/worth.component";
-import { ConfirmDialog } from "./modals/modalscomponent/confirm-dialog.component";
-import { AssetClassChipComponent } from "./components/asset-class-chip.component";
-
-const appRoutes: Routes = [
-    {path: '', component: LoginPageComponent},
-    {path: 'login', component: LoginPageComponent},
-    {path: 'signup', component: SignUpPageComponent},
-    {path: 'dashboard', component: DashboardPageComponent},
-    {path: 'survey', component: SurveyPageComponent},
-
-    { path: '**', redirectTo: '' }
-
-
-];
+// App modules/components
+import {LayoutsModule} from "./components/common/layouts/layouts.module";
 
 @NgModule({
-  imports:      [
-    BrowserModule,
-    MaterialModule,
-    HttpInterceptorModule,
-    HttpModule,
-    RouterModule.forRoot(appRoutes),
-    AmChartsModule,
+    declarations: [
+        AppComponent,
     ],
-  declarations: [
-    AppComponent,
-    LoginPageComponent,
-    SignUpPageComponent,
-    DashboardPageComponent,
-    SurveyPageComponent,
-    PieChartComponent,
-    AreaChartComponent,
-    ConfirmDialog,
-    WorthComponent,
-    AssetClassChipComponent,
+    imports: [
+        // Angular modules
+        BrowserModule,
+        HttpModule,
+
+        // Views
+        MainViewModule,
+        MinorViewModule,
+        LoginModule,
+        RegisterModule,
+
+        // Modules
+        LayoutsModule,
+
+        RouterModule.forRoot(ROUTES)
     ],
-  providers: [
-    ApiService,
-    AuthService,
-    ManageJsonService,
-    StrategyService,
-    PortfolioService,
-    DialogsService,
-  ],
-  exports: [
-    ConfirmDialog,
-  ],
-  entryComponents: [
-    ConfirmDialog,
-  ],
-  bootstrap:    [ AppComponent ]
+    exports: [
+
+    ],
+    providers: [
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        AuthService,
+        ApiService,
+        PortfolioService,
+        StrategyService,
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

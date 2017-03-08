@@ -1,0 +1,62 @@
+.img-worth{
+    margin-top: 12px;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.money{
+    margin-top: 15px;
+    font-size: 22px;
+}
+
+.underMoney{
+    margin-top: -10px;
+    font-size: 12px;
+}
+
+.separetor-left{
+    margin-left: 60px;
+}
+
+.green{
+    color: #aed581;
+}
+
+.red{
+    color: #c70e0e;
+}
+
+@media (max-width: 480px) {
+    .money {
+        font-size: 16px;
+    }
+
+    .underMoney {
+        font-size: 10px;
+    }
+
+    .img-worth {
+        width: 25px;
+        height: 25px;
+    }
+
+    .separetor-left{
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 345px) {
+    .img-worth {
+        display: none;
+    }
+
+}

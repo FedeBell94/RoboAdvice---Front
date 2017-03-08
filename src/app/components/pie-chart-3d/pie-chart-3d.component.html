@@ -1,0 +1,25 @@
+<div class="pie-chart-box" [class.pie-chart-portrait]="portrait">
+    <div class="pie-chart-title" *ngIf="title"><h2>{{title}}</h2></div>
+    <div class="pie-chart-container">
+        <canvas #chartCanvas class="pieChartCanvas" (window:resize)="rePaint()"></canvas>
+    </div>
+
+    <div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
+
+        Slider
+        <!--<md-slider
+                class="strategy-slider"
+                [value]="getValues(i)"
+                [max]="100"
+                [min]="0"
+                [step]="1"
+                [thumb-label]="true"
+                (change)="valueChanged($event, i)"
+        ></md-slider>-->
+
+    </div>
+    <br>
+    <div class="pie-chart-actions">
+        <button (click)="openDialog()">Save</button>
+    </div>
+</div>

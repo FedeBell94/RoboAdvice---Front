@@ -1,0 +1,12 @@
+@media (min-width: 768px){
+    .buttonShowSidebar{
+        display: none;
+    }
+}
+
+@media (max-width: 769px) {
+    .navbar-right {
+        float: right !important;
+        margin-right: 15px;
+    }
+}

@@ -43,11 +43,11 @@ export class AuthService {
         return this.apis.post("registerUser", {
             email: email,
             password: password
-        }).share();
+        });
     }
 
     logout() {
-        this.apis.post("logoutUser", {}).share().subscribe(()=>{
+        this.apis.post("logoutUser", {}).subscribe(()=>{
             this.logged = false;
             this.router.navigate(["login"]);
         });
@@ -107,7 +107,8 @@ export class AuthService {
         //now i save the user
         this.saveUser(user);
         //if the user has a username
-        if (this.currentUser.username) this.router.navigate(["/dashboard"]);
+        //TODO: change navigate
+        if (this.currentUser.username) this.router.navigate(["/mainView"]);
         else this.router.navigate(["/survey"]);
     }
 }

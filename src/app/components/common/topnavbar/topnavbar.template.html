@@ -1,0 +1,17 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="minimalize-styl-2 btn btn-primary buttonShowSidebar" (click)="toggleNavigation()"><i class="fa fa-bars"></i> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <app-worth
+                        *ngIf="getUsername()"
+                        [myWorth]="getWorth() || 10000"
+                        [myProfLoss]="getProfLoss() || 0"
+                ></app-worth>
+            </li>
+        </ul>
+
+    </nav>
+</div>
