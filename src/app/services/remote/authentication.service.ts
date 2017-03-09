@@ -38,12 +38,13 @@ export class AuthService {
             return res;
         });
     }
-    
 
-    register(email: string, password: string) {
+
+    register(email: string, nickname: string, password: string) {
         return this.apis.post("registerUser", {
-            email: email,
-            password: password
+            username: email,
+            password: password,
+            nickname: nickname
         });
     }
 

@@ -7,17 +7,20 @@
     <p  class="white-color">Create account to see it in action.</p>
     <form class="m-t" role="form">
       <div class="form-group">
-        <input type="email" class="form-control" #email placeholder="Email" required="">
+        <input type="email" class="form-control" #email placeholder="Email" required>
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" #pwd placeholder="Password" required="">
+        <input type="text" class="form-control" #nickname placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" #pwd placeholder="Password" required>
       </div>
       <div class="form-group">
         <div class="checkbox i-checks white-color"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
       </div>
       <button type="button"
               class="btn btn-primary block full-width m-b"
-              (click)="submitRegistration(email.value, pwd.value)"
+              (click)="submitRegistration(email.value, nickname.value, pwd.value)"
       >Register</button>
 
       <p class="text-muted text-center white-color"><small>Already have an account?</small></p>

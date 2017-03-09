@@ -19,9 +19,9 @@ export class registerComponent implements OnInit{
 
     }
 
-    submitRegistration(email:string, pwd: string) {
+    submitRegistration(email:string, nickname: string, pwd: string) {
         console.log("submitted");
-        this.auth.register(email, pwd).subscribe(data => {
+        this.auth.register(email, nickname, pwd).subscribe(data => {
             if (data.response > 0) {
                 console.log("REGISTRATION SUCCESSFULL");
                 //show a modal
