@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
-    private apiUrl = 'http://localhost:8080/';  // URL to web API
-    //private apiUrl = 'http://192.168.2.136:8080/';
+    //private apiUrl = 'http://localhost:8080/';  // URL to web API
+    private apiUrl = 'http://192.168.2.116:8080/securedApi/';
     private callCount = 0;
 
     constructor (
@@ -63,7 +63,7 @@ export class ApiService {
         ///     errorString: (string di messaggio dell'errore),
         ///     data: (dati se non errori) }
         let body = res.json();
-        //console.log(body)
+        console.log(body);
         if (body.response == 0) {
             //error there
             console.log( new Date().toDateString() + " SERVER API ERROR " + body.errorCode + ": " + body.errorString);

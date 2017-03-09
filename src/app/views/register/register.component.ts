@@ -1,12 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/remote/authentication.service";
-import {ManageJsonService} from "../../services/manageJson.service";
-import {Question} from "../../model/survey/question";
-import {Strategy} from "../../model/strategy/strategy";
-import {StrategyService} from "../../services/strategy.service";
 
-declare var jQuery:any;
 
 @Component({
     selector: 'register',
@@ -15,37 +10,12 @@ declare var jQuery:any;
 })
 export class registerComponent implements OnInit{
 
-  questions: Question[];
-
-  strategies: Strategy[];
-
-  idAnswer: number = -1;
-
-  idNextTab: number = 0;
-
-  totalScore: number[] = [0, 0, 0, 0, 0]; //0: Bonds, 1: Income, 2: Balanced, 3: Growth, 4: Stocks
-
-  strategySelected: string;
-
-  private tabs: any;
-
-  private count: number = -1;
-
   constructor(
-    private jsonService: ManageJsonService,
-    private apiService: StrategyService,
     private auth: AuthService,
     private router: Router,
   ) {  }
 
     ngOnInit(){
-        jQuery('a[title]').tooltip();
-        console.log("1");
-        this.jsonService.getFromJson('survey_roboadvice.json').subscribe((data:any)=> {
-          console.log("2");
-          console.log(data["questions"]);
-          this.questions = data["questions"];
-        });
 
     }
 
@@ -77,96 +47,4 @@ export class registerComponent implements OnInit{
             }
         });
     }
-
-
-  sendMyStrategy(my_strategy: Strategy){
-    console.log("Uploading my strategy...");
-    console.log(my_strategy.asset_class);
-    this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
-      console.log("Sent My Strategy!");
-    });
-  }
-
-  public openDialog(username: string) {
-    this.submitStrategyAndUsername(username);
-  }
-
-  choiceStrategy() {
-    let x: number = 50;
-    x += this.totalScore[1];    //sum: Income
-    x -= this.totalScore[3];    //sub: Growth
-    x += this.totalScore[0]/2;  //sum: Bonds/2
-    x -= this.totalScore[4]/2;  //sum: Stocks/2
-
-    this.jsonService.getFromJson('strategy_roboadvice.json').subscribe((data:any)=> {
-      this.strategies = data["strategies"];
-      switch (true){
-        case (x < 20):
-          console.log("Stocks");
-          this.strategySelected = this.strategies[4].name;
-          this.sendMyStrategy(this.strategies[4]);
-          break;
-        case (x >= 20 && x < 40):
-          console.log("Growth");
-          this.strategySelected = this.strategies[3].name;
-          this.sendMyStrategy(this.strategies[3]);
-          break;
-        case (x >= 40 && x < 60):
-          console.log("Balanced");
-          this.strategySelected = this.strategies[2].name;
-          this.sendMyStrategy(this.strategies[2]);
-          break;
-        case (x >= 60 && x < 80):
-          console.log("Income");
-          this.strategySelected = this.strategies[1].name;
-          this.sendMyStrategy(this.strategies[1]);
-          break;
-        case (x >= 80):
-          console.log("Bonds");
-          this.strategySelected = this.strategies[0].name;
-          this.sendMyStrategy(this.strategies[0]);
-          break;
-      }
-    });
-
-  }
-
-  submitQuestion(){
-
-    if (this.idAnswer != -1){
-      if (this.idNextTab < this.questions.length){
-
-        for (let i: number = 0; i < this.questions[this.idNextTab].answers.length; i++){
-          this.totalScore[i] += this.questions[this.idNextTab].answers[this.idAnswer].scores[i];
-        }
-
-      }
-    }
-  }
-
-  setAnswer(answ: number){
-    this.idAnswer = answ;
-  }
-
-  submitStrategyAndUsername(username: string){
-    if (username != ""){
-      this.choiceStrategy();
-      console.log("Strategy sent:");
-      console.log("Bonds: "+   this.totalScore[0]);
-      console.log("Income: "+  this.totalScore[1]);
-      console.log("Balanced: "+this.totalScore[2]);
-      console.log("Growth: "+  this.totalScore[3]);
-      console.log("Stocks: "+  this.totalScore[4]);
-
-      this.auth.updateUsername(username).subscribe((data)=>{
-        if (data.response > 0) {
-          this.auth.saveUser(data.data);
-          //TODO: this.strategySelected is your seleceted strategy
-          this.router.navigate(["/dashboard"]);
-        }else{
-          //TODO error
-        }
-      });
-    }
-  }
 }

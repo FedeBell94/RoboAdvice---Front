@@ -1,4 +1,9 @@
 <div class="wrapper wrapper-content animated fadeInRight">
+    <app-slider
+        [maxAllowed]="80"
+    ></app-slider>
+    <app-slider (change)="0"></app-slider>
+    <app-slider (input)="0"></app-slider>
     <div class="row">
         <div class="col-md-3" *ngFor="let aC of getPortfolio()">
             <div class="info-tile" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
@@ -8,6 +13,7 @@
                 <div class="tile-footer">
                     <span [ngClass]="{'text-success': !isLoss(aC.percentage), 'text-error': isLoss(aC.percentage)}">
                         <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(aC.percentage), 'ti-arrow-down': isLoss(aC.percentage)}"></i>
+                        {{aC.percentage | percent:'1.0-2'}}
                     </span>
                 </div>
             </div>
@@ -18,8 +24,8 @@
         <div class="col-lg-3">
             <app-pie-chart-3d #strategyPieChart></app-pie-chart-3d>
         </div>
-        <div class="col-lg-9">
-            <app-line-chart></app-line-chart>
+        <div class="col-lg-9" *ngIf="areaChartData()">
+            <app-line-chart [data]="areaChartData()"></app-line-chart>
         </div>
     </div>
 </div>

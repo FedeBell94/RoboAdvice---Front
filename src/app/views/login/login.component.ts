@@ -17,9 +17,7 @@ export class loginComponent {
     ) {}
 
     doLogin(user:string, password:string) {
-        this.auth.login(user, password).catch((res)=>{
-            return res;
-        }).subscribe((data:any)=> {
+        this.auth.login(user, password).subscribe((data:any)=> {
             if (data.response > 0) {
                 this.portfolio.forceDownolad().subscribe((data)=>{
                     this.router.navigate(["/mainView"]);
