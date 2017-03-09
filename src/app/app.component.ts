@@ -37,6 +37,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
+    /*
     this.auth.checkSession().subscribe((data)=> {
       if (data.response == 0) {
         this.router.navigate(["/login"]);
@@ -45,7 +46,8 @@ export class AppComponent implements OnInit{
 
         });
       }
-    });
+    });*/
+    this.router.navigate(["/login"]);
   }
 
   isLogged(){
