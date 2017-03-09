@@ -23,7 +23,7 @@ export class loginComponent {
             if (data.response > 0) {
                 this.portfolio.forceDownolad().subscribe((data)=>{
                     this.router.navigate(["/mainView"]);
-                    //TODO: modal: welcome user
+                  (window as any).swal('Welcome', user, "success")
                 });
             }
 

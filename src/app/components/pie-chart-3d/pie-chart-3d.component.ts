@@ -62,8 +62,26 @@ export class PieChart3dComponent implements OnInit {
     }
 
     public openDialog() {
-        //TODO: modal: You're changing your strategy, Are you sure? Yes or No --->
-        this.saveStrategy();
+      let _this = this;
+      (window as any).swal({
+        title: 'Are you sure?',
+        text: "You are changing your strategy!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, change it!'
+      }).then(function () {
+        _this.saveStrategy.bind(_this)();
+        (window as any).swal(
+          'Done!',
+          'Your strategy has been changed.',
+          'success'
+        )
+      }, function(error){
+        //nothing
+      })
+
     }
 
     saveStrategy() {
