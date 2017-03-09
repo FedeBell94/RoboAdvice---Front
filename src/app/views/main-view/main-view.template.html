@@ -1,4 +1,9 @@
 <div class="wrapper wrapper-content animated fadeInRight">
+    <app-slider
+        [maxAllowed]="80"
+    ></app-slider>
+    <app-slider (change)="0"></app-slider>
+    <app-slider (input)="0"></app-slider>
     <div class="row">
         <div class="col-md-3" *ngFor="let aC of getPortfolio()">
             <div class="info-tile" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
