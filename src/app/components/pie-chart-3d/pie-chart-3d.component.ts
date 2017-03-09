@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 export class PieChart3dComponent implements OnInit {
     constructor(
     ) { }
-    @Input() values: number[] = [20, 20, 20, 20, 10];
+    @Input() values: number[] = [20, 20, 20, 20, 20];
     @Input() labels: string[] = ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"];
     @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ["#3c4eb9", "#1b70ef", "#00abff", "#40daf1", "#4A861E"];
     @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";

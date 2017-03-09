@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { AuthService } from "../../services/remote/authentication.service";
 
+declare var jQuery:any;
+
 @Component({
     selector: 'register',
-    templateUrl: 'register.template.html'
+    templateUrl: 'register.template.html',
+    styleUrls: ['register.style.css']
 })
-export class registerComponent {
+export class registerComponent implements OnInit{
     constructor(
         private auth: AuthService,
         private router: Router,
     ) { }
+
+    ngOnInit(){
+        jQuery('a[title]').tooltip();
+    }
 
     submitRegistration(email:string, pwd: string) {
         console.log("submitted");
