@@ -28,12 +28,11 @@ export class AuthService {
         headers.append("Authorization","Basic " + btoa(email + ":" + password));
         let opts = new RequestOptions({ headers: headers, withCredentials: true });
 
-        return this.apis.post("loginUser", {email: email, password: password} /*, opts*/).map((res)=>{
+        return this.apis.post("loginUser", {}, opts).map((res)=>{
             if (res.response > 0) {
-                this.setAuthToken(res.data.userToken);
                 //if i'm correctly logged, i'll set the default headerOptions for remote calls to pass the auth token on each request
                 this.setAuthHeaders();
-                this.logInWithUser(res.data.user);
+                this.logInWithUser(res.data);
             }
             return res;
         });
@@ -98,8 +97,8 @@ export class AuthService {
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
         headers.append('Access-Control-Allow-Credentials', 'true');
-        headers.append('User-Token', this.getAuthToken());
-        let options = new RequestOptions({ headers: headers });
+        //headers.append('User-Token', this.getAuthToken());
+        let options = new RequestOptions({ headers: headers, withCredentials: true });
         this.apis.setDefaultRequestOptions(options);
     }
 

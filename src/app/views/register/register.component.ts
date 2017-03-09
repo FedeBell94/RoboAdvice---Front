@@ -23,15 +23,22 @@ export class registerComponent implements OnInit{
         console.log("submitted");
         this.auth.register(email, nickname, pwd).subscribe(data => {
             if (data.response > 0) {
-                console.log("REGISTRATION SUCCESSFULL");
-                //show a modal
+              console.log("REGISTRATION SUCCESSFULL");
+              (window as any).swal(
+                'Registration successful!',
+                'Let\'s make money',
+                'success'
+              )
                 this.router.navigate(["/login"]);
             } else {
-                //show modal
+              (window as any).swal(
+                'Oops...',
+                'Something went wrong!',
+                'error'
+              );
                 switch (data.errorCode) {
                     case 100:
-                        //TODO: show modal with errorString
-                        alert("Registration failed");
+
                         console.log("registration Failed");
                         break;
                     default:
