@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, ElementRef, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-slider',
@@ -8,8 +8,138 @@ import { Component, OnInit } from '@angular/core';
 export class SliderComponent implements OnInit {
 
   constructor() { }
+  @ViewChild('canvas') private canvas: ElementRef;
+  @Input() max: number = 100;                                                       //max value
+  @Input() maxAllowed: number = this.max;                                           //max allowed value
+  @Input() value: number = 0;                                                       //current value
+  @Input() step: number = 1;                                                        //min gap between values
+  @Input() fillColor: string | CanvasGradient | CanvasPattern = "#3C3";             //inner color of valued part
+  @Input() limitColor: string | CanvasGradient | CanvasPattern = "#fa9999";         //inner color of not allowed part when max allowed value is reached
+  @Input() ballColor: string | CanvasGradient | CanvasPattern = "#090";             //ball color
+  @Input() onFocusBorderColor: string | CanvasGradient | CanvasPattern = "#399";    //border color while pointer down
+  @Input() borderColor: string | CanvasGradient | CanvasPattern = "#333";           //border color on rest
+  @Input() backColor: string | CanvasGradient | CanvasPattern = "#fafafa";          //inner color on rest
+
+  @Output() change = new EventEmitter<number>();     //triggered on pointerup
+  @Output() input = new EventEmitter<number>();      //triggered on value change
+
+  private ctx: CanvasRenderingContext2D;
+  private p: { x: number, y: number } = {x: 0, y: 0};
+  private w: number;
+  private h: number;
+  private borColor: string | CanvasGradient | CanvasPattern = this.borderColor;
+  private bColor: string | CanvasGradient | CanvasPattern = this.backColor;
+
+  private dW: number;
+  private dX: number;
+  private dH: number;
+  private dY: number;
 
   ngOnInit() {
+    this.setupCanvas();
+
+    this.canvas.nativeElement.onpointerdown = this.onpointerdown.bind(this);
+
+    this.draw();
+  }
+
+  private setupCanvas() {
+    this.ctx = this.canvas.nativeElement.getContext("2d");
+    this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight
+    this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
+
+    this.h = this.canvas.nativeElement.offsetHeight;
+    this.w = this.canvas.nativeElement.offsetWidth;
+    
+    this.dW = this.w - this.h;
+    this.dX = this.h / 2;
+    this.dY = 0;
+    this.dH = this.h;
+  }
+
+  private onpointerdown(e) {
+    //set pointer position
+    this.p.x = e.clientX - this.canvas.nativeElement.offsetLeft;
+    this.p.y = e.clientY - this.canvas.nativeElement.offsetTop;
+    //set border
+    this.ctx.lineWidth = this.h / 15;
+    this.onFocusBorderColor = this.onFocusBorderColor;
+
+    //set onmove
+    document.onpointermove = this.onpointermove.bind(this);
+    //set onup
+    document.onpointerup = this.onpointerup.bind(this);
+    this.computeValue(e);
+    //draw
+    this.draw();
+  }
+
+  private onpointermove(e) {
+      this.computeValue(e);
+      this.draw();
+  }
+
+  private onpointerup() {
+    document.onpointermove = undefined;
+    this.canvas.nativeElement.onpointerup = undefined;
+    this.borColor = "#333"; 
+    this.ctx.lineWidth = 1; 
+    this.draw();
+    this.change.emit(this.value);
+  }
+
+  private computeValue(e) {
+      let old = this.value;
+
+      let p = this.p;
+      p.x = e.clientX - this.canvas.nativeElement.offsetLeft, p.y = e.clientY - this.canvas.nativeElement.offsetTop;
+
+      if (p.x < 0) p.x = 0;
+      else if (p.x > this.w) p.x = this.w;
+
+      this.value = this.max * p.x / this.w;
+      this.value = Math.floor(this.value);
+
+
+      this.value = this.value - this.value % this.step;
+      if (this.value >= this.maxAllowed) {
+        this.value = this.maxAllowed;
+        this.bColor = this.limitColor;
+      } else {
+        this.bColor = this.backColor;
+      }
+
+      //if the value changes, trigger the 'input' event
+      if (old != this.value) this.input.emit(this.value);
+  }
+
+  private draw() {
+    let c = this.ctx;
+    let w = this.w;
+    let h = this.h;
+    let p = this.p;
+
+      c.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+      c.shadowColor = null;
+      c.shadowBlur = 0;
+      c.shadowOffsetY = 0;
+      c.shadowOffsetX = 0;
+
+      c.strokeStyle = this.borColor;
+      c.strokeRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
+      c.fillStyle = this.bColor;
+      c.fillRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
+
+      c.fillStyle = this.fillColor;
+      c.fillRect(this.dX, h / 6 * 2, this.value / this.max * this.dW, h / 6 * 2);
+      c.beginPath();
+      c.arc(this.dX + this.value / this.max * this.dW, h / 2, h / 2 - h / 8, 0, Math.PI * 2);
+      c.fillStyle = this.ballColor;
+      c.shadowColor = '#999';
+      c.shadowBlur = this.h / 7;
+      c.shadowOffsetY = this.h / 15;
+      c.shadowOffsetX = 0;
+      c.fill();
   }
 
 }
