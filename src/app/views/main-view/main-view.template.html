@@ -8,6 +8,7 @@
                 <div class="tile-footer">
                     <span [ngClass]="{'text-success': !isLoss(aC.percentage), 'text-error': isLoss(aC.percentage)}">
                         <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(aC.percentage), 'ti-arrow-down': isLoss(aC.percentage)}"></i>
+                        {{aC.percentage | percent:'1.0-2'}}
                     </span>
                 </div>
             </div>
