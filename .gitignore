@@ -4,6 +4,7 @@ jspm_packages
 npm-debug.log
 debug.log
 src/**/*.js
+!src/app/vendor/pace/pace.min.js
 !src/systemjs.config.extras.js
 !src/systemjs.config.js
 *.js.map

@@ -12,6 +12,7 @@ import {ApiService} from "./services/remote/remote-call.service";
 import {AuthService} from "./services/remote/authentication.service";
 import {PortfolioService} from "./services/portfolio.service";
 import {StrategyService} from "./services/strategy.service";
+import {ManageJsonService} from "./services/manageJson.service";
 
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
@@ -51,6 +52,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         ApiService,
         PortfolioService,
         StrategyService,
+        ManageJsonService,
     ],
     bootstrap: [AppComponent]
 })

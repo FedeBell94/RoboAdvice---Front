@@ -73,14 +73,26 @@
 
     </div>
     <div class="tab-pane fade" id="survey">
-      <h3 class="head text-center">Drop comments!</h3>
-      <p class="narrow text-center">
-        Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
-      </p>
 
-      <p class="text-center">
-        <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
-      </p>
+      <!-- Tab panes -->
+      <div class="survey-question">
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade" [ngClass]="{'in active': i==0}" id="tab{{i}}" *ngFor="let question of questions; let i = index">
+            <h2>{{question.textQuestion}}</h2>
+            <h5>{{i+1}}/{{questions.length}}</h5>
+
+            <div *ngFor="let answer of question.answers; let y = index">
+              <input type="radio" id="test{{i}}{{y}}" (click)="setAnswer(y)" name="radio-group">
+              <label [attr.for]="'test'+i+y">{{answer.text}}</label>
+            </div>
+          </div>
+
+          <div style="float: right">
+            <a class="btn btn-apple" href="#tab{{idNextTab}}" data-toggle="tab" (click)="submitQuestion()">NEXT</a>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="tab-pane fade" id="doner">
       <div class="text-center">
@@ -95,3 +107,4 @@
   </div>
 
 </div>
+
