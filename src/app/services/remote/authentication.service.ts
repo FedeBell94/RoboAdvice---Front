@@ -24,10 +24,11 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.apis.post("loginUser", {
-            email: email,
-            password: password
-        }).map((res)=>{
+        let headers = new Headers();
+        headers.append("Authorization","Basic " + btoa(email + ":" + password));
+        let opts = new RequestOptions({ headers: headers, withCredentials: true });
+
+        return this.apis.post("loginUser", {email: email, password: password} /*, opts*/).map((res)=>{
             if (res.response > 0) {
                 this.setAuthToken(res.data.userToken);
                 //if i'm correctly logged, i'll set the default headerOptions for remote calls to pass the auth token on each request

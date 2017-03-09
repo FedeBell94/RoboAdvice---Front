@@ -172,7 +172,8 @@ export class PortfolioService {
         ret.push({
           assetClass: this.cachedData.graphs[i].title,
           value: lastVal,
-          profLoss: beforeLastVal
+          profLoss: beforeLastVal,
+          percentage: beforeLastVal * 100 / lastVal
         });
       }
       return ret;
