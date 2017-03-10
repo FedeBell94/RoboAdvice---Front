@@ -51,7 +51,6 @@ export class AppComponent implements OnInit{
   }
 
   isLogged(){
-    //da sviluppare, aspettiamo la spring security
     return this.auth.isLogged();
   }
 

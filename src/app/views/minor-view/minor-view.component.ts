@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 
 
 
 import {Strategy} from "../../model/strategy/strategy";
 import {Asset} from "../../model/strategy/asset";
-import {PortfolioService} from "../../services/portfolio.service";
+import {AssetService} from "../../services/asset.service";
 
 
 @Component({
@@ -14,15 +14,23 @@ import {PortfolioService} from "../../services/portfolio.service";
 })
 export class minorViewComponent {
   constructor(
-
-    private portfolio: PortfolioService,
+    private route: ActivatedRoute,
+    private asset: AssetService,
   ){ }
+  private options: any;
 
+  getOptions() {
+    return this.options;
+  }
 
-  areaChartData() {
-    return this.portfolio.getCachedPortfolioHistoryChartOptions();
+  areaChartData(id: number) {
+    this.asset.getAssetHistory(id).subscribe((data: any)=> {
+      this.options = data.data;
+    });
   };
 
-
+  ngOnInit() {
+    this.areaChartData(this.route.snapshot.params["assetClassId"] || 1);
+  }
 
 }

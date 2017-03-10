@@ -31,7 +31,6 @@ export class PortfolioService {
 
     private estractData(data: any) {
         this.cachedData = data.data;
-        console.log(this.cachedData);
 
         //current worth
         if (this.cachedData.data.length > 0) this.cachedWorth = this.sumAssetClasses(this.cachedData.data[this.cachedData.data.length - 1]);  //ok
@@ -92,7 +91,7 @@ export class PortfolioService {
                 "valueLineEnabled":true,
                 "valueLineBalloonEnabled":true,
                 "valueLineAlpha":0.5,
-                "fullWidth":true
+                "fullWidth":false
             },
             "dataDateFormat": "YYYY-MM-DD",
             "categoryField": "date",
