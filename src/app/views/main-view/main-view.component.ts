@@ -24,7 +24,7 @@ export class mainViewComponent implements OnInit{
     @ViewChild('strategyPieChart') pieChart: any;
 
     strategyValues: number[];
-
+    
     areaChartData() {
         return this.portfolio.getCachedPortfolioHistoryChartOptions();
     };
@@ -54,27 +54,41 @@ export class mainViewComponent implements OnInit{
 
     saveStrategy(event: any) {
         //called on 'save' event emitted from pie-chart on 'Save' button
-        //output is: [25, 25, 25, 25], in the same order of value passed
+        //output is: [25, 25, 25, 25, 0], in the same order of value passed
 
         if (event[4] == 0) {  //Check if the 'empty' portion is 0%
-            event.pop();
-            let str: Strategy = new Strategy();
-            for (let i = 0; i < event.length; i++) {
-                let asset = new Asset();
-                asset.assetClassId = i + 1; //server has 1-based ids
-                asset.percentage = event[i];
-                str.asset_class.push(asset);
-            }
-            str.name = "Custom";
-            this.strategyService.saveStrategy(str).subscribe((data) => {
-                alert("Stratgy changed");
-                //TODO: modal
-                console.log("Strategy saved");
+            let _this = this;
+            (window as any).swal({
+                title: 'Are you sure?',
+                text: "You are changing your strategy!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, change it!'
+            }).then(function () {
+                //send new strategy to server
+                event.pop();
+                let str: Strategy = new Strategy();
+                for (let i = 0; i < event.length; i++) {
+                    let asset = new Asset();
+                    asset.assetClassId = i + 1; //server has 1-based ids
+                    asset.percentage = event[i];
+                    str.asset_class.push(asset);
+                }
+                str.name = "Custom";
+                _this.strategyService.saveStrategy(str).subscribe((data) => {
+                    //everything's fine
+                    (window as any).swal('Done!', 'Your strategy has been changed.', 'success');
+                });
                 event.push(0);
+            }, function (error) {
+                //nothing
             });
+            
         }else{
-            //TODO: modal: something went wrong
-            alert("something went wrong");
+            //total is not 100%
+            (window as any).swal("Oops", "total must be 100%", "error");
         }
     }
 
