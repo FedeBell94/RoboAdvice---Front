@@ -28,6 +28,8 @@ export class loginComponent {
                   });
                 }
                 (window as any).swal('Welcome ' + data.data.nickname, "","success");
+            }else{
+                (window as any).swal('Error', "Email or password wrong", "error");
             }
 
             //error on login
