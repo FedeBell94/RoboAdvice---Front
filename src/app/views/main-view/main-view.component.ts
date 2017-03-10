@@ -47,7 +47,7 @@ export class mainViewComponent implements OnInit{
             if (data.response > 0) {
                 this.strategyValues = data.data.map((el: any)=>{ return el.percentage; });
                 this.strategyValues.push(0);
-                this.pieChart.rePaint();
+                if (this.pieChart) this.pieChart.rePaint();
             }
         });
     }
