@@ -26,10 +26,11 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3 info-tile tile-success">
+        <div class="col-md-3 info-tile">
+            <div class="tile-heading"><span>My Strategy</span></div>
             <app-pie-chart-3d #strategyPieChart></app-pie-chart-3d>
         </div>
-        <div class="col-md-9 info-tile tile-success" *ngIf="areaChartData()">
+        <div class="col-md-9 info-tile" *ngIf="areaChartData()">
             <app-line-chart [data]="areaChartData()"></app-line-chart>
         </div>
     </div>

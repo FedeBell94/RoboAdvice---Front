@@ -30,8 +30,6 @@ export class SurveyComponent implements OnInit {
   constructor(
     private jsonService: ManageJsonService,
     private apiService: StrategyService,
-    private auth: AuthService,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -51,6 +49,7 @@ export class SurveyComponent implements OnInit {
     this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
       console.log("Strategy sent:");
       console.log(my_strategy.asset_class);
+      document.getElementById('select_strategy').click();
     });
   }
 
@@ -102,15 +101,16 @@ export class SurveyComponent implements OnInit {
   }
 
   submitQuestion(){
-
     if (this.idAnswer != -1){
       let idCurrentTab = this.idNextTab - 1;
       if (this.idNextTab < this.questions.length){
         for (let i: number = 0; i < this.questions[idCurrentTab].answers[this.idAnswer].scores.length; i++){
           this.totalScore[i] += this.questions[idCurrentTab].answers[this.idAnswer].scores[i];
         }
-        this.idNextTab++;
+        document.getElementById("a_tab"+this.idNextTab).click();
         this.idAnswer = -1;
+        this.idNextTab++;
+
       }else{
         this.choiceStrategy();
         console.log("Survey finished, total score: ", this.totalScore);
