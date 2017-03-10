@@ -27,9 +27,6 @@
             <li [ngClass]="{active: activeRoute('userHistory')}" *ngIf="isLogged()">
               <a [routerLink]="['/userHistory']"><i class="fa fa-pie-chart"></i> <span class="nav-label">History</span> </a>
             </li>
-            <li [ngClass]="{active: activeRoute('survey')}" *ngIf="isLogged()">
-              <a [routerLink]="['/survey']"><i class="fa fa-pie-chart"></i> <span class="nav-label">Survey</span> </a>
-            </li>
             <li *ngIf="isLogged()">
                 <a (click)="logout()"><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span> </a>
             </li>
