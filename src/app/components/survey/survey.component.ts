@@ -3,8 +3,6 @@ import {Question} from "../../model/survey/question";
 import {Strategy} from "../../model/strategy/strategy";
 import {ManageJsonService} from "../../services/manageJson.service";
 import {StrategyService} from "../../services/strategy.service";
-import {AuthService} from "../../services/remote/authentication.service";
-import {Router} from "@angular/router";
 
 declare var jQuery:any;
 
@@ -25,7 +23,7 @@ export class SurveyComponent implements OnInit {
 
   totalScore: number[] = [0, 0, 0, 0, 0]; //0: Bonds, 1: Income, 2: Balanced, 3: Growth, 4: Stocks
 
-  strategySelected: string;
+  strategy: Array<Array<number>>;
 
   constructor(
     private jsonService: ManageJsonService,
@@ -37,8 +35,25 @@ export class SurveyComponent implements OnInit {
     this.jsonService.getFromJson('survey_roboadvice.json').subscribe((data:any)=> {
       this.questions = data["questions"];
       console.log("this.questions: ", this.questions);
-
     });
+    this.jsonService.getFromJson('strategy_roboadvice.json').subscribe((data:any)=> {
+      this.strategies = data["strategies"];
+      console.log("this.strategies: ", this.strategies);
+
+      this.strategy = new Array<Array<number>>();
+
+      for (let i = 0; i < this.strategies.length; i++){
+        this.strategy[i] = new Array<number>();
+        for (let j = 0; j < this.strategies[i].asset_class.length; j++){
+            this.strategy[i][j] = parseInt(this.strategies[i].asset_class[j].percentage.toString());
+        }
+      }
+      console.log(this.strategy);
+    });
+  }
+
+  getStrategy(id: number){
+    return this.strategy[id];
   }
 
   setAnswer(answ: number){
@@ -67,36 +82,29 @@ export class SurveyComponent implements OnInit {
     console.log("Growth: "+  this.totalScore[3]);
     console.log("Stocks: "+  this.totalScore[4]);
 
-    this.jsonService.getFromJson('strategy_roboadvice.json').subscribe((data:any)=> {
-      this.strategies = data["strategies"];
+
       switch (true){
         case (x < 20):
           console.log("Stocks");
-          this.strategySelected = this.strategies[4].name;
           this.sendMyStrategy(this.strategies[4]);
           break;
         case (x >= 20 && x < 40):
           console.log("Growth");
-          this.strategySelected = this.strategies[3].name;
           this.sendMyStrategy(this.strategies[3]);
           break;
         case (x >= 40 && x < 60):
           console.log("Balanced");
-          this.strategySelected = this.strategies[2].name;
           this.sendMyStrategy(this.strategies[2]);
           break;
         case (x >= 60 && x < 80):
           console.log("Income");
-          this.strategySelected = this.strategies[1].name;
           this.sendMyStrategy(this.strategies[1]);
           break;
         case (x >= 80):
           console.log("Bonds");
-          this.strategySelected = this.strategies[0].name;
           this.sendMyStrategy(this.strategies[0]);
           break;
       }
-    });
 
   }
 
@@ -116,6 +124,10 @@ export class SurveyComponent implements OnInit {
         console.log("Survey finished, total score: ", this.totalScore);
       }
     }
+  }
+
+  choose_strategy(id: number){
+
   }
 
 }

@@ -12,9 +12,6 @@ div.pie-chart-slider {
     text-align: right;
 }
 
-md-grid-tile {
-    overflow: unset;
-}
 .strategy-value-container {
     display: flex;
 }

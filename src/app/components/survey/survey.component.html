@@ -1,5 +1,6 @@
 
-<div class="tab-content text-left info-tile top-separator-margin">
+<div class="tab-content text-left info-tile top-separator-margin no-margin-bottom">
+  <!-- TAB CHOOSER-->
   <div class="tab-pane fade in active no-padding" id="chooser">
     <!-- Tab panes -->
     <div class="tab-content">
@@ -14,44 +15,103 @@
       </div>
     </div>
   </div>
+
+  <!-- TAB SURVEY-->
   <div class="tab-pane fade no-padding" id="survey">
-      <!-- Tab panes -->
-      <h3 class="head text-center" *ngIf="idNextTab==1">Fill the survey</h3>
+    <!-- Tab panes -->
+    <h3 class="head text-center" *ngIf="idNextTab==1">Fill the survey</h3>
 
-      <div class="survey-question">
-        <div class="tab-content">
+    <div class="survey-question">
+      <div class="tab-content">
 
-          <div *ngFor="let q of questions; let i = index">
-            <a id="a_tab{{i}}" [hidden]="true" [attr.href]="'#tab'+i" data-toggle="tab"></a>
-          </div>
-          <a id="select_strategy" [hidden]="true" [attr.href]="'#selectStrategy'" data-toggle="tab"></a>
+        <div *ngFor="let q of questions; let i = index">
+          <a id="a_tab{{i}}" [hidden]="true" [attr.href]="'#tab'+i" data-toggle="tab"></a>
+        </div>
+        <a id="select_strategy" [hidden]="true" [attr.href]="'#showModifyStrategy'" data-toggle="tab"></a>
 
-          <div role="tabpanel" class="tab-pane fade no-padding" [ngClass]="{'in active': i==0}" id="tab{{i}}" *ngFor="let question of questions; let i = index">
-            <h2>{{question.textQuestion}}</h2>
-            <h5>{{i+1}}/{{questions.length}}</h5>
+        <div role="tabpanel" class="tab-pane fade no-padding" [ngClass]="{'in active': i==0}" id="tab{{i}}" *ngFor="let question of questions; let i = index">
+          <h2>{{question.textQuestion}}</h2>
+          <h5>{{i+1}}/{{questions.length}}</h5>
 
-            <div *ngFor="let answer of question.answers; let y = index">
-              <input type="radio" id="test{{i}}{{y}}" (click)="setAnswer(y)" name="radio-group">
-              <label [attr.for]="'test'+i+y">{{answer.text}}</label>
-            </div>
-          </div>
-
-          <div class="right">
-            <a class="btn btn-apple" data-toggle="tab" (click)="submitQuestion()">NEXT</a>
+          <div *ngFor="let answer of question.answers; let y = index">
+            <input type="radio" id="test{{i}}{{y}}" (click)="setAnswer(y)" name="radio-group">
+            <label [attr.for]="'test'+i+y">{{answer.text}}</label>
           </div>
         </div>
+
+        <div class="right">
+          <a class="btn btn-apple" data-toggle="tab" (click)="submitQuestion()">NEXT</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAB SELECT STRATEGY-->
+  <div class="tab-pane fade" id="selectStrategy" *ngIf="strategies">
+    <h3 class="head text-center">Select your strategy</h3>
+
+    <p class="narrow text-center">
+
+    </p>
+    <div class="row">
+      <div class="col-md-4" style="text-align: center">
+        <a class="btn btn-apple" (click)="choose_strategy(0)">BONDS</a>
+        <app-pie-chart
+                       [values]="getStrategy(0)"
+                       [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
+                       [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+        ></app-pie-chart>
+      </div>
+
+      <div class="col-md-4" style="text-align: center">
+        <a class="btn btn-apple" (click)="choose_strategy(1)">INCOME</a>
+        <app-pie-chart
+                       [values]="getStrategy(1)"
+                       [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
+                       [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+        ></app-pie-chart>
+      </div>
+
+      <div class="col-md-4" style="text-align: center">
+        <a class="btn btn-apple" (click)="choose_strategy(2)">BALANCED</a>
+        <app-pie-chart
+                       [values]="getStrategy(2)"
+                       [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
+                       [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+        ></app-pie-chart>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-4" style="text-align: center">
+        <a class="btn btn-apple" (click)="choose_strategy(3)">GROWTH</a>
+        <app-pie-chart
+                       [values]="getStrategy(3)"
+                       [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
+                       [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+        ></app-pie-chart>
+      </div>
+
+      <div class="col-md-4" style="text-align: center">
+        <a class="btn btn-apple" (click)="choose_strategy(4)">STOCKS</a>
+        <app-pie-chart
+                       [values]="getStrategy(4)"
+                       [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
+                       [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+        ></app-pie-chart>
       </div>
 
     </div>
-  <div class="tab-pane fade" id="selectStrategy">
-      <div class="text-center">
-        <i class="img-intro icon-checkmark-circle"></i>
-      </div>
-      <h3 class="head text-center">thanks for staying tuned! <span style="color:#f48260;">♥</span> Bootstrap</h3>
-      <p class="narrow text-center">
-        Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
-      </p>
-    </div>
+  </div>
+
+  <!-- TAB SHOW and MODIFY STRATEGY-->
+  <div class="tab-pane fade" id="showModifyStrategy">
+    <h3 class="head text-center"></h3>
+    <p class="narrow text-center">
+      Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+    </p>
+  </div>
+
   <div class="clearfix"></div>
 
 </div>

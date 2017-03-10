@@ -6,7 +6,7 @@ import {registerComponent} from "./views/register/register.component";
 import {blankComponent} from "./components/common/layouts/blank.component";
 import {basicComponent} from "./components/common/layouts/basic.component";
 import {surveyViewComponent} from "./views/survey/survey-view.component";
-
+import {userHistoryViewComponent} from "./views/user-history-view/user-history-view.component";
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -18,7 +18,8 @@ export const ROUTES:Routes = [
     children: [
       {path: 'mainView', component: mainViewComponent},
       {path: 'minorView', component: minorViewComponent},
-      {path: 'survey', component: surveyViewComponent}
+      {path: 'survey', component: surveyViewComponent},
+      {path: 'userHistory', component: userHistoryViewComponent}
     ]
   },
   {

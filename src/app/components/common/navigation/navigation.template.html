@@ -24,6 +24,9 @@
             <li [ngClass]="{active: activeRoute('minorView')}" *ngIf="isLogged()">
                 <a [routerLink]="['/minorView']"><i class="fa fa-pie-chart"></i> <span class="nav-label">Strategy</span> </a>
             </li>
+            <li [ngClass]="{active: activeRoute('userHistory')}" *ngIf="isLogged()">
+              <a [routerLink]="['/userHistory']"><i class="fa fa-pie-chart"></i> <span class="nav-label">History</span> </a>
+            </li>
             <li [ngClass]="{active: activeRoute('survey')}" *ngIf="isLogged()">
               <a [routerLink]="['/survey']"><i class="fa fa-pie-chart"></i> <span class="nav-label">Survey</span> </a>
             </li>
