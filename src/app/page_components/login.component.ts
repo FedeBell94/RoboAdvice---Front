@@ -24,8 +24,8 @@ export class LoginPageComponent {
         }).share().subscribe((data:any)=> {
             if (data.response > 0) {
                 this.portfolio.forceDownolad().share().subscribe((data)=>{
-                    this.dialogsService.success('Welcome', user);
-          
+                  (window as any).swal('Welcome', user);
+
                 });
             }
 

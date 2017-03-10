@@ -5,8 +5,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { HttpModule } from '@angular/http';
 import { HttpInterceptorModule } from 'ng-http-interceptor';
 import { AmChartsModule } from "./directives/am-charts";
-
-
 //services
 import { ApiService } from './services/remote/remote-call.service';
 import { AuthService } from './services/remote/authentication.service';
@@ -14,6 +12,7 @@ import { ManageJsonService } from "./services/manageJson.service";
 import { StrategyService } from "./services/strategy.service";
 import { PortfolioService } from "./services/portfolio.service";
 import { DialogsService } from "./modals/modalservices/dialog.services";
+
 
 //pageComponents
 import { AppComponent }  from './app.component';
