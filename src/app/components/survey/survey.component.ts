@@ -43,16 +43,15 @@ export class SurveyComponent implements OnInit {
     });
   }
 
-  sendMyStrategy(my_strategy: Strategy){
-    console.log("Uploading my strategy...");
-    console.log(my_strategy.asset_class);
-    this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
-      console.log("Sent My Strategy!");
-    });
+  setAnswer(answ: number){
+    this.idAnswer = answ;
   }
 
-  public openDialog(username: string) {
-    this.submitStrategyAndUsername(username);
+  sendMyStrategy(my_strategy: Strategy){
+    this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
+      console.log("Strategy sent:");
+      console.log(my_strategy.asset_class);
+    });
   }
 
   choiceStrategy() {
@@ -61,6 +60,13 @@ export class SurveyComponent implements OnInit {
     x -= this.totalScore[3];    //sub: Growth
     x += this.totalScore[0]/2;  //sum: Bonds/2
     x -= this.totalScore[4]/2;  //sum: Stocks/2
+
+    console.log("Total Score: ");
+    console.log("Bonds: "+   this.totalScore[0]);
+    console.log("Income: "+  this.totalScore[1]);
+    console.log("Balanced: "+this.totalScore[2]);
+    console.log("Growth: "+  this.totalScore[3]);
+    console.log("Stocks: "+  this.totalScore[4]);
 
     this.jsonService.getFromJson('strategy_roboadvice.json').subscribe((data:any)=> {
       this.strategies = data["strategies"];
@@ -100,43 +106,15 @@ export class SurveyComponent implements OnInit {
     if (this.idAnswer != -1){
       let idCurrentTab = this.idNextTab - 1;
       if (this.idNextTab < this.questions.length){
-
         for (let i: number = 0; i < this.questions[idCurrentTab].answers[this.idAnswer].scores.length; i++){
           this.totalScore[i] += this.questions[idCurrentTab].answers[this.idAnswer].scores[i];
         }
-
         this.idNextTab++;
         this.idAnswer = -1;
-        console.log(this.idNextTab);
       }else{
+        this.choiceStrategy();
         console.log("Survey finished, total score: ", this.totalScore);
       }
-    }
-  }
-
-  setAnswer(answ: number){
-    this.idAnswer = answ;
-  }
-
-  submitStrategyAndUsername(username: string){
-    if (username != ""){
-      this.choiceStrategy();
-      console.log("Strategy sent:");
-      console.log("Bonds: "+   this.totalScore[0]);
-      console.log("Income: "+  this.totalScore[1]);
-      console.log("Balanced: "+this.totalScore[2]);
-      console.log("Growth: "+  this.totalScore[3]);
-      console.log("Stocks: "+  this.totalScore[4]);
-
-      this.auth.updateUsername(username).subscribe((data)=>{
-        if (data.response > 0) {
-          this.auth.saveUser(data.data);
-          //TODO: this.strategySelected is your seleceted strategy
-          this.router.navigate(["/dashboard"]);
-        }else{
-          //TODO error
-        }
-      });
     }
   }
 

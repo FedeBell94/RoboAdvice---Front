@@ -29,7 +29,7 @@ export class registerComponent implements OnInit{
                 'Let\'s make money',
                 'success'
               )
-                this.router.navigate(["/login"]);
+              this.router.navigate(["/login"]);
             } else {
               (window as any).swal(
                 'Oops...',

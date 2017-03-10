@@ -112,4 +112,10 @@ export class AuthService {
         if (this.currentUser.username) this.router.navigate(["/mainView"]);
         else this.router.navigate(["/survey"]);
     }
+
+    isUserNew(){
+      return this.apis.get("isUserNew").map((res: any)=> {
+                return res;
+      });
+    }
 }

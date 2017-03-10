@@ -5,6 +5,7 @@ import {loginComponent} from "./views/login/login.component";
 import {registerComponent} from "./views/register/register.component";
 import {blankComponent} from "./components/common/layouts/blank.component";
 import {basicComponent} from "./components/common/layouts/basic.component";
+import {surveyViewComponent} from "./views/survey/survey-view.component";
 
 
 export const ROUTES:Routes = [
@@ -16,7 +17,8 @@ export const ROUTES:Routes = [
     path: '', component: basicComponent,
     children: [
       {path: 'mainView', component: mainViewComponent},
-      {path: 'minorView', component: minorViewComponent}
+      {path: 'minorView', component: minorViewComponent},
+      {path: 'survey', component: surveyViewComponent}
     ]
   },
   {
@@ -26,6 +28,7 @@ export const ROUTES:Routes = [
       { path: 'register', component: registerComponent }
     ]
   },
+
 
   // Handle all other routes
   {path: '**',    component: mainViewComponent }

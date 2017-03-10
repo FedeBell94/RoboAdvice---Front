@@ -50,8 +50,8 @@ export class PortfolioService {
 
     private getOptions() {
         return {
-            "color": "#fff",
-            "fontFamily": "Roboto",
+            "color": "#9e9e9e",
+            "fontFamily": "open sans",
             "type": "serial",
             "categoryField": "date",
             "dataDateFormat": "YYYY-MM-DD",
@@ -70,17 +70,17 @@ export class PortfolioService {
             "chartScrollbar": {
                 "graph":"g1",
                 "gridAlpha":0,
-                "color":"#888888",
+                "color":"#9e9e9e",
                 "scrollbarHeight":55,
                 "backgroundAlpha":0,
                 "selectedBackgroundAlpha":0.1,
-                "selectedBackgroundColor":"#888888",
+                "selectedBackgroundColor":"#9e9e9e",
                 "graphFillAlpha":0,
                 "autoGridCount":true,
                 "selectedGraphFillAlpha":0,
                 "graphLineAlpha":0.2,
-                "graphLineColor":"#c2c2c2",
-                "selectedGraphLineColor":"#888888",
+                "graphLineColor":"#9e9e9e",
+                "selectedGraphLineColor":"#9e9e9e",
                 "selectedGraphLineAlpha":1
 
             },
@@ -101,13 +101,14 @@ export class PortfolioService {
             "balloon": {},
             "legend": {
                 "enabled": true,
-                "color": "#fff"
+                "color": "#9e9e9e"
             },
             "titles": [
                 {
                     "id": "Title-1",
                     "size": 15,
-                    "text": "Portfolio History"
+                    "text": "Portfolio History",
+                    "color": "#000000"
                 }
             ],
             "dataProvider": this.cachedData.data

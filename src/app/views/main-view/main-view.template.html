@@ -2,8 +2,13 @@
     <app-slider
         [maxAllowed]="80"
     ></app-slider>
-    <app-slider (change)="0"></app-slider>
-    <app-slider (input)="0"></app-slider>
+    <app-slider
+        (change)="0"
+    ></app-slider>
+    <app-slider
+        (input)="0"
+    ></app-slider>
+
     <div class="row">
         <div class="col-md-3" *ngFor="let aC of getPortfolio()">
             <div class="info-tile" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
@@ -21,10 +26,10 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-md-3 info-tile tile-success">
             <app-pie-chart-3d #strategyPieChart></app-pie-chart-3d>
         </div>
-        <div class="col-lg-9" *ngIf="areaChartData()">
+        <div class="col-md-9 info-tile tile-success" *ngIf="areaChartData()">
             <app-line-chart [data]="areaChartData()"></app-line-chart>
         </div>
     </div>

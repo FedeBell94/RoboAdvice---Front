@@ -31,6 +31,11 @@ export class NavigationComponent {
         return false;
     }
 
+    isLogged(){
+      //da sviluppare, aspettiamo la spring security
+      return this.auth.isLogged();
+    }
+
     logout(){
         this.auth.logout();
     }

@@ -8557,3 +8557,17 @@ body.md-skin {
 .white-color{
   color: white;
 }
+
+.swal2-container{
+  z-index: 2017;
+}
+
+.loading{
+  top: 50%;
+  left: 50%;
+  position:absolute;
+}
+
+.icon-width{
+  width: 10px;
+}

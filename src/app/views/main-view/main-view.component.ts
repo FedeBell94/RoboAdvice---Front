@@ -34,8 +34,12 @@ export class mainViewComponent implements OnInit{
             this.router.navigate(["login"]);
             return;
         } else {
-            if (this.auth.getUser().username == null) {
-                this.router.navigate(["mainView"]);
+            if (this.auth.isUserNew()){
+              //TODO go to the survey
+              //this.router.navigate(["survey"]);
+            }else{
+              //TODO go to the mainView
+              //this.router.navigate(["mainView"]);
             }
         }
         this.strategyService.getStrategy().subscribe((data)=> {

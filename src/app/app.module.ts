@@ -16,6 +16,7 @@ import {ManageJsonService} from "./services/manageJson.service";
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
 import {MinorViewModule} from "./views/minor-view/minor-view.module";
+import {SurveyViewModule} from "./views/survey/survey-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 
@@ -34,6 +35,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         // Views
         MainViewModule,
         MinorViewModule,
+        SurveyViewModule,
         LoginModule,
         RegisterModule,
 

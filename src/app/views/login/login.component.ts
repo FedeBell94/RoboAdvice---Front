@@ -20,7 +20,7 @@ export class loginComponent {
         this.auth.login(user, password).subscribe((data:any)=> {
             if (data.response > 0) {
                 this.portfolio.forceDownolad().subscribe((data)=>{
-                    this.router.navigate(["/mainView"]);
+                  this.router.navigate(["/mainView"]);
                   (window as any).swal('Welcome', user, "success")
                 });
             }
