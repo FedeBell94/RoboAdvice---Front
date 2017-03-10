@@ -283,3 +283,13 @@ li.active:after {
     padding:12px 20px;
   }
 }
+
+/*Lorenzo*/
+
+.text-left{
+  text-align: left;
+}
+
+.top-separator-margin{
+  margin-top: 18px;
+}
