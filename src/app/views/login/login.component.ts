@@ -19,10 +19,17 @@ export class loginComponent {
     doLogin(user:string, password:string) {
         this.auth.login(user, password).subscribe((data:any)=> {
             if (data.response > 0) {
-                this.portfolio.forceDownolad().subscribe((data)=>{
-                  this.router.navigate(["/mainView"]);
-                  (window as any).swal('Welcome', user, "success")
-                });
+              console.log(data.data.newUser);
+                if (data.data.newUser == true){
+                    this.router.navigate(["/survey"]);
+                }else {
+                  this.portfolio.forceDownolad().subscribe((data2) => {
+                    this.router.navigate(["/mainView"]);
+                  });
+                }
+                (window as any).swal('Welcome ' + data.data.nickname, "","success");
+            }else{
+                (window as any).swal('Error', "Email or password wrong", "error");
             }
 
             //error on login
