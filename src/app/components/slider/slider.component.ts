@@ -24,7 +24,7 @@ export class SliderComponent implements OnInit {
   @Output() input = new EventEmitter<number>();      //triggered on value change
 
   private ctx: CanvasRenderingContext2D;
-  private p: { x: number, y: number } = {x: 0, y: 0};
+  private p: { x: number, y: number } = { x: 0, y: 0 };
   private w: number;
   private h: number;
   private borColor: string | CanvasGradient | CanvasPattern = this.borderColor;
@@ -43,21 +43,27 @@ export class SliderComponent implements OnInit {
     this.draw();
   }
 
-  setManually(config : {max?: number, maxAllowed?: number, value?: number, step?: number}) {
-      if (config.max != undefined) this.max = config.max;
-      if (config.maxAllowed != undefined) this.max = config.maxAllowed;
-      if (config.value != undefined) this.max = config.value;
-      if (config.step != undefined) this.max = config.step;
+  setManually(config: { max?: number, maxAllowed?: number, value?: number, step?: number }) {
+    if (config.max != undefined) this.max = config.max;
+    if (config.maxAllowed != undefined) this.max = config.maxAllowed;
+    if (config.value != undefined) this.max = config.value;
+    if (config.step != undefined) this.max = config.step;
+  }
+
+  repaint() {
+    this.setupCanvas();
+    this.draw();
   }
 
   private setupCanvas() {
     this.ctx = this.canvas.nativeElement.getContext("2d");
-    this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight
+    this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight;
     this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
 
     this.h = this.canvas.nativeElement.offsetHeight;
     this.w = this.canvas.nativeElement.offsetWidth;
-    
+
+
     this.dW = this.w - this.h;
     this.dX = this.h / 2;
     this.dY = 0;
@@ -66,7 +72,7 @@ export class SliderComponent implements OnInit {
 
   private onpointerdown(e) {
     //set pointer position
-    this.p.x = e.clientX - this.canvas.nativeElement.offsetLeft;
+    this.p.x = e.clientX - this.getOffsetLeft(this.canvas.nativeElement) - this.dX;
     this.p.y = e.clientY - this.canvas.nativeElement.offsetTop;
     //set border
     this.ctx.lineWidth = this.h / 15;
@@ -82,42 +88,43 @@ export class SliderComponent implements OnInit {
   }
 
   private onpointermove(e) {
-      this.computeValue(e);
-      this.draw();
+    this.computeValue(e);
+    this.draw();
   }
 
   private onpointerup() {
     document.onpointermove = undefined;
     this.canvas.nativeElement.onpointerup = undefined;
-    this.borColor = "#333"; 
-    this.ctx.lineWidth = 1; 
+    this.borColor = "#333";
+    this.ctx.lineWidth = 1;
     this.draw();
     this.change.emit(this.value);
   }
 
   private computeValue(e) {
-      let old = this.value;
+    let old = this.value;
 
-      let p = this.p;
-      p.x = e.clientX - this.canvas.nativeElement.offsetLeft, p.y = e.clientY - this.canvas.nativeElement.offsetTop;
+    let p = this.p;
+    p.x = e.clientX - this.getOffsetLeft(this.canvas.nativeElement) - this.dX;
+    p.y = e.clientY - this.canvas.nativeElement.offsetTop;
 
-      if (p.x < 0) p.x = 0;
-      else if (p.x > this.w) p.x = this.w;
+    if (p.x < 0) p.x = 0;
+    else if (p.x > this.dW) p.x = this.dW;
 
-      this.value = this.max * p.x / this.w;
-      this.value = Math.floor(this.value);
+    this.value = this.max * p.x / this.dW;
+    this.value = Math.floor(this.value);
 
 
-      this.value = this.value - this.value % this.step;
-      if (this.value >= this.maxAllowed) {
-        this.value = this.maxAllowed;
-        this.bColor = this.limitColor;
-      } else {
-        this.bColor = this.backColor;
-      }
+    this.value = this.value - this.value % this.step;
+    if (this.value >= this.maxAllowed) {
+      this.value = this.maxAllowed;
+      this.bColor = this.limitColor;
+    } else {
+      this.bColor = this.backColor;
+    }
 
-      //if the value changes, trigger the 'input' event
-      if (old != this.value) this.input.emit(this.value);
+    //if the value changes, trigger the 'input' event
+    if (old != this.value) this.input.emit(this.value);
   }
 
   private draw() {
@@ -126,27 +133,37 @@ export class SliderComponent implements OnInit {
     let h = this.h;
     let p = this.p;
 
-      c.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-      c.shadowColor = null;
-      c.shadowBlur = 0;
-      c.shadowOffsetY = 0;
-      c.shadowOffsetX = 0;
+    c.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+    c.shadowColor = null;
+    c.shadowBlur = 0;
+    c.shadowOffsetY = 0;
+    c.shadowOffsetX = 0;
 
-      c.strokeStyle = this.borColor;
-      c.strokeRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
-      c.fillStyle = this.bColor;
-      c.fillRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
+    c.strokeStyle = this.borColor;
+    c.strokeRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
+    c.fillStyle = this.bColor;
+    c.fillRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
 
-      c.fillStyle = this.fillColor;
-      c.fillRect(this.dX, h / 6 * 2, this.value / this.max * this.dW, h / 6 * 2);
-      c.beginPath();
-      c.arc(this.dX + this.value / this.max * this.dW, h / 2, h / 2 - h / 8, 0, Math.PI * 2);
-      c.fillStyle = this.ballColor;
-      c.shadowColor = '#999';
-      c.shadowBlur = this.h / 7;
-      c.shadowOffsetY = this.h / 15;
-      c.shadowOffsetX = 0;
-      c.fill();
+    c.fillStyle = this.fillColor;
+    c.fillRect(this.dX, h / 6 * 2, this.value / this.max * this.dW, h / 6 * 2);
+    c.beginPath();
+    c.arc(this.dX + this.value / this.max * this.dW, h / 2, h / 2 - h / 8, 0, Math.PI * 2);
+    c.fillStyle = this.ballColor;
+    c.shadowColor = '#999';
+    c.shadowBlur = this.h / 7;
+    c.shadowOffsetY = this.h / 15;
+    c.shadowOffsetX = 0;
+    c.fill();
+  }
+
+  private getOffsetLeft(elem) {
+    var offsetLeft = 0;
+    do {
+      if (!isNaN(elem.offsetLeft)) {
+        offsetLeft += elem.offsetLeft;
+      }
+    } while (elem = elem.offsetParent);
+    return offsetLeft;
   }
 
 }
