@@ -24,7 +24,7 @@ export class mainViewComponent implements OnInit{
     @ViewChild('strategyPieChart') pieChart: any;
 
     strategyValues: number[];
-    
+
     areaChartData() {
         return this.portfolio.getCachedPortfolioHistoryChartOptions();
     };
@@ -85,7 +85,7 @@ export class mainViewComponent implements OnInit{
             }, function (error) {
                 //nothing
             });
-            
+
         }else{
             //total is not 100%
             (window as any).swal("Oops", "total must be 100%", "error");
@@ -103,8 +103,8 @@ export class mainViewComponent implements OnInit{
             return false;
     }
 
-    showAsset(){
+    showAsset(a_C: number){
 
-      this.router.navigate(["minorView"]);
+      this.router.navigate(["minorView", a_C]);
     }
 }

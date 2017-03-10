@@ -37,17 +37,17 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
-    /*
+
     this.auth.checkSession().subscribe((data)=> {
       if (data.response == 0) {
         this.router.navigate(["/login"]);
       } else {
         this.portfolio.forceDownolad().subscribe((data)=>{
+            this.router.navigate(["/mainView"]);
 
         });
       }
-    });*/
-    this.router.navigate(["/login"]);
+    });
   }
 
   isLogged(){
