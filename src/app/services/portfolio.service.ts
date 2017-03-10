@@ -50,114 +50,117 @@ export class PortfolioService {
 
     private getOptions() {
         return {
-            "color": "#9e9e9e",
-            "fontFamily": "open sans",
             "type": "serial",
-            "categoryField": "date",
-            "dataDateFormat": "YYYY-MM-DD",
-            "autoMarginOffset": 12,
+            "theme": "none",
+            "marginTop":0,
+            "marginRight": 20,
             "colors": [
-                "#3c4eb9",
-                "#1b70ef",
-                "#00abff",
-                "#0D8ECF"
+                "#369",
+                "#639",
+                "#693",
+                "#963"
             ],
-            "fontSize": 12,
-            "categoryAxis": {
-                "parseDates": true,
-                "ignoreAxisWidth": true
+            "legend": {
+                "enabled": true
             },
+            "dataProvider": this.cachedData.data,
+            "valueAxes": [{
+                "axisAlpha": 0,
+                "position": "left"
+            }],
+            "graphs": this.getGraphs(),
             "chartScrollbar": {
                 "graph":"g1",
                 "gridAlpha":0,
-                "color":"#9e9e9e",
+                "color":"#888888",
                 "scrollbarHeight":55,
                 "backgroundAlpha":0,
                 "selectedBackgroundAlpha":0.1,
-                "selectedBackgroundColor":"#9e9e9e",
+                "selectedBackgroundColor":"#888888",
                 "graphFillAlpha":0,
                 "autoGridCount":true,
                 "selectedGraphFillAlpha":0,
                 "graphLineAlpha":0.2,
-                "graphLineColor":"#9e9e9e",
-                "selectedGraphLineColor":"#9e9e9e",
+                "graphLineColor":"#c2c2c2",
+                "selectedGraphLineColor":"#888888",
                 "selectedGraphLineAlpha":1
 
             },
             "chartCursor": {
-                "categoryBalloonDateFormat": "YYYY",
-                "cursorAlpha": 0,
+                "categoryBalloonDateFormat": "YYYY-MM-DD",
+                "cursorAlpha": 0.9,
                 "valueLineEnabled":true,
                 "valueLineBalloonEnabled":true,
                 "valueLineAlpha":0.5,
                 "fullWidth":true
             },
-            "graphs": this.getGraphs(),
-            "valueAxes": [
-                {
-                    "id": "ValueAxis-1"
-                }
-            ],
-            "balloon": {},
-            "legend": {
-                "enabled": true,
-                "color": "#9e9e9e"
+            "dataDateFormat": "YYYY-MM-DD",
+            "categoryField": "date",
+            "categoryAxis": {
+                "minPeriod": "DD",
+                "parseDates": true,
+                "minorGridAlpha": 0.1,
+                "minorGridEnabled": true
             },
-            "titles": [
-                {
-                    "id": "Title-1",
-                    "size": 15,
-                    "text": "Portfolio History",
-                    "color": "#000000"
-                }
-            ],
-            "dataProvider": this.cachedData.data
+            "export": {
+                "enabled": true
+            }
         };
+        
+        
+        
     }
 
     private getGraphs() {
         return [{
-            "type": "smoothedLine",
-            "fillAlphas": 0.6,
-            "id": "AmGraph-1",
-            "lineAlpha": 0,
-            "title": "Bonds",
-            "valueField": "column1"
-        },
-        {
-            "type": "smoothedLine",
-            "fillAlphas": 0.6,
-            "id": "AmGraph-2",
-            "lineAlpha": 0,
-            "title": "Forex",
-            "valueField": "column2"
-        },
-        {
-            "type": "smoothedLine",
-            "fillAlphas": 0.6,
-            "id": "AmGraph-3",
-            "lineAlpha": 0,
-            "title": "Stocks",
-            "valueField": "column3"
-        },
-        {
-            "type": "smoothedLine",
-            "fillAlphas": 0.6,
-            "id": "AmGraph-4",
-            "lineAlpha": 0,
-            "title": "Commodities",
-            "valueField": "column4"
-        }];
+                "id":"g1",
+                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+                "bullet": "round",
+                "bulletSize": 8,
+                "lineThickness": 2,
+                "type": "smoothedLine",
+                "valueField": "column1",
+                "title": "Bonds"
+            },
+            {
+                "id":"g2",
+                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+                "bullet": "round",
+                "bulletSize": 8,
+                "lineThickness": 2,
+                "type": "smoothedLine",
+                "valueField": "column2",
+                "title": "Forex"
+            },
+            {
+                "id":"g3",
+                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+                "bullet": "round",
+                "bulletSize": 8,
+                "lineThickness": 2,
+                "type": "smoothedLine",
+                "valueField": "column3",
+                "title": "Stocks"
+            },
+            {
+                "id":"g4",
+                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+                "bullet": "round",
+                "bulletSize": 8,
+                "lineThickness": 2,
+                "type": "smoothedLine",
+                "valueField": "column4",
+                "title": "Commodities"
+            }];
         /*
         let g = [];
         for (let i = 0; i < this.cachedData.graphs.length; i++) {
             g.push({
+                    "id":"g4",
                     "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                     "bullet": "round",
                     "bulletSize": 8,
-                    "lineColor": "#d1655d",
                     "lineThickness": 2,
-                    "negativeLineColor": "#637bb6",
                     "type": "smoothedLine",
                     "title": this.cachedData.graphs[i].title,
                     "valueField": this.cachedData.graphs[i].valueField

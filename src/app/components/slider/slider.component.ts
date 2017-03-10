@@ -43,6 +43,13 @@ export class SliderComponent implements OnInit {
     this.draw();
   }
 
+  setManually(config : {max?: number, maxAllowed?: number, value?: number, step?: number}) {
+      if (config.max != undefined) this.max = config.max;
+      if (config.maxAllowed != undefined) this.max = config.maxAllowed;
+      if (config.value != undefined) this.max = config.value;
+      if (config.step != undefined) this.max = config.step;
+  }
+
   private setupCanvas() {
     this.ctx = this.canvas.nativeElement.getContext("2d");
     this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight

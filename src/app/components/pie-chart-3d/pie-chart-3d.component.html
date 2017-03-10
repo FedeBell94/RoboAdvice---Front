@@ -4,22 +4,61 @@
         <canvas #chartCanvas class="pieChartCanvas" (window:resize)="rePaint()"></canvas>
     </div>
 
-    <div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
+    <!--<div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
 
-        Slider
-        <!--<md-slider
-                class="strategy-slider"
-                [value]="getValues(i)"
+        <app-slider
+                [value]="getValue(i)"
                 [max]="100"
-                [min]="0"
                 [step]="1"
-                [thumb-label]="true"
+                [maxAllowed]="getMax(i)"
+                [fillColor]="colors[i]"
                 (change)="valueChanged($event, i)"
-        ></md-slider>-->
+        ></app-slider>
 
+    </div>-->
+
+    <div class="pie-chart-slider">
+        <app-slider
+                [value]="getValue(0)"
+                [max]="100"
+                [step]="1"
+                [maxAllowed]="getMax(0)"
+                [fillColor]="colors[0]"
+                (change)="valueChanged($event, 0)"
+        ></app-slider>
+    </div>
+    <div class="pie-chart-slider">
+        <app-slider
+                [value]="getValue(1)"
+                [max]="100"
+                [step]="1"
+                [maxAllowed]="getMax(1)"
+                [fillColor]="colors[1]"
+                (change)="valueChanged($event, 1)"
+        ></app-slider>
+    </div>
+    <div class="pie-chart-slider">
+        <app-slider
+                [value]="getValue(2)"
+                [max]="100"
+                [step]="1"
+                [maxAllowed]="getMax(2)"
+                [fillColor]="colors[2]"
+                (change)="valueChanged($event, 2)"
+        ></app-slider>
+    </div>
+    <div class="pie-chart-slider">
+        <app-slider
+                [value]="getValue(3)"
+                [max]="100"
+                [step]="1"
+                [maxAllowed]="getMax(3)"
+                [fillColor]="colors[3]"
+                (change)="valueChanged($event, 3)"
+        ></app-slider>
     </div>
     <br>
     <div class="pie-chart-actions">
-        <button (click)="openDialog()">Save</button>
+        <button (click)="emitSave()">Save</button>
     </div>
 </div>
