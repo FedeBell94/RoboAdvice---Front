@@ -79,7 +79,6 @@ export class AuthService {
                 this.setAuthHeaders();
                 this.logInWithUser(res.data);
             }
-            console.log("BAD CRED");
             return res;
         });
     }
@@ -111,18 +110,12 @@ export class AuthService {
 
     private logInWithUser(user: any) {
         this.saveUser(user);
-        this.logged = true;//if i'm correctly logged, i'll set the default headerOptions for remote calls to pass the auth token on each request
+        this.logged = true;
         //now i save the user
         this.saveUser(user);
         //if the user has a username
         //TODO: change navigate
         if (this.currentUser.username) this.router.navigate(["/mainView"]);
         else this.router.navigate(["/survey"]);
-    }
-
-    isUserNew(){
-      return this.apis.get("isUserNew").map((res: any)=> {
-                return res;
-      });
     }
 }
