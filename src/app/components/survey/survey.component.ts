@@ -126,4 +126,8 @@ export class SurveyComponent implements OnInit {
     }
   }
 
+  choose_strategy(id: number){
+
+  }
+
 }

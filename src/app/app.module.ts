@@ -20,6 +20,7 @@ import {MinorViewModule} from "./views/minor-view/minor-view.module";
 import {SurveyViewModule} from "./views/survey/survey-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
+import {UserHistoryViewModule} from "./views/user-history-view/user-history-view.module";
 
 // App modules/components
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
@@ -41,6 +42,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         SurveyViewModule,
         LoginModule,
         RegisterModule,
+        UserHistoryViewModule,
 
         // Modules
         LayoutsModule,

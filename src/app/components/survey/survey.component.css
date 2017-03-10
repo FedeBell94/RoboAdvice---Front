@@ -293,3 +293,7 @@ li.active:after {
 .top-separator-margin{
   margin-top: 18px;
 }
+
+.no-margin-bottom{
+  margin-bottom: 0;
+}

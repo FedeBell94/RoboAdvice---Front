@@ -1,5 +1,5 @@
 
-<div class="tab-content text-left info-tile top-separator-margin">
+<div class="tab-content text-left info-tile top-separator-margin no-margin-bottom">
   <!-- TAB CHOOSER-->
   <div class="tab-pane fade in active no-padding" id="chooser">
     <!-- Tab panes -->
@@ -56,8 +56,8 @@
     </p>
     <div class="row">
       <div class="col-md-4" style="text-align: center">
-        <a class="btn btn-apple" (click)="c_strategy(0)">BONDS</a>
-        <app-pie-chart style="margin: 0 auto"
+        <a class="btn btn-apple" (click)="choose_strategy(0)">BONDS</a>
+        <app-pie-chart
                        [values]="getStrategy(0)"
                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
@@ -65,8 +65,8 @@
       </div>
 
       <div class="col-md-4" style="text-align: center">
-        <a class="btn btn-apple" (click)="c_strategy(1)">INCOME</a>
-        <app-pie-chart style="margin: 0 auto"
+        <a class="btn btn-apple" (click)="choose_strategy(1)">INCOME</a>
+        <app-pie-chart
                        [values]="getStrategy(1)"
                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
@@ -74,8 +74,8 @@
       </div>
 
       <div class="col-md-4" style="text-align: center">
-        <a class="btn btn-apple" (click)="c_strategy(2)">BALANCED</a>
-        <app-pie-chart style="margin: 0 auto"
+        <a class="btn btn-apple" (click)="choose_strategy(2)">BALANCED</a>
+        <app-pie-chart
                        [values]="getStrategy(2)"
                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
@@ -84,8 +84,8 @@
     </div>
     <div class="row">
       <div class="col-md-offset-2 col-md-4" style="text-align: center">
-        <a class="btn btn-apple" (click)="c_strategy(3)">GROWTH</a>
-        <app-pie-chart style="margin: 0 auto"
+        <a class="btn btn-apple" (click)="choose_strategy(3)">GROWTH</a>
+        <app-pie-chart
                        [values]="getStrategy(3)"
                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
@@ -93,8 +93,8 @@
       </div>
 
       <div class="col-md-4" style="text-align: center">
-        <a class="btn btn-apple" (click)="c_strategy(4)">STOCKS</a>
-        <app-pie-chart style="margin: 0 auto"
+        <a class="btn btn-apple" (click)="choose_strategy(4)">STOCKS</a>
+        <app-pie-chart
                        [values]="getStrategy(4)"
                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a']"
                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
