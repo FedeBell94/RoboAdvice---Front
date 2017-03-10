@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-3" *ngFor="let aC of getPortfolio()" (click)="showAsset(aC.assetClass)">
-            <div class="info-tile" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
+        <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
+            <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
                 <div class="tile-icon"><i class="ti ti-stats-up"></i></div>
                 <div class="tile-heading"><span>{{aC.assetClass}}</span></div>
                 <div class="tile-body"><span>{{aC.value | currency:'USD':true:'1.2-2'}}</span></div>
