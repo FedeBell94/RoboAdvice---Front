@@ -116,8 +116,8 @@ export class PortfolioService {
                 "id":"g1",
                 "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                 "bullet": "round",
-                "bulletSize": 8,
-                "lineThickness": 2,
+                "bulletSize": 4,
+                "lineThickness": 1,
                 "type": "smoothedLine",
                 "valueField": "column1",
                 "title": "Bonds"
@@ -126,8 +126,8 @@ export class PortfolioService {
                 "id":"g2",
                 "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                 "bullet": "round",
-                "bulletSize": 8,
-                "lineThickness": 2,
+                "bulletSize": 4,
+                "lineThickness": 1,
                 "type": "smoothedLine",
                 "valueField": "column2",
                 "title": "Forex"
@@ -136,8 +136,8 @@ export class PortfolioService {
                 "id":"g3",
                 "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                 "bullet": "round",
-                "bulletSize": 8,
-                "lineThickness": 2,
+                "bulletSize": 4,
+                "lineThickness": 1,
                 "type": "smoothedLine",
                 "valueField": "column3",
                 "title": "Stocks"
@@ -146,8 +146,8 @@ export class PortfolioService {
                 "id":"g4",
                 "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                 "bullet": "round",
-                "bulletSize": 8,
-                "lineThickness": 2,
+                "bulletSize": 4,
+                "lineThickness": 1,
                 "type": "smoothedLine",
                 "valueField": "column4",
                 "title": "Commodities"
