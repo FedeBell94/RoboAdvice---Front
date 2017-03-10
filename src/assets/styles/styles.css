@@ -8571,3 +8571,24 @@ body.md-skin {
 .icon-width{
   width: 10px;
 }
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+.info-tile {
+  margin: 0 0 16px;
+  box-shadow: 1px -1px 0 0 #eee inset, -1px 0 0 0 #eee inset;
+  background-color: #fff;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1px;
+  display: block;
+  border-width: 2px 0 0;
+  border-style: solid
+}

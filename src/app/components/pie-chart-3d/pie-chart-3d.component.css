@@ -5,6 +5,7 @@ canvas.pieChartCanvas {
 }
 
 div.pie-chart-slider {
+  height: 20px;
 }
 
 .pie-chart-actions {

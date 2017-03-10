@@ -1,14 +1,4 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-    <app-slider
-        [maxAllowed]="80"
-    ></app-slider>
-    <app-slider
-        (change)="0"
-    ></app-slider>
-    <app-slider
-        (input)="0"
-    ></app-slider>
-
     <div class="row">
         <div class="col-md-3" *ngFor="let aC of getPortfolio()" (click)="showAsset(aC.assetClass)">
             <div class="info-tile" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
@@ -26,10 +16,19 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3 info-tile tile-success">
-            <app-pie-chart-3d #strategyPieChart></app-pie-chart-3d>
+
+        <div class="col-md-3 info-tile">
+            <div class="tile-heading"><span>My Strategy</span></div>
+            <app-pie-chart-3d  *ngIf="strategyValues"
+                  #strategyPieChart
+                  [values]="strategyValues"
+                  [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a','#eaeaea']"
+                  [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
+                  (save)="saveStrategy($event)"
+            ></app-pie-chart-3d>
         </div>
-        <div class="col-md-9 info-tile tile-success" *ngIf="areaChartData()">
+        <div class="col-md-9 info-tile" *ngIf="areaChartData()">
+            <div class="tile-heading"><span>Worth history</span></div>
             <app-line-chart [data]="areaChartData()"></app-line-chart>
         </div>
     </div>

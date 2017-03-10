@@ -14,7 +14,7 @@ export class SliderComponent implements OnInit {
   @Input() value: number = 0;                                                       //current value
   @Input() step: number = 1;                                                        //min gap between values
   @Input() fillColor: string | CanvasGradient | CanvasPattern = "#3C3";             //inner color of valued part
-  @Input() limitColor: string | CanvasGradient | CanvasPattern = "#fa9999";         //inner color of not allowed part when max allowed value is reached
+  @Input() limitColor: string | CanvasGradient | CanvasPattern = "#fafafa";         //inner color of not allowed part when max allowed value is reached
   @Input() ballColor: string | CanvasGradient | CanvasPattern = "#090";             //ball color
   @Input() onFocusBorderColor: string | CanvasGradient | CanvasPattern = "#399";    //border color while pointer down
   @Input() borderColor: string | CanvasGradient | CanvasPattern = "#333";           //border color on rest
@@ -43,6 +43,13 @@ export class SliderComponent implements OnInit {
     this.draw();
   }
 
+  setManually(config : {max?: number, maxAllowed?: number, value?: number, step?: number}) {
+      if (config.max != undefined) this.max = config.max;
+      if (config.maxAllowed != undefined) this.max = config.maxAllowed;
+      if (config.value != undefined) this.max = config.value;
+      if (config.step != undefined) this.max = config.step;
+  }
+
   private setupCanvas() {
     this.ctx = this.canvas.nativeElement.getContext("2d");
     this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight
@@ -50,7 +57,7 @@ export class SliderComponent implements OnInit {
 
     this.h = this.canvas.nativeElement.offsetHeight;
     this.w = this.canvas.nativeElement.offsetWidth;
-    
+
     this.dW = this.w - this.h;
     this.dX = this.h / 2;
     this.dY = 0;
@@ -82,8 +89,8 @@ export class SliderComponent implements OnInit {
   private onpointerup() {
     document.onpointermove = undefined;
     this.canvas.nativeElement.onpointerup = undefined;
-    this.borColor = "#333"; 
-    this.ctx.lineWidth = 1; 
+    this.borColor = "#333";
+    this.ctx.lineWidth = 1;
     this.draw();
     this.change.emit(this.value);
   }
