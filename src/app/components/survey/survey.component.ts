@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Route, Router} from "@angular/router";
 import {Question} from "../../model/survey/question";
 import {Strategy} from "../../model/strategy/strategy";
 import {ManageJsonService} from "../../services/manageJson.service";
@@ -28,6 +29,7 @@ export class SurveyComponent implements OnInit {
   constructor(
     private jsonService: ManageJsonService,
     private apiService: StrategyService,
+    private routes: Router
   ) { }
 
   ngOnInit() {
@@ -64,7 +66,9 @@ export class SurveyComponent implements OnInit {
     this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
       console.log("Strategy sent:");
       console.log(my_strategy.asset_class);
-      document.getElementById('select_strategy').click();
+      this.routes.navigate(["/mainView"]);
+      (window as any).swal("Well done!", "Your strategy is '" + my_strategy.name +"'","success");
+      //document.getElementById('select_strategy').click();
     });
   }
 
@@ -127,7 +131,7 @@ export class SurveyComponent implements OnInit {
   }
 
   choose_strategy(id: number){
-
+      this.sendMyStrategy(this.strategies[id]);
   }
 
 }
