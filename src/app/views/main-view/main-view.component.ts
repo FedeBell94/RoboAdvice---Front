@@ -88,4 +88,9 @@ export class mainViewComponent implements OnInit{
         else
             return false;
     }
+
+    showAsset(){
+
+      this.router.navigate(["minorView"]);
+    }
 }

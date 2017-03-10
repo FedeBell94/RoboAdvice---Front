@@ -10,7 +10,7 @@
     ></app-slider>
 
     <div class="row">
-        <div class="col-md-3" *ngFor="let aC of getPortfolio()">
+        <div class="col-md-3" *ngFor="let aC of getPortfolio()" (click)="showAsset(aC.assetClass)">
             <div class="info-tile" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
                 <div class="tile-icon"><i class="ti ti-stats-up"></i></div>
                 <div class="tile-heading"><span>{{aC.assetClass}}</span></div>

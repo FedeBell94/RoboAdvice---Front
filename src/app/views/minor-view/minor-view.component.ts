@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from "@angular/router";
+
+
+
+import {Strategy} from "../../model/strategy/strategy";
+import {Asset} from "../../model/strategy/asset";
+
 
 @Component({
     selector: 'minorView',

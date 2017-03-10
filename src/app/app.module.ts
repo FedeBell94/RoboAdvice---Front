@@ -45,7 +45,6 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         RouterModule.forRoot(ROUTES)
     ],
     exports: [
-
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
