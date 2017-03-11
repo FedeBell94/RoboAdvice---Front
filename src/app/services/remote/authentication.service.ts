@@ -99,9 +99,9 @@ export class AuthService {
 
     saveUser(user: any) {
         this.currentUser = new User();
-        this.currentUser.email = user.email;
+        this.currentUser.email = user.username;
         this.currentUser.id = user.id;
-        this.currentUser.username = user.username;
+        this.currentUser.username = user.nickname;
     }
 
     private estractCookie(cookieName: string) {
@@ -123,7 +123,6 @@ export class AuthService {
     }
 
     private logInWithUser(user: any) {
-        this.saveUser(user);
         this.logged = true;
         //now i save the user
         this.saveUser(user);
