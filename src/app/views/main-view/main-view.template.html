@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
             <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
-                <div class="tile-icon"><i class="ti ti-stats-up"></i></div>
+                <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(aC.percentage), 'ti-stats-down': isLoss(aC.percentage)}"></i></div>
                 <div class="tile-heading"><span>{{aC.assetClass}}</span></div>
                 <div class="tile-body"><span>{{aC.value | currency:'USD':true:'1.2-2'}}</span></div>
                 <div class="tile-footer">
@@ -19,11 +19,9 @@
 
         <div class="col-md-3 info-tile">
             <div class="tile-heading"><span>My Strategy</span></div>
-            <app-pie-chart-3d  *ngIf="strategyValues"
+            <app-pie-chart-3d
                   #strategyPieChart
-                  [values]="strategyValues"
                   [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a','#eaeaea']"
-                  [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
                   (save)="saveStrategy($event)"
             ></app-pie-chart-3d>
         </div>

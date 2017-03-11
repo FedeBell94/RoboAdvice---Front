@@ -39,13 +39,12 @@ export class AppComponent implements OnInit{
   ngOnInit(){
 
     this.auth.checkSession().subscribe((data)=> {
-      if (data.response == 0) {
-        this.router.navigate(["/login"]);
-      } else {
+      if (data.response > 0) {
         this.portfolio.forceDownolad().subscribe((data)=>{
-            this.router.navigate(["/mainView"]);
-
+          this.router.navigate(["/mainView"]);
         });
+      } else {
+        this.router.navigate(["/login"]);
       }
     });
   }

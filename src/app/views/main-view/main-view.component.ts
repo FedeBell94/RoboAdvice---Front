@@ -42,19 +42,10 @@ export class mainViewComponent implements OnInit{
               //this.router.navigate(["mainView"]);
             }
         }
-        this.strategyService.getStrategy().subscribe((data)=> {
-            console.log("strategy has arrived: " + JSON.stringify(data.data));
-            if (data.response > 0) {
-                this.strategyValues = data.data.map((el: any)=>{ return el.percentage; });
-                this.strategyValues.push(0);
-                if (this.pieChart) this.pieChart.rePaint();
-            }
-        });
+
     }
 
     saveStrategy(event: any) {
-        //called on 'save' event emitted from pie-chart on 'Save' button
-        //output is: [25, 25, 25, 25, 0], in the same order of value passed
 
         if (event[4] == 0) {  //Check if the 'empty' portion is 0%
             let _this = this;

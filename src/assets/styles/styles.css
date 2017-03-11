@@ -8563,8 +8563,8 @@ body.md-skin {
 }
 
 .loading{
-  top: 50%;
-  left: 50%;
+  top: 45%;
+  left: 45%;
   position:absolute;
 }
 
@@ -8595,4 +8595,8 @@ body.md-skin {
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.text-error{
+  color: #dd191d;
 }

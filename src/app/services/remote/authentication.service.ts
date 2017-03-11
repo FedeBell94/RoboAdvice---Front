@@ -48,9 +48,23 @@ export class AuthService {
         });
     }
 
+    private setCookie(cname:string, cvalue:string, exMins:number) {
+        let d: Date = new Date();
+        d.setTime(d.getTime() + (exMins*60*1000));
+        let expires: string = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    private removeCookie(name: string){
+        this.setCookie(name,'',-1);
+    }
+
     logout() {
         this.apis.post("logoutUser", {}).subscribe(()=>{
             this.logged = false;
+            this.setAuthToken("");
+            this.removeCookie("authToken");
+            this.removeCookie("JSESSIONID");
             this.router.navigate(["login"]);
         });
     }
