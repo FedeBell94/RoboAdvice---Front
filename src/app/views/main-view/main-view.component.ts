@@ -34,12 +34,12 @@ export class mainViewComponent implements OnInit{
             this.router.navigate(["login"]);
             return;
         } else {
-            if (this.auth.isUserNew()){
+            if (this.auth.getUser().newUser){
               //TODO go to the survey
               //this.router.navigate(["survey"]);
             }else{
               //TODO go to the mainView
-              //this.router.navigate(["mainView"]);
+              this.router.navigate(["mainView"]);
             }
         }
 

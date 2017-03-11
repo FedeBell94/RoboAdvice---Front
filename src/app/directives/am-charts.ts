@@ -267,6 +267,7 @@ export class AmChartsDirective implements OnDestroy, OnChanges, OnInit {
           if (didUpdate) {
             this.chart.validateNow();
             this.chart.validateData();
+            console.log("AM-Charts: just revalidated");
           }
         });
       }
