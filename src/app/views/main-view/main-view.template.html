@@ -22,8 +22,8 @@
 
 
 
-    <div class="row">
-        <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
+    <div class="row" *ngIf="portfolio">
+        <div class="col-md-3" *ngFor="let aC of portfolio let i = index" (click)="showAsset(i+1)">
             <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
                 <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(aC.percentage), 'ti-stats-down': isLoss(aC.percentage)}"></i></div>
                 <div class="tile-heading"><span>{{aC.assetClass}}</span></div>

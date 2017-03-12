@@ -12,15 +12,21 @@ export class PortfolioService {
         private apis: ApiService,
         private router: Router,
     ) { }
-    private sumAssetClasses(portfolio: any) {
-        let sum = 0;
-        for (let col in portfolio) {
-            if (typeof portfolio[col] == typeof 0) sum += portfolio[col];
-        }
-        return sum;
-    }
 
     private cache: PortfolioCache = new PortfolioCache();
+
+    getPortfolio(): Observable<GenericResponse> {
+        if (this.cache.portfolio) return Observable.create(observer=> {
+                                    observer.next(new GenericResponse(1, 0, "", this.cache.portfolio));
+                                    observer.complete();
+                                });
+        return this.downloadWorthHistory().map(res=> {
+                    if (res.response > 0) {
+                        return new GenericResponse(1, 0, "", this.cache.portfolio);
+                    }
+                    return res;
+                });  
+    }
 
     getProfLoss(): Observable<GenericResponse> {
         if (this.cache.profLoss) return Observable.create(observer=> {
@@ -67,6 +73,19 @@ export class PortfolioService {
                 });
     }
 
+    private downloadPerAssetTodayWorth(): Observable<GenericResponse> {
+        return this.apis.get("worthDay").map((res)=> {
+           if (res.response > 0) {
+               //saving raw data for future purposes
+               this.cache.raw.perAssetTodayWorth = res.data;
+               this.cache.portfolio = res.data;
+               this.cache.worth = this.getWorthFromPortfolio(this.cache.portfolio);
+           }
+           
+           return res; 
+        });
+    }
+
     private downloadWorthHistory(): Observable<GenericResponse> {
         return this.apis.get("worthHistory").map((res)=> {
                     if (res.response > 0) {
@@ -87,6 +106,14 @@ export class PortfolioService {
                     }
                     return res;
                 });
+    }
+
+    private getWorthFromPortfolio(portfolio: Portfolio[]) {
+        let sum = 0;
+        for (let i = 0; i < portfolio.length; i++) {
+            sum += portfolio[i].value;
+        }
+        return sum;
     }
 
     private getGraphs(opts) {
@@ -179,8 +206,17 @@ export class PortfolioCache {
     worthHistoryOptions: any;
     worth: number;
     profLoss: number;
+    portfolio: any;
 }
 
 export class PortfolioRawCache {
     worthHistory: any;
+    perAssetTodayWorth: any;
+}
+
+export class Portfolio {
+    assetClass: string;
+    value: number;
+    profLoss: number;
+    percentage: number;
 }

@@ -4,6 +4,7 @@ import {Question} from "../../model/survey/question";
 import {Strategy} from "../../model/strategy/strategy";
 import {ManageJsonService} from "../../services/manageJson.service";
 import {StrategyService} from "../../services/strategy.service";
+import {AuthService} from "../../services/remote/authentication.service";
 
 declare var jQuery:any;
 
@@ -26,9 +27,14 @@ export class SurveyComponent implements OnInit {
 
   strategy: Array<Array<number>>;
 
+  currentStrategyName: string;
+
+  currentStrategyValues: number[] = [25,25,25,25];
+
   constructor(
     private jsonService: ManageJsonService,
     private apiService: StrategyService,
+    private auth: AuthService,
     private routes: Router
   ) { }
 
@@ -66,8 +72,16 @@ export class SurveyComponent implements OnInit {
     this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
       console.log("Strategy sent:");
       console.log(my_strategy.asset_class);
+      /*this.currentStrategyName = my_strategy.name;
+      let i : number = 0;
+      for (let entry of my_strategy.asset_class) {
+        this.currentStrategyValues[i] = entry.percentage;
+        i++;
+      }
+      console.log(this.currentStrategyValues);*/
+      this.auth.getUser().newUser = false;
       this.routes.navigate(["/mainView"]);
-      (window as any).swal("Well done!", "Your strategy is '" + my_strategy.name +"'","success");
+      (window as any).swal("Well done!", "Your strategy is '" + my_strategy.name +"'.\n If you want you can adjust (or change) the percentages of your strategy by your dashboard","success");
       //document.getElementById('select_strategy').click();
     });
   }
@@ -77,7 +91,7 @@ export class SurveyComponent implements OnInit {
     x += this.totalScore[1];    //sum: Income
     x -= this.totalScore[3];    //sub: Growth
     x += this.totalScore[0]/2;  //sum: Bonds/2
-    x -= this.totalScore[4]/2;  //sum: Stocks/2
+    x -= this.totalScore[4]/2;  //sub: Stocks/2
 
     console.log("Total Score: ");
     console.log("Bonds: "+   this.totalScore[0]);
