@@ -17,7 +17,7 @@ export const ROUTES:Routes = [
     path: '', component: basicComponent,
     children: [
       {path: 'mainView', component: mainViewComponent},
-      {path: 'minorView/:assetClassId', component: minorViewComponent},
+      {path: 'minorView/:assetClassId/:assetClassName', component: minorViewComponent},
       {path: 'survey', component: surveyViewComponent},
       {path: 'userHistory', component: userHistoryViewComponent}
     ]

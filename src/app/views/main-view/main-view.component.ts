@@ -75,6 +75,14 @@ export class mainViewComponent implements OnInit {
     }
 
     showAsset(a_C: number) {
-        this.router.navigate(["/minorView", a_C]);
+        let name: string;
+        switch (a_C){
+          case 1:  name = "Bonds"; break;
+          case 2:  name = "Forex"; break;
+          case 3:  name = "Stocks"; break;
+          case 4:  name = "Commodities"; break;
+
+        }
+        this.router.navigate(["/minorView", a_C, name]);
     }
 }
