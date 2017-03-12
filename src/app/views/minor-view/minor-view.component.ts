@@ -19,6 +19,8 @@ export class minorViewComponent {
   ){ }
   private options: any;
 
+  assetClassName: string;
+
   getOptions() {
     return this.options;
   }
@@ -31,6 +33,7 @@ export class minorViewComponent {
 
   ngOnInit() {
     this.areaChartData(this.route.snapshot.params["assetClassId"] || 1);
+    this.assetClassName = this.route.snapshot.params["assetClassName"] || "Bonds";
   }
 
 }
