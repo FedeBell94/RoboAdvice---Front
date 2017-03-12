@@ -28,6 +28,10 @@ export class mainViewComponent implements OnInit {
     worthHistoryOptions: any;
     portfolio: any;
 
+    getPortfolio() {
+        return this.portfolio;
+    }
+
     ngOnInit() {
         if (!this.auth.isLogged()) {
             this.router.navigate(["login"]);
@@ -53,17 +57,13 @@ export class mainViewComponent implements OnInit {
         });
         this.portfolioService.getPortfolio().subscribe(data=>{
             if (data.response > 0) {
-                this.portfolioService = data.data;
+                this.portfolio = data.data;
             }
         });
     }
 
     getMyStrategy() {
         return this.strategyValues;
-    }
-
-    getPortfolioSportfolioService() {
-        return null;
     }
 
     isLoss(percentage: number): boolean {

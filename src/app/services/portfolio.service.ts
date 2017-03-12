@@ -15,12 +15,17 @@ export class PortfolioService {
 
     private cache: PortfolioCache = new PortfolioCache();
 
+    getCached(field: string) {
+        if (this.cache[field]) return this.cache[field];
+        return null;
+    }
+
     getPortfolio(): Observable<GenericResponse> {
         if (this.cache.portfolio) return Observable.create(observer=> {
                                     observer.next(new GenericResponse(1, 0, "", this.cache.portfolio));
                                     observer.complete();
                                 });
-        return this.downloadWorthHistory().map(res=> {
+        return this.downloadPerAssetTodayWorth().map(res=> {
                     if (res.response > 0) {
                         return new GenericResponse(1, 0, "", this.cache.portfolio);
                     }

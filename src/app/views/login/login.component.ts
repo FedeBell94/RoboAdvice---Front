@@ -23,9 +23,7 @@ export class loginComponent {
                 if (data.data.newUser == true){
                     this.router.navigate(["/survey"]);
                 }else {
-                  this.portfolio.forceDownolad().subscribe((data2) => {
                     this.router.navigate(["/mainView"]);
-                  });
                 }
                 (window as any).swal('Welcome ' + data.data.nickname, "","success");
             }else{
