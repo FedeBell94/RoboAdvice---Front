@@ -36,7 +36,7 @@ export class mainViewComponent implements OnInit{
         } else {
             if (this.auth.getUser().newUser){
               //TODO go to the survey
-              //this.router.navigate(["survey"]);
+              this.router.navigate(["survey"]);
             }else{
               //TODO go to the mainView, so here
               //this.router.navigate(["mainView"]);

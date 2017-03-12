@@ -44,7 +44,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- TAB SELECT STRATEGY-->
@@ -55,7 +54,7 @@
 
     </p>
     <div class="row">
-      <div class="col-md-4" style="text-align: center">
+      <div class="col-md-4 text-center">
         <a class="btn btn-apple" (click)="choose_strategy(0)">BONDS</a>
         <app-pie-chart
                        [values]="getStrategy(0)"
@@ -64,7 +63,7 @@
         ></app-pie-chart>
       </div>
 
-      <div class="col-md-4" style="text-align: center">
+      <div class="col-md-4 text-center">
         <a class="btn btn-apple" (click)="choose_strategy(1)">INCOME</a>
         <app-pie-chart
                        [values]="getStrategy(1)"
@@ -73,7 +72,7 @@
         ></app-pie-chart>
       </div>
 
-      <div class="col-md-4" style="text-align: center">
+      <div class="col-md-4 text-center">
         <a class="btn btn-apple" (click)="choose_strategy(2)">BALANCED</a>
         <app-pie-chart
                        [values]="getStrategy(2)"
@@ -83,7 +82,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-offset-2 col-md-4" style="text-align: center">
+      <div class="col-md-offset-2 col-md-4 text-center">
         <a class="btn btn-apple" (click)="choose_strategy(3)">GROWTH</a>
         <app-pie-chart
                        [values]="getStrategy(3)"
@@ -92,7 +91,7 @@
         ></app-pie-chart>
       </div>
 
-      <div class="col-md-4" style="text-align: center">
+      <div class="col-md-4 text-center">
         <a class="btn btn-apple" (click)="choose_strategy(4)">STOCKS</a>
         <app-pie-chart
                        [values]="getStrategy(4)"
@@ -106,10 +105,15 @@
 
   <!-- TAB SHOW and MODIFY STRATEGY-->
   <div class="tab-pane fade" id="showModifyStrategy">
-    <h3 class="head text-center"></h3>
+    <h3 class="head text-center">Your strategy is '{{currentStrategyName}}'</h3>
     <p class="narrow text-center">
-      Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+      Do you want to adjust the percentages of your strategy?
     </p>
+    <!--<app-strategy
+                  [values]="[12,28,30,30]"
+                  [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a','#eaeaea']"
+                  [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
+    ></app-strategy>-->
   </div>
 
   <div class="clearfix"></div>

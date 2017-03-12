@@ -102,6 +102,7 @@ export class AuthService {
         this.currentUser.email = user.username;
         this.currentUser.id = user.id;
         this.currentUser.username = user.nickname;
+        this.currentUser.newUser = user.newUser;
     }
 
     private estractCookie(cookieName: string) {
