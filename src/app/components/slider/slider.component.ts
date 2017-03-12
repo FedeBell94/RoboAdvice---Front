@@ -50,6 +50,10 @@ export class SliderComponent implements OnInit {
     if (config.step != undefined) this.max = config.step;
   }
 
+  ngAfterViewChecked(){
+    this.repaint();
+  }
+
   repaint() {
     this.setupCanvas();
     this.draw();
@@ -62,7 +66,7 @@ export class SliderComponent implements OnInit {
 
     this.h = this.canvas.nativeElement.offsetHeight;
     this.w = this.canvas.nativeElement.offsetWidth;
-    
+
     this.dW = this.w - this.h;
     this.dX = this.h / 2;
     this.dY = 0;

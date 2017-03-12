@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PieChart3dComponent } from './pie-chart-3d.component';
+import { StrategyComponent } from './strategy.component';
 
-describe('PieChart3dComponent', () => {
-  let component: PieChart3dComponent;
-  let fixture: ComponentFixture<PieChart3dComponent>;
+describe('StrategyComponent', () => {
+  let component: StrategyComponent;
+  let fixture: ComponentFixture<StrategyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PieChart3dComponent ]
+      declarations: [ StrategyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PieChart3dComponent);
+    fixture = TestBed.createComponent(StrategyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

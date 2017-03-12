@@ -21,6 +21,10 @@ export class PieChartComponent implements OnInit {
     this.rePaint();
   }
 
+  ngAfterViewChecked(){
+    this.rePaint();
+  }
+
   rePaint() {
     setTimeout(() => this.printChart(), 1);
   }

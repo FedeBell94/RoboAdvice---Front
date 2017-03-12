@@ -23,7 +23,7 @@ export class mainViewComponent implements OnInit{
 
     @ViewChild('strategyPieChart') pieChart: any;
 
-    strategyValues: number[];
+    private strategyValues: number[] = [25, 25, 25, 25];
 
     areaChartData() {
         return this.portfolio.getCachedPortfolioHistoryChartOptions();
@@ -38,49 +38,22 @@ export class mainViewComponent implements OnInit{
               //TODO go to the survey
               //this.router.navigate(["survey"]);
             }else{
-              //TODO go to the mainView
-              this.router.navigate(["mainView"]);
+              //TODO go to the mainView, so here
+              //this.router.navigate(["mainView"]);
+              this.strategyService.getStrategy().subscribe((data)=>{
+                let i: number = 0;
+                for (let assetClass of data.data) {
+                  this.strategyValues[i] = assetClass.percentage;
+                  i++;
+                }
+                console.log(this.strategyValues);
+              })
             }
         }
-
     }
 
-    saveStrategy(event: any) {
-
-        if (event[4] == 0) {  //Check if the 'empty' portion is 0%
-            let _this = this;
-            (window as any).swal({
-                title: 'Are you sure?',
-                text: "You are changing your strategy!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, change it!'
-            }).then(function () {
-                //send new strategy to server
-                event.pop();
-                let str: Strategy = new Strategy();
-                for (let i = 0; i < event.length; i++) {
-                    let asset = new Asset();
-                    asset.assetClassId = i + 1; //server has 1-based ids
-                    asset.percentage = event[i];
-                    str.asset_class.push(asset);
-                }
-                str.name = "Custom";
-                _this.strategyService.saveStrategy(str).subscribe((data) => {
-                    //everything's fine
-                    (window as any).swal('Done!', 'Your strategy has been changed.', 'success');
-                });
-                event.push(0);
-            }, function (error) {
-                //nothing
-            });
-
-        }else{
-            //total is not 100%
-            (window as any).swal("Oops", "total must be 100%", "error");
-        }
+    getMyStrategy(){
+      return this.strategyValues;
     }
 
     getPortfolio() {

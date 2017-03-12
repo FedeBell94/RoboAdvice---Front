@@ -19,15 +19,18 @@
 
         <div class="col-md-3 info-tile">
             <div class="tile-heading"><span>My Strategy</span></div>
-            <app-pie-chart-3d
+            <app-strategy *ngIf="strategyValues"
                   #strategyPieChart
+                  [values]="strategyValues"
                   [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a','#eaeaea']"
-                  (save)="saveStrategy($event)"
-            ></app-pie-chart-3d>
+                  [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
+            ></app-strategy>
         </div>
         <div class="col-md-9 info-tile" *ngIf="areaChartData()">
             <div class="tile-heading"><span>Worth history</span></div>
-            <app-line-chart [data]="areaChartData()"></app-line-chart>
+            <app-line-chart
+              [data]="areaChartData()"
+            ></app-line-chart>
         </div>
     </div>
 </div>

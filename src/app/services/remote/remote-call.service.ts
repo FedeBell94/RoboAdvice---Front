@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
-    private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
+    //private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
+      private apiUrl = 'http://192.168.3.57:8080/securedApi/';  // URL to web API
     //private apiUrl = 'http://192.168.2.116:8080/securedApi/';
     private callCount = 0;
 

@@ -4,18 +4,18 @@ import {Strategy} from "../../model/strategy/strategy";
 import {Asset} from "../../model/strategy/asset";
 
 @Component({
-    selector: 'app-pie-chart-3d',
-    templateUrl: './pie-chart-3d.component.html',
-    styleUrls: ['./pie-chart-3d.component.css']
+    selector: 'app-strategy',
+    templateUrl: './strategy.component.html',
+    styleUrls: ['./strategy.component.css']
 })
-export class PieChart3dComponent implements OnInit {
+export class StrategyComponent implements OnInit {
     constructor(
         private _z: NgZone,
         private strategyService: StrategyService,
     ) { }
 
-    values: number[] = [20, 20, 20, 20, 20];
-    labels: string[] = ['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty'];
+    @Input() values: number[] = [20, 20, 20, 20, 20];
+    @Input() labels: string[] = ['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty'];
     @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ["#3c4eb9", "#1b70ef", "#00abff", "#40daf1", "#4A861E"];
     @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";
     @Input() titleColor: string | CanvasGradient | CanvasPattern;
@@ -24,14 +24,12 @@ export class PieChart3dComponent implements OnInit {
 
 
     ngOnInit() {
-          this.strategyService.getStrategy().subscribe((data)=> {
-          console.log("strategy has arrived: " + JSON.stringify(data.data));
-          if (data.response > 0) {
-            this.values = data.data.map((el: any)=>{ return el.percentage; });
-            this.values.push(0);
-            this.rePaint();
-          }
-        });
+        if (!this.values) this.values = [25, 25, 25, 25, 0];
+        this.rePaint();
+    }
+
+    ngAfterViewChecked(){
+        this.rePaint();
     }
 
     rePaint() {
@@ -80,7 +78,7 @@ export class PieChart3dComponent implements OnInit {
               this.save.emit(this.values);
             });
             this.values.push(0);
-          }, function (error) {
+          }.bind(this), function (error) {
             //nothing
           });
 

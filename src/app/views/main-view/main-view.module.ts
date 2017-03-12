@@ -4,15 +4,15 @@ import {BrowserModule} from "@angular/platform-browser";
 import {mainViewComponent} from "./main-view.component";
 
 import {AmChartsModule} from "../../directives/am-charts";
-import {PieChart3dComponent} from '../../components/pie-chart-3d/pie-chart-3d.component';
+import {StrategyComponent} from '../../components/strategy/strategy.component';
 import {SliderComponent} from '../../components/slider/slider.component';
 import {LineChartComponent} from "../../components/line-chart/line-chart.component";
 
 @NgModule({
     declarations: [
         mainViewComponent,
-        PieChart3dComponent,
         SliderComponent,
+        StrategyComponent,
         LineChartComponent,
     ],
     imports: [
@@ -21,6 +21,7 @@ import {LineChartComponent} from "../../components/line-chart/line-chart.compone
     ],
     exports:[
         LineChartComponent,
+        StrategyComponent,
     ]
 })
 
