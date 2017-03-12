@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
-    private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
-    //private apiUrl = 'http://192.168.2.116:8080/securedApi/';
+    //private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
+    private apiUrl = 'http://192.168.3.57:8080/securedApi/';
     private callCount = 0;
 
     constructor (
@@ -33,16 +33,16 @@ export class ApiService {
         this.defaultOptions = options;
     }
 
-    get(action: string, params?: Object, options?: RequestOptions): Observable<any> {
+    get(action: string, params?: Object, options?: RequestOptions): Observable<GenericResponse> {
         let reqAction = action;
         if (params) {
             reqAction += "?";
             for (let p in params) reqAction = reqAction + p + "=" + params[p] + "&";
             reqAction = reqAction.substr(0, reqAction.length - 1);
         }
-        if (options) return this.http.get(this.apiUrl + reqAction, options).map(this.extractData).catch(this.handleError);
-        if (this.defaultOptions) return this.http.get(this.apiUrl + reqAction, this.defaultOptions).map(this.extractData).catch(this.handleError);
-        return this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError);
+        if (options) return (this.http.get(this.apiUrl + reqAction, options).map(this.extractData).catch(this.handleError) as any) as Observable<GenericResponse>;
+        if (this.defaultOptions) return (this.http.get(this.apiUrl + reqAction, this.defaultOptions).map(this.extractData).catch(this.handleError) as any) as Observable<GenericResponse>;
+        return (this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError) as any) as Observable<GenericResponse>;
     }
 
     post(action: string, params: any, options?: RequestOptions): Observable<any> {
@@ -54,7 +54,7 @@ export class ApiService {
         }
         let opts = options || this.defaultOptions || new RequestOptions({ headers: headers });
 
-        return this.http.post(this.apiUrl + action, params, opts).map(this.extractData).catch(this.handleError);
+        return (this.http.post(this.apiUrl + action, params, opts).map(this.extractData).catch(this.handleError) as any) as Observable<GenericResponse>;
     }
 
     private extractData(res: Response) {
@@ -92,4 +92,11 @@ export class ApiService {
         console.error(errMsg);
         return errMsg;
     }
+}
+
+export class GenericResponse {
+    data: any;
+    response: number;
+    errorCode: number;
+    errorString: string;
 }
