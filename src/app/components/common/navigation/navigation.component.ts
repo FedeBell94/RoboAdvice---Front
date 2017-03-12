@@ -39,4 +39,8 @@ export class NavigationComponent {
     logout(){
         this.auth.logout();
     }
+
+    isNewUser(){
+        return this.auth.getUser().newUser;
+    }
 }

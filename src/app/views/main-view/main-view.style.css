@@ -35912,6 +35912,8 @@ form .no-validate {
 }
 
 
+/*COUNTDOWN */
+
 #clockdiv{
   font-family: sans-serif;
   color: #fff;
@@ -35939,3 +35941,5 @@ form .no-validate {
   padding-top: 5px;
   font-size: 16px;
 }
+
+/*END COUNTDOWN*/

@@ -26,7 +26,7 @@ export class PieChartComponent implements OnInit {
   }*/
 
   rePaint() {
-    setTimeout(() => this.printChart(), 150);
+    setTimeout(() => this.printChart(), 300);
     //window.requestAnimationFrame(this.printChart.bind(this));
   }
 

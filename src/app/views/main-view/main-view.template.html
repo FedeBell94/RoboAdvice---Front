@@ -1,5 +1,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+<<<<<<< HEAD
       <h1>Countdown Clock</h1>
       <div id="clockdiv">
         <div>
@@ -24,6 +25,9 @@
 
     <div class="row" *ngIf="portfolio">
         <div class="col-md-3" *ngFor="let aC of portfolio let i = index" (click)="showAsset(i+1)">
+=======
+        <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
+>>>>>>> a2e28f1a8d8f0c3b1a4b305292dfb76abc5a418c
             <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
                 <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(aC.percentage), 'ti-stats-down': isLoss(aC.percentage)}"></i></div>
                 <div class="tile-heading"><span>{{aC.assetClass}}</span></div>
