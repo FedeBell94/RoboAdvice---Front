@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 
 import {AuthService} from "../../../services/remote/authentication.service";
+import {PortfolioService} from "../../../services/portfolio.service";
 
 declare var jQuery:any;
 
@@ -16,6 +17,7 @@ export class NavigationComponent {
     constructor(
         private router: Router,
         private auth: AuthService,
+        private portfolio: PortfolioService,
     ) {}
 
     ngAfterViewInit() {
@@ -37,6 +39,7 @@ export class NavigationComponent {
     }
 
     logout(){
+        this.portfolio.clearCache();
         this.auth.logout();
     }
 

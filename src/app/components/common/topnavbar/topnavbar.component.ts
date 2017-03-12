@@ -30,11 +30,11 @@ export class TopnavbarComponent {
     }
 
     getWorth() {
-        return this.portfolio.getCached("worth");
+        return this.portfolio.getCached("worth") || 10000;
     }
 
     getProfLoss() {
-        return this.portfolio.getCached("profLoss");
+        return this.portfolio.getCached("profLoss") || 0;
     }
 
 }

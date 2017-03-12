@@ -29,6 +29,7 @@ export class mainViewComponent implements OnInit {
     portfolio: any;
 
     getPortfolio() {
+        console.log("portfolio is:", this.portfolio);
         return this.portfolio;
     }
 

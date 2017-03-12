@@ -15,6 +15,10 @@ export class PortfolioService {
 
     private cache: PortfolioCache = new PortfolioCache();
 
+    clearCache() {
+        this.cache = new PortfolioCache();
+    }
+
     getCached(field: string) {
         if (this.cache[field]) return this.cache[field];
         return null;
