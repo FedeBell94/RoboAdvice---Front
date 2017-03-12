@@ -25,6 +25,8 @@ export class AssetService {
           observer.next(
             {
               response: 1,
+              errorCode: 0,
+              errorString: "",
               data: this.getChartOptions(this.cachedAssets[type]) 
             });
           observer.complete();

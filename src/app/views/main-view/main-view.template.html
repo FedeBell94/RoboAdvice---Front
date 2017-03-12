@@ -49,10 +49,10 @@
                   [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
             ></app-strategy>
         </div>
-        <div class="col-md-9 info-tile" *ngIf="areaChartData()">
+        <div class="col-md-9 info-tile" *ngIf="worthHistoryOptions">
             <div class="tile-heading"><span>Worth history</span></div>
             <app-line-chart
-              [data]="areaChartData()"
+              [data]="worthHistoryOptions"
             ></app-line-chart>
         </div>
     </div>

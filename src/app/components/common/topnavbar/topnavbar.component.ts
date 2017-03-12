@@ -19,9 +19,25 @@ export class TopnavbarComponent {
         private auth: AuthService,
     ){}
 
+    private worth: number;
+    private profLoss: number;
+
     toggleNavigation(): void {
         jQuery("body").toggleClass("mini-navbar");
         smoothlyMenu();
+    }
+
+    ngOnInit() {
+        this.portfolio.getWorth().subscribe((data)=> {
+            if (data.response > 0) {
+                this.worth = data.data;
+            }
+        });
+        this.portfolio.getProfLoss().subscribe((data)=> {
+            if (data.response > 0) {
+                this.profLoss = data.data;
+            }
+        });
     }
 
     getUsername(): any {
@@ -30,11 +46,11 @@ export class TopnavbarComponent {
     }
 
     getWorth() {
-        return this.portfolio.getWorth();
+        return this.worth;
     }
 
     getProfLoss() {
-        return this.portfolio.getProfLoss();
+        return this.profLoss;
     }
 
 }

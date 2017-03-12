@@ -95,6 +95,12 @@ export class ApiService {
 }
 
 export class GenericResponse {
+    constructor(response?: number, errorCode?: number, errorString?: string, data?: any) {
+        if (response) this.response = response;
+        if (errorCode) this.errorCode = errorCode;
+        if (errorString) this.errorString = errorString;
+        if (data) this.data = data;
+    }
     data: any;
     response: number;
     errorCode: number;

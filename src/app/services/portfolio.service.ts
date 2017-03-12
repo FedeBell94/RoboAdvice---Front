@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestOptions, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import { ApiService } from './remote/remote-call.service';
+import { ApiService, GenericResponse } from './remote/remote-call.service';
 import { AuthService } from './remote/authentication.service';
 
 @Injectable()
@@ -11,16 +12,6 @@ export class PortfolioService {
         private apis: ApiService,
         private router: Router,
     ) { }
-
-    private cachedData: any;
-    private cachedWorth: number;
-    private cachedYesterdayWorth: number;
-    private cachedPortfolioHistoryChartOptions: any;
-
-    private getRemoteData(type: string) {
-        return this.apis.get("portfolio").map(this.cacheData[type], this);
-    }
-
     private sumAssetClasses(portfolio: any) {
         let sum = 0;
         for (let col in portfolio) {
@@ -29,25 +20,93 @@ export class PortfolioService {
         return sum;
     }
 
-    private estractData(data: any) {
-        this.cachedData = data.data;
+    private cache: PortfolioCache = new PortfolioCache();
 
-        //current worth
-        if (this.cachedData.data.length > 0) this.cachedWorth = this.sumAssetClasses(this.cachedData.data[this.cachedData.data.length - 1]);  //ok
-        else this.cachedWorth = 10000;
-        console.log("current worth: ", this.cachedWorth);
-        //yesterday's worth
-        if (this.cachedData.data.length > 1) this.cachedYesterdayWorth = this.sumAssetClasses(this.cachedData.data[this.cachedData.data.length - 2]);
-        else this.cachedYesterdayWorth = 10000;
-        console.log("yesterday's worth: ", this.cachedYesterdayWorth);
-        //options
-        this.cachedPortfolioHistoryChartOptions = this.getOptions();
-        //console.log("options: ", this.cachedPortfolioHistoryChartOptions);
-
-
+    getProfLoss(): Observable<GenericResponse> {
+        if (this.cache.profLoss) return Observable.create(observer=> {
+                                    observer.next(new GenericResponse(1, 0, "", this.cache.profLoss));
+                                    observer.complete();
+                                });
+        return this.downloadWorthHistory().map(res=> {
+                    if (res.response > 0) {
+                        return new GenericResponse(1, 0, "", this.cache.profLoss);
+                    }
+                    return res;
+                });  
     }
 
-    private getOptions() {
+    getWorth(): Observable<GenericResponse> {
+        if (this.cache.worth) {
+            return Observable.create(observer=> {
+                observer.next(new GenericResponse(1, 0, "", this.cache.worth));
+                observer.complete();
+            });
+        }
+        return this.downloadWorthHistory().map(res=> {
+                    if (res.response > 0) {
+                        return new GenericResponse(1, 0, "", this.cache.worth);
+                    }
+                    return res;
+                });    //TODO: portfolio is faster
+    }
+
+    getWorthHistoryOptions(): Observable<GenericResponse> {
+        if (this.cache.raw.worthHistory) {
+            //data already there
+            return Observable.create(observer=> {
+                        observer.next(new GenericResponse(1, 0, "", this.cache.worthHistoryOptions));
+                        observer.complete();
+                    });
+        } 
+        //let's call the api
+        return this.downloadWorthHistory().map(res=> {
+                    if (res.response > 0) {
+                        return new GenericResponse(1, 0, "", this.cache.worthHistoryOptions);
+                    }
+                    return res;
+                });
+    }
+
+    private downloadWorthHistory(): Observable<GenericResponse> {
+        return this.apis.get("worthHistory").map((res)=> {
+                    if (res.response > 0) {
+                        //saving raw data for future purposes
+                        this.cache.raw.worthHistory = res.data;
+                        this.cache.worthHistoryOptions = this.getOptions(res.data.data, this.getGraphs(res.data.graphs));
+                        //get worth and prof/loss
+                        if (res.data.data.length == 0) {
+                            this.cache.worth = 10000;
+                            this.cache.profLoss = 0;
+                        } else {
+                            this.cache.worth = res.data.data[res.data.data.length - 1][res.data.graphs[0].valueField];
+                            if (res.data.data.length > 1) this.cache.profLoss = this.cache.worth - res.data.data[res.data.data.length - 2][res.data.graphs[0].valueField];
+                            else this.cache.profLoss = 0;
+                        }
+                    } else {
+                        //TODO: ?
+                    }
+                    return res;
+                });
+    }
+
+    private getGraphs(opts) {
+        let g = [];
+        for (let i = 0; i < opts.length; i++) {
+            g.push({
+                    "id":"g" + i,
+                    "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+                    "bullet": "round",
+                    "bulletSize": 8,
+                    "lineThickness": 2,
+                    "type": "smoothedLine",
+                    "title": opts[i].title,
+                    "valueField": opts[i].valueField
+                });
+        }
+        return g;
+    }
+
+    private getOptions(data: any[], graphs: any) {
         return {
             "type": "serial",
             "theme": "none",
@@ -62,12 +121,12 @@ export class PortfolioService {
             "legend": {
                 "enabled": true
             },
-            "dataProvider": this.cachedData.data,
+            "dataProvider": data,
             "valueAxes": [{
                 "axisAlpha": 0,
                 "position": "left"
             }],
-            "graphs": this.getGraphs(),
+            "graphs": graphs,
             "chartScrollbar": {
                 "graph":"g1",
                 "gridAlpha":0,
@@ -110,131 +169,18 @@ export class PortfolioService {
         
     }
 
-    private getGraphs() {
-        return [{
-                "id":"g1",
-                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-                "bullet": "round",
-                "bulletSize": 4,
-                "lineThickness": 1,
-                "type": "smoothedLine",
-                "valueField": "column1",
-                "title": "Bonds"
-            },
-            {
-                "id":"g2",
-                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-                "bullet": "round",
-                "bulletSize": 4,
-                "lineThickness": 1,
-                "type": "smoothedLine",
-                "valueField": "column2",
-                "title": "Forex"
-            },
-            {
-                "id":"g3",
-                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-                "bullet": "round",
-                "bulletSize": 4,
-                "lineThickness": 1,
-                "type": "smoothedLine",
-                "valueField": "column3",
-                "title": "Stocks"
-            },
-            {
-                "id":"g4",
-                "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-                "bullet": "round",
-                "bulletSize": 4,
-                "lineThickness": 1,
-                "type": "smoothedLine",
-                "valueField": "column4",
-                "title": "Commodities"
-            }];
-        /*
-        let g = [];
-        for (let i = 0; i < this.cachedData.graphs.length; i++) {
-            g.push({
-                    "id":"g4",
-                    "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-                    "bullet": "round",
-                    "bulletSize": 8,
-                    "lineThickness": 2,
-                    "type": "smoothedLine",
-                    "title": this.cachedData.graphs[i].title,
-                    "valueField": this.cachedData.graphs[i].valueField
-                });
-        }
-        return g;*/
-    }
+}
 
-    private cacheData = {
-        "portfolioHistory": (data: any) => {
-            this.estractData(data);
-            return this.cachedPortfolioHistoryChartOptions;
-        },
-        "worth": (data: any) => {
-            this.estractData(data);
-            return this.cachedWorth;
-        },
-        "yesterdayWorth": (data: any) => {
-            this.estractData(data);
-            return this.cachedYesterdayWorth;
-        }
-    };
-
-    forceDownolad() {
-        return this.getRemoteData("portfolioHistory");
+export class PortfolioCache {
+    constructor() {
+        this.raw = new PortfolioRawCache();
     }
+    raw: PortfolioRawCache;
+    worthHistoryOptions: any;
+    worth: number;
+    profLoss: number;
+}
 
-    getLastPortfolio() {
-      if (!this.cachedData) {
-        this.forceDownolad();
-        return null;
-      }
-      let ret: any[] = [];
-      for (let i = 0; i < 4; i++) {
-        let lastVal = (this.cachedData.data.length > 0 ? this.cachedData.data[this.cachedData.data.length -1][this.cachedData.graphs[i].valueField] : 0);
-        let beforeLastVal = (this.cachedData.data.length > 1 ? lastVal - this.cachedData.data[this.cachedData.data.length -2][this.cachedData.graphs[i].valueField] : 0);
-        ret.push({
-          assetClass: this.cachedData.graphs[i].title,
-          value: lastVal,
-          profLoss: beforeLastVal,
-          percentage: beforeLastVal / lastVal
-        });
-      }
-      return ret;
-    }
-
-    getWorth() {
-        if (!this.cachedData) {
-            this.getRemoteData("worth");
-            return null;
-        }
-        return this.cachedWorth;
-    }
-
-    getYesterdayWorth() {
-        if (!this.cachedData) {
-            this.getRemoteData("yesterdayWorth");
-            return null;
-        }
-        return this.cachedYesterdayWorth;
-    }
-
-    getProfLoss() {
-        if (!this.cachedData) {
-            this.getRemoteData("worth");
-            return null;
-        }
-        return this.cachedWorth - this.cachedYesterdayWorth;
-    }
-
-    getCachedPortfolioHistoryChartOptions() {
-        if (!this.cachedData) {
-            this.getRemoteData("portfolioHistory");
-            return null;
-        }
-        return this.cachedPortfolioHistoryChartOptions;
-    }
+export class PortfolioRawCache {
+    worthHistory: any;
 }
