@@ -27,58 +27,33 @@ export class PortfolioService {
     }
 
     getPortfolio(): Observable<GenericResponse> {
-        if (this.cache.portfolio) return Observable.create(observer=> {
-                                    observer.next(new GenericResponse(1, 0, "", this.cache.portfolio));
-                                    observer.complete();
-                                });
-        return this.downloadPerAssetTodayWorth().map(res=> {
-                    if (res.response > 0) {
-                        return new GenericResponse(1, 0, "", this.cache.portfolio);
-                    }
-                    return res;
-                });  
+        return this.cacheOrDownload(this.downloadPerAssetTodayWorth, "portfolio");
     }
 
     getProfLoss(): Observable<GenericResponse> {
-        if (this.cache.profLoss) return Observable.create(observer=> {
-                                    observer.next(new GenericResponse(1, 0, "", this.cache.profLoss));
-                                    observer.complete();
-                                });
-        return this.downloadWorthHistory().map(res=> {
-                    if (res.response > 0) {
-                        return new GenericResponse(1, 0, "", this.cache.profLoss);
-                    }
-                    return res;
-                });  
+        return this.cacheOrDownload(this.downloadWorthHistory, "profLoss");
     }
 
     getWorth(): Observable<GenericResponse> {
-        if (this.cache.worth) {
-            return Observable.create(observer=> {
-                observer.next(new GenericResponse(1, 0, "", this.cache.worth));
-                observer.complete();
-            });
-        }
-        return this.downloadWorthHistory().map(res=> {
-                    if (res.response > 0) {
-                        return new GenericResponse(1, 0, "", this.cache.worth);
-                    }
-                    return res;
-                });    //TODO: portfolio is faster
+        return this.cacheOrDownload(this.getPortfolio, "worth");
     }
 
     getWorthHistoryOptions(): Observable<GenericResponse> {
-        if (this.cache.raw.worthHistory) {
+        return this.cacheOrDownload(this.downloadWorthHistory, "worthHistoryOptions");
+    }
+
+    private cacheOrDownload(func: Function, field: string): Observable<GenericResponse> {
+        if (this.cache.raw[field]) {
             //data already there
             return Observable.create(observer=> {
-                        observer.next(new GenericResponse(1, 0, "", this.cache.worthHistoryOptions));
+                        observer.next(new GenericResponse(1, 0, "", this.cache[field]));
                         observer.complete();
                     });
         } 
         //let's call the api
-        return this.downloadWorthHistory().map(res=> {
+        return func.bind(this)().map(res=> {
                     if (res.response > 0) {
-                        return new GenericResponse(1, 0, "", this.cache.worthHistoryOptions);
+                        return new GenericResponse(1, 0, "", this.cache[field]);
                     }
                     return res;
                 });
@@ -105,7 +80,7 @@ export class PortfolioService {
             this.pending.history = this.apis.get("worthHistory").map((res)=> {
                     if (res.response > 0) {
                         //saving raw data for future purposes
-                        this.cache.raw.worthHistory = res.data;
+                        this.cache.raw.worthHistoryOptions = res.data;
                         this.cache.worthHistoryOptions = this.getOptions(res.data.data, this.getGraphs(res.data.graphs));
                         //get worth and prof/loss
                         if (res.data.data.length == 0) {
@@ -224,7 +199,7 @@ export class PortfolioCache {
 }
 
 export class PortfolioRawCache {
-    worthHistory: any;
+    worthHistoryOptions: any;
     perAssetTodayWorth: any;
 }
 
