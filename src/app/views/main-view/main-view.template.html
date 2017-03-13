@@ -1,31 +1,40 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
-            <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
-                <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(aC.percentage), 'ti-stats-down': isLoss(aC.percentage)}"></i></div>
-                <div class="tile-heading"><span>{{aC.assetClass}}</span></div>
-                <div class="tile-body"><span>{{aC.value | currency:'USD':true:'1.2-2'}}</span></div>
-                <div class="tile-footer">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
+      <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
+        <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(aC.percentage), 'ti-stats-down': isLoss(aC.percentage)}"></i></div>
+        <div class="tile-heading"><span>{{aC.assetClass}}</span></div>
+        <div class="tile-body"><span>{{aC.value | currency:'USD':true:'1.2-2'}}</span></div>
+        <div class="tile-footer">
                     <span [ngClass]="{'text-success': !isLoss(aC.percentage), 'text-error': isLoss(aC.percentage)}">
                         <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(aC.percentage), 'ti-arrow-down': isLoss(aC.percentage)}"></i>
                         <span *ngIf="aC.percentage">{{aC.percentage | percent:'1.0-2'}}</span>
                         <span *ngIf="!aC.percentage">N/A</span>
                     </span>
-                </div>
-            </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="row">
+  <div class="row">
 
-        <div class="col-md-3 info-tile">
-            <div class="tile-heading"><span>My Strategy</span></div>
-            <app-strategy *ngIf="strategyValues" #strategyPieChart [values]="strategyValues" [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a','#eaeaea']"
-                [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"></app-strategy>
-        </div>
-        <div class="col-md-9 info-tile" *ngIf="worthHistoryOptions">
-            <div class="tile-heading"><span>Worth history</span></div>
-            <app-line-chart [data]="worthHistoryOptions"></app-line-chart>
-        </div>
+    <div class="col-md-3">
+      <div class="info-tile">
+        <div class="tile-heading"><span>My Strategy</span></div>
+        <app-strategy
+          *ngIf="strategyValues"
+          #strategyPieChart
+          [values]="strategyValues"
+          [colors]="['#86c7f3','#aed581','#ffa1b5','#ecb47a','#eaeaea']"
+          [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
+        ></app-strategy>
+      </div>
     </div>
+    <div class="col-md-9 " *ngIf="worthHistoryOptions">
+      <div class="info-tile">
+        <div class="tile-heading"><span>Worth history</span></div>
+        <app-line-chart [data]="worthHistoryOptions"></app-line-chart>
+      </div>
+    </div>
+  </div>
 </div>
