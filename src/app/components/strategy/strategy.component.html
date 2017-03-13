@@ -1,8 +1,10 @@
 <div class="pie-chart-box" [class.pie-chart-portrait]="portrait">
-    <div class="pie-chart-title" *ngIf="title"><h2>{{title}}</h2></div>
-    <div class="pie-chart-container">
-        <canvas #chartCanvas class="pieChartCanvas" (window:resize)="rePaint()"></canvas>
-    </div>
+    <app-pie-chart
+      #pieChart
+      [values]="values"
+      [labels]="labels"
+    ></app-pie-chart>
+
 
     <!--<div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
 
