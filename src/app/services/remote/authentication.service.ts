@@ -65,7 +65,9 @@ export class AuthService {
             this.setAuthToken("");
             this.removeCookie("authToken");
             this.removeCookie("JSESSIONID");
+            this.currentUser = null;    //clearing cache
             this.router.navigate(["login"]);
+            
         });
     }
 
