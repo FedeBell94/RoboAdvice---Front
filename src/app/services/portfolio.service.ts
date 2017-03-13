@@ -14,9 +14,11 @@ export class PortfolioService {
     ) { }
 
     private cache: PortfolioCache = new PortfolioCache();
+    private pending = { history: undefined, worth: undefined };
 
     clearCache() {
         this.cache = new PortfolioCache();
+        this.pending = { history: undefined, worth: undefined };
     }
 
     getCached(field: string) {
@@ -83,20 +85,24 @@ export class PortfolioService {
     }
 
     private downloadPerAssetTodayWorth(): Observable<GenericResponse> {
-        return this.apis.get("worthDay").map((res)=> {
-           if (res.response > 0) {
-               //saving raw data for future purposes
-               this.cache.raw.perAssetTodayWorth = res.data;
-               this.cache.portfolio = res.data;
-               this.cache.worth = this.getWorthFromPortfolio(this.cache.portfolio);
-           }
-           
-           return res; 
-        });
+        if (!this.pending.worth) {
+            this.pending.worth = this.apis.get("worthDay").map((res)=> {
+                if (res.response > 0) {
+                    //saving raw data for future purposes
+                    this.cache.raw.perAssetTodayWorth = res.data;
+                    this.cache.portfolio = res.data;
+                    this.cache.worth = this.getWorthFromPortfolio(this.cache.portfolio);
+                }
+                
+                return res; 
+            });
+        }
+        return this.pending.worth;
     }
 
     private downloadWorthHistory(): Observable<GenericResponse> {
-        return this.apis.get("worthHistory").map((res)=> {
+        if (!this.pending.history) {
+            this.pending.history = this.apis.get("worthHistory").map((res)=> {
                     if (res.response > 0) {
                         //saving raw data for future purposes
                         this.cache.raw.worthHistory = res.data;
@@ -115,6 +121,8 @@ export class PortfolioService {
                     }
                     return res;
                 });
+        }
+        return this.pending.history;
     }
 
     private getWorthFromPortfolio(portfolio: Portfolio[]) {
