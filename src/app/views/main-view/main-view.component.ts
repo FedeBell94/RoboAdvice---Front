@@ -62,26 +62,19 @@ export class mainViewComponent implements OnInit {
         });
     }
 
-    getMyStrategy() {
+    /*getMyStrategy() {
         return this.strategyValues;
-    }
-
-    isLoss(percentage: number): boolean {
-        if (percentage < 0)
-            return true;
-        else
-            return false;
-    }
+    }*/
 
     showAsset(a_C: number) {
-        let name: string;
-        switch (a_C){
-          case 1:  name = "Bonds"; break;
-          case 2:  name = "Forex"; break;
-          case 3:  name = "Stocks"; break;
-          case 4:  name = "Commodities"; break;
+      let name: string;
+      switch (a_C){
+        case 1:  name = "Bonds"; break;
+        case 2:  name = "Forex"; break;
+        case 3:  name = "Stocks"; break;
+        case 4:  name = "Commodities"; break;
 
-        }
-        this.router.navigate(["/minorView", a_C, name]);
+      }
+      this.router.navigate(["/minorView", a_C, name]);
     }
 }

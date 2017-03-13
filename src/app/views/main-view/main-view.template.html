@@ -1,18 +1,11 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-md-3" *ngFor="let aC of getPortfolio() let i = index" (click)="showAsset(i+1)">
-      <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(aC.percentage), 'tile-error': isLoss(aC.percentage)}">
-        <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(aC.percentage), 'ti-stats-down': isLoss(aC.percentage)}"></i></div>
-        <div class="tile-heading"><span>{{aC.assetClass}}</span></div>
-        <div class="tile-body"><span>{{aC.value | currency:'USD':true:'1.2-2'}}</span></div>
-        <div class="tile-footer">
-                    <span [ngClass]="{'text-success': !isLoss(aC.percentage), 'text-error': isLoss(aC.percentage)}">
-                        <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(aC.percentage), 'ti-arrow-down': isLoss(aC.percentage)}"></i>
-                        <span *ngIf="aC.percentage">{{aC.percentage | percent:'1.0-2'}}</span>
-                        <span *ngIf="!aC.percentage">N/A</span>
-                    </span>
-        </div>
-      </div>
+  <div class="row" *ngIf="getPortfolio">
+    <div class="col-md-3" *ngFor="let aC of getPortfolio(); let i = index" (click)="showAsset(i+1)">
+      <app-portfolio-snapshot
+          [assetClass]="aC.assetClass"
+          [percentage]="aC.percentage"
+          [value]="aC.value"
+      ></app-portfolio-snapshot>
     </div>
   </div>
 
