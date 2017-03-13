@@ -16,7 +16,7 @@ export class StrategyComponent implements OnInit {
 
     @Input() values: number[] = [20, 20, 20, 20, 20];
     @Input() labels: string[] = ['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty'];
-    @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ["#3c4eb9", "#1b70ef", "#00abff", "#40daf1", "#4A861E"];
+    @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ['#86c7f3','#aed581','#ffa1b5','#ECD25B', '#4A861E'];
     @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";
     @Input() titleColor: string | CanvasGradient | CanvasPattern;
     @ViewChild('chartCanvas') canvas: ElementRef;

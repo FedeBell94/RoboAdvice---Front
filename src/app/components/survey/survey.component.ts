@@ -27,6 +27,8 @@ export class SurveyComponent implements OnInit {
 
   strategy: Array<Array<number>>;
 
+  assetClassName: string[] = ['BONDS', 'INCOME', 'BALANCED', 'GROWTH', 'STOCKS'];
+
   currentStrategyName: string;
 
   currentStrategyValues: number[] = [25,25,25,25];
