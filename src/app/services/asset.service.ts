@@ -27,7 +27,7 @@ export class AssetService {
               response: 1,
               errorCode: 0,
               errorString: "",
-              data: this.getChartOptions(this.cachedAssets[type]) 
+              data: this.getChartOptions(this.cachedAssets[type])
             });
           observer.complete();
         }, 10);
@@ -107,6 +107,6 @@ export class AssetService {
             "export": {
                 "enabled": true
             }
-        };;
+        };
   }
 }
