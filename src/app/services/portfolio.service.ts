@@ -154,9 +154,6 @@ export class PortfolioService {
                 "#693",
                 "#963"
             ],
-            "legend": {
-                "enabled": true
-            },
             "dataProvider": data,
             "valueAxes": [{
                 "axisAlpha": 0,
