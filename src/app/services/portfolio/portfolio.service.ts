@@ -119,8 +119,8 @@ export class PortfolioService {
                     "id":"g" + i,
                     "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                     "bullet": "round",
-                    "bulletSize": 8,
-                    "lineThickness": 2,
+                    "bulletSize": 4,
+                    "lineThickness": 1,
                     "type": "smoothedLine",
                     "title": opts[i].title,
                     "valueField": opts[i].valueField

@@ -16,8 +16,8 @@
         <app-strategy
           *ngIf="strategyValues"
           [values]="strategyValues"
-          [colors]="['#86c7f3','#aed581','#ffa1b5','#ECD25B','#eaeaea']"
-          [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty']"
+          [colors]="roboAdviceConfig.PieChartColor"
+          [labels]="roboAdviceConfig.AssetClassLabel"
         ></app-strategy>
       </div>
     </div>

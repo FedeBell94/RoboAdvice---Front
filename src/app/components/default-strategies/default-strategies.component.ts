@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {StrategyService} from "../../services/strategy/strategy.service";
 import {Strategy} from "../../model/strategy/strategy";
+import {RoboAdviceConfig} from "../../app.configuration";
+
 
 @Component({
   selector: 'app-default-strategies',
@@ -8,6 +10,8 @@ import {Strategy} from "../../model/strategy/strategy";
   styleUrls: ['./default-strategies.component.css']
 })
 export class DefaultStrategiesComponent implements OnInit {
+
+  private roboAdviceConfig = RoboAdviceConfig;
 
   constructor(
     private apiService: StrategyService,
@@ -20,8 +24,6 @@ export class DefaultStrategiesComponent implements OnInit {
   @Input() textAlert: string = "If you want you can adjust (or change) the percentages of your strategy by your dashboard";
 
   @Output() save = new EventEmitter();
-
-  assetClassName: string[] = ['BONDS', 'INCOME', 'BALANCED', 'GROWTH', 'STOCKS'];
 
   ngOnInit() {
   }

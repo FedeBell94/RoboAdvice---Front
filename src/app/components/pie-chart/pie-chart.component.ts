@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, ViewChild, ElementRef} from '@angular/core';
+import {RoboAdviceConfig} from "../../app.configuration";
 
 @Component({
   selector: 'app-pie-chart',
@@ -9,9 +10,11 @@ export class PieChartComponent implements OnInit {
 
   constructor() { }
 
+  private roboAdviceConfig = RoboAdviceConfig;
+
   @Input() values: number[] = [25, 25, 25, 25];
-  @Input() labels: string[] = ["Label 1", "Label 2", "Label 3", "Label 4"];
-  @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ['#86c7f3','#aed581','#ffa1b5','#ECD25B', '#DADBD8'];
+  @Input() labels: string[] = this.roboAdviceConfig.AssetClassLabel;
+  @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = this.roboAdviceConfig.PieChartColor;
   @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";
 
   @ViewChild('pieChart_Canvas') canvas: ElementRef;

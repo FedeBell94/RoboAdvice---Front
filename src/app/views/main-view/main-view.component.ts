@@ -5,10 +5,10 @@ import { AuthService } from "../../services/remote/authentication.service";
 import { StrategyService } from "../../services/strategy/strategy.service";
 import { PortfolioService } from "../../services/portfolio/portfolio.service";
 
-import { Strategy } from "../../model/strategy/strategy";
-import { Asset } from "../../model/strategy/asset";
-import {AssetSnapshot} from "../../model/portfolio/asset-snapshot";
+import {Asset} from "../../model/strategy/asset";
 import {Portfolio} from "../../model/portfolio/portfolio";
+
+import {RoboAdviceConfig} from "../../app.configuration";
 
 @Component({
     selector: 'mianView',
@@ -22,6 +22,9 @@ export class mainViewComponent implements OnInit {
         private strategyService: StrategyService,
         private portfolioService: PortfolioService,
     ) { }
+
+    //Used into html to import configs.
+    private roboAdviceConfig = RoboAdviceConfig;
 
     @ViewChild('strategyPieChart') pieChart: any;
 
@@ -57,7 +60,7 @@ export class mainViewComponent implements OnInit {
                 this.worthHistoryOptions = data.data;
             }
         });
-        this.portfolioService.getPortfolio().subscribe(data=>{
+        this.portfolioService.getPortfolio().subscribe((data) => {
             if (data.response > 0) {
                 this.portfolio = data.data;
             }
@@ -66,14 +69,6 @@ export class mainViewComponent implements OnInit {
 
 
     showAsset(a_C: number) {
-      let name: string;
-      switch (a_C){
-        case 1:  name = "Bonds"; break;
-        case 2:  name = "Forex"; break;
-        case 3:  name = "Stocks"; break;
-        case 4:  name = "Commodities"; break;
-
-      }
-      this.router.navigate(["/minorView", a_C, name]);
+      this.router.navigate(["/minorView", a_C, this.roboAdviceConfig.AssetClassLabel[a_C]]);
     }
 }
