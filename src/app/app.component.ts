@@ -3,9 +3,6 @@ import { correctHeight, detectBody } from './app.helpers';
 import {Router} from "@angular/router";
 
 import {AuthService} from "./services/remote/authentication.service";
-import {PortfolioService} from "./services/portfolio/portfolio.service";
-import {Observable} from "rxjs";
-import {GenericResponse} from "./services/remote/remote-call.service";
 
 declare var jQuery:any;
 
@@ -19,7 +16,6 @@ export class AppComponent implements OnInit{
   constructor(
       private auth: AuthService,
       private router: Router,
-      private portfolio: PortfolioService,
   ){ }
 
 

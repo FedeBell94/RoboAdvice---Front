@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiService, GenericResponse } from '../remote/remote-call.service';
+import { ApiService } from '../remote/remote-call/remote-call.service';
+
 import {PortfolioCache} from "../../model/portfolio/portfolio-cache";
+import {GenericResponse} from "../remote/remote-call/generic-response";
 import {Portfolio} from "../../model/portfolio/portfolio";
 
 @Injectable()
@@ -63,7 +65,11 @@ export class PortfolioService {
                 if (res.response > 0) {
                     //saving raw data for future purposes
                     this.cache.raw.perAssetTodayWorth = res.data;
-                    this.cache.portfolio = res.data;
+                    if (this.cache == undefined)
+                      console.log("UNDEFINED TRUE 1");
+                    if (this.cache.portfolio == undefined)
+                      console.log("UNDEFINED TRUE 2");
+                    this.cache.portfolio.assets = res.data;
                     this.cache.worth = this.getWorthFromPortfolio(this.cache.portfolio);
                 }
 
@@ -98,10 +104,10 @@ export class PortfolioService {
         return this.pending.history;
     }
 
-    private getWorthFromPortfolio(portfolio: Portfolio[]) {
+    private getWorthFromPortfolio(portfolio: Portfolio) {
         let sum = 0;
-        for (let i = 0; i < portfolio.length; i++) {
-            sum += portfolio[i].value;
+        for (let i = 0; i < portfolio.assets.length; i++) {
+            sum += portfolio.assets[i].value;
         }
         return sum;
     }
@@ -113,8 +119,8 @@ export class PortfolioService {
                     "id":"g" + i,
                     "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
                     "bullet": "round",
-                    "bulletSize": 8,
-                    "lineThickness": 2,
+                    "bulletSize": 4,
+                    "lineThickness": 1,
                     "type": "smoothedLine",
                     "title": opts[i].title,
                     "valueField": opts[i].valueField
@@ -178,8 +184,6 @@ export class PortfolioService {
                 "enabled": true
             }
         };
-
-
 
     }
 

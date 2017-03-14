@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestOptions, Headers } from '@angular/http';
 
-import { ApiService } from '../remote/remote-call.service';
+import { ApiService } from '../remote/remote-call/remote-call.service';
 import { AuthService } from '../remote/authentication.service';
 
 import { Strategy } from '../../model/strategy/strategy';

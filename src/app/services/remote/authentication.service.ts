@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestOptions, Headers } from '@angular/http';
 
-import { ApiService } from './remote-call.service';
+import { ApiService } from './remote-call/remote-call.service';
 
 import { User } from '../../model/user/user';
 
@@ -67,7 +67,7 @@ export class AuthService {
             this.removeCookie("JSESSIONID");
             this.currentUser = null;    //clearing cache
             this.router.navigate(["login"]);
-            
+
         });
     }
 
