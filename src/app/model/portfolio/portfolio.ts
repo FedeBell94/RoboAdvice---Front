@@ -1,6 +1,8 @@
+import {AssetSnapshot} from "./asset-snapshot";
+
 export class Portfolio {
-  assetClass: string;
-  value: number;
-  profLoss: number;
-  percentage: number;
+  constructor(){
+    this.assets = new Array<AssetSnapshot>();
+  }
+  assets: AssetSnapshot[];
 }

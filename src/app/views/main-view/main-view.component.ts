@@ -7,6 +7,8 @@ import { PortfolioService } from "../../services/portfolio/portfolio.service";
 
 import { Strategy } from "../../model/strategy/strategy";
 import { Asset } from "../../model/strategy/asset";
+import {AssetSnapshot} from "../../model/portfolio/asset-snapshot";
+import {Portfolio} from "../../model/portfolio/portfolio";
 
 @Component({
     selector: 'mianView',
@@ -28,7 +30,7 @@ export class mainViewComponent implements OnInit {
     worthHistoryOptions: any;
     portfolio: any;
 
-    getPortfolio() {
+    getPortfolio(): Portfolio {
         return this.portfolio;
     }
 
@@ -44,7 +46,7 @@ export class mainViewComponent implements OnInit {
         this.strategyService.getStrategy().subscribe((data) => {
             if (data.response > 0) {
                 let i: number = 0;
-                for (let assetClass of data.data) {
+                for (let assetClass of data.data as Asset[]) {
                     this.strategyValues[i] = assetClass.percentage;
                     i++;
                 }
@@ -62,9 +64,6 @@ export class mainViewComponent implements OnInit {
         });
     }
 
-    /*getMyStrategy() {
-        return this.strategyValues;
-    }*/
 
     showAsset(a_C: number) {
       let name: string;

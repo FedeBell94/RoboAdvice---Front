@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row" *ngIf="getPortfolio">
-    <div class="col-md-3" *ngFor="let aC of getPortfolio(); let i = index" (click)="showAsset(i+1)">
+  <div class="row" *ngIf="getPortfolio()">
+    <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i+1)">
       <app-portfolio-snapshot
           [assetClass]="aC.assetClass"
           [percentage]="aC.percentage"
@@ -10,7 +10,6 @@
   </div>
 
   <div class="row">
-
     <div class="col-md-3">
       <div class="info-tile">
         <div class="tile-heading"><span>My Strategy</span></div>
