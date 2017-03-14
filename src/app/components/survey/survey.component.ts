@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Route, Router} from "@angular/router";
 import {Question} from "../../model/survey/question";
 import {Strategy} from "../../model/strategy/strategy";
-import {ManageJsonService} from "../../services/manageJson.service";
-import {StrategyService} from "../../services/strategy.service";
+import {ManageJsonService} from "../../services/manage-json/manage-json.service";
+import {StrategyService} from "../../services/strategy/strategy.service";
 import {AuthService} from "../../services/remote/authentication.service";
 
 declare var jQuery:any;

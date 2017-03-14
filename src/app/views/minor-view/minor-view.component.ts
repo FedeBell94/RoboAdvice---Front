@@ -5,7 +5,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 
 import {Strategy} from "../../model/strategy/strategy";
 import {Asset} from "../../model/strategy/asset";
-import {AssetService} from "../../services/asset.service";
+import {AssetService} from "../../services/asset/asset.service";
 
 
 @Component({

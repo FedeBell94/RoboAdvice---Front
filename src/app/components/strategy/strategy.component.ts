@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, NgZone } from "@angular/core";
-import {StrategyService} from "../../services/strategy.service";
+import {StrategyService} from "../../services/strategy/strategy.service";
 import {Strategy} from "../../model/strategy/strategy";
 import {Asset} from "../../model/strategy/asset";
 import {PieChartComponent} from "../pie-chart/pie-chart.component";
