@@ -9,6 +9,7 @@ import {SliderComponent} from '../../components/slider/slider.component';
 import {LineChartComponent} from "../../components/line-chart/line-chart.component";
 import {PortfolioSnapshotComponent} from "../../components/portfolio-snapshot/portfolio-snapshot.component"
 import {PieChartComponent} from "../../components/pie-chart/pie-chart.component";
+import {DefaultStrategiesComponent} from "../../components/default-strategies/default-strategies.component";
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import {PieChartComponent} from "../../components/pie-chart/pie-chart.component"
         LineChartComponent,
         PortfolioSnapshotComponent,
         PieChartComponent,
+      DefaultStrategiesComponent,
     ],
     imports: [
         BrowserModule,
@@ -27,6 +29,7 @@ import {PieChartComponent} from "../../components/pie-chart/pie-chart.component"
         LineChartComponent,
         StrategyComponent,
         PieChartComponent,
+      DefaultStrategiesComponent,
     ]
 })
 

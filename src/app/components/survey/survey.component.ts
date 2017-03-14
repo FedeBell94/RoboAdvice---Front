@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Route, Router} from "@angular/router";
+import { Router } from "@angular/router";
 import {Question} from "../../model/survey/question";
 import {Strategy} from "../../model/strategy/strategy";
 import {ManageJsonService} from "../../services/manageJson.service";
@@ -27,11 +27,6 @@ export class SurveyComponent implements OnInit {
 
   strategy: Array<Array<number>>;
 
-  assetClassName: string[] = ['BONDS', 'INCOME', 'BALANCED', 'GROWTH', 'STOCKS'];
-
-  currentStrategyName: string;
-
-  currentStrategyValues: number[] = [25,25,25,25];
 
   constructor(
     private jsonService: ManageJsonService,
@@ -62,29 +57,21 @@ export class SurveyComponent implements OnInit {
     });
   }
 
-  getStrategy(id: number){
-    return this.strategy[id];
-  }
-
   setAnswer(answ: number){
     this.idAnswer = answ;
+  }
+
+  changeUserStatusAndRedirect(){
+    this.auth.getUser().newUser = false;
+    this.routes.navigate(["/mainView"]);
   }
 
   sendMyStrategy(my_strategy: Strategy){
     this.apiService.saveStrategy(my_strategy).subscribe((data)=>{
       console.log("Strategy sent:");
       console.log(my_strategy.asset_class);
-      /*this.currentStrategyName = my_strategy.name;
-      let i : number = 0;
-      for (let entry of my_strategy.asset_class) {
-        this.currentStrategyValues[i] = entry.percentage;
-        i++;
-      }
-      console.log(this.currentStrategyValues);*/
-      this.auth.getUser().newUser = false;
-      this.routes.navigate(["/mainView"]);
+      this.changeUserStatusAndRedirect();
       (window as any).swal("Well done!", "Your strategy is '" + my_strategy.name +"'.\n If you want you can adjust (or change) the percentages of your strategy by your dashboard","success");
-      //document.getElementById('select_strategy').click();
     });
   }
 
@@ -146,8 +133,5 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  choose_strategy(id: number){
-      this.sendMyStrategy(this.strategies[id]);
-  }
 
 }

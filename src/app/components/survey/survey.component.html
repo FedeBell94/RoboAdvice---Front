@@ -54,72 +54,12 @@
 
     </p>
     <div class="row">
-        <div [ngClass]="{'col-md-offset-2': i==3}" class="col-md-4 text-center" *ngFor="let _strategy of strategies; let i = index">
-          <a class="btn btn-apple" (click)="choose_strategy(i)">{{assetClassName[i]}}</a>
-          <app-pie-chart
-            class="cursor-pointer"
-            (click)="choose_strategy(i)"
-            [values]="getStrategy(i)"
-            [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-          ></app-pie-chart>
-        </div>
+        <app-default-strategies
+          [strategies]="strategies"
+          [strategy]="strategy"
+          (save)="changeUserStatusAndRedirect()"
+        ></app-default-strategies>
     </div>
-
-      <!--<div class="col-md-4 text-center">
-        <a class="btn btn-apple" (click)="choose_strategy(0)">BONDS</a>
-        <app-pie-chart
-                        class="cursor-pointer"
-                        (click)="choose_strategy(0)"
-                        [values]="getStrategy(0)"
-                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ECD25B']"
-                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-        ></app-pie-chart>
-      </div>
-
-      <div class="col-md-4 text-center">
-        <a class="btn btn-apple" (click)="choose_strategy(1)">INCOME</a>
-        <app-pie-chart
-                        class="cursor-pointer"
-                        (click)="choose_strategy(1)"
-                        [values]="getStrategy(1)"
-                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ECD25B']"
-                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-        ></app-pie-chart>
-      </div>
-
-      <div class="col-md-4 text-center">
-        <a class="btn btn-apple" (click)="choose_strategy(2)">BALANCED</a>
-        <app-pie-chart
-                        class="cursor-pointer"
-                        (click)="choose_strategy(2)"
-                        [values]="getStrategy(2)"
-                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ECD25B']"
-                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-        ></app-pie-chart>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-offset-2 col-md-4 text-center">
-        <a class="btn btn-apple" (click)="choose_strategy(3)">GROWTH</a>
-        <app-pie-chart
-                        class="cursor-pointer"
-                        (click)="choose_strategy(3)"
-                        [values]="getStrategy(3)"
-                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ECD25B']"
-                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-        ></app-pie-chart>
-      </div>
-
-      <div class="col-md-4 text-center">
-        <a class="btn btn-apple" (click)="choose_strategy(4)">STOCKS</a>
-        <app-pie-chart
-                        class="cursor-pointer"
-                        (click)="choose_strategy(4)"
-                        [values]="getStrategy(4)"
-                        [colors]="['#86c7f3','#aed581','#ffa1b5','#ECD25B']"
-                        [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
-        ></app-pie-chart>
-      </div>-->
   </div>
 
   <!-- TAB SHOW and MODIFY STRATEGY-->

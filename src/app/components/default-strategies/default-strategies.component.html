@@ -1,0 +1,9 @@
+  <div [ngClass]="{'col-md-offset-2': i==3}" class="col-md-4 text-center" *ngFor="let _strategy of strategies; let i = index">
+    <a class="btn btn-apple" (click)="chooseStrategy(_strategy)">{{assetClassName[i]}}</a>
+    <app-pie-chart
+      class="cursor-pointer"
+      (click)="chooseStrategy(_strategy)"
+      [values]="getStrategy(i)"
+      [labels]="['Bonds', 'Forex', 'Stocks', 'Commodities']"
+    ></app-pie-chart>
+  </div>
