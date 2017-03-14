@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {StrategyService} from "../../services/strategy.service";
+import {StrategyService} from "../../services/strategy/strategy.service";
 import {Strategy} from "../../model/strategy/strategy";
 
 @Component({
