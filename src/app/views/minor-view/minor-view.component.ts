@@ -27,6 +27,7 @@ export class minorViewComponent {
 
   areaChartData(id: number) {
     this.asset.getAssetHistory(id).subscribe((data: any)=> {
+      console.log("cached data has arrived:", data.data);
       this.options = data.data;
     });
   };
