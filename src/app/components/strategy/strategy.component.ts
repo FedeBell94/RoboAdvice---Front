@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, NgZone } from "@angular/core";
-import {StrategyService} from "../../services/strategy.service";
+import {StrategyService} from "../../services/strategy/strategy.service";
 import {Strategy} from "../../model/strategy/strategy";
 import {Asset} from "../../model/strategy/asset";
 import {PieChartComponent} from "../pie-chart/pie-chart.component";
@@ -50,7 +50,6 @@ export class StrategyComponent implements OnInit {
 
     emitSave() {
         if (this.values[4] == 0) {  //Check if the 'empty' portion is 0%
-          let _this = this;
           (window as any).swal({
             title: 'Are you sure?',
             text: "You are changing your strategy!",
@@ -59,7 +58,7 @@ export class StrategyComponent implements OnInit {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, change it!'
-          }).then(function () {
+          }).then(() => {
             //send new strategy to server
             this.values.pop();
             let str: Strategy = new Strategy();
@@ -76,7 +75,7 @@ export class StrategyComponent implements OnInit {
               this.save.emit(this.values);
             });
             this.values.push(0);
-          }.bind(this), function (error) {
+          }, (error) => {
             //nothing
           });
 

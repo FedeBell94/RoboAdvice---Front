@@ -1,21 +1,16 @@
-/**
- * Created by cicca on 10/03/2017.
- */
-
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiService } from './remote/remote-call.service';
+import { ApiService } from '../remote/remote-call.service';
 
 @Injectable()
 export class AssetService {
-  constructor(private apis: ApiService,
-              private router: Router,) {
-  }
+  constructor(
+    private apis: ApiService,
+  ) {}
 
   private cachedAssets: {} = {};
-    private idCounter = 0;
+  private idCounter = 0;
 
 
   public getAssetHistory(type: number): Observable<any> {
@@ -27,7 +22,7 @@ export class AssetService {
               response: 1,
               errorCode: 0,
               errorString: "",
-              data: this.getChartOptions(this.cachedAssets[type]) 
+              data: this.getChartOptions(this.cachedAssets[type])
             });
           observer.complete();
         }, 10);
@@ -107,6 +102,6 @@ export class AssetService {
             "export": {
                 "enabled": true
             }
-        };;
+        };
   }
 }

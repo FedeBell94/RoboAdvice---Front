@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { AuthService } from "../../services/remote/authentication.service";
-import { StrategyService } from "../../services/strategy.service";
-import { PortfolioService } from "../../services/portfolio.service";
+import { StrategyService } from "../../services/strategy/strategy.service";
+import { PortfolioService } from "../../services/portfolio/portfolio.service";
 
 import { Strategy } from "../../model/strategy/strategy";
 import { Asset } from "../../model/strategy/asset";

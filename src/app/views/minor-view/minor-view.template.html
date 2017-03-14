@@ -8,7 +8,7 @@
                 <small>(One year data)</small>
             </div>
         </div>
-        <div *ngIf="getOptions && getOptions()">
+        <div class="info-tile" *ngIf="getOptions && getOptions()">
             <app-line-chart [id]="'app-line-chart-' + idCounter" [data]="getOptions()"></app-line-chart>
         </div>
     </div>

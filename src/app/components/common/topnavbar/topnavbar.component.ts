@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { smoothlyMenu } from '../../../app.helpers';
 
-import {PortfolioService} from "../../../services/portfolio.service";
+import {PortfolioService} from "../../../services/portfolio/portfolio.service";
 import {AuthService} from "../../../services/remote/authentication.service";
 
 

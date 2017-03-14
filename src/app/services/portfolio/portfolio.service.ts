@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiService, GenericResponse } from './remote/remote-call.service';
-import { AuthService } from './remote/authentication.service';
+import { ApiService, GenericResponse } from '../remote/remote-call.service';
+import {PortfolioCache} from "../../model/portfolio/portfolio-cache";
+import {Portfolio} from "../../model/portfolio/portfolio";
 
 @Injectable()
 export class PortfolioService {
     constructor(
         private apis: ApiService,
-        private router: Router,
     ) { }
 
     private cache: PortfolioCache = new PortfolioCache();
@@ -49,7 +47,7 @@ export class PortfolioService {
                         observer.next(new GenericResponse(1, 0, "", this.cache[field]));
                         observer.complete();
                     });
-        } 
+        }
         //let's call the api
         return func.bind(this)().map(res=> {
                     if (res.response > 0) {
@@ -68,8 +66,8 @@ export class PortfolioService {
                     this.cache.portfolio = res.data;
                     this.cache.worth = this.getWorthFromPortfolio(this.cache.portfolio);
                 }
-                
-                return res; 
+
+                return res;
             });
         }
         return this.pending.worth;
@@ -180,32 +178,9 @@ export class PortfolioService {
                 "enabled": true
             }
         };
-        
-        
-        
+
+
+
     }
 
-}
-
-export class PortfolioCache {
-    constructor() {
-        this.raw = new PortfolioRawCache();
-    }
-    raw: PortfolioRawCache;
-    worthHistoryOptions: any;
-    worth: number;
-    profLoss: number;
-    portfolio: any;
-}
-
-export class PortfolioRawCache {
-    worthHistoryOptions: any;
-    perAssetTodayWorth: any;
-}
-
-export class Portfolio {
-    assetClass: string;
-    value: number;
-    profLoss: number;
-    percentage: number;
 }

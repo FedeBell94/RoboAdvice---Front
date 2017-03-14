@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 
 import {AuthService} from "../../../services/remote/authentication.service";
-import {PortfolioService} from "../../../services/portfolio.service";
+import {PortfolioService} from "../../../services/portfolio/portfolio.service";
 
 declare var jQuery:any;
 

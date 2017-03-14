@@ -9,10 +9,10 @@ import {AppComponent} from './app.component';
 // App services
 import {ApiService} from "./services/remote/remote-call.service";
 import {AuthService} from "./services/remote/authentication.service";
-import {PortfolioService} from "./services/portfolio.service";
-import {StrategyService} from "./services/strategy.service";
-import {ManageJsonService} from "./services/manageJson.service";
-import {AssetService} from "./services/asset.service";
+import {PortfolioService} from "./services/portfolio/portfolio.service";
+import {StrategyService} from "./services/strategy/strategy.service";
+import {ManageJsonService} from "./services/manage-json/manage-json.service";
+import {AssetService} from "./services/asset/asset.service";
 
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
