@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, NgZone } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, NgZone } from "@angular/core";
 import {StrategyService} from "../../services/strategy/strategy.service";
 import {Strategy} from "../../model/strategy/strategy";
 import {Asset} from "../../model/strategy/asset";
 import {PieChartComponent} from "../pie-chart/pie-chart.component";
+import {RoboAdviceConfig} from "../../app.configuration";
 
 
 @Component({
@@ -16,9 +17,11 @@ export class StrategyComponent implements OnInit {
         private strategyService: StrategyService,
     ) { }
 
+    private roboAdviceConfig = RoboAdviceConfig;
+
     @Input() values: number[] = [20, 20, 20, 20, 20];
-    @Input() labels: string[] = ['Bonds', 'Forex', 'Stocks', 'Commodities', 'Empty'];
-    @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = ['#86c7f3','#aed581','#ffa1b5','#ECD25B', '#DADBD8'];
+    @Input() labels: string[] = this.roboAdviceConfig.AssetClassLabel;
+    @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = this.roboAdviceConfig.PieChartColor;
     @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";
     @Input() titleColor: string | CanvasGradient | CanvasPattern;
     @ViewChild('pieChart') canvas: PieChartComponent;

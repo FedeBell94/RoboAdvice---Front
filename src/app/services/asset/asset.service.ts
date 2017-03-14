@@ -3,20 +3,23 @@ import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from '../remote/remote-call/remote-call.service';
 
+import { LocalStorage } from "../../annotations/local-storage.annotation";
+
 @Injectable()
 export class AssetService {
   constructor(
     private apis: ApiService,
   ) {}
 
-  private cachedAssets: {} = {};
+  @LocalStorage() private cachedAssets;
   private idCounter = 0;
 
-
   public getAssetHistory(type: number): Observable<any> {
+    if (!this.cachedAssets) this.cachedAssets = {};
     if (this.cachedAssets[type]) { //if i have something in cache
       return Observable.create(observer => {
         setTimeout(()=> {
+          
           observer.next(
             {
               response: 1,
@@ -32,6 +35,7 @@ export class AssetService {
     return this.apis.get("assetClassHistory", {assetClassId: type}).map((data:any)=> {
         if (data.response > 0) {
           this.cachedAssets[type] = data.data;
+          this.cachedAssets = JSON.parse(JSON.stringify(this.cachedAssets));
           data.data = this.getChartOptions(this.cachedAssets[type]);
         }
         return data;

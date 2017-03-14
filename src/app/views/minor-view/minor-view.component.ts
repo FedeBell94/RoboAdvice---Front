@@ -1,12 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router, ActivatedRoute} from "@angular/router";
+import {Component} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
-
-
-import {Strategy} from "../../model/strategy/strategy";
-import {Asset} from "../../model/strategy/asset";
 import {AssetService} from "../../services/asset/asset.service";
 
+import {RoboAdviceConfig} from "../../app.configuration";
 
 @Component({
     selector: 'minorView',
@@ -27,13 +24,14 @@ export class minorViewComponent {
 
   areaChartData(id: number) {
     this.asset.getAssetHistory(id).subscribe((data: any)=> {
+      console.log("cached data has arrived:", data.data);
       this.options = data.data;
     });
   };
 
   ngOnInit() {
     this.areaChartData(this.route.snapshot.params["assetClassId"] || 1);
-    this.assetClassName = this.route.snapshot.params["assetClassName"] || "Bonds";
+    this.assetClassName = this.route.snapshot.params["assetClassName"] || RoboAdviceConfig.AssetClassLabel[0];
   }
 
 }
