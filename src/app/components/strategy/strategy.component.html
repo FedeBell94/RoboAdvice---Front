@@ -18,38 +18,38 @@
         ></app-slider>
 
     </div>-->
-
-    <div class="pie-chart-slider">
-        <app-slider
-                [value]="getValue(0)"
-                [max]="100"
-                [step]="1"
-                [maxAllowed]="getMax(0)"
-                [fillColor]="colors[0]"
-                (change)="valueChanged($event, 0)"
-        ></app-slider>
-    </div>
-    <div class="pie-chart-slider">
-        <app-slider
-                [value]="getValue(1)"
-                [max]="100"
-                [step]="1"
-                [maxAllowed]="getMax(1)"
-                [fillColor]="colors[1]"
-                (change)="valueChanged($event, 1)"
-        ></app-slider>
-    </div>
-    <div class="pie-chart-slider">
-        <app-slider
-                [value]="getValue(2)"
-                [max]="100"
-                [step]="1"
-                [maxAllowed]="getMax(2)"
-                [fillColor]="colors[2]"
-                (change)="valueChanged($event, 2)"
-        ></app-slider>
-    </div>
-    <div class="pie-chart-slider">
+    <div [hidden]="defaultStrategy">
+        <div class="pie-chart-slider">
+            <app-slider
+                    [value]="getValue(0)"
+                    [max]="100"
+                    [step]="1"
+                    [maxAllowed]="getMax(0)"
+                    [fillColor]="colors[0]"
+                    (change)="valueChanged($event, 0)"
+            ></app-slider>
+        </div>
+        <div class="pie-chart-slider">
+            <app-slider
+                    [value]="getValue(1)"
+                    [max]="100"
+                    [step]="1"
+                    [maxAllowed]="getMax(1)"
+                    [fillColor]="colors[1]"
+                    (change)="valueChanged($event, 1)"
+            ></app-slider>
+        </div>
+        <div class="pie-chart-slider">
+            <app-slider
+                    [value]="getValue(2)"
+                    [max]="100"
+                    [step]="1"
+                    [maxAllowed]="getMax(2)"
+                    [fillColor]="colors[2]"
+                    (change)="valueChanged($event, 2)"
+            ></app-slider>
+        </div>
+        <div class="pie-chart-slider">
         <app-slider
                 [value]="getValue(3)"
                 [max]="100"
@@ -59,8 +59,14 @@
                 (change)="valueChanged($event, 3)"
         ></app-slider>
     </div>
+    </div>
+    <div [hidden]="!defaultStrategy">
+      blablabla
+
+    </div>
     <br>
     <div class="pie-chart-actions">
         <a class="btn btn-apple" (click)="emitSave()">SAVE</a>
+      <a class="btn btn-apple" (click)="defaultStrategies()">Default Strategy</a>
     </div>
 </div>

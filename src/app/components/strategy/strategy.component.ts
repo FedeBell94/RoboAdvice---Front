@@ -5,6 +5,7 @@ import {Asset} from "../../model/strategy/asset";
 import {PieChartComponent} from "../pie-chart/pie-chart.component";
 import {RoboAdviceConfig} from "../../app.configuration";
 
+
 @Component({
     selector: 'app-strategy',
     templateUrl: './strategy.component.html',
@@ -25,7 +26,7 @@ export class StrategyComponent implements OnInit {
     @Input() titleColor: string | CanvasGradient | CanvasPattern;
     @ViewChild('pieChart') canvas: PieChartComponent;
     @Output() save = new EventEmitter();
-
+    defaultStrategy : boolean = false;
 
     ngOnInit() {
         if (!this.values) this.values = [25, 25, 25, 25, 0];
@@ -87,6 +88,9 @@ export class StrategyComponent implements OnInit {
           (window as any).swal("Oops", "total must be 100%", "error");
         }
     }
+  defaultStrategies(){
+    this.defaultStrategy = !this.defaultStrategy;
+  }
 
     private getMax(i: number) {
         return 100 - this.totalPercentage() + this.values[i];
@@ -100,3 +104,4 @@ export class StrategyComponent implements OnInit {
         return tmp;
     }
 }
+
