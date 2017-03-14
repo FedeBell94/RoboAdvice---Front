@@ -7,7 +7,7 @@ import {ROUTES} from "./app.routes";
 import {AppComponent} from './app.component';
 
 // App services
-import {ApiService} from "./services/remote/remote-call.service";
+import {ApiService} from "./services/remote/remote-call/remote-call.service";
 import {AuthService} from "./services/remote/authentication.service";
 import {PortfolioService} from "./services/portfolio/portfolio.service";
 import {StrategyService} from "./services/strategy/strategy.service";

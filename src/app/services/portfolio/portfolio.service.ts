@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiService, GenericResponse } from '../remote/remote-call.service';
+import { ApiService } from '../remote/remote-call/remote-call.service';
 import {PortfolioCache} from "../../model/portfolio/portfolio-cache";
 import {Portfolio} from "../../model/portfolio/portfolio";
+import {GenericResponse} from "../remote/remote-call/generic-response";
 
 @Injectable()
 export class PortfolioService {

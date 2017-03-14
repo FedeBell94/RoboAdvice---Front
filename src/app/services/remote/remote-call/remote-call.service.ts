@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import {GenericResponse} from "./generic-response";
 
 @Injectable()
 export class ApiService {
@@ -13,7 +13,6 @@ export class ApiService {
 
     constructor (
             private http: Http,
-            private router: Router,
         ) {
             /*interceptor.request().addInterceptor((req: any, method: string) => {
                 //console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
@@ -92,17 +91,4 @@ export class ApiService {
         console.error(errMsg);
         return errMsg;
     }
-}
-
-export class GenericResponse {
-    constructor(response?: number, errorCode?: number, errorString?: string, data?: any) {
-        if (response) this.response = response;
-        if (errorCode) this.errorCode = errorCode;
-        if (errorString) this.errorString = errorString;
-        if (data) this.data = data;
-    }
-    data: any;
-    response: number;
-    errorCode: number;
-    errorString: string;
 }
