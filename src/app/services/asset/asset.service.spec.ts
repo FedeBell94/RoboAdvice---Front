@@ -12,5 +12,6 @@ describe('Service: Asset', () => {
 
   it('should ...', inject([AssetService], (service: AssetService) => {
     expect(service).toBeTruthy();
+    
   }));
 });
