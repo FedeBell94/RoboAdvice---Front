@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ApiService } from '../remote/remote-call/remote-call.service';
 
 import { LocalStorage } from "../../annotations/local-storage.annotation";
+import {GenericResponse} from "../remote/remote-call/generic-response";
 
 @Injectable()
 export class AssetService {
@@ -11,21 +12,22 @@ export class AssetService {
     private apis: ApiService,
   ) {}
 
+  @LocalStorage() private cachedAssetsHistory;
   @LocalStorage() private cachedAssets;
   private idCounter = 0;
 
-  public getAssetHistory(type: number): Observable<any> {
-    if (!this.cachedAssets) this.cachedAssets = {};
-    if (this.cachedAssets[type]) { //if i have something in cache
+  public getAssetHistory(type: number): Observable<GenericResponse> {
+    if (!this.cachedAssetsHistory) this.cachedAssetsHistory = {};
+    if (this.cachedAssetsHistory[type]) { //if i have something in cache
       return Observable.create(observer => {
         setTimeout(()=> {
-          
+
           observer.next(
             {
               response: 1,
               errorCode: 0,
               errorString: "",
-              data: this.getChartOptions(this.cachedAssets[type])
+              data: this.getChartOptions(this.cachedAssetsHistory[type])
             });
           observer.complete();
         }, 10);
@@ -34,12 +36,45 @@ export class AssetService {
     //if not
     return this.apis.get("assetClassHistory", {assetClassId: type}).map((data:any)=> {
         if (data.response > 0) {
-          this.cachedAssets[type] = data.data;
-          this.cachedAssets = JSON.parse(JSON.stringify(this.cachedAssets));
-          data.data = this.getChartOptions(this.cachedAssets[type]);
+          this.cachedAssetsHistory[type] = data.data;
+          this.cachedAssetsHistory = JSON.parse(JSON.stringify(this.cachedAssetsHistory));
+          data.data = this.getChartOptions(this.cachedAssetsHistory[type]);
         }
         return data;
       }, this);
+  }
+
+  public getAssets(): Observable<GenericResponse> {
+    // if (!this.cachedAssets) this.cachedAssets = [];
+    if (this.cachedAssets) { //if i have something in cache
+      return Observable.create(observer => {
+        setTimeout(()=> {
+
+          observer.next(
+            {
+              response: 1,
+              errorCode: 0,
+              errorString: "",
+              data: this.cachedAssets
+            });
+          observer.complete();
+        }, 10);
+      });
+    }
+    //if not
+    return this.apis.get("assetClassesName", {}).map((data: GenericResponse)=> {
+      if (data.response > 0) {
+        let tmp = [];
+        for(let i = 0; i < data.data.length; i++){
+          tmp[data.data[i].id] = data.data[i].name;
+        }
+        this.cachedAssets = tmp;
+        this.cachedAssets = JSON.parse(JSON.stringify(this.cachedAssets));
+        data.data = this.getChartOptions(this.cachedAssets);
+        return new GenericResponse(1, 0, "", tmp);
+      }
+      return data;
+    }, this);
   }
 
   private getChartOptions(data: Array<any>) {

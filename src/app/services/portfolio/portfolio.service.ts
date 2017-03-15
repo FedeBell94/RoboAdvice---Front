@@ -27,7 +27,7 @@ export class PortfolioService {
     }
 
     getPortfolio(): Observable<GenericResponse> {
-        return this.cacheOrDownload(this.downloadPerAssetTodayWorth, "portfolio");
+        return this.cacheOrDownload(this.downloadWorthHistory, "portfolio");
     }
 
     getProfLoss(): Observable<GenericResponse> {
@@ -35,7 +35,7 @@ export class PortfolioService {
     }
 
     getWorth(): Observable<GenericResponse> {
-        return this.cacheOrDownload(this.getPortfolio, "worth");
+        return this.cacheOrDownload(this.downloadWorthHistory, "worth");
     }
 
     getWorthHistoryOptions(): Observable<GenericResponse> {
@@ -59,25 +59,10 @@ export class PortfolioService {
                 });
     }
 
-    private downloadPerAssetTodayWorth(): Observable<GenericResponse> {
-        if (!this.pending.worth) {
-            this.pending.worth = this.apis.get("worthDay").map((res)=> {
-                if (res.response > 0) {
-                    //saving raw data for future purposes
-                    this.cache.raw.perAssetTodayWorth = res.data;
-                    if (this.cache == undefined)
-                      console.log("UNDEFINED TRUE 1");
-                    if (this.cache.portfolio == undefined)
-                      console.log("UNDEFINED TRUE 2");
-                    this.cache.portfolio.assets = res.data;
-                    this.cache.worth = this.getWorthFromPortfolio(this.cache.portfolio);
-                }
 
-                return res;
-            });
-        }
-        return this.pending.worth;
-    }
+    /*private downloadWorthHistoryDaCOMPLETARE(): Observable<GenericResponse> {
+
+    }*/
 
     private downloadWorthHistory(): Observable<GenericResponse> {
         if (!this.pending.history) {
