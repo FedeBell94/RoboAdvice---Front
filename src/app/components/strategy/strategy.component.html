@@ -1,72 +1,74 @@
 <div class="pie-chart-box" [class.pie-chart-portrait]="portrait">
-    <app-pie-chart
-      #pieChart
-      [values]="values"
-      [labels]="labels"
-    ></app-pie-chart>
+  <app-pie-chart
+    #pieChart
+    [values]="values"
+    [labels]="labels"
+  ></app-pie-chart>
 
 
-    <!--<div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
+  <!--<div [hidden]="i == 4" class="pie-chart-slider" *ngFor="let ac of values; let i = index">
 
-        <app-slider
-                [value]="getValue(i)"
-                [max]="100"
-                [step]="1"
-                [maxAllowed]="getMax(i)"
-                [fillColor]="colors[i]"
-                (change)="valueChanged($event, i)"
-        ></app-slider>
+      <app-slider
+              [value]="getValue(i)"
+              [max]="100"
+              [step]="1"
+              [maxAllowed]="getMax(i)"
+              [fillColor]="colors[i]"
+              (change)="valueChanged($event, i)"
+      ></app-slider>
 
-    </div>-->
-    <div [hidden]="defaultStrategy">
-        <div class="pie-chart-slider">
-            <app-slider
-                    [value]="getValue(0)"
-                    [max]="100"
-                    [step]="1"
-                    [maxAllowed]="getMax(0)"
-                    [fillColor]="colors[0]"
-                    (change)="valueChanged($event, 0)"
-            ></app-slider>
-        </div>
-        <div class="pie-chart-slider">
-            <app-slider
-                    [value]="getValue(1)"
-                    [max]="100"
-                    [step]="1"
-                    [maxAllowed]="getMax(1)"
-                    [fillColor]="colors[1]"
-                    (change)="valueChanged($event, 1)"
-            ></app-slider>
-        </div>
-        <div class="pie-chart-slider">
-            <app-slider
-                    [value]="getValue(2)"
-                    [max]="100"
-                    [step]="1"
-                    [maxAllowed]="getMax(2)"
-                    [fillColor]="colors[2]"
-                    (change)="valueChanged($event, 2)"
-            ></app-slider>
-        </div>
-        <div class="pie-chart-slider">
-        <app-slider
-                [value]="getValue(3)"
-                [max]="100"
-                [step]="1"
-                [maxAllowed]="getMax(3)"
-                [fillColor]="colors[3]"
-                (change)="valueChanged($event, 3)"
-        ></app-slider>
+  </div>-->
+  <div [hidden]="defaultStrategy">
+    <div class="pie-chart-slider">
+      <app-slider
+        [value]="getValue(0)"
+        [max]="100"
+        [step]="1"
+        [maxAllowed]="getMax(0)"
+        [fillColor]="colors[0]"
+        (change)="valueChanged($event, 0)"
+      ></app-slider>
     </div>
+    <div class="pie-chart-slider">
+      <app-slider
+        [value]="getValue(1)"
+        [max]="100"
+        [step]="1"
+        [maxAllowed]="getMax(1)"
+        [fillColor]="colors[1]"
+        (change)="valueChanged($event, 1)"
+      ></app-slider>
     </div>
-    <div [hidden]="!defaultStrategy">
-      blablabla
+    <div class="pie-chart-slider">
+      <app-slider
+        [value]="getValue(2)"
+        [max]="100"
+        [step]="1"
+        [maxAllowed]="getMax(2)"
+        [fillColor]="colors[2]"
+        (change)="valueChanged($event, 2)"
+      ></app-slider>
+    </div>
+    <div class="pie-chart-slider">
+      <app-slider
+        [value]="getValue(3)"
+        [max]="100"
+        [step]="1"
+        [maxAllowed]="getMax(3)"
+        [fillColor]="colors[3]"
+        (change)="valueChanged($event, 3)"
+      ></app-slider>
+    </div>
+  </div>
+  <div [hidden]="!defaultStrategy">
+    <div *ngFor="let nameStrategy of roboAdviceConfig.StrategyName; let i = index">
+      <a class=" btn btn-apple" (click)="seeStrategy(i)">{{nameStrategy}} </a>
 
     </div>
-    <br>
-    <div class="pie-chart-actions">
-        <a class="btn btn-apple" (click)="emitSave()">SAVE</a>
-      <a class="btn btn-apple" (click)="defaultStrategies()">Default Strategy</a>
-    </div>
+  </div>
+  <br>
+  <div class="pie-chart-actions">
+    <a class="btn btn-apple" (click)="emitSave()">SAVE</a>
+    <a class="btn btn-apple" (click)="defaultStrategies()">Default Strategy</a>
+  </div>
 </div>
