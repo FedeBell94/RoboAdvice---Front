@@ -10,7 +10,5 @@ describe('Service: ManageJson', () => {
     });
   });
 
-  it('should ...', inject([ManageJsonService], (service: ManageJsonService) => {
-    expect(service).toBeTruthy();
-  }));
+  
 });

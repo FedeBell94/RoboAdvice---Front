@@ -10,7 +10,5 @@ describe('Service: AssetSnapshot', () => {
     });
   });
 
-  it('should ...', inject([PortfolioService], (service: PortfolioService) => {
-    expect(service).toBeTruthy();
-  }));
+  
 });

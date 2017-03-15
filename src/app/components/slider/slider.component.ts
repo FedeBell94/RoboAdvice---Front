@@ -154,9 +154,7 @@ export class SliderComponent implements OnInit {
     //painting remaining part
     c.fillStyle = this.remainingColor;
     let rX = this.dX + this.value / this.max * this.dW;
-    console.log("rx:", rX);
     let rW = this.maxAllowed / this.max * this.dW - rX + this.dX;
-    console.log("rx:", rW);
     c.fillRect(
         rX,
         h / 6 * 2,
