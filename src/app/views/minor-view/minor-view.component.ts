@@ -31,7 +31,7 @@ export class minorViewComponent {
 
   ngOnInit() {
     this.areaChartData(this.route.snapshot.params["assetClassId"] || 1);
-    this.assetClassName = this.route.snapshot.params["assetClassName"] || RoboAdviceConfig.AssetClassLabel[0];
+    this.assetClassName = this.route.snapshot.params["assetClassName"] || RoboAdviceConfig.AssetClassName[0];
   }
 
 }
