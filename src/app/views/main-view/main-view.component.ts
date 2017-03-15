@@ -19,7 +19,6 @@ export class mainViewComponent implements OnInit {
     constructor(
         private auth: AuthService,
         private router: Router,
-        private strategyService: StrategyService,
         private portfolioService: PortfolioService,
     ) { }
 
@@ -36,7 +35,7 @@ export class mainViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (!this.auth.isLogged()) {
+        if (!this.isLogged()) {
             this.router.navigate(["login"]);
             return;
         }
@@ -58,8 +57,11 @@ export class mainViewComponent implements OnInit {
         });
     }
 
+    isLogged(){
+      return this.auth.isLogged();
+    }
 
     showAsset(a_C: number) {
-      this.router.navigate(["/minorView", a_C, this.roboAdviceConfig.AssetClassName[a_C]]);
+      this.router.navigate(["/minorView", a_C, this.roboAdviceConfig.AssetClassLabel[a_C]]);
     }
 }

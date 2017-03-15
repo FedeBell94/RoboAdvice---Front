@@ -116,7 +116,7 @@ export class StrategyComponent implements OnInit {
     }
   }
 
-  seeStrategy(id: number){
+  previewStrategy(id: number){
     this.strategyValues = this.presetStrategy[id];
     this.strategyValues.push(0);
     this.canvas.changeValues(this.presetStrategy[id]);

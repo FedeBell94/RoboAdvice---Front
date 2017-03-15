@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight" *ngIf="isLogged()">
   <div class="row" *ngIf="getPortfolio()">
     <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
       <app-portfolio-snapshot
