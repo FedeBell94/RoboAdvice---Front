@@ -10,7 +10,5 @@ describe('Service: Strategy', () => {
     });
   });
 
-  it('should ...', inject([StrategyService], (service: StrategyService) => {
-    expect(service).toBeTruthy();
-  }));
+  
 });

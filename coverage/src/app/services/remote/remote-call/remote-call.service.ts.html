@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\app\services\remote\remote-call\remote-call.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/app/services/remote/remote-call/</a> remote-call.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">32.69% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>17/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.57% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>16/48</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import {GenericResponse} from "./generic-response";
+&nbsp;
+@Injectable()
+export class ApiService {
+    private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
+    //private apiUrl = 'http://192.168.2.117:8080/securedApi/';
+    private callCount = 0;
+&nbsp;
+    constructor (
+            private http: Http,
+        ) {
+            /*interceptor.request().addInterceptor((req: any, method: string) =&gt; {
+                //console.log( new Date().toDateString() + " - INTERCEPTED REQUEST: " + req);
+                return req;
+            });
+            interceptor.response().addInterceptor((res: any, method: string)=&gt; {
+                this.callCount--;
+                res.share().subscribe((data: any)=&gt;{
+                    //console.log( new Date().toDateString() + " - INTERCEPTED RESPONSE: " + data);
+                });
+                return res;
+            });*/
+        }
+&nbsp;
+    private defaultOptions: RequestOptions;
+<span class="fstat-no" title="function not covered" >    setDefaultRequestOptions(options: RequestOptions)</span> {
+<span class="cstat-no" title="statement not covered" >        this.defaultOptions = options;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    get(action: string, params?: Object, options?: RequestOptions)</span>: Observable&lt;GenericResponse&gt; {
+<span class="cstat-no" title="statement not covered" >        let reqAction = action;</span>
+<span class="cstat-no" title="statement not covered" >        if (params) {</span>
+<span class="cstat-no" title="statement not covered" >            reqAction += "?";</span>
+<span class="cstat-no" title="statement not covered" >            for (let p in params) <span class="cstat-no" title="statement not covered" >reqAction = reqAction + p + "=" + params[p] + "&amp;";</span></span>
+<span class="cstat-no" title="statement not covered" >            reqAction = reqAction.substr(0, reqAction.length - 1);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (options) <span class="cstat-no" title="statement not covered" >return (this.http.get(this.apiUrl + reqAction, options).map(this.extractData).catch(this.handleError) as any) as Observable&lt;GenericResponse&gt;;</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this.defaultOptions) <span class="cstat-no" title="statement not covered" >return (this.http.get(this.apiUrl + reqAction, this.defaultOptions).map(this.extractData).catch(this.handleError) as any) as Observable&lt;GenericResponse&gt;;</span></span>
+<span class="cstat-no" title="statement not covered" >        return (this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError) as any) as Observable&lt;GenericResponse&gt;;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    post(action: string, params: any, options?: RequestOptions)</span>: Observable&lt;any&gt; {
+<span class="cstat-no" title="statement not covered" >        let headers: Headers;</span>
+<span class="cstat-no" title="statement not covered" >        if (!options &amp;&amp; !this.defaultOptions) {</span>
+<span class="cstat-no" title="statement not covered" >            headers = new Headers();</span>
+<span class="cstat-no" title="statement not covered" >            headers.append('Accept', 'application/json');</span>
+<span class="cstat-no" title="statement not covered" >            headers.append('Content-Type', 'application/json');</span>
+        }
+<span class="cstat-no" title="statement not covered" >        let opts = options || this.defaultOptions || new RequestOptions({ headers: headers });</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (this.http.post(this.apiUrl + action, params, opts).map(this.extractData).catch(this.handleError) as any) as Observable&lt;GenericResponse&gt;;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    private extractData(res: Response)</span> {
+        /// {   response: 0 (errore) | 1+ (ok),
+        ///     errorCode: (intero univoco),
+        ///     errorString: (string di messaggio dell'errore),
+        ///     data: (dati se non errori) }
+<span class="cstat-no" title="statement not covered" >        let body = res.json();</span>
+<span class="cstat-no" title="statement not covered" >        console.log(body);</span>
+<span class="cstat-no" title="statement not covered" >        if (body.response == 0) {</span>
+            //error there
+<span class="cstat-no" title="statement not covered" >            console.log( new Date().toDateString() + " SERVER API ERROR " + body.errorCode + ": " + body.errorString);</span>
+<span class="cstat-no" title="statement not covered" >            switch(body.errorCode) {</span>
+                case 999:
+                    //auth error
+                    //TODO: display a message to the user
+                    //this.router.navigate(["login"]);
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        return body || { };</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    private handleError (error: Response | any)</span> {
+<span class="cstat-no" title="statement not covered" >        this.callCount--;</span>
+        // In a real world app, we might use a remote logging infrastructure
+<span class="cstat-no" title="statement not covered" >        let errMsg: string;</span>
+<span class="cstat-no" title="statement not covered" >        if (error instanceof Response) {</span>
+<span class="cstat-no" title="statement not covered" >            const body = error.json() || '';</span>
+<span class="cstat-no" title="statement not covered" >            const err = body.error || JSON.stringify(body);</span>
+<span class="cstat-no" title="statement not covered" >            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            errMsg = error.message ? error.message : error.toString();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        console.error(errMsg);</span>
+<span class="cstat-no" title="statement not covered" >        return errMsg;</span>
+    }
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 15 2017 13:02:20 GMT+0100 (ora solare Europa occidentale)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

@@ -22,7 +22,5 @@ describe('SliderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  
 });

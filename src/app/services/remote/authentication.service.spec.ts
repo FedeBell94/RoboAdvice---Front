@@ -2,15 +2,19 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AuthService } from './authentication.service';
+import { ApiService } from './remote-call/remote-call.service';
 
 describe('Service: Authentication', () => {
+  let auth: AuthService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AuthService]
     });
   });
 
-  it('should ...', inject([AuthService], (service: AuthService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('#AuthService should inject', ()=>{
+      auth = new AuthService(new ApiService(null), null);
+      expect(auth).toBeTruthy();
+  });
 });
