@@ -101,9 +101,7 @@ export class StrategyComponent implements OnInit {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, change it!'
       }).then(() => {
-
-        this.nothingChanged = false;
-
+        this.nothingChanged = true;
         this.copyArray(this.strategyValues,this.myAttualStrategy);
 
         //send new strategy to server
@@ -134,14 +132,15 @@ export class StrategyComponent implements OnInit {
   }
 
   previewStrategy(id: number){
+    this.nothingChanged = false;
     this.strategyValues = this.presetStrategy[id];
     this.strategyValues.push(0);
-    this.canvas.changeValues(this.presetStrategy[id]);
+    this.canvas.changeValues(this.strategyValues);
     this.rePaint();
   }
 
   resetStrategy(){
-    this.nothingChanged = false;
+    this.nothingChanged = true;
     this.copyArray(this.myAttualStrategy, this.strategyValues);
     this.showPresetStrategies = false;
     this.canvas.changeValues(this.strategyValues);
