@@ -81,7 +81,8 @@ export class AuthService {
     }
 
     getAuthToken() {
-        return this.estractCookie("authToken");
+        let extracted = this.estractCookie("authToken")
+        return (extracted ? extracted + '=' : extracted);
     }
 
     checkSession() {
@@ -111,7 +112,7 @@ export class AuthService {
         let value = "; " + document.cookie;
         let parts: any = value.split(";");
         for (let i = 0; i < parts.length; i++) {
-            if (parts[i] && parts[i].split("=")[0].trim() == cookieName) return parts[i].split("=")[1] + "=";
+            if (parts[i] && parts[i].split("=")[0].trim() == cookieName) return parts[i].split("=")[1];
         }
     }
 
