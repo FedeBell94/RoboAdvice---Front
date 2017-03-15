@@ -1,7 +1,7 @@
 <div class="pie-chart-box" [class.pie-chart-portrait]="portrait">
   <app-pie-chart
     #pieChart
-    [values]="values"
+    [values]="strategyValues"
     [labels]="labels"
   ></app-pie-chart>
 
@@ -18,7 +18,7 @@
       ></app-slider>
 
   </div>-->
-  <div [hidden]="defaultStrategy">
+  <div [hidden]="showPresetStrategies">
     <div class="pie-chart-slider">
       <app-slider
         [value]="getValue(0)"
@@ -61,14 +61,14 @@
     </div>
   </div>
 
-  <div [hidden]="!defaultStrategy">
+  <div [hidden]="!showPresetStrategies">
     <div *ngFor="let nameStrategy of roboAdviceConfig.StrategyName; let i = index">
       <a class="btn btn-apple" (click)="seeStrategy(i)">{{nameStrategy}} </a>
     </div>
   </div>
   <br>
   <div class="pie-chart-actions">
-    <a class="btn btn-apple" (click)="defaultStrategies()">PRESET STRATEGIES</a>
+    <a class="btn btn-apple" (click)="tooglePresetStrategies()">PRESET STRATEGIES</a>
     <a class="btn btn-apple" (click)="emitSave()">SAVE</a>
   </div>
 </div>

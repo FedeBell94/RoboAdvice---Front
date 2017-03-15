@@ -28,8 +28,6 @@ export class mainViewComponent implements OnInit {
 
     @ViewChild('strategyPieChart') pieChart: any;
 
-    private strategyValues: number[] = [25, 25, 25, 25];
-
     worthHistoryOptions: any;
     portfolio: any;
 
@@ -46,20 +44,13 @@ export class mainViewComponent implements OnInit {
             this.router.navigate(["survey"]);
             return;
         }
-        this.strategyService.getStrategy().subscribe((data) => {
-            if (data.response > 0) {
-                let i: number = 0;
-                for (let assetClass of data.data as Asset[]) {
-                    this.strategyValues[i] = assetClass.percentage;
-                    i++;
-                }
-            }
-        });
+
         this.portfolioService.getWorthHistoryOptions().subscribe((data) => {
             if (data.response > 0) {
                 this.worthHistoryOptions = data.data;
             }
         });
+
         this.portfolioService.getPortfolio().subscribe((data) => {
             if (data.response > 0) {
                 this.portfolio = data.data;

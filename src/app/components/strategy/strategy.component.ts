@@ -21,32 +21,43 @@ export class StrategyComponent implements OnInit {
 
   private roboAdviceConfig = RoboAdviceConfig;
 
-  @Input() values: number[] = [20, 20, 20, 20, 20];
   @Input() labels: string[] = this.roboAdviceConfig.AssetClassLabel;
   @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = this.roboAdviceConfig.PieChartColor;
   @Input() textColor: string | CanvasGradient | CanvasPattern = "#fff";
   @Input() titleColor: string | CanvasGradient | CanvasPattern;
   @ViewChild('pieChart') canvas: PieChartComponent;
   @Output() save = new EventEmitter();
-  defaultStrategy : boolean = false;
-  strategies: Strategy[];
-  strategy: Array<Array<number>>;
+  showPresetStrategies : boolean = false;
+  presetStrategy: Array<Array<number>>;
+
+  private strategyValues: number[] = [];
 
   ngOnInit() {
-    if (!this.values) this.values = [25, 25, 25, 25, 0];
-    this.canvas.rePaint();
+
+    this.strategyService.getStrategy().subscribe((data) => {
+      if (data.response > 0) {
+        let i: number = 0;
+        for (let assetClass of data.data as Asset[]) {
+          this.strategyValues[i] = assetClass.percentage;
+          i++;
+        }
+        this.strategyValues.push(0); // new position stand for empty portion;
+      }
+    });
 
     this.jsonService.getFromJson('strategy_roboadvice.json').subscribe((data:any)=> {
-      this.strategies = data["strategies"];
-      this.strategy = new Array<Array<number>>();
+      let tmpStrategy = data["strategies"];
+      this.presetStrategy = new Array<Array<number>>();
 
-      for (let i = 0; i < this.strategies.length; i++){
-        this.strategy[i] = new Array<number>();
-        for (let j = 0; j < this.strategies[i].asset_class.length; j++){
-          this.strategy[i][j] = parseInt(this.strategies[i].asset_class[j].percentage.toString());
+      for (let i = 0; i < tmpStrategy.length; i++){
+        this.presetStrategy[i] = new Array<number>();
+        for (let j = 0; j < tmpStrategy[i].asset_class.length; j++){
+          this.presetStrategy[i][j] = parseInt(tmpStrategy[i].asset_class[j].percentage.toString());
         }
       }
     });
+
+    this.rePaint();
   }
 
   rePaint() {
@@ -55,20 +66,20 @@ export class StrategyComponent implements OnInit {
 
 
   getValue(index: number) {
-    return this.values[index];
+    return this.strategyValues[index];
   }
 
   valueChanged(event: any, i: number) {
     //to detect changes
     this._z.run(()=> {
-      this.values[i] = event;
-      this.values[4] = 100 - this.totalPercentage();
+      this.strategyValues[i] = event;
+      this.strategyValues[4] = 100 - this.totalPercentage();
       this.rePaint();
     });
   }
 
   emitSave() {
-    if (this.values[4] == 0) {  //Check if the 'empty' portion is 0%
+    if (this.strategyValues[4] == 0) {  //Check if the 'empty' portion is 0%
       (window as any).swal({
         title: 'Are you sure?',
         text: "You are changing your strategy!",
@@ -79,22 +90,22 @@ export class StrategyComponent implements OnInit {
         confirmButtonText: 'Yes, change it!'
       }).then(() => {
         //send new strategy to server
-        this.values.pop();
+        this.strategyValues.pop();
         let str: Strategy = new Strategy();
-        for (let i = 0; i < this.values.length; i++) {
+        for (let i = 0; i < this.strategyValues.length; i++) {
           let asset = new Asset();
           asset.assetClassId = i + 1; //server has 1-based ids
-          asset.percentage = this.values[i];
+          asset.percentage = this.strategyValues[i];
           str.asset_class.push(asset);
         }
         str.name = "Custom";
         this.strategyService.saveStrategy(str).subscribe((data) => {
           //everything's fine
           (window as any).swal('Done!', 'Your strategy has been changed.', 'success');
-          this.save.emit(this.values);
-          this.defaultStrategy = false;
+          this.save.emit(this.strategyValues);
+          this.showPresetStrategies = false;
         });
-        this.values.push(0);
+        this.strategyValues.push(0);
       }, (error) => {
         //nothing
       });
@@ -104,24 +115,27 @@ export class StrategyComponent implements OnInit {
       (window as any).swal("Oops", "total must be 100%", "error");
     }
   }
-  defaultStrategies(){
-    this.defaultStrategy = !this.defaultStrategy;
-  }
 
   seeStrategy(id: number){
-    this.values = this.strategy[id];
-    this.values.push(0);
-    this.canvas.changeValues(this.strategy[id]);
+    this.strategyValues = this.presetStrategy[id];
+    this.strategyValues.push(0);
+    this.canvas.changeValues(this.presetStrategy[id]);
     this.rePaint();
   }
+
+  tooglePresetStrategies(){
+    this.showPresetStrategies = !this.showPresetStrategies;
+  }
+
+  // it's used in html
   private getMax(i: number) {
-    return 100 - this.totalPercentage() + this.values[i];
+    return 100 - this.totalPercentage() + this.strategyValues[i];
   }
 
   private totalPercentage(): number {
     let tmp: number = 0;
     for (let i = 0; i < 4; i++) {
-      tmp += this.values[i];
+      tmp += this.strategyValues[i];
     }
     return tmp;
   }

@@ -14,8 +14,6 @@
       <div class="info-tile">
         <div class="tile-heading"><span>My Strategy</span></div>
         <app-strategy
-          *ngIf="strategyValues"
-          [values]="strategyValues"
           [colors]="roboAdviceConfig.PieChartColor"
           [labels]="roboAdviceConfig.AssetClassLabel"
         ></app-strategy>
