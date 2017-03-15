@@ -25,14 +25,17 @@ export class PieChartComponent implements OnInit {
   }
 
   /*ngAfterViewChecked(){
-    this.rePaint();
-  }*/
+   this.rePaint();
+   }*/
 
   rePaint() {
     setTimeout(() => this.printChart(), 300);
     //window.requestAnimationFrame(this.printChart.bind(this));
   }
 
+  changeValues(values: Array<number>) {
+    this.values = values;
+  }
 
   private printChart() {
     //setting up canvas
