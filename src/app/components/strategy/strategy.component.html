@@ -60,15 +60,15 @@
       ></app-slider>
     </div>
   </div>
+
   <div [hidden]="!defaultStrategy">
     <div *ngFor="let nameStrategy of roboAdviceConfig.StrategyName; let i = index">
-      <a class=" btn btn-apple" (click)="seeStrategy(i)">{{nameStrategy}} </a>
-
+      <a class="btn btn-apple" (click)="seeStrategy(i)">{{nameStrategy}} </a>
     </div>
   </div>
   <br>
   <div class="pie-chart-actions">
+    <a class="btn btn-apple" (click)="defaultStrategies()">PRESET STRATEGIES</a>
     <a class="btn btn-apple" (click)="emitSave()">SAVE</a>
-    <a class="btn btn-apple" (click)="defaultStrategies()">Default Strategy</a>
   </div>
 </div>

@@ -69,6 +69,6 @@ export class mainViewComponent implements OnInit {
 
 
     showAsset(a_C: number) {
-      this.router.navigate(["/minorView", a_C, this.roboAdviceConfig.AssetClassLabel[a_C]]);
+      this.router.navigate(["/minorView", a_C, this.roboAdviceConfig.AssetClassName[a_C]]);
     }
 }

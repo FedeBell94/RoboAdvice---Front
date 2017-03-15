@@ -92,6 +92,7 @@ export class StrategyComponent implements OnInit {
           //everything's fine
           (window as any).swal('Done!', 'Your strategy has been changed.', 'success');
           this.save.emit(this.values);
+          this.defaultStrategy = false;
         });
         this.values.push(0);
       }, (error) => {
@@ -108,6 +109,8 @@ export class StrategyComponent implements OnInit {
   }
 
   seeStrategy(id: number){
+    this.values = this.strategy[id];
+    this.values.push(0);
     this.canvas.changeValues(this.strategy[id]);
     this.rePaint();
   }
