@@ -10,5 +10,10 @@ describe('Service: Strategy', () => {
     });
   });
 
-  
+  it('#StrategyService', () => {
+    let service = new StrategyService(null);
+
+    expect(service).toBeTruthy();
+  });
+
 });
