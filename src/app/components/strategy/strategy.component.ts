@@ -29,6 +29,7 @@ export class StrategyComponent implements OnInit {
   @Output() save = new EventEmitter();
   showPresetStrategies : boolean = false;
   presetStrategy: Array<Array<number>>;
+  myAttualStrategy : number[] = [];
 
   private strategyValues: number[] = [];
 
@@ -39,9 +40,11 @@ export class StrategyComponent implements OnInit {
         let i: number = 0;
         for (let assetClass of data.data as Asset[]) {
           this.strategyValues[i] = assetClass.percentage;
+          this.myAttualStrategy[i]= assetClass.percentage;
           i++;
         }
         this.strategyValues.push(0); // new position stand for empty portion;
+        this.myAttualStrategy.push(0);
       }
     });
 
@@ -89,6 +92,9 @@ export class StrategyComponent implements OnInit {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, change it!'
       }).then(() => {
+
+        this.copyArray(this.strategyValues,this.myAttualStrategy);
+
         //send new strategy to server
         this.strategyValues.pop();
         let str: Strategy = new Strategy();
@@ -121,6 +127,19 @@ export class StrategyComponent implements OnInit {
     this.strategyValues.push(0);
     this.canvas.changeValues(this.presetStrategy[id]);
     this.rePaint();
+  }
+
+  resetStrategy(){
+    this.copyArray(this.myAttualStrategy, this.strategyValues);
+    this.showPresetStrategies = false;
+    this.canvas.changeValues(this.strategyValues);
+    this.rePaint();
+  }
+
+  copyArray(from: number[], to: number[]){
+    for (let i=0; i < from.length; i++){
+      to[i] = from[i];
+    }
   }
 
   tooglePresetStrategies(){
