@@ -29,7 +29,7 @@ describe('Service: Authentication', () => {
     // server return such type of object
     let newUser = {
       username: 'a@a.com',
-      newUser: false,
+      isNewUser: false,
       id: 1,
       nickname: 'Pippo'
     }
@@ -39,12 +39,12 @@ describe('Service: Authentication', () => {
     let savedUser = auth.getUser();
     expect(savedUser.email).toContain('a@a.com');
     expect(savedUser.id).toBeDefined();
-    expect(savedUser.newUser).toBeDefined();
+    expect(savedUser.isNewUser).toBeDefined();
     expect(savedUser.username).toContain('Pippo');
 
     newUser = {
       username: 'ab@a.com',
-      newUser: false,
+      isNewUser: false,
       id: 1,
       nickname: 'Pippoasd'
     }
@@ -54,7 +54,7 @@ describe('Service: Authentication', () => {
     savedUser = auth.getUser();
     expect(savedUser.email).toContain('ab@a.com');
     expect(savedUser.id).toBeDefined();
-    expect(savedUser.newUser).toBeDefined();
+    expect(savedUser.isNewUser).toBeDefined();
     expect(savedUser.username).toContain('Pippoasd');
   });
 

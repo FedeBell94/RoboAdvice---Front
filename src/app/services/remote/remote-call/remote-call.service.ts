@@ -56,7 +56,7 @@ export class ApiService {
         return (this.http.post(this.apiUrl + action, params, opts).map(this.extractData).catch(this.handleError) as any) as Observable<GenericResponse>;
     }
 
-    private extractData(res: Response) {
+    private extractData(res: Response): GenericResponse {
         /// {   response: 0 (errore) | 1+ (ok),
         ///     errorCode: (intero univoco),
         ///     errorString: (string di messaggio dell'errore),
@@ -74,7 +74,7 @@ export class ApiService {
                     break;
             }
         }
-        return body || { };
+        return (body as GenericResponse) || new GenericResponse();
     }
 
     private handleError (error: Response | any) {
