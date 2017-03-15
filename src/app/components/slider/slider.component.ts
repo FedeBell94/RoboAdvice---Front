@@ -19,6 +19,7 @@ export class SliderComponent implements OnInit {
   @Input() onFocusBorderColor: string | CanvasGradient | CanvasPattern = "#399";    //border color while pointer down
   @Input() borderColor: string | CanvasGradient | CanvasPattern = "#333";           //border color on rest
   @Input() backColor: string | CanvasGradient | CanvasPattern = "#fafafa";          //inner color on rest
+  @Input() remainingColor: string | CanvasGradient | CanvasPattern = "#909090";     //color of the remaining available space while scrolling
 
   @Output() change = new EventEmitter<number>();     //triggered on pointerup
   @Output() input = new EventEmitter<number>();      //triggered on value change
@@ -131,24 +132,42 @@ export class SliderComponent implements OnInit {
   }
 
   private draw() {
+    //shortcuts
     let c = this.ctx;
     let w = this.w;
     let h = this.h;
     let p = this.p;
 
+    //resetting shadow
     c.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     c.shadowColor = null;
     c.shadowBlur = 0;
     c.shadowOffsetY = 0;
     c.shadowOffsetX = 0;
 
+    //painting border and background
     c.strokeStyle = this.borColor;
     c.strokeRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
     c.fillStyle = this.bColor;
     c.fillRect(this.dX, h / 6 * 2, this.dW, h / 6 * 2);
 
+    //painting remaining part
+    c.fillStyle = this.remainingColor;
+    let rX = this.dX + this.value / this.max * this.dW;
+    console.log("rx:", rX);
+    let rW = this.maxAllowed / this.max * this.dW - rX + this.dX;
+    console.log("rx:", rW);
+    c.fillRect(
+        rX,
+        h / 6 * 2,
+        rW,
+        h / 6 * 2
+      )
+
+    //paintint filled part
     c.fillStyle = this.fillColor;
     c.fillRect(this.dX, h / 6 * 2, this.value / this.max * this.dW, h / 6 * 2);
+    //painting cursor
     c.beginPath();
     c.arc(this.dX + this.value / this.max * this.dW, h / 2, h / 2 - h / 8, 0, Math.PI * 2);
     c.fillStyle = this.ballColor;
