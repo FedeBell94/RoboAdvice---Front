@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 import {AssetService} from "../../services/asset/asset.service";
 
@@ -7,12 +7,14 @@ import {RoboAdviceConfig} from "../../app.configuration";
 
 @Component({
     selector: 'minorView',
-    templateUrl: 'minor-view.template.html'
+    templateUrl: 'minor-view.template.html',
+    styleUrls: ['minor-view.style.css']
 })
 export class minorViewComponent {
   constructor(
     private route: ActivatedRoute,
     private asset: AssetService,
+    private router: Router,
   ){ }
   private options: any;
 
@@ -32,6 +34,10 @@ export class minorViewComponent {
   ngOnInit() {
     this.areaChartData(this.route.snapshot.params["assetClassId"] || 1);
     this.assetClassName = this.route.snapshot.params["assetClassName"] || RoboAdviceConfig.AssetClassLabel[0];
+  }
+
+  comeBack(){
+    this.router.navigate(["/mainView"]);
   }
 
 }

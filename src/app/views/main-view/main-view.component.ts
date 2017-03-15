@@ -2,10 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { AuthService } from "../../services/remote/authentication.service";
-import { StrategyService } from "../../services/strategy/strategy.service";
 import { PortfolioService } from "../../services/portfolio/portfolio.service";
 
-import {Asset} from "../../model/strategy/asset";
 import {Portfolio} from "../../model/portfolio/portfolio";
 
 import {RoboAdviceConfig} from "../../app.configuration";
@@ -39,7 +37,7 @@ export class mainViewComponent implements OnInit {
             this.router.navigate(["login"]);
             return;
         }
-        if (this.auth.getUser().newUser) {
+        if (this.auth.getUser().isNewUser) {
             this.router.navigate(["survey"]);
             return;
         }
@@ -62,6 +60,6 @@ export class mainViewComponent implements OnInit {
     }
 
     showAsset(a_C: number) {
-      this.router.navigate(["/minorView", a_C, this.roboAdviceConfig.AssetClassLabel[a_C]]);
+      this.router.navigate(["/minorView", a_C+1, this.roboAdviceConfig.AssetClassLabel[a_C]]);
     }
 }

@@ -12,7 +12,6 @@ export class loginComponent {
 
     constructor(
         private auth: AuthService,
-        private portfolio: PortfolioService,
         private router: Router,
     ) {}
 
@@ -20,7 +19,7 @@ export class loginComponent {
         this.auth.login(user, password).subscribe((data:any)=> {
             if (data.response > 0) {
               console.log(data.data.newUser);
-                if (data.data.newUser == true){
+                if (data.data.isNewUser == true){
                     this.router.navigate(["/survey"]);
                 }else {
                     this.router.navigate(["/mainView"]);

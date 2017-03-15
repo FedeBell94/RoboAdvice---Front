@@ -62,7 +62,7 @@ export class SurveyComponent implements OnInit {
   }
 
   changeUserStatusAndRedirect(){
-    this.auth.getUser().newUser = false;
+    this.auth.getUser().isNewUser = false;
     this.routes.navigate(["/mainView"]);
   }
 

@@ -5,5 +5,5 @@ export class User {
     email: string;
     username: string;
     id: number;
-    newUser: boolean;
+    isNewUser: boolean;
 }

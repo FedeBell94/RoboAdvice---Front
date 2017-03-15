@@ -31,6 +31,8 @@ export class StrategyComponent implements OnInit {
   presetStrategy: Array<Array<number>>;
   myAttualStrategy : number[] = [];
 
+  nothingChanged: boolean = true;
+
   private strategyValues: number[] = [];
 
   ngOnInit() {
@@ -73,6 +75,13 @@ export class StrategyComponent implements OnInit {
   }
 
   valueChanged(event: any, i: number) {
+
+    if (this.strategyValues != this.myAttualStrategy) {
+        this.nothingChanged = false;
+    }else{
+        this.nothingChanged = true;
+    }
+
     //to detect changes
     this._z.run(()=> {
       this.strategyValues[i] = event;
@@ -92,6 +101,8 @@ export class StrategyComponent implements OnInit {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, change it!'
       }).then(() => {
+
+        this.nothingChanged = false;
 
         this.copyArray(this.strategyValues,this.myAttualStrategy);
 
@@ -130,6 +141,7 @@ export class StrategyComponent implements OnInit {
   }
 
   resetStrategy(){
+    this.nothingChanged = false;
     this.copyArray(this.myAttualStrategy, this.strategyValues);
     this.showPresetStrategies = false;
     this.canvas.changeValues(this.strategyValues);

@@ -44,6 +44,6 @@ export class NavigationComponent {
     }
 
     isNewUser(){
-        return this.auth.getUser().newUser;
+        return this.auth.getUser().isNewUser;
     }
 }

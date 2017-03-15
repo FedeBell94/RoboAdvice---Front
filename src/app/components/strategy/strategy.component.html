@@ -68,8 +68,8 @@
   </div>
   <br>
   <div class="pie-chart-actions">
-    <a class="btn btn-apple" (click)="resetStrategy()">RESET</a>
-    <a class="btn btn-apple" (click)="tooglePresetStrategies()">PRESET STRATEGIES</a>
-    <a class="btn btn-apple" (click)="emitSave()">SAVE</a>
+    <button class="btn btn-default" (click)="resetStrategy()" [disabled]="nothingChanged">RESET</button>
+    <button class="btn btn-default" (click)="tooglePresetStrategies()">PRESET</button>
+    <button class="btn btn-default" (click)="emitSave()" [disabled]="nothingChanged">SAVE</button>
   </div>
 </div>
