@@ -9,7 +9,6 @@ import {GenericResponse} from "./generic-response";
 export class ApiService {
     private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
     //private apiUrl = 'http://192.168.2.117:8080/securedApi/';
-    private callCount = 0;
 
     constructor (
             private http: Http,
@@ -78,7 +77,6 @@ export class ApiService {
     }
 
     private handleError (error: Response | any) {
-        this.callCount--;
         // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
@@ -88,7 +86,7 @@ export class ApiService {
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-        console.error(errMsg);
+        //console.error(errMsg);
         return errMsg;
     }
 }

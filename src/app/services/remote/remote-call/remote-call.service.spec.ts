@@ -36,5 +36,20 @@ describe('Service: RemoteCall', () => {
           let res = new Response(new ResponseOptions({ body: JSON.stringify(genRes[i]) }));
           expect(typeof srv['extractData'](res)).toEqual(typeof new GenericResponse());
       }
-  }); 
+  });
+
+  it('#handleError must return a string', ()=> {
+    let srv = new ApiService(null);
+    let genRes = [
+        new Response(new ResponseOptions({ body: JSON.stringify({error: 400, message: "bad things"}) })),
+        new Response(new ResponseOptions({ body: JSON.stringify({message: "bad things"}) })),
+        new Response(new ResponseOptions({ body: JSON.stringify({}) })),
+        new Response(new ResponseOptions({ body: JSON.stringify("error") }))
+    ];
+      
+      for (let i = 0; i < genRes.length; i++) {
+          expect(typeof srv['handleError'](genRes[i])).toEqual(typeof "");
+      }
+      expect(typeof srv['handleError']({"error": "bad things"})).toEqual(typeof "");
+  });
 });
