@@ -62,7 +62,7 @@ export class AssetService {
       });
     }
     //if not
-    return this.apis.get("assetClassesName", {}).map((data: GenericResponse)=> {
+    return this.apis.get("assetClass", {}).map((data: GenericResponse)=> {
       if (data.response > 0) {
         let tmp = [];
         for(let i = 0; i < data.data.length; i++){
