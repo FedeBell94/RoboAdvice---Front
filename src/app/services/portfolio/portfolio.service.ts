@@ -18,11 +18,12 @@ export class PortfolioService {
     ) { }
 
     private cache: PortfolioCache = new PortfolioCache();
-    private pending: Observable<GenericResponse>;
+    private pending: {history: Observable<GenericResponse>, updateCache: Observable<GenericResponse>} = {history: null, updateCache: null};
 
-    clearCache() {
+    wipeCache() {
         this.cache = new PortfolioCache();
-        this.pending = null;
+        this.pending.history = null;
+        this.pending.updateCache = null;
     }
 
     getCached(field: string) {
@@ -31,28 +32,40 @@ export class PortfolioService {
     }
 
     getPortfolio(): Observable<GenericResponse> {
-        return this.cacheOrDownload(this.downloadWorthHistory, "portfolio");
+        return this.cacheOrDownload(this.getPortfolioHistory, "portfolio");
     }
 
     getProfLoss(): Observable<GenericResponse> {
-        return this.cacheOrDownload(this.downloadWorthHistory, "profLoss");
+        return this.cacheOrDownload(this.getPortfolioHistory, "profLoss");
     }
 
     getWorth(): Observable<GenericResponse> {
-        return this.cacheOrDownload(this.downloadWorthHistory, "worth");
+        return this.cacheOrDownload(this.getPortfolioHistory, "worth");
     }
 
     getWorthHistoryOptions(): Observable<GenericResponse> {
-        return this.cacheOrDownload(this.downloadWorthHistory, "worthHistoryOptions");
+        return this.cacheOrDownload(this.getPortfolioHistory, "worthHistoryOptions");
     }
 
     private cacheOrDownload(func: Function, field: string): Observable<GenericResponse> {
         if (this.cache[field]) {
-            //data already there
+            // data already there
+
+            // check if data is up to date
+            let todayDateString = new Date().toLocaleDateString('eu', {year: 'numeric', month: '2-digit', day: '2-digit'}).replace(/\//g, '-');
+            let oldDate = new Date(this.cache.lastStoredDate);
+            let todayDate = new Date(todayDateString);
+            if (+oldDate < +todayDate){
+                // I need to update cached data
+                return this.updateCacheAndGetField(field);
+            }
+
+            // data is up to date
             return Observable.create(observer=> {
-                        observer.next(new GenericResponse(1, 0, "", this.cache[field]));
-                        observer.complete();
-                    });
+                observer.next(new GenericResponse(1, 0, "", this.cache[field]));
+                observer.complete();
+            });
+
         }
         //let's call the api
         return func.bind(this)().map(res=> {
@@ -61,31 +74,71 @@ export class PortfolioService {
                     }
                     return res;
                 });
+
     }
 
-    private downloadWorthHistory(): Observable<GenericResponse> {
-        if (!this.pending) {
-            this.pending = Observable.create(observer => {
-                // in this api we can set a parameter {from: 'YYYY-MM-DD'}
-                this.apis.get("portfolio", {}).subscribe((resPortfolio)=> {
-                    if (resPortfolio.response > 0) {
-                        this.assetService.getAssets().subscribe((resAsset) => {
-                            if (resAsset.response > 0) {
-                                this.computeCache(resPortfolio, resAsset);
-                                observer.next(new GenericResponse(1, 0, "", "OK"));
+    private updateCacheAndGetField(field: string): Observable<GenericResponse>{
+
+        console.log("updateCacheAndGetField CALLED!");
+
+        if (!this.pending.updateCache) {
+            console.log("Updating cache");
+            this.pending.updateCache = Observable.create((observer)=>{
+                this.assetService.getAssets().subscribe((resAsset) => {
+                    if (resAsset.response > 0) {
+                        this.apis.get("portfolio", {from: this.cache.lastStoredDate}).map((data: GenericResponse)=>{
+                            if (data.response > 0){
+                                // if server has up to date data
+                                if (data.data.length > 0) {
+                                    console.log("There are data to up to date!");
+                                    this.cache.raw.append(data.data);
+                                    this.computeCache(new GenericResponse(1, 0, "", this.cache.raw), resAsset);
+                                }else{
+                                  console.log("NO DATA FROM SERVER to update portfolio cache");
+                                }
+                                observer.next(new GenericResponse(1, 0, "", this.cache[field]));
                             }else{
-                               observer.next(resAsset);
+                                observer.next(data);
                             }
                             observer.complete();
                         });
-                    }else{
-                        observer.next(resPortfolio);
+                    } else {
+                        observer.next(resAsset);
                         observer.complete();
                     }
                 });
             });
         }
-        return this.pending;
+        return this.pending.updateCache;
+    }
+
+    private getPortfolioHistory(): Observable<GenericResponse> {
+        if (!this.pending.history) {
+            this.pending.history = this.downloadAllData();
+        }
+        return this.pending.history;
+    }
+
+    private downloadAllData(): Observable<GenericResponse>{
+        return Observable.create(observer => {
+            // in this api we can set a parameter {from: 'YYYY-MM-DD'}
+            this.apis.get("portfolio", {}).subscribe((resPortfolio) => {
+                if (resPortfolio.response > 0) {
+                    this.assetService.getAssets().subscribe((resAsset) => {
+                        if (resAsset.response > 0) {
+                            this.computeCache(resPortfolio, resAsset);
+                            observer.next(new GenericResponse(1, 0, "", "OK"));
+                        } else {
+                            observer.next(resAsset);
+                        }
+                        observer.complete();
+                    });
+                } else {
+                    observer.next(resPortfolio);
+                    observer.complete();
+                }
+            });
+        });
     }
 
     private computeCache(resPortfolio: GenericResponse, resAsset: GenericResponse){
@@ -110,6 +163,9 @@ export class PortfolioService {
             }
 
         }
+
+        // used to check if cached date is updated
+        this.cache.lastStoredDate = lastDate;
 
         for (let y in tmp){
             dataProvider.push({
@@ -160,5 +216,6 @@ export class PortfolioService {
             this.cache.portfolio.assets.push(snap);
         }
     }
+
 }
 

@@ -17,6 +17,11 @@ export class AssetService {
   @LocalStorage() private cachedAssetsHistory;
   @LocalStorage() private cachedAssets;
 
+  public wipeCache(){
+      this.cachedAssetsHistory = null;
+      this.cachedAssets = null;
+  }
+
   public getAssetHistory(type: number): Observable<GenericResponse> {
     if (!this.cachedAssetsHistory) this.cachedAssetsHistory = {};
     if (this.cachedAssetsHistory[type]) { //if i have something in cache

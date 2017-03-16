@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {AuthService} from "../../../services/remote/authentication.service";
 import {PortfolioService} from "../../../services/portfolio/portfolio.service";
+import {AssetService} from "../../../services/asset/asset.service";
 
 declare var jQuery:any;
 
@@ -18,6 +19,7 @@ export class NavigationComponent {
         private router: Router,
         private auth: AuthService,
         private portfolio: PortfolioService,
+        private assetService: AssetService,
     ) {}
 
     ngAfterViewInit() {
@@ -34,12 +36,12 @@ export class NavigationComponent {
     }
 
     isLogged(){
-      //da sviluppare, aspettiamo la spring security
       return this.auth.isLogged();
     }
 
     logout(){
-        this.portfolio.clearCache();
+        this.portfolio.wipeCache();
+        this.assetService.wipeCache();
         this.auth.logout();
     }
 

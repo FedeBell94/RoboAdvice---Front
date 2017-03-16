@@ -8,7 +8,12 @@ export function LocalStorage() {
             descriptor.set = function(value) {
                 //calling the old setter
                 this["->get-" + propertyName](value);
-                localStorage.setItem(this.constructor.name + "." + propertyName, JSON.stringify(this[propertyName])); //saving into localStorage
+                if (this[propertyName]) {
+                    localStorage.setItem(this.constructor.name + "." + propertyName, JSON.stringify(this[propertyName])); //saving into localStorage
+                }else{
+                    localStorage.removeItem(this.constructor.name + "." + propertyName);
+                }
+
             }
             descriptor.get = function() {
                 if (this["->get-" + propertyName]() === undefined)  {
@@ -28,7 +33,11 @@ export function LocalStorage() {
                 },
                 set: function(value) {
                     this[pName] = value;
-                    localStorage.setItem(this.constructor.name + "." + propertyName, JSON.stringify(this[pName])); //saving into localStorage
+                    if (this[pName]) {
+                        localStorage.setItem(this.constructor.name + "." + propertyName, JSON.stringify(this[pName])); //saving into localStorage
+                    }else{
+                        localStorage.removeItem(this.constructor.name + "." + propertyName);
+                    }
                 }
             })
         }

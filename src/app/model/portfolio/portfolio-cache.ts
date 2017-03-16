@@ -9,4 +9,5 @@ export class PortfolioCache {
   worth: number;
   profLoss: number;
   portfolio: Portfolio;
+  lastStoredDate: string;
 }

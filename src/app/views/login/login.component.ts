@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 
 import {AuthService} from "../../services/remote/authentication.service";
 import {PortfolioService} from "../../services/portfolio/portfolio.service";
+import {AssetService} from "../../services/asset/asset.service";
 
 @Component({
     selector: 'login',
@@ -13,12 +14,19 @@ export class loginComponent {
     constructor(
         private auth: AuthService,
         private router: Router,
+        private portfolio: PortfolioService,
+        private assetService: AssetService,
     ) {}
 
     doLogin(user:string, password:string) {
         this.auth.login(user, password).subscribe((data:any)=> {
             if (data.response > 0) {
-              console.log(data.data.newUser);
+                console.log(data.data.newUser);
+
+                // just in case the user didn't navigate throw logout.
+                this.portfolio.wipeCache();
+                this.assetService.wipeCache();
+
                 if (data.data.isNewUser == true){
                     this.router.navigate(["/survey"]);
                 }else {

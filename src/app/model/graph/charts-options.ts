@@ -82,6 +82,7 @@ export class ChartUtils {
 
       ChartUtils.counter += graphs.length;
 
+      console.log("requested opts:", opt);
       return opt;
     }
 
