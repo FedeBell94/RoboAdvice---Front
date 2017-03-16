@@ -8,7 +8,7 @@ import {GenericResponse} from "./generic-response";
 @Injectable()
 export class ApiService {
     private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
-    //private apiUrl = 'http://192.168.2.117:8080/securedApi/';
+    // private apiUrl = 'http://192.168.2.117:8080/securedApi/';
     private callCount = 0;
 
     constructor (

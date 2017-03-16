@@ -5,20 +5,24 @@ import { ApiService } from '../remote/remote-call/remote-call.service';
 
 import {PortfolioCache} from "../../model/portfolio/portfolio-cache";
 import {GenericResponse} from "../remote/remote-call/generic-response";
-import {Portfolio} from "../../model/portfolio/portfolio";
+import {AssetService} from "../asset/asset.service";
+import {GraphDynamicOptions} from "../../model/graph/graph-dynamic-options";
+import {AssetSnapshot} from "../../model/portfolio/asset-snapshot";
+import {ChartUtils} from "../../model/graph/charts-options";
 
 @Injectable()
 export class PortfolioService {
     constructor(
         private apis: ApiService,
+        private assetService: AssetService,
     ) { }
 
     private cache: PortfolioCache = new PortfolioCache();
-    private pending = { history: undefined, worth: undefined };
+    private pending: Observable<GenericResponse>;
 
     clearCache() {
         this.cache = new PortfolioCache();
-        this.pending = { history: undefined, worth: undefined };
+        this.pending = null;
     }
 
     getCached(field: string) {
@@ -43,7 +47,7 @@ export class PortfolioService {
     }
 
     private cacheOrDownload(func: Function, field: string): Observable<GenericResponse> {
-        if (this.cache.raw[field]) {
+        if (this.cache[field]) {
             //data already there
             return Observable.create(observer=> {
                         observer.next(new GenericResponse(1, 0, "", this.cache[field]));
@@ -59,117 +63,102 @@ export class PortfolioService {
                 });
     }
 
-
-    /*private downloadWorthHistoryDaCOMPLETARE(): Observable<GenericResponse> {
-
-    }*/
-
     private downloadWorthHistory(): Observable<GenericResponse> {
-        if (!this.pending.history) {
-            this.pending.history = this.apis.get("worthHistory").map((res)=> {
-                    if (res.response > 0) {
-                        //saving raw data for future purposes
-                        this.cache.raw.worthHistoryOptions = res.data;
-                        this.cache.worthHistoryOptions = this.getOptions(res.data.data, this.getGraphs(res.data.graphs));
-                        //get worth and prof/loss
-                        if (res.data.data.length == 0) {
-                            this.cache.worth = 10000;
-                            this.cache.profLoss = 0;
-                        } else {
-                            this.cache.worth = res.data.data[res.data.data.length - 1][res.data.graphs[0].valueField];
-                            if (res.data.data.length > 1) this.cache.profLoss = this.cache.worth - res.data.data[res.data.data.length - 2][res.data.graphs[0].valueField];
-                            else this.cache.profLoss = 0;
-                        }
-                    } else {
-                        //TODO: ?
+        if (!this.pending) {
+            this.pending = Observable.create(observer => {
+                // in this api we can set a parameter {from: 'YYYY-MM-DD'}
+                this.apis.get("portfolio", {}).subscribe((resPortfolio)=> {
+                    if (resPortfolio.response > 0) {
+                        this.assetService.getAssets().subscribe((resAsset) => {
+                            if (resAsset.response > 0) {
+                                this.computeCache(resPortfolio, resAsset);
+                                observer.next(new GenericResponse(1, 0, "", "OK"));
+                            }else{
+                               observer.next(resAsset);
+                            }
+                            observer.complete();
+                        });
+                    }else{
+                        observer.next(resPortfolio);
+                        observer.complete();
                     }
-                    return res;
                 });
+            });
         }
-        return this.pending.history;
+        return this.pending;
     }
 
-    private getWorthFromPortfolio(portfolio: Portfolio) {
-        let sum = 0;
-        for (let i = 0; i < portfolio.assets.length; i++) {
-            sum += portfolio.assets[i].value;
-        }
-        return sum;
-    }
+    private computeCache(resPortfolio: GenericResponse, resAsset: GenericResponse){
+        //saving raw data for future purposes
+        this.cache.raw = resPortfolio.data;
 
-    private getGraphs(opts) {
-        let g = [];
-        for (let i = 0; i < opts.length; i++) {
-            g.push({
-                    "id":"g" + i,
-                    "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
-                    "bullet": "round",
-                    "bulletSize": 4,
-                    "lineThickness": 1,
-                    "type": "smoothedLine",
-                    "title": opts[i].title,
-                    "valueField": opts[i].valueField
-                });
-        }
-        return g;
-    }
+        let graphOptions = new Array<GraphDynamicOptions>();
+        graphOptions.push(new GraphDynamicOptions('Worth', 'value'));
 
-    private getOptions(data: any[], graphs: any) {
-        return {
-            "type": "serial",
-            "theme": "none",
-            "marginTop":0,
-            "marginRight": 20,
-            "colors": [
-                "#369",
-                "#639",
-                "#693",
-                "#963"
-            ],
-            "dataProvider": data,
-            "valueAxes": [{
-                "axisAlpha": 0,
-                "position": "left"
-            }],
-            "graphs": graphs,
-            "chartScrollbar": {
-                "graph":"g1",
-                "gridAlpha":0,
-                "color":"#888888",
-                "scrollbarHeight":55,
-                "backgroundAlpha":0,
-                "selectedBackgroundAlpha":0.1,
-                "selectedBackgroundColor":"#888888",
-                "graphFillAlpha":0,
-                "autoGridCount":true,
-                "selectedGraphFillAlpha":0,
-                "graphLineAlpha":0.2,
-                "graphLineColor":"#c2c2c2",
-                "selectedGraphLineColor":"#888888",
-                "selectedGraphLineAlpha":1
+        let dataProvider = [];
+        let tmp = {};
+        let lastDate = "", yesterDate = "";
+        for (let i = 0; i < resPortfolio.data.length; i++){
+            if (!tmp[resPortfolio.data[i].date])
+                tmp[resPortfolio.data[i].date] = 0;
 
-            },
-            "chartCursor": {
-                "categoryBalloonDateFormat": "YYYY-MM-DD",
-                "cursorAlpha": 0.9,
-                "valueLineEnabled":true,
-                "valueLineBalloonEnabled":true,
-                "valueLineAlpha":0.5,
-                "fullWidth":false
-            },
-            "dataDateFormat": "YYYY-MM-DD",
-            "categoryField": "date",
-            "categoryAxis": {
-                "minPeriod": "DD",
-                "parseDates": true,
-                "minorGridAlpha": 0.1,
-                "minorGridEnabled": true
-            },
-            "export": {
-                "enabled": true
+            tmp[resPortfolio.data[i].date] += resPortfolio.data[i].value;
+
+            if (resPortfolio.data[i].date != lastDate) {
+                yesterDate = lastDate;
+                lastDate = resPortfolio.data[i].date;
             }
-        };
 
+        }
+
+        for (let y in tmp){
+            dataProvider.push({
+                date: y,
+                value: Math.round(tmp[y] * 100) / 100,
+            });
+        }
+        this.cache.worthHistoryOptions = ChartUtils.getOptions(dataProvider, graphOptions);
+
+        console.log("opts: ", this.cache.worthHistoryOptions);
+
+        //get worth and prof/loss
+        if (dataProvider.length == 0) {
+            this.cache.worth = 10000;
+            this.cache.profLoss = 0;
+        } else {
+            this.cache.worth = dataProvider[dataProvider.length - 1][graphOptions[0].valueField];
+            if (dataProvider.length > 1) {
+                this.cache.profLoss = this.cache.worth - dataProvider[dataProvider.length - 2][graphOptions[0].valueField];
+            } else {
+                this.cache.profLoss = 0;
+            }
+        }
+
+        //get Portfolio
+        let lastDay = resPortfolio.data.filter((el) => {
+            return el.date == lastDate;
+        });
+
+        let lastDayYesterday = [];
+        if (yesterDate != "") {
+            lastDayYesterday = resPortfolio.data.filter((el) => {
+                return el.date == yesterDate;
+            });
+        }
+
+        for (let i = 0; i < lastDay.length; i++){
+            let snap = new AssetSnapshot();
+            snap.value = lastDay[i].value;
+            snap.assetClass = resAsset.data[lastDay[i].assetClassId];
+            if (yesterDate && lastDayYesterday[i]){
+                snap.profLoss = lastDay[i].value - lastDayYesterday[i].value;
+                snap.percentage = (lastDay[i].value / lastDayYesterday[i].value) - 1;
+            }else{
+                snap.profLoss = 0;
+                snap.percentage = null;
+            }
+            this.cache.portfolio.assets.push(snap);
+        }
     }
-
 }
+

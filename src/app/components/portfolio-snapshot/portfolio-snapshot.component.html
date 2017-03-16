@@ -1,12 +1,18 @@
 <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(percentage), 'tile-error': isLoss(percentage)}">
-  <div class="tile-icon"><i class="ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i></div>
-  <div class="tile-heading"><span>{{assetClass}}</span></div>
-  <div class="tile-body"><span>{{value | currency:'USD':true:'1.2-2'}}</span></div>
-  <div class="tile-footer">
-    <span [ngClass]="{'text-success': !isLoss(percentage), 'text-error': isLoss(percentage)}">
-      <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(percentage), 'ti-arrow-down': isLoss(percentage)}"></i>
-      <span *ngIf="percentage">{{percentage | percent:'1.0-2'}}</span>
-      <span *ngIf="!percentage">N/A</span>
-    </span>
-  </div>
+    <div class="tile-icon">
+        <i class="ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
+    </div>
+    <div class="tile-heading">
+        <span>{{assetClassName}}</span>
+    </div>
+    <div class="tile-body">
+        <span>{{value | currency:'USD':true:'1.2-2'}}</span>
+    </div>
+    <div class="tile-footer">
+        <span [ngClass]="{'text-success': !isLoss(percentage), 'text-error': isLoss(percentage)}">
+            <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(percentage), 'ti-arrow-down': isLoss(percentage)}"></i>
+            <span *ngIf="percentage">{{percentage | percent:'1.0-2'}}</span>
+            <span *ngIf="!percentage">N/A</span>
+        </span>
+    </div>
 </div>

@@ -13,7 +13,7 @@ export class PortfolioSnapshotComponent implements OnInit {
   ) { }
 
   @Input() percentage: number;
-  @Input() assetClass: string;
+  @Input() assetClassName: string;
   @Input() value: number;
 
   ngOnInit() {

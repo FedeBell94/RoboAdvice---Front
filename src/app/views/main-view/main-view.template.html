@@ -2,7 +2,7 @@
   <div class="row" *ngIf="getPortfolio()">
     <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
       <app-portfolio-snapshot
-          [assetClass]="aC.assetClass"
+          [assetClassName]="aC.assetClass"
           [percentage]="aC.percentage"
           [value]="aC.value"
       ></app-portfolio-snapshot>
