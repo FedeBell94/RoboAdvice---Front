@@ -11,6 +11,11 @@ export class PieChartComponent implements OnInit {
   constructor() { }
 
   private roboAdviceConfig = RoboAdviceConfig;
+  private ctx: CanvasRenderingContext2D;
+  private fontSize: number;
+  private pieArea: any;
+  private pieCenter: any;
+  private ray: number;
 
   @Input() values: number[] = [25, 25, 25, 25];
   @Input() labels: string[] = this.roboAdviceConfig.AssetClassLabel;
@@ -21,29 +26,54 @@ export class PieChartComponent implements OnInit {
 
   ngOnInit() {
     if (!this.values) this.values = [25, 25, 25, 25];
+    this.draw();
+  }
+
+  ngAfterViewChecked(){
     this.rePaint();
   }
 
-  /*ngAfterViewChecked(){
-   this.rePaint();
-   }*/
-
   rePaint() {
-    setTimeout(() => this.printChart(), 300);
-    //window.requestAnimationFrame(this.printChart.bind(this));
+    this.setupCanvas();
+
+    this.draw();
   }
 
   changeValues(values: Array<number>) {
     this.values = values;
   }
 
-  private printChart() {
-    //setting up canvas
-    this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
-    this.canvas.nativeElement.height = this.canvas.nativeElement.offsetWidth;
-    let ctx: CanvasRenderingContext2D = this.canvas.nativeElement.getContext("2d");
+  private setupCanvas() {
+      //setting up canvas
+      this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
+      this.canvas.nativeElement.height = this.canvas.nativeElement.offsetWidth;
+      this.ctx = this.canvas.nativeElement.getContext("2d");
 
-    //preparing external data
+      //preparing internal data
+      let internalWidth = this.canvas.nativeElement.width;
+      this.fontSize = this.canvas.nativeElement.height / 12;
+      let internalHeight = this.canvas.nativeElement.height;
+
+      this.pieArea = {
+          x: 0,
+          y: 0,
+          width: internalWidth,
+          height: internalWidth
+      }
+
+      this.pieCenter = {
+          x: this.pieArea.x + this.pieArea.width / 2,
+          y: this.pieArea.y + this.pieArea.height / 2
+      };
+
+      this.ray = this.pieArea.width / 2;
+      this.ctx.font = this.fontSize + "px Open Sans, Roboto";
+      this.ctx.textBaseline = "middle";
+  }
+
+  private draw() {
+
+    //preparing data
     let innerStrings = this.values.map(v => v.toString() + "%");
 
     let angles: number[] = [];
@@ -53,35 +83,15 @@ export class PieChartComponent implements OnInit {
     for (let i = 1; i < this.values.length; i++) { angles[i] = angles[i - 1] + this.values[i] * Math.PI * 2 / total; }; //now we got all proportional angles starting from previous one.
 
 
-    //preparing internal data
-    let internalWidth = this.canvas.nativeElement.width;
-    let fontSize = this.canvas.nativeElement.height / 12;
-    let internalHeight = this.canvas.nativeElement.height;
-    //pie area
-    let pieArea = {
-      x: 0,
-      y: 0,
-      width: internalWidth,
-      height: internalWidth
-    }
-
-    let pieCenter = {
-      x: pieArea.x + pieArea.width / 2,
-      y: pieArea.y + pieArea.height / 2
-    };
-
-
-    let ray = pieArea.width / 2;
-    ctx.font = fontSize + "px Roboto";
-    ctx.textBaseline = "middle";
+    
 
     let textCoords: any[] = [];
     for (let i = 0; i < this.values.length; i++) {
       let angle = (angles[i] - (angles[i - 1] || 0)) / 2 + (angles[i - 1] || 0)
       textCoords.push(
         {
-          x: pieCenter.x + (ray / 3 * 2) * Math.cos(angle),
-          y: pieCenter.y + (ray / 3 * 2) * Math.sin(angle)
+          x: this.pieCenter.x + (this.ray / 3 * 2) * Math.cos(angle),
+          y: this.pieCenter.y + (this.ray / 3 * 2) * Math.sin(angle)
         });
     }
 
@@ -89,22 +99,22 @@ export class PieChartComponent implements OnInit {
 
     //pie
     for (let i = 0; i < this.values.length; i++) {
-      ctx.fillStyle = this.colors[i];
-      ctx.beginPath();
-      ctx.moveTo(pieCenter.x, pieCenter.y);
-      ctx.arc(pieCenter.x, pieCenter.y, ray, angles[i - 1] || 0, angles[i]);
-      ctx.lineTo(pieCenter.x, pieCenter.y);
-      ctx.fill();
+      this.ctx.fillStyle = this.colors[i];
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.pieCenter.x, this.pieCenter.y);
+      this.ctx.arc(this.pieCenter.x, this.pieCenter.y, this.ray, angles[i - 1] || 0, angles[i]);
+      this.ctx.lineTo(this.pieCenter.x, this.pieCenter.y);
+      this.ctx.fill();
 
     }
     //percentages
     for (let i = 0; i < this.values.length; i++) {
       if (this.values[i] == 0) continue;
-      ctx.fillStyle = this.textColor;
-      ctx.font = (fontSize / 3 * 2) + "px Roboto";
-      ctx.fillText(this.labels[i], textCoords[i].x - ctx.measureText(this.labels[i]).width / 2, textCoords[i].y - fontSize / 2);
-      ctx.font = fontSize + "px Roboto";
-      ctx.fillText(innerStrings[i], textCoords[i].x - ctx.measureText(innerStrings[i]).width / 2, textCoords[i].y + fontSize / 2);
+      this.ctx.fillStyle = this.textColor;
+      this.ctx.font = (this.fontSize / 3 * 2) + "px Roboto";
+      this.ctx.fillText(this.labels[i], textCoords[i].x - this.ctx.measureText(this.labels[i]).width / 2, textCoords[i].y - this.fontSize / 2);
+      this.ctx.font = this.fontSize + "px Roboto";
+      this.ctx.fillText(innerStrings[i], textCoords[i].x - this.ctx.measureText(innerStrings[i]).width / 2, textCoords[i].y + this.fontSize / 2);
     }
   }
 }
