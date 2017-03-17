@@ -25,8 +25,7 @@ export class PieChartComponent implements OnInit {
   @ViewChild('pieChart_Canvas') canvas: ElementRef;
 
   ngOnInit() {
-    if (!this.values) this.values = [25, 25, 25, 25];
-    this.draw();
+    this.rePaint();
   }
 
   ngAfterViewChecked(){
