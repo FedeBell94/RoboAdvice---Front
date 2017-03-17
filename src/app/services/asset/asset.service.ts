@@ -4,9 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { ApiService } from '../remote/remote-call/remote-call.service';
 
 import { LocalStorage } from "../../annotations/local-storage.annotation";
-import {GenericResponse} from "../remote/remote-call/generic-response";
-import {ChartUtils} from "../../model/graph/charts-options";
-import {GraphDynamicOptions} from "../../model/graph/graph-dynamic-options";
+
+import { GenericResponse } from "../remote/remote-call/generic-response";
+import { ChartUtils } from "../../model/graph/charts-options";
+import { GraphDynamicOptions } from "../../model/graph/graph-dynamic-options";
 
 @Injectable()
 export class AssetService {
@@ -74,7 +75,6 @@ export class AssetService {
           tmp[data.data[i].id] = data.data[i].name;
         }
         this.cachedAssets = tmp;
-        console.log("cachedAssets: ", this.cachedAssets);
         return new GenericResponse(1, 0, "", tmp);
       }
       return data;
