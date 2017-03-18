@@ -21,8 +21,6 @@ export class loginComponent {
     doLogin(user:string, password:string) {
         this.auth.login(user, password).subscribe((data:any)=> {
             if (data.response > 0) {
-                console.log(data.data.newUser);
-
                 // just in case the user didn't navigate throw logout.
                 this.portfolio.wipeCache();
                 this.assetService.wipeCache();
@@ -36,9 +34,6 @@ export class loginComponent {
             }else{
                 (window as any).swal('Error', "Email or password wrong", "error");
             }
-
-            //error on login
-            console.log("error on login: " + data.errorString);
         });
     }
 }

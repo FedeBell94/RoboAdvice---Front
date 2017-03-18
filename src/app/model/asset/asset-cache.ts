@@ -2,8 +2,11 @@ export class AssetCache {
     constructor(){
         this.history = [];
         this.assetsName = [];
+        this.raw = [];
+        this.lastStoredDate = [];
     }
-    lastStoredDate: string;
+    raw: any[];
+    lastStoredDate: string[];
     history: any[]; 
     assetsName: any[];
 }

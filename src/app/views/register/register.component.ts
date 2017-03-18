@@ -20,10 +20,8 @@ export class registerComponent implements OnInit{
     }
 
     submitRegistration(email:string, nickname: string, pwd: string) {
-        console.log("submitted");
         this.auth.register(email, nickname, pwd).subscribe(data => {
             if (data.response > 0) {
-              console.log("REGISTRATION SUCCESSFULL");
               (window as any).swal(
                 'Registration successful!',
                 'Let\'s make money',
@@ -38,7 +36,6 @@ export class registerComponent implements OnInit{
               );
                 switch (data.errorCode) {
                     case 100:
-
                         console.log("registration Failed");
                         break;
                     default:
