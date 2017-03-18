@@ -46,9 +46,15 @@ export class SliderComponent implements OnInit {
 
   setManually(config: { max?: number, maxAllowed?: number, value?: number, step?: number }) {
     if (config.max != undefined) this.max = config.max;
-    if (config.maxAllowed != undefined) this.max = config.maxAllowed;
-    if (config.value != undefined) this.max = config.value;
-    if (config.step != undefined) this.max = config.step;
+    if (config.maxAllowed != undefined) {
+        if(config.maxAllowed > this.max) this.maxAllowed = this.max;
+        else this.maxAllowed = config.maxAllowed;
+    }
+    if (config.value != undefined) {
+        if (config.value > this.maxAllowed) this.value = this.maxAllowed;
+        else this.value = config.value;
+    }
+    if (config.step != undefined) this.step = config.step;
   }
 
   ngAfterViewChecked(){

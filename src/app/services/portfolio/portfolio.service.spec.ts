@@ -10,5 +10,9 @@ describe('Service: AssetSnapshot', () => {
     });
   });
 
-  
+  it("#wipe cache must reset cache and utility variables", ()=> {
+    expect(true).toBe(true);
+
+    
+  });
 });

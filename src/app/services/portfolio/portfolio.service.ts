@@ -11,6 +11,7 @@ import { AssetSnapshot } from "../../model/portfolio/asset-snapshot";
 import { ChartUtils } from "../../model/graph/charts-options";
 
 import { LocalStorage } from "../../annotations/local-storage.annotation";
+import { Portfolio } from "../../model/portfolio/portfolio";
 
 @Injectable()
 export class PortfolioService {
@@ -25,10 +26,6 @@ export class PortfolioService {
     private observers = { history: [], update: [] };
 
     /* methods */
-
-    ngOnInit() {
-
-    }
 
     public wipeCache() {
         this.cache = new PortfolioCache();
@@ -205,6 +202,7 @@ export class PortfolioService {
             });
         }
 
+        this.cache.portfolio.assets = [];
         for (let i = 0; i < lastDay.length; i++) {
             let snap = new AssetSnapshot();
             snap.value = lastDay[i].value;
