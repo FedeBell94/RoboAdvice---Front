@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {GenericResponse} from "./generic-response";
+import { RoboAdviceConfig } from '../../../app.configuration';
 
 @Injectable()
 export class ApiService {
-    private apiUrl = 'http://localhost:8080/securedApi/';  // URL to web API
-    // private apiUrl = 'http://192.168.2.132:8080/securedApi/';
+    private apiUrl = RoboAdviceConfig.apiUrl;  // URL to web API
 
     constructor (
             private http: Http,
