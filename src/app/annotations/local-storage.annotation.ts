@@ -1,6 +1,7 @@
 export function LocalStorage() {
     return function(target: Object, propertyName: string, descriptor?: PropertyDescriptor) {
         if (!!descriptor) { // already have a descriptor <-------WARN not tested
+            /* commented becouse even with getter and setter, this code was not executed
             //saving prop getter and setter
             target.constructor.prototype["->set-" + propertyName] = descriptor.set;
             target.constructor.prototype["->get-" + propertyName] = descriptor.get;
@@ -20,7 +21,7 @@ export function LocalStorage() {
                     this["->get-" + propertyName] = JSON.parse(localStorage.getItem(this.constructor.name + "." + propertyName));
                 }
                 return this["->get-" + propertyName]();
-            }
+            }*/
         } else {
             //there's no descriptor yet
             let pName = "_" + propertyName;
