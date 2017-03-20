@@ -1,10 +1,6 @@
 import {GraphDynamicOptions} from "./graph-dynamic-options";
 export class ChartUtils {
 
-    constructor(){
-
-    }
-
     private static counter: number = 0;
 
     private static getGraphs(opts: GraphDynamicOptions[]) {
