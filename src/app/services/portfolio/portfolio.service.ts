@@ -13,6 +13,8 @@ import { ChartUtils } from "../../model/graph/charts-options";
 import { LocalStorage } from "../../annotations/local-storage.annotation";
 import { Portfolio } from "../../model/portfolio/portfolio";
 
+import { RoboAdviceConfig } from '../../app.configuration';
+
 @Injectable()
 export class PortfolioService {
     constructor(
@@ -179,7 +181,7 @@ export class PortfolioService {
 
         //get worth and prof/loss
         if (dataProvider.length == 0) {
-            this.cache.worth = 10000;
+            this.cache.worth = RoboAdviceConfig.DefaultInitialWorth;
             this.cache.profLoss = 0;
         } else {
             this.cache.worth = dataProvider[dataProvider.length - 1][graphOptions[0].valueField];

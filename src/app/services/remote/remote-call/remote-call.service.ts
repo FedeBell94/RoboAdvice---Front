@@ -8,7 +8,7 @@ import { RoboAdviceConfig } from '../../../app.configuration';
 
 @Injectable()
 export class ApiService {
-    private apiUrl = RoboAdviceConfig.apiUrl;  // URL to web API
+    private apiUrl = RoboAdviceConfig.ApiUrl;  // URL to web API
 
     constructor (
             private http: Http,
