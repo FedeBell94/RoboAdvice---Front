@@ -40,7 +40,7 @@ export function LocalStorage() {
                         localStorage.removeItem(this.constructor.name + "." + propertyName);
                     }
                 }
-            })
+            });
         }
     }
 }

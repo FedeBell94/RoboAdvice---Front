@@ -9,9 +9,10 @@ import { AssetService } from "../asset/asset.service";
 import { GraphDynamicOptions } from "../../model/graph/graph-dynamic-options";
 import { AssetSnapshot } from "../../model/portfolio/asset-snapshot";
 import { ChartUtils } from "../../model/graph/charts-options";
+import { Portfolio } from "../../model/portfolio/portfolio";
 
 import { LocalStorage } from "../../annotations/local-storage.annotation";
-import { Portfolio } from "../../model/portfolio/portfolio";
+import { AtomicAsync } from "../../annotations/atomic.annotation";
 
 @Injectable()
 export class PortfolioService {
@@ -66,7 +67,7 @@ export class PortfolioService {
             let todayDate = new Date(todayDateString);
             if (+oldDate < +todayDate) {
                 // I need to update cached data
-                return this.getObservable("update").map((res) => {
+                return this.withAtomic().map((res) => {
                     if (res.response > 0) {
                         return new GenericResponse(1, 0, "", this.cache[field]);
                     }
@@ -82,7 +83,7 @@ export class PortfolioService {
 
         }
         //let's call the api
-        return this.getObservable("history").map(res => {
+        return this.withAtomic().map(res => {
             if (res.response > 0) {
                 return new GenericResponse(1, 0, "", this.cache[field]);
             }
@@ -90,7 +91,7 @@ export class PortfolioService {
         });
 
     }
-
+/*
     private getObservable(action: string): Observable<GenericResponse> {
         //creating the Observable only once 
         if (!this.pending[action]) {
@@ -139,6 +140,78 @@ export class PortfolioService {
                         this.observers[action][i].complete();
                     }
                     this.observers[action] = [];
+                }
+            });
+        });
+    }
+*/
+    private getData(action: string) {
+        this.assetService.getAssets().subscribe((resAsset) => {
+                if (resAsset.response > 0) {
+                    let params = undefined;
+                    //now i got the assets, let's retrieve the data
+                    if (this.cache.lastStoredDate) {
+                        params = { from: this.cache.lastStoredDate};
+                    }
+                    this.apis.get("portfolio", params).subscribe((data: GenericResponse) => {
+                        if (data.response > 0) {
+                            // if server has up to date data
+                            if (data.data.length > 0) {
+                                if (!this.cache.raw) this.cache.raw = [];
+                                this.cache.raw = this.cache.raw.concat(data.data);
+                                //computing cache (synchronously)
+                                this.computeCache(resAsset);
+                            }
+                        }
+                        //now let's wake up all my subscribers!
+                        for (let i = 0; i < this.observers[action].length; i++) {
+                            this.observers[action][i].next(data);
+                            this.observers[action][i].complete();
+                        }
+                        this.observers[action] = [];
+                    });
+                } else {
+                    //error retrieving asset data
+                    for (let i = 0; i < this.observers[action].length; i++) {
+                        this.observers[action][i].next(resAsset);
+                        this.observers[action][i].complete();
+                    }
+                    this.observers[action] = [];
+                }
+            });
+    }
+
+
+    @AtomicAsync("history")
+    private withAtomic(): Observable<GenericResponse> {
+        return Observable.create(observer=> {
+            //computng the requests
+            this.assetService.getAssets().subscribe((resAsset) => {
+                if (resAsset.response > 0) {
+                    let params = undefined;
+                    //now i got the assets, let's retrieve the data
+                    if (this.cache.lastStoredDate) {
+                        params = { from: this.cache.lastStoredDate};
+                    }
+                    this.apis.get("portfolio", params).subscribe((data: GenericResponse) => {
+                        if (data.response > 0) {
+                            // if server has up to date data
+                            if (data.data.length > 0) {
+                                if (!this.cache.raw) this.cache.raw = [];
+                                this.cache.raw = this.cache.raw.concat(data.data);
+                                //computing cache (synchronously)
+                                this.computeCache(resAsset);
+                            }
+                        }
+                        //now let's return data!
+                        observer.next(data);
+                        observer.complete();
+                        
+                    });
+                } else {
+                    //error retrieving asset data
+                    observer.next(resAsset);
+                    observer.complete();
                 }
             });
         });
