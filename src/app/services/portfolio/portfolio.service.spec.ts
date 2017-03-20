@@ -6,14 +6,12 @@ import { GenericResponse } from "../remote/remote-call/generic-response";
 import { PortfolioCache } from "../../model/portfolio/portfolio-cache";
 import { ApiService } from "../remote/remote-call/remote-call.service";
 import { AssetService } from "../asset/asset.service";
-import { MockApiService } from "../../mock/mock-remote-call.service";
 
 describe('Service: AssetSnapshot', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                     PortfolioService,
-                    {provide: ApiService, useClass: MockApiService},
                 ]
         });
     });

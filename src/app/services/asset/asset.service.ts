@@ -10,6 +10,7 @@ import { ChartUtils } from "../../model/graph/charts-options";
 import { GraphDynamicOptions } from "../../model/graph/graph-dynamic-options";
 import { AssetCache } from "../../model/asset/asset-cache";
 import { Pending } from "../../model/asset/pending";
+import { AtomicAsync } from "../../annotations/atomic.annotation";
 
 @Injectable()
 export class AssetService {
@@ -41,7 +42,7 @@ export class AssetService {
             let todayDate = new Date(todayDateString);
             if (+oldDate < +todayDate) {
                 // I need to update cached data
-                return this.getObservable("update", type).map((res) => {
+                return this.performRequest(type).map((res) => {
                     if (res.response > 0) {
                         return new GenericResponse(1, 0, "", this.cache.history[type]);
                     }
@@ -58,7 +59,7 @@ export class AssetService {
         }
         //if not
         //let's call the api
-        return this.getObservable("history", type).map(res => {
+        return this.performRequest(type).map(res => {
             if (res.response > 0) {
                 return new GenericResponse(1, 0, "", this.cache.history[type]);
             }
@@ -66,34 +67,15 @@ export class AssetService {
         });
     }
 
-    private getObservable(action: string, type: number): Observable<GenericResponse> {
-        //creating the Observable only once 
-        if (!this.pending[type]) this.pending[type] = new Pending();
-        if (!this.pending[type][action]) {
-            this.pending[type][action] = this.performRequest(action, type);
-        }
-        return this.pending[type][action];
-    }
-
-    private performRequest(action: string, type: number): Observable<GenericResponse> {
+    @AtomicAsync(0) //using first parameter as unique id for observable
+    private performRequest(type: number): Observable<GenericResponse> {
         return Observable.create(observer => {
-            //adding observer to my subscripionist list
-            this.observers[action].push(observer);
 
-            //if I'm not the first, I don't need to call the server
-            if (this.observers[action].length > 1) return;
-
-            let params = {};
+            let params = {assetClassId: type};
             //now i got the assets, let's retrieve the data
-            if (action == "update") {
-                params = {
-                    assetClassId: type,
-                    from: this.cache.lastStoredDate[type]
-                };
-            } else {
-                params = {
-                    assetClassId: type,
-                };
+            if (this.cache.lastStoredDate[type]) {
+                params['from'] = this.cache.lastStoredDate[type];
+                
             }
 
             //If I'm the first one, Let's get the call
@@ -108,12 +90,8 @@ export class AssetService {
                         this.computeCache(data, type);
                     }
                 }
-                //now let's wake up all my subscribers!
-                for (let i = 0; i < this.observers[action].length; i++) {
-                    this.observers[action][i].next(data);
-                    this.observers[action][i].complete();
-                }
-                this.observers[action] = [];
+                observer.next(data);
+                observer.complete();
             });
 
         });
