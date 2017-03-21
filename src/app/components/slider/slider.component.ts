@@ -40,6 +40,10 @@ export class SliderComponent implements OnInit {
     this.setupCanvas();
 
     this.canvas.nativeElement.onpointerdown = this.onpointerdown.bind(this);
+    if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+        //firefox from 50+ version has touch events disabled by default
+        this.canvas.nativeElement.onmousedown = this.onpointerdown.bind(this);
+    }
 
     this.draw();
   }
@@ -92,6 +96,12 @@ export class SliderComponent implements OnInit {
     document.onpointermove = this.onpointermove.bind(this);
     //set onup
     document.onpointerup = this.onpointerup.bind(this);
+    if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+        //firefox from 50+ version has touch events disabled by default
+        document.onmousemove = this.onpointermove.bind(this);
+        document.onmouseup = this.onpointerup.bind(this);
+    }
+
     this.computeValue(e);
     //draw
     this.draw();
@@ -105,6 +115,12 @@ export class SliderComponent implements OnInit {
   private onpointerup() {
     document.onpointermove = undefined;
     this.canvas.nativeElement.onpointerup = undefined;
+    if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+        //firefox from 50+ version has touch events disabled by default
+        document.onmousemove = undefined;
+        this.canvas.nativeElement.onmouseup = undefined;
+    }
+
     this.borColor = "#333";
     this.ctx.lineWidth = 1;
     this.draw();

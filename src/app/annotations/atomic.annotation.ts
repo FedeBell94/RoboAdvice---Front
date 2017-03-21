@@ -25,7 +25,7 @@ export function AtomicAsync(observableId?: number) {
             pending[id] = new Obvable();
             pending[id].observable = Observable.create(observer=> {
                 pending[id].observerList.push(observer);
-                //if i'm the first
+                //if i'm not the first
                 if (pending[id].observerList.length > 1) return;
                 //else let's make the call
                 old.apply(this, args).subscribe((data: any)=> {
