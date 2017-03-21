@@ -9,7 +9,6 @@ import { GenericResponse } from "../remote/remote-call/generic-response";
 import { ChartUtils } from "../../model/graph/charts-options";
 import { GraphDynamicOptions } from "../../model/graph/graph-dynamic-options";
 import { AssetCache } from "../../model/asset/asset-cache";
-import { Pending } from "../../model/asset/pending";
 import { AtomicAsync } from "../../annotations/atomic.annotation";
 
 @Injectable()
@@ -20,7 +19,6 @@ export class AssetService {
 
     /* properties */
     @LocalStorage() private cache: AssetCache;
-    private pending: Pending[];
     private observers = { history: [], update: [] };
 
     /* methods */
@@ -28,12 +26,10 @@ export class AssetService {
     public wipeCache() {
         this.cache = new AssetCache();
         this.observers = { history: [], update: [] };
-        this.pending = new Array<Pending>();
     }
 
     public getAssetHistory(type: number): Observable<GenericResponse> {
         if (!this.cache) this.cache = new AssetCache();
-        if (!this.pending) this.pending = new Array<Pending>();
         if (this.cache.history[type]) {
             // data already there
             // check if data is up to date
@@ -87,7 +83,7 @@ export class AssetService {
                         if (!this.cache.raw[type]) this.cache.raw[type] = [];
                         this.cache.raw[type] = this.cache.raw[type].concat(data.data);
                         //computing cache (synchronously)
-                        this.computeCache(data, type);
+                        this.computeCache(type);
                     }
                 }
                 observer.next(data);
@@ -97,9 +93,9 @@ export class AssetService {
         });
     }
 
-    private computeCache(res: GenericResponse, type: number) {
+    private computeCache(type: number) {
         // updating lastStoredDate
-        this.cache.lastStoredDate[type] = res.data[res.data.length - 1].date;
+        this.cache.lastStoredDate[type] = this.cache.raw[type][this.cache.raw[type].length - 1].date;
 
         let graphOptions = new Array<GraphDynamicOptions>();
         graphOptions.push(new GraphDynamicOptions(this.cache.assetsName[type], 'value'));
