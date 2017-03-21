@@ -65,7 +65,8 @@ describe('Annotation: LocalStorage', () => {
         }
         for (let i = 0; i < 5; i++) {
             mock.getDataAsyncWithBadParams("qwe").subscribe(data => {
-                //due to the fact that we provided a bad id, the default is used. this cause the @AtomicAsync() to provide the same observable created for getDataAsync, that had no id provided too but is called before.
+                //due to the fact that we provided a bad id, the default is used. this cause the @AtomicAsync() to provide the same observable created for getDataAsync, 
+                //that had no id provided too but is called before. so we're expecting the same output of the getDataAsync() function.
                 expect(data).toContain("pippo");    
                 expect(mock['getdataasyncwithbadparamsCounter']).toBeLessThan(2);
             });
