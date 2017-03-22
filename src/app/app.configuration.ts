@@ -5,6 +5,6 @@ export const RoboAdviceConfig = {
   DefaultInitialWorth: 10000,
 
   ApiUrl: 'http://localhost:8080/securedApi/',
-  // ApiUrl: 'http://192.168.2.132:8080/securedApi/',
+  //ApiUrl: 'http://192.168.2.115:8080/securedApi/',
 };
 

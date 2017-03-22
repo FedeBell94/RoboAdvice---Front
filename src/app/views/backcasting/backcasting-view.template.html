@@ -1,9 +1,24 @@
-<h1>
-    Backcasting works!
-</h1>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1>This is the Backcasting page</h1>
+        <h3>Look what would have happen if you had chosen a different strategy on a specific date.</h3>
+        <p>To start you should select a date, choose a preset (or custom) strategy and then click on "PREVIEW" button.</p>
+    </div>
+</div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-12">
+        <div class="info-tile">
+            <div class="input-group">
+                <span class="input-group-addon">Simulation starting date</span>
+                <input class="form-control" type="date" #fromDate name="date" value="2017-03-22">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
         <div class="info-tile">
             <div class="tile-heading"><span>My Strategy</span></div>
             <app-strategy 
@@ -11,14 +26,18 @@
                 [labels]="roboAdviceConfig.AssetClassLabel" 
                 [autoSaving]="false"
                 [saveLabel]="'Preview'" 
-                (save)="myFunction()"
-            ></app-strategy>
+                (save)="onPreviewClick($event, fromDate.value)"></app-strategy>
         </div>
     </div>
-    <div class="col-md-9 " *ngIf="worthHistoryOptions">
+    <div class="col-md-8" *ngIf="backcastingData">
         <div class="info-tile">
             <div class="tile-heading"><span>Backcasting Worth</span></div>
-            <!--<app-line-chart [data]="worthHistoryOptions"></app-line-chart>-->
+            <app-line-chart [data]="backcastingData"></app-line-chart>
+        </div>
+    </div>
+    <div class="col-md-8" *ngIf="!backcastingData">
+        <div class="info-tile">
+            <h1>Click on Preview button to see chart preview</h1>
         </div>
     </div>
 </div>

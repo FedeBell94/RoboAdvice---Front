@@ -43,7 +43,7 @@ export class ApiService {
         return (this.http.get(this.apiUrl + reqAction).map(this.extractData).catch(this.handleError) as any) as Observable<GenericResponse>;
     }
 
-    post(action: string, params: any, options?: RequestOptions): Observable<any> {
+    post(action: string, params: any, options?: RequestOptions): Observable<GenericResponse> {
         let headers: Headers;
         if (!options && !this.defaultOptions) {
             headers = new Headers();

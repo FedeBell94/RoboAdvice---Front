@@ -24,7 +24,8 @@ import {RegisterModule} from "./views/register/register.module";
 import {DemoViewModule} from "./views/demo-view/demo-view.module";
 
 // App modules/components
-import {LayoutsModule} from "./components/common/layouts/layouts.module";
+import { LayoutsModule } from "./components/common/layouts/layouts.module";
+import { BackcastingService } from "./services/backcasting/backcasting.service";
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         StrategyService,
         ManageJsonService,
         AssetService,
+        BackcastingService,
     ],
     bootstrap: [AppComponent]
 })
