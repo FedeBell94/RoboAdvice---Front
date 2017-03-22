@@ -6,7 +6,8 @@ import {registerComponent} from "./views/register/register.component";
 import {blankComponent} from "./components/common/layouts/blank.component";
 import {basicComponent} from "./components/common/layouts/basic.component";
 import {surveyViewComponent} from "./views/survey/survey-view.component";
-import {userHistoryViewComponent} from "./views/user-history-view/user-history-view.component";
+import { userHistoryViewComponent } from "./views/user-history-view/user-history-view.component";
+import { backcastingViewComponent } from "./views/backcasting/backcasting-view.component";
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -19,7 +20,8 @@ export const ROUTES:Routes = [
       {path: 'mainView', component: mainViewComponent},
       {path: 'minorView/:assetClassId/:assetClassName', component: minorViewComponent},
       {path: 'survey', component: surveyViewComponent},
-      {path: 'userHistory', component: userHistoryViewComponent}
+      {path: 'userHistory', component: userHistoryViewComponent},
+      {path: 'backcasting', component: backcastingViewComponent}
     ]
   },
   {

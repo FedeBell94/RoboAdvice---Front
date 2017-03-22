@@ -18,14 +18,13 @@ import {AssetService} from "./services/asset/asset.service";
 import {MainViewModule} from "./views/main-view/main-view.module";
 import {MinorViewModule} from "./views/minor-view/minor-view.module";
 import {SurveyViewModule} from "./views/survey/survey-view.module";
+import {BackcastingViewModule} from "./views/backcasting/backcasting-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {UserHistoryViewModule} from "./views/user-history-view/user-history-view.module";
 
 // App modules/components
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
-
-
 
 @NgModule({
     declarations: [
@@ -43,6 +42,8 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         LoginModule,
         RegisterModule,
         UserHistoryViewModule,
+        BackcastingViewModule,
+
 
         // Modules
         LayoutsModule,
