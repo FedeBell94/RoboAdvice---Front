@@ -1,14 +1,14 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {userHistoryViewComponent} from "./user-history-view.component";
+import {demoViewComponent} from "./demo-view.component";
 
 @NgModule({
   declarations: [
-    userHistoryViewComponent,
+    demoViewComponent,
   ],
   imports     : [
     BrowserModule,
   ],
 })
 
-export class UserHistoryViewModule {}
+export class DemoViewModule {}

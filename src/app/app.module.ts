@@ -21,7 +21,7 @@ import {SurveyViewModule} from "./views/survey/survey-view.module";
 import {BackcastingViewModule} from "./views/backcasting/backcasting-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
-import {UserHistoryViewModule} from "./views/user-history-view/user-history-view.module";
+import {DemoViewModule} from "./views/demo-view/demo-view.module";
 
 // App modules/components
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
@@ -41,7 +41,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         SurveyViewModule,
         LoginModule,
         RegisterModule,
-        UserHistoryViewModule,
+        DemoViewModule,
         BackcastingViewModule,
 
 
