@@ -1,14 +1,14 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { BackcastingService } from './backcasting.service';
+import { BackTestingService } from './back-testing.service';
 
 
-describe('Service: BackcastingService', () => {
+describe('Service: BackTestingService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                    BackcastingService,
+                    BackTestingService,
                 ]
         });
     });

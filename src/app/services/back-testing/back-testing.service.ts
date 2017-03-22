@@ -10,7 +10,7 @@ import { ChartUtils } from "../../model/graph/charts-options";
 import { GraphDynamicOptions } from "../../model/graph/graph-dynamic-options";
 
 @Injectable()
-export class BackcastingService {
+export class BackTestingService {
     constructor(
         private apis: ApiService,
     ) { }
@@ -366,14 +366,15 @@ export class BackcastingService {
 
     /* methods */
 
-    getBackcastingSimulation(str: Strategy, from: string): Observable<GenericResponse> {
+    getBackTestingSimulation(str: Strategy, from: string): Observable<GenericResponse> {
         let obj = {
             from: from,
             strategy: str.asset_class
         }
-        return this.apis.post('backcasting', obj).map((res: GenericResponse) => {
+        return this.apis.post('backTesting', obj).map((res: GenericResponse) => {
             let graph = this.computeData(res.data);
             // let graph = this.computeData(this.mockAnswerBackend.data);
+            console.log(graph);
             return new GenericResponse(1, 0, "", graph);
         });
     }
@@ -381,7 +382,7 @@ export class BackcastingService {
     private computeData(data: any) {
 
         let graphOptions = new Array<GraphDynamicOptions>();
-        graphOptions.push(new GraphDynamicOptions('Worth-Backcasting', 'value'));
+        graphOptions.push(new GraphDynamicOptions('Worth-Backtesting', 'value'));
 
         let dataProvider = [];
         let tmp = [];

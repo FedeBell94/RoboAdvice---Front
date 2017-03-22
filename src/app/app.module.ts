@@ -18,14 +18,14 @@ import {AssetService} from "./services/asset/asset.service";
 import {MainViewModule} from "./views/main-view/main-view.module";
 import {MinorViewModule} from "./views/minor-view/minor-view.module";
 import {SurveyViewModule} from "./views/survey/survey-view.module";
-import {BackcastingViewModule} from "./views/backcasting/backcasting-view.module";
+import {BackTestingViewModule} from "./views/back-testing/back-testing-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {DemoViewModule} from "./views/demo-view/demo-view.module";
 
 // App modules/components
 import { LayoutsModule } from "./components/common/layouts/layouts.module";
-import { BackcastingService } from "./services/backcasting/backcasting.service";
+import { BackTestingService } from "./services/back-testing/back-testing.service";
 
 @NgModule({
     declarations: [
@@ -43,7 +43,7 @@ import { BackcastingService } from "./services/backcasting/backcasting.service";
         LoginModule,
         RegisterModule,
         DemoViewModule,
-        BackcastingViewModule,
+        BackTestingViewModule,
 
 
         // Modules
@@ -61,7 +61,7 @@ import { BackcastingService } from "./services/backcasting/backcasting.service";
         StrategyService,
         ManageJsonService,
         AssetService,
-        BackcastingService,
+        BackTestingService,
     ],
     bootstrap: [AppComponent]
 })

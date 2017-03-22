@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-md-12 text-center">
-        <h1>This is the Backcasting page</h1>
+    <div class="col-md-12">
+        <h1>This is the Backtesting page</h1>
         <h3>Look what would have happen if you had chosen a different strategy on a specific date.</h3>
         <p>To start you should select a date, choose a preset (or custom) strategy and then click on "PREVIEW" button.</p>
     </div>
@@ -11,7 +11,7 @@
         <div class="info-tile">
             <div class="input-group">
                 <span class="input-group-addon">Simulation starting date</span>
-                <input class="form-control" type="date" #fromDate name="date" value="2017-03-22">
+                <input class="form-control" type="date" #fromDate name="date" (change)="checkDate($event.target.value)" [value]="startingDate">
             </div>
         </div>
     </div>
@@ -29,13 +29,13 @@
                 (save)="onPreviewClick($event, fromDate.value)"></app-strategy>
         </div>
     </div>
-    <div class="col-md-8" *ngIf="backcastingData">
+    <div class="col-md-8" *ngIf="backTestingData">
         <div class="info-tile">
-            <div class="tile-heading"><span>Backcasting Worth</span></div>
-            <app-line-chart [data]="backcastingData"></app-line-chart>
+            <div class="tile-heading"><span>Backtesting Worth</span></div>
+            <app-line-chart [data]="backTestingData"></app-line-chart>
         </div>
     </div>
-    <div class="col-md-8" *ngIf="!backcastingData">
+    <div class="col-md-8" *ngIf="!backTestingData">
         <div class="info-tile">
             <h1>Click on Preview button to see chart preview</h1>
         </div>

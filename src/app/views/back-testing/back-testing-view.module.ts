@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {backcastingViewComponent} from "./backcasting-view.component";
+import {backTestingViewComponent} from "./back-testing-view.component";
 import {MainViewModule} from "../main-view/main-view.module";
 
 @NgModule({
     declarations: [
-      backcastingViewComponent
+      backTestingViewComponent
     ],
     imports     : [
       BrowserModule,
@@ -13,4 +13,4 @@ import {MainViewModule} from "../main-view/main-view.module";
     ],
 })
 
-export class BackcastingViewModule {}
+export class BackTestingViewModule {}
