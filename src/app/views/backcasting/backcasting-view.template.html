@@ -2,10 +2,23 @@
     Backcasting works!
 </h1>
 
-<app-strategy
-    [colors]="roboAdviceConfig.PieChartColor"
-    [labels]="roboAdviceConfig.AssetClassLabel"
-    [autoSaving]="false"
-    [saveLabel]="'Preview'"
-    (save)="myFunction()"
-></app-strategy>
+<div class="row">
+    <div class="col-md-3">
+        <div class="info-tile">
+            <div class="tile-heading"><span>My Strategy</span></div>
+            <app-strategy 
+                [colors]="roboAdviceConfig.PieChartColor" 
+                [labels]="roboAdviceConfig.AssetClassLabel" 
+                [autoSaving]="false"
+                [saveLabel]="'Preview'" 
+                (save)="myFunction()"
+            ></app-strategy>
+        </div>
+    </div>
+    <div class="col-md-9 " *ngIf="worthHistoryOptions">
+        <div class="info-tile">
+            <div class="tile-heading"><span>Backcasting Worth</span></div>
+            <!--<app-line-chart [data]="worthHistoryOptions"></app-line-chart>-->
+        </div>
+    </div>
+</div>

@@ -105,37 +105,40 @@ export class StrategyComponent implements OnInit {
                     this.nothingChanged = true;
                     this.copyArray(this.strategyValues, this.myAttualStrategy);
 
-                    //send new strategy to server
-                    this.strategyValues.pop();
-                    let str: Strategy = new Strategy();
-                    for (let i = 0; i < this.strategyValues.length; i++) {
-                        let asset = new Asset();
-                        asset.assetClassId = i + 1; //server has 1-based ids
-                        asset.percentage = this.strategyValues[i];
-                        str.asset_class.push(asset);
-                    }
-                    str.name = "Custom";
+                    let str: Strategy = this.getStrategyFromArray(this.strategyValues, "Custom");
+        
                     this.strategyService.saveStrategy(str).subscribe((data) => {
                         //everything's fine
                         (window as any).swal('Done!', 'Your strategy has been changed.', 'success');
                         this.save.emit(this.strategyValues);
                         this.showPresetStrategies = false;
                     });
-                    this.strategyValues.push(0);
                 }, (error) => {
                     //nothing
                 });
             }else{
-                // send to outside the component the strategy
-                this.strategyValues.pop();
-                this.save.emit(this.strategyValues);
-                this.strategyValues.push(0);
+                // send to outside the component the strategy                
+                this.save.emit(this.getStrategyFromArray(this.strategyValues, "Custom"));
             }
 
         } else {
             //total is not 100%
             (window as any).swal("Oops", "total must be 100%", "error");
         }
+    }
+
+    getStrategyFromArray(strategyValues: number[], nameStrategy: string): Strategy{
+        strategyValues.pop();
+        let str: Strategy = new Strategy();
+        for (let i = 0; i < strategyValues.length; i++) {
+            let asset = new Asset();
+            asset.assetClassId = i + 1; //server has 1-based ids
+            asset.percentage = this.strategyValues[i];
+            str.asset_class.push(asset);
+        }
+        str.name = nameStrategy;
+        this.strategyValues.push(0);
+        return str;
     }
 
     previewStrategy(id: number) {
