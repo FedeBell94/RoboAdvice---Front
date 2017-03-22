@@ -70,6 +70,7 @@
   <div class="pie-chart-actions">
     <button class="btn btn-default" (click)="resetStrategy()" [disabled]="nothingChanged">RESET</button>
     <button class="btn btn-default" (click)="tooglePresetStrategies()">PRESET</button>
-    <button class="btn btn-default" (click)="emitSave()" [disabled]="nothingChanged">SAVE</button>
+    <button class="btn btn-default" (click)="emitSave()" [disabled]="nothingChanged && autoSaving" >{{saveLabel | uppercase}}</button>
+
   </div>
 </div>

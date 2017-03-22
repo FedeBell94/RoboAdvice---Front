@@ -1,3 +1,11 @@
 <h1>
     Backcasting works!
 </h1>
+
+<app-strategy
+    [colors]="roboAdviceConfig.PieChartColor"
+    [labels]="roboAdviceConfig.AssetClassLabel"
+    [autoSaving]="false"
+    [saveLabel]="'Preview'"
+    (save)="myFunction()"
+></app-strategy>

@@ -11,6 +11,8 @@ import { RoboAdviceConfig } from "../../app.configuration";
 export class backcastingViewComponent {
     constructor() { }
 
+    private roboAdviceConfig = RoboAdviceConfig;
+
     ngOnInit() {
 
     }
