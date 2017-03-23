@@ -13,6 +13,7 @@ import {PortfolioService} from "./services/portfolio/portfolio.service";
 import {StrategyService} from "./services/strategy/strategy.service";
 import {ManageJsonService} from "./services/manage-json/manage-json.service";
 import {AssetService} from "./services/asset/asset.service";
+import {DemoService} from "./services/demo/demo.service";
 
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
@@ -60,6 +61,7 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
         StrategyService,
         ManageJsonService,
         AssetService,
+        DemoService,
     ],
     bootstrap: [AppComponent]
 })

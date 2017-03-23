@@ -29,7 +29,8 @@ import {DefaultStrategiesComponent} from "../../components/default-strategies/de
         LineChartComponent,
         StrategyComponent,
         PieChartComponent,
-      DefaultStrategiesComponent,
+        PortfolioSnapshotComponent,
+        DefaultStrategiesComponent,
     ]
 })
 

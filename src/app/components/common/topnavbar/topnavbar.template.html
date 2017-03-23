@@ -7,9 +7,14 @@
         <ul class="nav navbar-top-links navbar-right">
             <li>
                 <app-worth
-                        *ngIf="getUsername() && getWorth()"
+                        *ngIf="getUsername() && getWorth() && !isDemo()"
                         [myWorth]="getWorth() || 10000"
                         [myProfLoss]="getProfLoss() || 0"
+                ></app-worth>
+                <app-worth
+                        *ngIf="getUsername() && getDemoWorth() && isDemo()"
+                        [myWorth]="getDemoWorth() || 10000"
+                        [myProfLoss]="getDemoProfLoss() || 0"
                 ></app-worth>
             </li>
         </ul>

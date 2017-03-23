@@ -5,6 +5,8 @@ import { Asset } from "../../model/strategy/asset";
 import { PieChartComponent } from "../pie-chart/pie-chart.component";
 import { RoboAdviceConfig } from "../../app.configuration";
 import { ManageJsonService } from "../../services/manage-json/manage-json.service";
+import { Observable } from "rxjs/Observable";
+import { GenericResponse } from "../../services/remote/remote-call/generic-response";
 
 
 @Component({
@@ -20,6 +22,7 @@ export class StrategyComponent implements OnInit {
     ) { }
 
     private roboAdviceConfig = RoboAdviceConfig;
+    private sendInitial: any[] = [];
 
     @Input() labels: string[] = this.roboAdviceConfig.AssetClassLabel;
     @Input() colors: string[] | CanvasGradient[] | CanvasPattern[] = this.roboAdviceConfig.PieChartColor;
@@ -29,6 +32,12 @@ export class StrategyComponent implements OnInit {
     @Input() saveLabel: string = "SAVE";
     @ViewChild('pieChart') canvas: PieChartComponent;
     @Output() save = new EventEmitter();
+    @Output() getInitial(): Observable<GenericResponse> {
+        let obs = Observable.create(observer=> {
+            this.sendInitial.push(observer);
+        });
+        return obs;
+    }
     showPresetStrategies: boolean = false;
     presetStrategy: Array<Array<number>>;
     myAttualStrategy: number[] = [];
@@ -48,6 +57,10 @@ export class StrategyComponent implements OnInit {
                 }
                 this.strategyValues.push(0); // new position stand for empty portion;
                 this.myAttualStrategy.push(0);
+            }
+            for (let i = 0; i < this.sendInitial.length; i++) {
+                this.sendInitial[i].next(new GenericResponse(1, 0, "", this.getStrategyFromArray(this.strategyValues, "Custom")));
+                this.sendInitial[i].complete();
             }
         });
 

@@ -56,6 +56,6 @@ describe('Annotation: LocalStorage', () => {
     mockInstance.bar = "";
     expect(localStorage.getItem(mockInstance.constructor.name + ".testStorage")).toBeNull();
     expect(localStorage.getItem(mockInstance.constructor.name + "._bar")).toBeNull();
-  })
+  });
   
 });
