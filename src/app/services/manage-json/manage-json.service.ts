@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ManageJsonService {
-  private path = '/app/';
+  private path = '/assets/';
 
   constructor (
     private http: Http
