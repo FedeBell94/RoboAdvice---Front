@@ -8,6 +8,7 @@ import {basicComponent} from "./components/common/layouts/basic.component";
 import {surveyViewComponent} from "./views/survey/survey-view.component";
 import { demoViewComponent } from "./views/demo-view/demo-view.component";
 import { backTestingViewComponent } from "./views/back-testing/back-testing-view.component";
+import { forecastingViewComponent } from "./views/forecasting/forecasting-view.component";
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -21,7 +22,8 @@ export const ROUTES:Routes = [
       {path: 'minorView/:assetClassId/:assetClassName', component: minorViewComponent},
       {path: 'survey', component: surveyViewComponent},
       {path: 'demo', component: demoViewComponent},
-      {path: 'backtesting', component: backTestingViewComponent}
+      {path: 'backtesting', component: backTestingViewComponent},
+      {path: 'forecasting', component: forecastingViewComponent},
     ]
   },
   {

@@ -23,6 +23,7 @@ import {BackTestingViewModule} from "./views/back-testing/back-testing-view.modu
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {DemoViewModule} from "./views/demo-view/demo-view.module";
+import {ForecastingViewModule} from "./views/forecasting/forecasting-view.module";
 
 // App modules/components
 import { LayoutsModule } from "./components/common/layouts/layouts.module";
@@ -45,6 +46,7 @@ import { BackTestingService } from "./services/back-testing/back-testing.service
         RegisterModule,
         DemoViewModule,
         BackTestingViewModule,
+        ForecastingViewModule,
 
 
         // Modules
