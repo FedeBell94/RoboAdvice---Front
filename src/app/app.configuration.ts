@@ -4,8 +4,9 @@ export const RoboAdviceConfig = {
   StrategyName: ['BONDS', 'INCOME', 'BALANCED', 'GROWTH', 'STOCKS'],
   DefaultInitialWorth: 10000,
 
-  //ApiUrl: 'http://localhost:8080/securedApi/',
+
+  ApiUrl: 'http://localhost:8080/securedApi/',
   //ApiUrl: 'http://192.168.2.113:8080/securedApi/',
-  ApiUrl: 'http://104.236.70.57:8080/securedApi/',
+  //ApiUrl: 'http://104.236.70.57:8080/securedApi/',
 };
 
