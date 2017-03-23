@@ -8593,6 +8593,16 @@ body.md-skin {
   border-style: solid
 }
 
+.info-tile .tile-heading {
+  text-align: left;
+  color: black;
+  height: 16px;
+  line-height: 16px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase
+}
+
 .cursor-pointer{
   cursor: pointer;
 }
