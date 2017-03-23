@@ -38,7 +38,7 @@ export class DemoService {
     demoDate(strategy: Strategy): Observable<GenericResponse> {
         return Observable.create(observer=> {
             this.apis.post("demo", {
-                strategyInput: strategy.asset_class,
+                strategy: strategy.asset_class,
                 from: this.cache.lastComputedDate,
                 worth: this.cache.worth
             }).subscribe((res) => {
@@ -65,7 +65,7 @@ export class DemoService {
         });
     }
 
-    computeCache(rawData: any, resAsset) {
+    private computeCache(rawData: any, resAsset) {
         if (!rawData) return;
         let graphOptions = new Array<GraphDynamicOptions>();
         graphOptions.push(new GraphDynamicOptions('Worth', 'value'));

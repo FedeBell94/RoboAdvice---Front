@@ -24,7 +24,7 @@
             <li [ngClass]="{active: activeRoute('backtesting')}" *ngIf="isLogged() && !isNewUser()">
                 <a [routerLink]="['/backtesting']"><i class="fa fa-fast-backward"></i> <span class="nav-label">Backtesting</span> </a>
             </li>
-            <li [ngClass]="{active: activeRoute('forecasting')}" *ngIf="isLogged()">
+            <li [ngClass]="{active: activeRoute('forecasting')}" *ngIf="isLogged() && !isNewUser()">
               <a [routerLink]="['/forecasting']"><i class="fa fa-eye"></i> <span class="nav-label">Forecasting</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('demo')}" *ngIf="isLogged()">
