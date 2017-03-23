@@ -11,7 +11,7 @@
         <div class="info-tile">
             <div class="input-group">
                 <span class="input-group-addon">Simulation starting date</span>
-                <input class="form-control" type="date" #fromDate name="date" (change)="checkDate($event.target.value)" [value]="startingDate">
+                <input class="form-control" type="date" #fromDate name="date" (change)="checkDate($event)" [value]="startingDate">
             </div>
         </div>
     </div>
@@ -32,12 +32,12 @@
     <div class="col-md-8" *ngIf="backTestingData">
         <div class="info-tile">
             <div class="tile-heading"><span>Backtesting Worth</span></div>
-            <app-line-chart [data]="backTestingData"></app-line-chart>
+            <app-line-chart [data]="getChartOptions()"></app-line-chart>
         </div>
     </div>
     <div class="col-md-8" *ngIf="!backTestingData">
         <div class="info-tile">
-            <h1>Click on Preview button to see chart preview</h1>
+            <h1>{{textPreview}}</h1>
         </div>
     </div>
 </div>

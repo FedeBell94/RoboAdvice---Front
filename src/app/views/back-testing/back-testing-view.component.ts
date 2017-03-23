@@ -21,17 +21,26 @@ export class backTestingViewComponent {
 
     backTestingData: any;
 
+    textPreview: string = "Click on Preview button to see chart preview";
+
     ngOnInit() {
         let tmp = new Date();
+        tmp.setDate(tmp.getDate()-1);
         this.startingDate = tmp.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
     }
 
-    checkDate(date: string){
-        // check the Date
-        let n = new Date(date);
-        let t = new Date();
-        if (+n >= +t){
-            return;
+    getChartOptions(){
+        return this.backTestingData;
+    }
+
+    checkDate(e: any){
+        //check the Date
+        let d = new Date();
+        d.setDate(d.getDate() - 1);
+        if (e.target.value > d.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')) {
+            e.target.value = d.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+        } else {
+            this.startingDate = e.target.value;
         }
     }
 
@@ -40,6 +49,8 @@ export class backTestingViewComponent {
     }
 
     getBackTesting(str: Strategy, from: string){
+        this.backTestingData = null;
+        this.textPreview = "Loading data...";
         this.backTestingService.getBackTestingSimulation(str, from).subscribe((res)=>{
             if (res.response > 0) {
                 this.backTestingData = res.data;
