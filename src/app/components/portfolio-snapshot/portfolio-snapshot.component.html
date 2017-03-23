@@ -1,5 +1,5 @@
 <div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(percentage), 'tile-error': isLoss(percentage)}">
-    <div class="tile-icon">
+    <div class="tile-icon chart-icon">
         <i class="ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
     </div>
     <div class="tile-heading">
@@ -13,6 +13,8 @@
             <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(percentage), 'ti-arrow-down': isLoss(percentage)}"></i>
             <span *ngIf="percentage">{{percentage | percent:'1.0-2'}}</span>
             <span *ngIf="!percentage">N/A</span>
+            &nbsp;&nbsp;
+            <i class="chart-icon-footer ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
         </span>
     </div>
 </div>

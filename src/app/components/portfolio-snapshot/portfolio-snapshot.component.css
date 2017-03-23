@@ -35910,3 +35910,30 @@ form .no-validate {
 .input-group-addon:not(:first-child) {
   border-left: 0
 }
+
+
+/* LORENZO */
+
+.chart-icon-footer{
+  width: 100px !important;
+  height: 100px !important
+}
+
+@media (max-width: 991px) {
+  .chart-icon-footer{
+    display: none
+  }     
+}
+
+@media (min-width: 992px) and (max-width: 1229px) {
+  .chart-icon{
+    display: none
+  }
+}
+
+@media (min-width: 1230px) {
+  .chart-icon-footer{
+    display: none
+  }     
+}
+

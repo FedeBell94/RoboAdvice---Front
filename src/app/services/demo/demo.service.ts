@@ -41,8 +41,8 @@ export class DemoService {
                 strategyInput: strategy.asset_class,
                 from: this.cache.lastComputedDate,
                 worth: this.cache.worth
-            }).subscribe(res=> {
-                if (res > 0) {
+            }).subscribe((res) => {
+                if (res.response > 0) {
                     this.assetService.getAssets().subscribe(resAsset=> {
                         if (resAsset.response > 0) {
                             if (!this.cache.raw) this.cache.raw = [];
