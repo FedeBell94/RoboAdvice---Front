@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { RoboAdviceConfig } from "../../app.configuration";
@@ -17,9 +17,13 @@ export class backTestingViewComponent {
 
     private roboAdviceConfig = RoboAdviceConfig;
 
+    @ViewChild("previewButton") previewButton: ElementRef;
+
     startingDate: string;
 
     backTestingData: any;
+
+    currentStrategy: Strategy;
 
     textPreview: string = "Click on Preview button to see chart preview";
 
@@ -44,15 +48,22 @@ export class backTestingViewComponent {
         }
     }
 
-    onPreviewClick(str: Strategy, from: string){
-        this.getBackTesting(str, from); 
+    onPreviewClick(from: string){
+        this.getBackTesting(from); 
     }
 
-    getBackTesting(str: Strategy, from: string){
+    onChooseClick(str: Strategy){
+        this.currentStrategy = str;
+        (window as any).swal('Done!', 'Strategy selected', 'success');
+    }
+
+    getBackTesting(from: string){
         this.backTestingData = null;
+        this.previewButton.nativeElement.disabled = true;
         this.textPreview = "Loading data...";
-        this.backTestingService.getBackTestingSimulation(str, from).subscribe((res)=>{
+        this.backTestingService.getBackTestingSimulation(this.currentStrategy, from).subscribe((res)=>{
             if (res.response > 0) {
+                this.previewButton.nativeElement.disabled = false;
                 this.backTestingData = res.data;
             }
         });

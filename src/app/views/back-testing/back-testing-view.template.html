@@ -12,6 +12,11 @@
             <div class="input-group">
                 <span class="input-group-addon">Simulation starting date</span>
                 <input class="form-control" type="date" #fromDate name="date" (change)="checkDate($event)" [value]="startingDate">
+                <div class="input-group-btn">
+                    <button #previewButton class="btn btn-default" type="button" (click)="onPreviewClick(fromDate.value)">
+                            {{'Preview' | uppercase}}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -25,8 +30,9 @@
                 [colors]="roboAdviceConfig.PieChartColor" 
                 [labels]="roboAdviceConfig.AssetClassLabel" 
                 [autoSaving]="false"
-                [saveLabel]="'Preview'" 
-                (save)="onPreviewClick($event, fromDate.value)"></app-strategy>
+                [saveLabel]="'Choose' | uppercase" 
+                (save)="onChooseClick($event)"
+            ></app-strategy>
         </div>
     </div>
     <div class="col-md-8" *ngIf="backTestingData">

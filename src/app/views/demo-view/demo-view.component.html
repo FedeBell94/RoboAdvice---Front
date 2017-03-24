@@ -11,7 +11,7 @@
             <div class="info-tile">
                 <div class="input-group">
                     <span class="input-group-addon">Simulation starting date</span>
-                    <input class="form-control" type="date" name="startDate" [value]="startingDate" (change)="onStartDateChange($event)" [disabled]="hasStarted">
+                    <input #inputStartingDate class="form-control" type="date" name="startDate" [value]="startingDate" (change)="onStartDateChange($event)" [disabled]="hasStarted">
                 </div>
                 <br>
                 <div class="input-group">

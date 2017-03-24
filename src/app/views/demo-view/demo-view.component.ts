@@ -25,6 +25,7 @@ export class demoViewComponent implements OnInit {
     textPreview: string = "Click on 'start' to begin the simulation.";
     chartOptions: any;
     
+    @ViewChild("inputStartingDate") inputDate: ElementRef;
     @ViewChild("nextButton") nextButton: ElementRef;
 
     private lastComputedDay() { return this.demo.getCurrentDate() };
@@ -33,6 +34,7 @@ export class demoViewComponent implements OnInit {
         this.textPreview = "Click on 'start' to begin the simulation.";
         this.textButton = "Start";
         this.chartOptions = null;
+        this.inputDate.nativeElement.disabled = false;
         this.nextButton.nativeElement.disabled = false;
         this.demo.wipeCache();
         this.initData();
@@ -60,6 +62,7 @@ export class demoViewComponent implements OnInit {
         this.textButton = "Next";
         this.chartOptions = null;
 
+        this.inputDate.nativeElement.disabled = true;
         // disable next button, it'll enable when the call will came back
         this.nextButton.nativeElement.disabled = true;
         this.demo.demoDate(this.strategy, this.days).subscribe(res => {
@@ -108,7 +111,6 @@ export class demoViewComponent implements OnInit {
             this.days = 1;
         }else{
             this.days = e.target.value;
-            console.log("days: ", this.days);
         }
     }
 
