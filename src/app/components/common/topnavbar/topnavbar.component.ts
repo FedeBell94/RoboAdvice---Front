@@ -6,6 +6,8 @@ import {PortfolioService} from "../../../services/portfolio/portfolio.service";
 import { AuthService } from "../../../services/remote/authentication.service";
 import { DemoService } from "../../../services/demo/demo.service";
 
+import { RoboAdviceConfig } from "../../../app.configuration";
+
 
 declare var jQuery:any;
 
@@ -22,6 +24,8 @@ export class TopnavbarComponent {
         private auth: AuthService,
         private router: Router,
     ){}
+
+    initialWorth: number = RoboAdviceConfig.DefaultInitialWorth;
 
     toggleNavigation(): void {
         jQuery("body").toggleClass("mini-navbar");

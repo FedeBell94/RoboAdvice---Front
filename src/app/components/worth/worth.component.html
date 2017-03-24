@@ -4,7 +4,7 @@
   </div>
   <div class="right">
     <p class="money"> {{myWorth | currency:'USD':true:'1.2-2'}} </p>
-    <p class="underMoney right">Current worth</p>
+    <p class="underMoney right">Current worth <span *ngIf="demo">(Demo)</span></p>
   </div>
 </div>
 

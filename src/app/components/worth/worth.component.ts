@@ -12,16 +12,13 @@ export class WorthComponent implements OnInit {
 
   @Input() myWorth: number;
   @Input() myProfLoss: number;
+  @Input() demo: boolean = false;
 
   ngOnInit() {
-
   }
 
   isLoss(): boolean{
-    if (this.myProfLoss < 0)
-      return true;
-    else
-      return false;
+    return (this.myProfLoss < 0);
   }
 
 }

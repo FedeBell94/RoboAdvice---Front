@@ -1,63 +1,72 @@
 <div class="wrapper wrapper-content animated fadeInRight" *ngIf="isLogged()">
-  <div class="row">
-      <div class="col-md-12">
-          <h1>This is the DEMO page</h1>
-          <h3>To start simulating, choose a start date and an initial strategy, then click on "NEXT".</h3>
-          <p>You can change your strategy day by day. Clicking on next, another day will be computed. Enjoy!</p>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-md-12">
-          <div class="info-tile">
-              <div class="input-group">
-                  <span class="input-group-addon">Simulation starting date</span>
-                  <input class="form-control" type="date" name="startDate" [value]="startingDate" (change)="onStartDateChange($event)" [disabled]="hasStarted">
-              </div>
-              <br>
-              <div class="input-group">
-                  <span class="input-group-addon">Current portfolio at</span>
-                  <input class="form-control" type="date" value="{{lastComputedDay()}}" disabled>
-                  <div class="input-group-btn">
-                      <button class="btn btn-default" type="button" (click)="demoNextDay(lastComputedDay)">
-                        <span *ngIf="!hasStarted">
-                        {{'Start' | uppercase}}
-                        </span>
-                        <span *ngIf="hasStarted">
-                        {{'Next' | uppercase}}
-                        </span>
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="row" *ngIf="getPortfolio()">
-    <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
-      <app-portfolio-snapshot
-          [assetClassName]="aC.assetClass"
-          [percentage]="aC.percentage"
-          [value]="aC.value"
-      ></app-portfolio-snapshot>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>This is the DEMO page</h1>
+            <h3>To start simulating, choose a start date and an initial strategy, then click on "NEXT".</h3>
+            <p>You can change your strategy day by day. Clicking on next, another day will be computed. Enjoy!</p>
+        </div>
     </div>
-  </div>
-  <div class="row">
-      <div class="col-md-4">
-          <div class="info-tile">
-              <div class="tile-heading"><span>{{"Current Strategy" | uppercase }}</span></div>
-              <app-strategy #strategyComponent [autoSaving]="false" (save)="onStrategySave($event)"></app-strategy>
-          </div>
-      </div>
-      <div class="col-md-8">
-          <div class="info-tile" *ngIf="getChartOptions()">
-              <div class="tile-heading"><span>Simulated worth history</span></div>
-              <app-line-chart [data]="getChartOptions()"></app-line-chart>
-          </div>
-          <div class="info-tile" *ngIf="!getChartOptions()">
-              <h1>Click on 'start' to begin the simulation.</h1>
-          </div>
-      </div>
-  </div>
-  <!--<div class="row" *ngIf="getPortfolio && getPortfolio()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="info-tile">
+                <div class="input-group">
+                    <span class="input-group-addon">Simulation starting date</span>
+                    <input class="form-control" type="date" name="startDate" [value]="startingDate" (change)="onStartDateChange($event)" [disabled]="hasStarted">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">How many days want to simulate each next click?</span>
+                    <input class="form-control" type="number" name="numberDays" min="1" [value]="days" (change)="onNumberDaysChange($event)">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">Current portfolio at</span>
+                    <input class="form-control" type="date" value="{{lastComputedDay()}}" disabled>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" (click)="resetDemo()">
+                            {{'Reset' | uppercase}}
+                        </button>
+                        <button #nextButton class="btn btn-default" type="button" (click)="demoNextDay(lastComputedDay)">
+                            {{textButton | uppercase}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="getPortfolio()">
+        <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
+            <app-portfolio-snapshot 
+                [assetClassName]="aC.assetClass" 
+                [percentage]="aC.percentage" 
+                [value]="aC.value"
+            ></app-portfolio-snapshot>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="info-tile">
+                <div class="tile-heading"><span>{{"Current Strategy" | uppercase }}</span></div>
+                <app-strategy 
+                    #strategyComponent 
+                    [autoSaving]="false" 
+                    (save)="onStrategySave($event)"
+                ></app-strategy>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="info-tile" *ngIf="chartOptions">
+                <div class="tile-heading"><span>Simulated worth history</span></div>
+                <app-line-chart 
+                    [data]="chartOptions"
+                ></app-line-chart>
+            </div>
+            <div class="info-tile" *ngIf="!chartOptions">
+                <h1>{{textPreview}}</h1>
+            </div>
+        </div>
+    </div>
+    <!--<div class="row" *ngIf="getPortfolio && getPortfolio()">
     <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
       <app-portfolio-snapshot
           [assetClassName]="aC.assetClass"

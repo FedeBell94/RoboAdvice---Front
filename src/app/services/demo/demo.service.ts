@@ -34,25 +34,31 @@ export class DemoService {
     setCurrentDate(val: string) {
         this.cache.lastComputedDate = val;
     }
+
+    wipeCache(){
+        this.cache = new DemoCache();
+    }
     
-    demoDate(strategy: Strategy): Observable<GenericResponse> {
-        return Observable.create(observer=> {
-            this.apis.post("demo", {
+    demoDate(strategy: Strategy, days: number): Observable<GenericResponse> {
+        let obj = {
                 strategy: strategy.asset_class,
                 from: this.cache.lastComputedDate,
+                to: this.computeToDate(days),
                 worth: this.cache.worth
-            }).subscribe((res) => {
+        };
+        return Observable.create(observer=> {
+            this.apis.post("demo", obj).subscribe((res) => {
                 if (res.response > 0) {
+                    this.cache.chartOptions = null;
                     this.assetService.getAssets().subscribe(resAsset=> {
                         if (resAsset.response > 0) {
                             if (!this.cache.raw) this.cache.raw = [];
                             this.cache.raw = this.cache.raw.concat(res.data);
                             //let's elaborate data
                             this.computeCache(res.data, resAsset);
-                            
                         }
                         //now let's return data!
-                        observer.next(resAsset);
+                        observer.next(new GenericResponse(1, 0, "", this.cache.chartOptions));
                         observer.complete();
 
                     })
@@ -63,6 +69,12 @@ export class DemoService {
                 }
             });
         });
+    }
+
+    private computeToDate(days: any): string {
+        let d = new Date(this.cache.lastComputedDate);
+        d.setDate(d.getDate()+parseInt(days));
+        return d.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
     }
 
     private computeCache(rawData: any, resAsset) {

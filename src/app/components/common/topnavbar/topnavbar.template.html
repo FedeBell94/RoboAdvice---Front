@@ -8,13 +8,14 @@
             <li>
                 <app-worth
                         *ngIf="getUsername() && getWorth() && !isDemo()"
-                        [myWorth]="getWorth() || 10000"
+                        [myWorth]="getWorth() || initialWorth"
                         [myProfLoss]="getProfLoss() || 0"
                 ></app-worth>
                 <app-worth
                         *ngIf="getUsername() && getDemoWorth() && isDemo()"
-                        [myWorth]="getDemoWorth() || 10000"
+                        [myWorth]="getDemoWorth() || initialWorth"
                         [myProfLoss]="getDemoProfLoss() || 0"
+                        [demo]="true"
                 ></app-worth>
             </li>
         </ul>
