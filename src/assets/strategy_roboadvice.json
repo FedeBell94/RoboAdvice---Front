@@ -1,0 +1,109 @@
+{
+  "strategies": [
+    {
+      "name": "Bonds",
+      "asset_class": [
+        {
+          "assetClassId": "1",
+          "percentage": "95"
+        },
+        {
+          "assetClassId": "2",
+          "percentage": "0"
+        },
+        {
+          "assetClassId": "3",
+          "percentage": "0"
+        },
+        {
+          "assetClassId": "4",
+          "percentage": "5"
+        }
+      ]
+    },
+    {
+      "name": "Income",
+      "asset_class": [
+        {
+          "assetClassId": "1",
+          "percentage": "65"
+        },
+        {
+          "assetClassId": "2",
+          "percentage": "15"
+        },
+        {
+          "assetClassId": "3",
+          "percentage": "10"
+        },
+        {
+          "assetClassId": "4",
+          "percentage": "10"
+        }
+      ]
+    },
+    {
+      "name": "Balanced",
+      "asset_class": [
+        {
+          "assetClassId": "1",
+          "percentage": "30"
+        },
+        {
+          "assetClassId": "2",
+          "percentage": "20"
+        },
+        {
+          "assetClassId": "3",
+          "percentage": "30"
+        },
+        {
+          "assetClassId": "4",
+          "percentage": "20"
+        }
+      ]
+    },
+    {
+      "name": "Growth",
+      "asset_class": [
+        {
+          "assetClassId": "1",
+          "percentage": "20"
+        },
+        {
+          "assetClassId": "2",
+          "percentage": "10"
+        },
+        {
+          "assetClassId": "3",
+          "percentage": "60"
+        },
+        {
+          "assetClassId": "4",
+          "percentage": "10"
+        }
+      ]
+    },
+    {
+      "name": "Stocks",
+      "asset_class": [
+        {
+          "assetClassId": "1",
+          "percentage": "0"
+        },
+        {
+          "assetClassId": "2",
+          "percentage": "0"
+        },
+        {
+          "assetClassId": "3",
+          "percentage": "100"
+        },
+        {
+          "assetClassId": "4",
+          "percentage": "0"
+        }
+      ]
+    }
+  ]
+}
