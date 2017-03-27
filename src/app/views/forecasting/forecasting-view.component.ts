@@ -88,6 +88,13 @@ export class forecastingViewComponent {
 
     ngOnInit() {
         if (!this.auth.isLogged()) return;
+        if (this.state == 'done') {
+            this.forecast.getForecastChartOptions().subscribe(res=> {
+                if (res.response > 0) {
+                    this.chartOptions = res.data;
+                }
+            });
+        }
 
     }
 

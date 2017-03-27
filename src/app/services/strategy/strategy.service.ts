@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../remote/remote-call/remote-call.service';
 import { Strategy } from '../../model/strategy/strategy';
-import {ForecastingService} from "../forecasting/forecasting.service";
 import {isNumber} from "util";
 
 @Injectable()

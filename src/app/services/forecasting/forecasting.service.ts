@@ -32,6 +32,8 @@ export class ForecastingService {
     public state = "none";
     public loading = new LoadingBar(100, 0);
 
+    private nnChartOptions: any;
+
 
     /* Second type of Forecasting */
     getForecastingSimulation(): Observable<GenericResponse> {
@@ -168,11 +170,22 @@ export class ForecastingService {
         }
     }
 
-    public getForecastChartOptions(days: number): Observable<GenericResponse> {
+    public getForecastChartOptions(days?: number): Observable<GenericResponse> {
         let obs: Observable<GenericResponse>;
         obs = Observable.create(observer=> {
+            if (this.nnChartOptions && !days) {
+                //if i have cached
+                observer.next(new GenericResponse(1, 0, "", this.nnChartOptions));
+                observer.complete();
+                return;
+            }
+            if(!days) {
+                //ERROR, missing paramter
+                console.error("missing parameter 'days'", new Error().stack);
+            }
             this.getForecastData(days).subscribe((res)=> {
-                observer.next(new GenericResponse(1, 0, "", this.computeData(res.data)));
+                this.nnChartOptions = this.computeData(res.data);
+                observer.next(new GenericResponse(1, 0, "", this.nnChartOptions));
                 observer.complete();
                 this.state = "done";
             });
