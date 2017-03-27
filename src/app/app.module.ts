@@ -14,6 +14,8 @@ import {StrategyService} from "./services/strategy/strategy.service";
 import {ManageJsonService} from "./services/manage-json/manage-json.service";
 import {AssetService} from "./services/asset/asset.service";
 import {DemoService} from "./services/demo/demo.service";
+import {ForecastingService} from "./services/forecasting/forecasting.service";
+import {NeuralNetworkService} from "./services/forecasting/neural-network.service";
 
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
@@ -66,6 +68,8 @@ import { BackTestingService } from "./services/back-testing/back-testing.service
         AssetService,
         DemoService,
         BackTestingService,
+        ForecastingService,
+        NeuralNetworkService,
     ],
     bootstrap: [AppComponent]
 })

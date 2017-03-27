@@ -1,3 +1,51 @@
-<h1>
-    {{synaptic | json}}
-</h1>
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Warning!</strong> This is an experimental feature! The forecast data is not reliable, use at your own risk.
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" *ngIf="isLogged()">
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Welcome to the Forecast page</h1>
+            <h3>This is an experimental feature, be patient if it will require a few minutes to load the data!</h3>
+            <p>You can have a forecast about the trend of your portfolio based on the general market trend. Enjoy!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="info-tile">
+                <button class="btn btn-default" *ngIf="state == 'none'" (click)="prepareNeuralNetwork()">Prepare NN</button>
+                <p *ngIf="state == 'trainingNN'">The system is loading. This may take some time, you can continue navigating the application and come back later.</p>
+                <button class="btn btn-default" *ngIf="state == 'ready'" (click)="getForecastingData()">Get Forecast</button>
+                <p *ngIf="state == 'ready'"> The network is ready. Click on 'Get Forecast' to see the results</p>
+                <br>
+                
+                <div class="progress" *ngIf="state == 'trainingNN'">
+                    <div class="progress-bar progress-bar-striped active" 
+                            role="progressbar" 
+                            attr.aria-valuenow="{{loading.current}}" 
+                            attr.aria-valuemin="0" 
+                            attr.aria-valuemax="{{loading.total}}" 
+                            [style.width]="loading.current + '%'">
+                        <span>{{loading.quote}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="info-tile" *ngIf="state == 'done' && getChartOptions()">
+                <div class="tile-heading"><span>Simulated future trend</span></div>
+                <app-line-chart [data]="getChartOptions()"></app-line-chart>
+            </div>
+        </div>
+    </div>
+
+</div>

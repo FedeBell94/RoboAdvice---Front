@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { RoboAdviceConfig } from "../../app.configuration";
@@ -6,6 +6,10 @@ import { Strategy } from "../../model/strategy/strategy";
 import { Observable } from "rxjs/Observable";
 import { BackTestingService } from "../../services/back-testing/back-testing.service";
 import { StrategyService } from "../../services/strategy/strategy.service";
+import { AuthService } from "../../services/remote/authentication.service";
+import { ForecastingService, LoadingBar } from "../../services/forecasting/forecasting.service";
+
+let mnist = require('mnist');
 
 @Component({
     selector: 'forecastingView',
@@ -15,60 +19,56 @@ import { StrategyService } from "../../services/strategy/strategy.service";
 export class forecastingViewComponent {
     constructor(
         private data: BackTestingService,
+        private auth: AuthService,
         private strategy: StrategyService,
+        private forecast: ForecastingService,
+        private _nz: NgZone,
     ) { }
-
     private roboAdviceConfig = RoboAdviceConfig;
-    private synaptic = (window as any).synaptic.Architect;
+    private chartOptions;
+    get loading() {
+        return this.forecast.loading;
+    }
+    get state() {
+        return this.forecast.state;
+    }
 
-    ngOnInit() {
-        const synaptic = (window as any).synaptic;
-        Observable.create(observer=> {
-            this.strategy.getStrategy().subscribe((resStrategy)=> {
-                if (resStrategy.response <= 0) return;
-                //now i got the strategy
-                let strat = new Strategy();
-                strat.asset_class = resStrategy.data;
-                this.data.getRawBackTestingSimulation(strat, "2014-04-30").subscribe((resData)=> {
-                    if (resData.response <= 0) return;
-                    //now i got the raw data
-                    let grouped = this.groupByDate(resData.data);
-                    let trainingData = this.getTrainingData(grouped);
-                });
+    isLogged() {
+        return this.auth.isLogged();
+    }
 
-            });
+    hasNNCached() {
+        return this.forecast.hasCached();
+    }
 
+    getChartOptions() {
+        return this.chartOptions;
+    }
 
+    prepareNeuralNetwork() {
+        this.forecast.prepareNN().subscribe(res=> {
+            if (res.response <= 0) {
+                // TODO: print an error
+                return;
+            }
+            
+            // progress update has been sent
+            if (this.loading.current == this.loading.total) {
+                //TODO: loading has finished
+            }
 
-
-            setTimeout(()=> {
-                let net = new synaptic.Architect.Perceptron(180*4, 100, 20, 4);
-                let trainingData = [];
-                for (let i = 0; i < 180; i++) {
-
-                }
-            }, 1);
-
+            // training is made into a web worker, so we need to call NgZone to update the view
+            this._nz.run(()=> {});
         });
+    }
 
+    getForecastingData() {
         
     }
 
-    private getTrainingData(data) {
-        let r;
-        for (let i = 0; i < data.length - 180; i++) {
-            //foreach set of 180 days starting from initial date
-            for (let j = 0; j < 180; j++) {
-                
-            }
-        }
+    ngOnInit() {
+        if (!this.auth.isLogged()) return;
+
     }
 
-    private groupByDate(data) {
-        let r;
-        for (let i = 0; i < data.length; i++) {
-            r[data[i].date].push(data[i]);
-        }
-        return r;
-    }
 }
