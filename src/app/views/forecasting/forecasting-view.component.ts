@@ -26,10 +26,10 @@ export class forecastingViewComponent {
     private chartOptions;
 
     /* Second type of forecasting */
-    forecastingData: any;
+    private forecastingData: any;
 
-    getForecasting(from: string){
-        this.forecastingData = null;
+    getForecasting(){
+        if (this.forecastingData) return;
         this.forecast.getForecastingSimulation().subscribe((res)=>{
             if (res.response > 0) {
                 this.forecastingData = res.data;
@@ -95,6 +95,8 @@ export class forecastingViewComponent {
                 }
             });
         }
+
+        this.getForecasting();
 
     }
 

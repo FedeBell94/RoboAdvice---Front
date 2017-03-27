@@ -34,7 +34,7 @@ export class NeuralNetworkService {
     private trainer;
     private currentIteration = 0;
 
-    @LocalStorage() 
+    //@LocalStorage() this require 1.6GB Memory
     private neuralNetwork;
 
     public hasCached(): boolean {
