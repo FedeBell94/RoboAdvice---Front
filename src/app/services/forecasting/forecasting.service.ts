@@ -68,24 +68,16 @@ export class ForecastingService {
     }
     /* end */
 
-    getForecastData(version: string) {
+    getForecastData(days: number): Observable<GenericResponse> {
         let obs: Observable<GenericResponse>;
-        if (version == "federico") {
-            obs = Observable.create(observer=> {
-                this.apis.get("forecast", {name: version}).subscribe(data=> {
-                    if (data.response > 0) {
-                        let raw = data.data;
-                        this.strategy.getStrategy().subscribe(resStrategy=> {
-                            if (resStrategy.response > 0) {
-                                let str: Strategy = resStrategy.data;
-                                
-                            }
-                        });
-                    }
-                });
-            });
+        obs = Observable.create(observer=> {
+            setTimeout(()=> {
+                observer.next(new GenericResponse(1, 0, "", this.nn.activate(days)));
+                observer.complete();
+            }, 1);
+        });
+        return obs;
             
-        }
     }
 
     public hasCached() {
@@ -179,7 +171,11 @@ export class ForecastingService {
     public getForecastChartOptions(days: number): Observable<GenericResponse> {
         let obs: Observable<GenericResponse>;
         obs = Observable.create(observer=> {
-
+            this.getForecastData(days).subscribe((res)=> {
+                observer.next(new GenericResponse(1, 0, "", this.computeData(res.data)));
+                observer.complete();
+                this.state = "done";
+            });
         });
         return obs;
     }

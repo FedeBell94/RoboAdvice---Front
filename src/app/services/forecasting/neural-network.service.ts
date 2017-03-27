@@ -114,6 +114,46 @@ export class NeuralNetworkService {
         });
         return obs;
     }
+
+    public activate(days: number) {
+        let results = [];
+        let todate = new Date();
+        let classes: number;
+        todate.setDate(todate.getDate() + 1);
+
+        //getting last 6 months of data
+        let input = this.trainingData[this.trainingData.length - 1].input;
+        console.log("first input:", input);
+
+        //for each requested day
+        for (let i = 0; i < days; i++) {
+            //activate network
+            let out = this.neuralNetwork.activate(input);
+            //get the results
+            for (let j = 1; j <= out.length; j++) {
+                classes = out.length;
+                results.push({
+                    date: todate.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-'),
+                    assetClassId: j,
+                    value: out[j - 1] * this.maxValue
+                });
+            }
+            //removing first day and adding the new one
+            let addr = input.length / classes;
+            for (let j = 0; j < out.length; j++) {
+                //insert last
+                input.splice(addr * j + addr - 1, 0, out[j]);
+
+                //removing first
+                input.splice(addr * j, 1);
+            }
+            
+            //adding one day
+            todate.setDate(todate.getDate() + 1);
+        }
+        console.log("over:", results);
+        return results;
+    }
     
     private getTrainingData(data) {
         console.log("data is:", data);
