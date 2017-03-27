@@ -27,7 +27,7 @@
             <li [ngClass]="{active: activeRoute('forecasting')}" *ngIf="isLogged() && !isNewUser()">
               <a [routerLink]="['/forecasting']"><i class="fa fa-eye"></i> <span class="nav-label">Forecasting</span> </a>
             </li>
-            <li [ngClass]="{active: activeRoute('demo')}" *ngIf="isLogged()">
+            <li [ngClass]="{active: activeRoute('demo')}" *ngIf="isLogged() && !isNewUser()">
               <a [routerLink]="['/demo']"><i class="fa fa-tv"></i> <span class="nav-label">Demo</span> </a>
             </li>
             <li *ngIf="isLogged()">

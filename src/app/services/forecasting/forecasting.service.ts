@@ -37,6 +37,12 @@ export class ForecastingService {
     private nnChartOptions: any;
 
 
+    getRawForecastingData(): Observable<GenericResponse> {
+      return this.apis.get('forecast').map((res: GenericResponse) => {
+        return new GenericResponse(1, 0, "", res.data);
+      });
+    }
+
     /* Second type of Forecasting */
     getForecastingSimulation(): Observable<GenericResponse> {
         return this.apis.get('forecast').map((res: GenericResponse) => {
@@ -81,7 +87,7 @@ export class ForecastingService {
             }, 1);
         });
         return obs;
-            
+
     }
 
     public hasCached() {
@@ -98,13 +104,13 @@ export class ForecastingService {
         // 4)       receiving informations each iteration to up the progress bar
         // 5)   if yes, get the neural network from the cache
         // 6)   preparation done!
-        // 
+        //
         // in the meanwhile, GenericResponses are sent to the observer to notify the state of the loading
-        
+
         let obs: Observable<GenericResponse>;
         this.loading = new LoadingBar(0, 0);
 
-        
+
         this.state = "trainingNN";
         // STEP 1)
         if (this.nn.hasCached()) {

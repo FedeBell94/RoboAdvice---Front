@@ -12,4 +12,10 @@ export class surveyViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  scrollUp(){
+        setTimeout(()=>{
+            (window).scrollTo(0,0);
+        }, 10)
+  }
+  
 }

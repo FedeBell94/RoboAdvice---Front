@@ -1,12 +1,17 @@
-<div class="text-center m-t-lg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <a class="btn btn-default back-button" [attr.href]="'#chooser'" (click)="scrollUp()">
+            <span aria-hidden="true">&larr;</span>
+        </a>
+        <div class="text-center m-t-lg">
+            <h1>
+                Welcome to RoboAdivce+
+            </h1>
+            <small>To start using the service you need to choose a strategy.</small>
 
-  <h1>
-    Welcome to RoboAdivce+
-  </h1>
-  <small>To start using the service you need to choose a strategy.</small>
+            <app-survey>
 
-  <app-survey>
-
-  </app-survey>
-
+            </app-survey>
+        </div>
+    </div>
 </div>

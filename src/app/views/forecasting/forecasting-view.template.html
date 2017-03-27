@@ -5,7 +5,7 @@
 <div class="wrapper wrapper-content animated fadeInRight" *ngIf="isLogged()">
     <div class="row">
         <div class="col-md-12">
-            
+
         </div>
     </div>
 
@@ -30,21 +30,23 @@
                 </div>
                 <p *ngIf="state == 'ready'"> The network is ready. Click on 'Get Forecast' to see the results</p>
                 <br>
-                
+
                 <div class="progress" *ngIf="state == 'trainingNN'">
-                    <div class="progress-bar progress-bar-striped active" 
-                            role="progressbar" 
-                            attr.aria-valuenow="{{loading.current}}" 
-                            attr.aria-valuemin="0" 
-                            attr.aria-valuemax="{{loading.total}}" 
+                    <div class="progress-bar progress-bar-striped active"
+                            role="progressbar"
+                            attr.aria-valuenow="{{loading.current}}"
+                            attr.aria-valuemin="0"
+                            attr.aria-valuemax="{{loading.total}}"
                             [style.width]="loading.current + '%'">
                         <span>{{loading.quote}}</span>
                     </div>
                 </div>
+              <button class="btn btn-default"  (click)="onRecommendedMeClick()">Recommended Me</button>
+
 
             </div>
         </div>
-    </div>    
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="info-tile" *ngIf="state == 'done' && getChartOptions()">

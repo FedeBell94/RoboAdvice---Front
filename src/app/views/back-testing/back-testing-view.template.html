@@ -13,7 +13,7 @@
                 <span class="input-group-addon">Simulation starting date</span>
                 <input class="form-control" type="date" #fromDate name="date" (change)="checkDate($event)" [value]="startingDate">
                 <div class="input-group-btn">
-                    <button #previewButton class="btn btn-default" type="button" (click)="onPreviewClick(fromDate.value)">
+                    <button #previewButton class="btn btn-default" type="button" (click)="onPreviewClick(fromDate.value)" disabled>
                             {{'Preview' | uppercase}}
                     </button>
                 </div>
