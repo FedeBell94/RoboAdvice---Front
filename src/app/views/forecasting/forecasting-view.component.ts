@@ -24,6 +24,24 @@ export class forecastingViewComponent {
     ) { }
     private roboAdviceConfig = RoboAdviceConfig;
     private chartOptions;
+
+    /* Second type of forecasting */
+    forecastingData: any;
+
+    getForecasting(from: string){
+        this.forecastingData = null;
+        this.forecast.getForecastingSimulation().subscribe((res)=>{
+            if (res.response > 0) {
+                this.forecastingData = res.data;
+            }
+        });
+    }
+
+    getChartOptionsSecondType(){
+        return this.forecastingData;
+    }
+    /* end */
+
     get loading() {
         return this.forecast.loading;
     }

@@ -48,4 +48,13 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12" *ngIf="forecastingData">
+            <div class="info-tile">
+                <div class="tile-heading"><span>Forecasting Simulation</span></div>
+                <app-line-chart [data]="getChartOptionsSecondType()"></app-line-chart>
+            </div>
+        </div>
+    </div>
+
 </div>

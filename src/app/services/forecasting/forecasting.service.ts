@@ -33,6 +33,41 @@ export class ForecastingService {
     public loading = new LoadingBar(100, 0);
 
 
+    /* Second type of Forecasting */
+    getForecastingSimulation(): Observable<GenericResponse> {
+        return this.apis.get('forecast').map((res: GenericResponse) => {
+            let graph = this.computeData(res.data);
+            // let graph = this.computeData(this.mockAnswerBackend.data);
+            console.log(graph);
+            return new GenericResponse(1, 0, "", graph);
+        });
+    }
+
+    private computeData(data: any) {
+
+        let graphOptions = new Array<GraphDynamicOptions>();
+        graphOptions.push(new GraphDynamicOptions('ForecastingSimulation', 'value'));
+
+        let dataProvider = [];
+        let tmp = [];
+        for (let i = 0; i < data.length; i++) {
+            if (!tmp[data[i].date])
+                tmp[data[i].date] = 0;
+
+            tmp[data[i].date] += data[i].value;
+        }
+
+        for (let y in tmp) {
+            dataProvider.push({
+                date: y,
+                value: Math.round(tmp[y] * 100) / 100,
+            });
+        }
+
+        return ChartUtils.getOptions(dataProvider, graphOptions);
+    }
+    /* end */
+
     getForecastData(version: string) {
         let obs: Observable<GenericResponse>;
         if (version == "federico") {
