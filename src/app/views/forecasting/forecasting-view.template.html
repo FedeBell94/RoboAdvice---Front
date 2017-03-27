@@ -21,7 +21,7 @@
             <div class="info-tile">
                 <button class="btn btn-default" *ngIf="state == 'none'" (click)="prepareNeuralNetwork()">Prepare NN</button>
                 <p *ngIf="state == 'trainingNN'">The system is loading. This may take some time, you can continue navigating the application and come back later.</p>
-                <button class="btn btn-default" *ngIf="state == 'ready'" (click)="getForecastingData(15)">Get Forecast</button>
+                <button class="btn btn-default" *ngIf="state == 'ready'" (click)="getForecastingData(180)">Get Forecast</button>
                 <p *ngIf="state == 'ready'"> The network is ready. Click on 'Get Forecast' to see the results</p>
                 <br>
                 
