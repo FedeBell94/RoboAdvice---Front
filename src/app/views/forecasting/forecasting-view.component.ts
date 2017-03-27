@@ -52,7 +52,14 @@ export class forecastingViewComponent {
     isLogged() {
         return this.auth.isLogged();
     }
-
+    onRecommendedMeClick(){
+        this.forecast.getRawForecastingData().subscribe((res)=>{
+            if(res.response>0){
+              let recommendedStrategy: Strategy =  this.strategy.getRecommendedStrategy(res.data);
+                console.log(recommendedStrategy);
+            }
+        });
+    }
     hasNNCached() {
         return this.forecast.hasCached();
     }
@@ -67,7 +74,7 @@ export class forecastingViewComponent {
                 // TODO: print an error
                 return;
             }
-            
+
             // progress update has been sent
             if (this.loading.current == this.loading.total) {
                 //TODO: loading has finished
