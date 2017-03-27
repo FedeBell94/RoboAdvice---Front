@@ -33,9 +33,8 @@ export class PieChartComponent implements OnInit {
   }
 
   rePaint() {
-    this.setupCanvas();
-
-    this.draw();
+      this.setupCanvas();
+      this.draw();
   }
 
   changeValues(values: Array<number>) {
