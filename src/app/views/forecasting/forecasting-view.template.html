@@ -18,10 +18,16 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="info-tile">
+            <div class="info-tile" *ngIf="status != 'done'">
                 <button class="btn btn-default" *ngIf="state == 'none'" (click)="prepareNeuralNetwork()">Prepare NN</button>
                 <p *ngIf="state == 'trainingNN'">The system is loading. This may take some time, you can continue navigating the application and come back later.</p>
-                <button class="btn btn-default" *ngIf="state == 'ready'" (click)="getForecastingData(180)">Get Forecast</button>
+                <div class="input-group" *ngIf="state == 'ready' || state == 'done'">
+                    <span class="input-group-addon">How many days do you want to forecast? (1 to 180)</span>
+                    <input class="form-control" type="number" #forecastDays name="forecastDays" value="15">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" (click)="getForecastingData(forecastDays.value)">Get Forecast</button>
+                    </div>
+                </div>
                 <p *ngIf="state == 'ready'"> The network is ready. Click on 'Get Forecast' to see the results</p>
                 <br>
                 

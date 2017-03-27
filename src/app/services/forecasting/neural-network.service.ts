@@ -25,17 +25,26 @@ export class NeuralNetworkService {
         private assetService: AssetService,
     ) { }
     public static TrainingRate = .25;
-    public static TrainingIterations = 10;
-    public static ErrorRatio = 0.000001;
-    public startingTrainingDate: string = "2016-03-27";
+    public static TrainingIterations = 10000;
+    public static ErrorRatio = 0.000007;
+    public static BackDays = 30;
+    public startingTrainingDate: string = "2015-01-27";
 
     private maxValue = 10000;
     private trainingData: any;
     private trainer;
     private currentIteration = 0;
+    private assetClassesNumber = 4;
 
     //@LocalStorage() this require 1.6GB Memory
     private neuralNetwork;
+
+    public wipeCache() {
+        this.trainingData = undefined;
+        this.trainer = undefined;
+        this.currentIteration = 0;
+        this.neuralNetwork = undefined;
+    }
 
     public hasCached(): boolean {
         // TODO: check if there is a nn cached
@@ -58,9 +67,11 @@ export class NeuralNetworkService {
         const Network = synaptic.Network;
         const Trainer = synaptic.Trainer;
 
-        const inputLayer = new Layer(720);
-        const hiddenLayer = new Layer(50);
-        const outputLayer = new Layer(4);
+        const inputSize = NeuralNetworkService.BackDays * this.assetClassesNumber;
+
+        const inputLayer = new Layer(inputSize);
+        const hiddenLayer = new Layer(Math.round(inputSize / 10));
+        const outputLayer = new Layer(this.assetClassesNumber);
 
         inputLayer.project(hiddenLayer);
         hiddenLayer.project(outputLayer);
@@ -85,6 +96,14 @@ export class NeuralNetworkService {
 
     public initNetwork(data: any) {
         let grouped = this.groupByDate(data);
+        
+        let n = 0;
+        const firstKey = Object.keys(grouped)[0];
+        for (let i = 0; i < grouped[firstKey].length; i++) {
+            n = grouped[firstKey][i].assetClassId > n ? grouped[firstKey][i].assetClassId : n;
+        }
+        this.assetClassesNumber = n;
+
         this.trainingData = this.getTrainingData(grouped);
     }
 
@@ -101,7 +120,7 @@ export class NeuralNetworkService {
                 schedule: {
                     every: 1,
                     do: (data)=> {
-                        console.log("error", (Math.round(data.error * this.maxValue * 100 * 1000) / 1000) + "%", "iterations", data.iterations, "rate", data.rate);
+                        console.log("error", (Math.round(data.error * this.maxValue * 100 * 100) / 100) + "%", "iterations", data.iterations, "rate", data.rate);
                         this.currentIteration++;
                         observer.next(new GenericResponse(1, 0, "", 1));    //sending info about completeness
                     }
@@ -109,7 +128,6 @@ export class NeuralNetworkService {
             }).then(res=> {
                 observer.next(new GenericResponse(1, 0, "", NeuralNetworkService.TrainingIterations - this.currentIteration));
                 observer.complete();
-                console.log("training ended");
             });
         });
         return obs;
@@ -119,11 +137,10 @@ export class NeuralNetworkService {
         let results = [];
         let todate = new Date();
         let classes: number;
-        todate.setDate(todate.getDate() + 1);
+        todate.setDate(todate.getDate());
 
         //getting last 6 months of data
-        let input = this.trainingData[this.trainingData.length - 1].input;
-        console.log("first input:", input);
+        let input = this.trainingData[this.trainingData.length - 2].input;
 
         //for each requested day
         for (let i = 0; i < days; i++) {
@@ -151,12 +168,10 @@ export class NeuralNetworkService {
             //adding one day
             todate.setDate(todate.getDate() + 1);
         }
-        console.log("over:", results);
         return results;
     }
     
     private getTrainingData(data) {
-        console.log("data is:", data);
         // data is in format
         // { "2016-01-01": [{assetClassId: 1, date: "2016-01-01", "value": 1364.1233} ...]}
         // 
@@ -178,14 +193,14 @@ export class NeuralNetworkService {
             di++;
         }
         let ts = [];
-        for (let i = 0; i < r[1].length - 181; i++) {
-            //foreach set of 180 days starting from initial date, plus the result
+        for (let i = 0; i < r[1].length - NeuralNetworkService.BackDays - 1; i++) {
+            //foreach set of NeuralNetworkService.BackDays days starting from initial date, plus the result
             let inp = [];
             let out = [];
             for (let j = 0; j < r.length; j++) {
                 if (!r[j]) continue;
-                inp = inp.concat(r[j].slice(i, i + 180));
-                out.push(r[j][i + 180]);
+                inp = inp.concat(r[j].slice(i, i + NeuralNetworkService.BackDays));
+                out.push(r[j][i + NeuralNetworkService.BackDays]);
             }
             let input = [], output = [];
             //normalizing data

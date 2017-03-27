@@ -18,6 +18,7 @@ import { AssetService } from "../asset/asset.service";
 import { StrategyService } from "../strategy/strategy.service";
 import { NeuralNetworkService } from "./neural-network.service";
 import { BackTestingService } from "../back-testing/back-testing.service";
+import { PortfolioService } from "../portfolio/portfolio.service";
 
 @Injectable()
 export class ForecastingService {
@@ -27,6 +28,7 @@ export class ForecastingService {
         private assetService: AssetService,
         private nn: NeuralNetworkService,
         private backtesting: BackTestingService,
+        private portfolio: PortfolioService,
     ) { }
 
     public state = "none";
@@ -184,10 +186,20 @@ export class ForecastingService {
                 console.error("missing parameter 'days'", new Error().stack);
             }
             this.getForecastData(days).subscribe((res)=> {
-                this.nnChartOptions = this.computeData(res.data);
-                observer.next(new GenericResponse(1, 0, "", this.nnChartOptions));
-                observer.complete();
-                this.state = "done";
+                this.portfolio.getWorth().subscribe(resProtfolio=> {
+                    if (resProtfolio.response > 0) {
+                        this.nnChartOptions = this.computeData(res.data);
+                        let diff = resProtfolio.data - this.nnChartOptions.dataProvider[0].value;
+                        for (let i = 0; i < this.nnChartOptions.dataProvider.length; i++) {
+                            this.nnChartOptions.dataProvider[i].value += diff;
+                        }
+                        this.state = "done";
+                        observer.next(new GenericResponse(1, 0, "", this.nnChartOptions));
+                        observer.complete();
+                    } else {
+                        // TODO: handle this error
+                    }
+                });
             });
         });
         return obs;

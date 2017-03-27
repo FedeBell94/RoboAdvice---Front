@@ -79,6 +79,7 @@ export class forecastingViewComponent {
     }
 
     getForecastingData(days: number) {
+        this.chartOptions = null;
         this.forecast.getForecastChartOptions(days).subscribe(res=> {
             if (res.response > 0) {
                 this.chartOptions = res.data;

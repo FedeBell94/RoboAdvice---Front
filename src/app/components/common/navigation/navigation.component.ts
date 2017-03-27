@@ -3,7 +3,8 @@ import {Router} from '@angular/router';
 
 import {AuthService} from "../../../services/remote/authentication.service";
 import {PortfolioService} from "../../../services/portfolio/portfolio.service";
-import {AssetService} from "../../../services/asset/asset.service";
+import { AssetService } from "../../../services/asset/asset.service";
+import { NeuralNetworkService } from "../../../services/forecasting/neural-network.service";
 
 declare var jQuery:any;
 
@@ -20,6 +21,7 @@ export class NavigationComponent {
         private auth: AuthService,
         private portfolio: PortfolioService,
         private assetService: AssetService,
+        private neural: NeuralNetworkService,
     ) {}
 
     ngAfterViewInit() {
@@ -42,6 +44,7 @@ export class NavigationComponent {
     logout(){
         this.portfolio.wipeCache();
         this.assetService.wipeCache();
+        this.neural.wipeCache();
         this.auth.logout();
     }
 
