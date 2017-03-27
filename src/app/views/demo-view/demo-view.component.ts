@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { AuthService } from "../../services/remote/authentication.service";
 import { DemoService } from "../../services/demo/demo.service";
 import { Strategy } from "../../model/strategy/strategy";
@@ -9,7 +9,7 @@ import { StrategyComponent } from "../../components/strategy/strategy.component"
     templateUrl: './demo-view.component.html',
     styleUrls: ['./demo-view.component.css']
 })
-export class demoViewComponent implements OnInit {
+export class demoViewComponent implements OnInit, OnDestroy {
 
     constructor(
         private auth: AuthService,
@@ -117,6 +117,10 @@ export class demoViewComponent implements OnInit {
     ngOnInit() {
         //set default date
         this.initData();
+    }
+
+    ngOnDestroy(){
+        this.resetDemo();
     }
 
     private initData(){
