@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../remote/remote-call/remote-call.service';
 import { Strategy } from '../../model/strategy/strategy';
 import {isNumber} from "util";
+import {Asset} from "../../model/strategy/asset";
 
 @Injectable()
 export class StrategyService {
@@ -20,7 +21,7 @@ export class StrategyService {
             if( (i+1) == rawForecastData[i].assetClassId){
                 deltaArray[i] = 0 - rawForecastData[i].value;
             }else{
-                break;
+              break;
             }
         }
         let min: number = 0;
@@ -36,6 +37,7 @@ export class StrategyService {
         }
         suggestStrategy.name = "Recommended Strategy";
         for( let i=0; i<deltaArray.length; i++){
+          suggestStrategy.asset_class[i] = new Asset();
           suggestStrategy.asset_class[i].assetClassId = i+1;
           suggestStrategy.asset_class[i].percentage= Math.round(100*deltaArray[i]/sum);
 
