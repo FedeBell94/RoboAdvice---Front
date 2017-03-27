@@ -54,6 +54,7 @@ export class backTestingViewComponent {
 
     onChooseClick(str: Strategy){
         this.currentStrategy = str;
+        this.previewButton.nativeElement.disabled = false;
         (window as any).swal('Done!', 'Strategy selected', 'success');
     }
 
@@ -63,9 +64,11 @@ export class backTestingViewComponent {
         this.textPreview = "Loading data...";
         this.backTestingService.getBackTestingSimulation(this.currentStrategy, from).subscribe((res)=>{
             if (res.response > 0) {
-                this.previewButton.nativeElement.disabled = false;
                 this.backTestingData = res.data;
+            }else{
+                this.textPreview = res.data;
             }
+            this.previewButton.nativeElement.disabled = false;
         });
     }
 }

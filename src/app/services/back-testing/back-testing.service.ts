@@ -31,10 +31,11 @@ export class BackTestingService {
             strategy: str.asset_class
         }
         return this.apis.post('backTesting', obj).map((res: GenericResponse) => {
-            let graph = this.computeData(res.data);
-            // let graph = this.computeData(this.mockAnswerBackend.data);
-            console.log(graph);
-            return new GenericResponse(1, 0, "", graph);
+            if (res.response > 0){
+                let graph = this.computeData(res.data);
+                return new GenericResponse(1, 0, "", graph);
+            }
+            return res;
         });
     }
 
