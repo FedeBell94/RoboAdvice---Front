@@ -9,8 +9,6 @@ import { StrategyService } from "../../services/strategy/strategy.service";
 import { AuthService } from "../../services/remote/authentication.service";
 import { ForecastingService, LoadingBar } from "../../services/forecasting/forecasting.service";
 
-let mnist = require('mnist');
-
 @Component({
     selector: 'forecastingView',
     templateUrl: 'forecasting-view.template.html',
@@ -62,8 +60,12 @@ export class forecastingViewComponent {
         });
     }
 
-    getForecastingData() {
-        
+    getForecastingData(days: number) {
+        this.forecast.getForecastChartOptions(days).subscribe(res=> {
+            if (res.response > 0) {
+                this.chartOptions = res.data;
+            }
+        });
     }
 
     ngOnInit() {

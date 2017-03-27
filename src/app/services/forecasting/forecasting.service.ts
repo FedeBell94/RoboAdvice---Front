@@ -141,8 +141,12 @@ export class ForecastingService {
         }
     }
 
-    public getForecastChartOptions(days: number) {
-        //TODO: get inferenced data from nnService
+    public getForecastChartOptions(days: number): Observable<GenericResponse> {
+        let obs: Observable<GenericResponse>;
+        obs = Observable.create(observer=> {
+
+        });
+        return obs;
     }
 }
 
