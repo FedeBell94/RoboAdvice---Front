@@ -30,7 +30,7 @@ export class NeuralNetworkService {
     public static BackDays = 20;
     public startingTrainingDate: string = "2015-01-27";
 
-    private maxValue = 10000;
+    private maxValue = 100000;
     private trainingData: any;
     private trainer;
     private currentIteration = 0;

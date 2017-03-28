@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { RoboAdviceConfig } from "../../app.configuration";
@@ -8,6 +8,7 @@ import { BackTestingService } from "../../services/back-testing/back-testing.ser
 import { StrategyService } from "../../services/strategy/strategy.service";
 import { AuthService } from "../../services/remote/authentication.service";
 import { ForecastingService, LoadingBar } from "../../services/forecasting/forecasting.service";
+import { PieChartComponent } from "../../components/pie-chart/pie-chart.component";
 
 @Component({
     selector: 'forecastingView',
@@ -24,6 +25,8 @@ export class forecastingViewComponent {
     ) { }
     private roboAdviceConfig = RoboAdviceConfig;
     private chartOptions;
+
+    @ViewChild("pieChart") pieChart: PieChartComponent;
 
     recommendedPercentageStrategy: number[];
 
@@ -56,20 +59,20 @@ export class forecastingViewComponent {
     }
 
     onRecommendedMeClick(type: string) {
+        this.recommendedPercentageStrategy = null;
         if (type == "svm") {
-            console.log("SVM");
             this.forecast.getRawForecastingData().subscribe((res) => {
                 if (res.response > 0) {
-                    this.recommendedPercentageStrategy = this.strategy.getRecommendedStrategy(res.data).getPercentageArray();
-                    console.log(this.recommendedPercentageStrategy);
-                    
+                    this.recommendedPercentageStrategy = this.strategy.getRecommendedStrategy(res.data).getPercentageArray();                    
                 }
             });
-        } else if (type == "neural") {
-            console.log("NEURAL");
+        } else {    // NEURAL
             this.recommendedPercentageStrategy = this.strategy.getRecommendedStrategy(this.forecast.getRawForecastDataForNeuralNetwork()).getPercentageArray();
-            console.log(this.recommendedPercentageStrategy);
         }
+
+        setTimeout(()=>{
+                this.pieChart.rePaint();
+        }, 500);
     }
 
     hasNNCached() {
@@ -124,7 +127,11 @@ export class forecastingViewComponent {
         strategy.setStrategyByArrayValues(values);
 
         this.strategy.saveStrategy(strategy).subscribe((res)=>{
-            (window as any).swal('Done!', 'Strategy Changed', 'success');
+            if (res.response > 0){
+                (window as any).swal('Done!', 'Strategy Changed', 'success');
+            }else{
+                (window as any).swal('Ops...', 'Something went wrog. Please try again!', 'error');
+            }
         });
     }
 

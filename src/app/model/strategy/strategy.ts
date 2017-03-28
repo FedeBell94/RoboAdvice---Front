@@ -25,4 +25,24 @@ export class Strategy {
             this.asset_class[i].percentage = values[i];
         }
     }
+
+    getTotalPercentage(): number{
+        let sum = 0;
+        for (let i = 0; i < this.asset_class.length; i++){
+            sum += this.asset_class[i].percentage;
+        }
+        return sum;
+    }
+
+    getIdOfMaxAssetClassPercentage(): number{
+        let id = 0;
+        let max = 0;
+        for (let i = 0; i < this.asset_class.length; i++){
+            if (this.asset_class[i].percentage > max){
+                max = this.asset_class[i].percentage;
+                id = i;
+            }
+        }
+        return id;
+    }
 }

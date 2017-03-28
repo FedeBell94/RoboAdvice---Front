@@ -49,7 +49,7 @@
                 </div>
                 <app-line-chart [data]="getChartOptions()" *ngIf="state == 'done' && getChartOptions()"></app-line-chart>
 
-                <button class="btn btn-default" *ngIf="state == 'done'" (click)="onRecommendedMeClick('neural')">{{ 'Recommended Me a Strategy' | uppercase }}</button>
+                <button class="btn btn-default" *ngIf="state == 'done'" data-toggle="modal" data-target="#recommendedStrategyModal" (click)="onRecommendedMeClick('neural')">{{ 'Recommended Me a Strategy' | uppercase }}</button>
             </div>
         </div>
     </div>
@@ -79,8 +79,9 @@
                 <h4>Recommended Strategy</h4>
             </div>
             <div class="modal-body" *ngIf="recommendedPercentageStrategy">
-                <div style="width: 300px; height: 300px">
+                <div class="pie-chart-recommended">
                     <app-pie-chart
+                        #pieChart
                         [values]="recommendedPercentageStrategy"
                     ></app-pie-chart>
                 </div>

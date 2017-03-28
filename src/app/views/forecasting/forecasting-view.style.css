@@ -4,3 +4,9 @@
     width: 100%;
     color: black;
  }
+
+ .pie-chart-recommended{
+     width: 260px;
+     height: 260px;
+     margin: auto;
+ }
