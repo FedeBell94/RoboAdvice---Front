@@ -42,7 +42,7 @@ export class registerComponent implements OnInit {
     }
 
     validatePassword(val: string) {
-        let re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        let re = /^[a-zA-Z0-9\s!#$%&'*+/=?^._`{|}~-]{6,16}$/;
         return re.test(val);
     }
 
