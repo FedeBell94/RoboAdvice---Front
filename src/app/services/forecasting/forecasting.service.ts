@@ -259,13 +259,13 @@ export class LoadingBar {
     private _total: number;
     private _current: number;
     get total() {
-        return 100;
+        return 1000;
     }
     set total(value: number) {
         this._total = (value < 0 ? 0 : value);
     }
     get current() {
-        return Math.ceil(this._current * 100 / this._total);
+        return Math.ceil(this._current * 1000 / this._total);
     }
     set current(value: number) {
         this._current = (value < 0 ? 0 : value);
