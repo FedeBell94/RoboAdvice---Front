@@ -3,18 +3,23 @@ import { ApiService } from '../remote/remote-call/remote-call.service';
 import { Strategy } from '../../model/strategy/strategy';
 import { isNumber } from "util";
 import { Asset } from "../../model/strategy/asset";
+import { Observable } from "rxjs/Observable";
+import { GenericResponse } from "../remote/remote-call/generic-response";
 
 @Injectable()
 export class StrategyService {
     constructor(
         private apis: ApiService,
     ) { }
+
     getStrategy() {
         return this.apis.get('strategy');
     }
+
     saveStrategy(strategy: Strategy) {
         return this.apis.post('strategy', strategy.asset_class);
     }
+
     getRecommendedStrategy(rawForecastData: ForecastData[]): Strategy {
         let deltaArray: number[] = [];
         for (let i = 0; i < rawForecastData.length; i++) {
@@ -50,6 +55,16 @@ export class StrategyService {
         return suggestStrategy;
     }
 
+    getSomeAdvice(){
+        return this.apis.get('giveMeSomeAdvicePlease').map((res) => {
+            let tmpAdvices: number[] = [];
+            for (let i = 0; i < res.data.length; i++){
+                tmpAdvices[i] = res.data[i].advice;
+            }
+            res.data = tmpAdvices;
+            return res;
+        });
+    }
 }
 
 

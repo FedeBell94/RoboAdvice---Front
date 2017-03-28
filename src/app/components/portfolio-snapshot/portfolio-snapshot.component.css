@@ -35937,3 +35937,12 @@ form .no-validate {
   }     
 }
 
+.advice {
+  float: right;
+  margin-right: 32px
+}
+
+.popup {
+  z-index: 300;
+  cursor: help
+}

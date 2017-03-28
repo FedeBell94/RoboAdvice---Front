@@ -8,13 +8,16 @@
     <div class="tile-body">
         <span>{{value | currency:'USD':true:'1.2-2'}}</span>
     </div>
-    <div class="tile-footer">
+    <div class="tile-footer" style="width: 100%">
         <span [ngClass]="{'text-success': !isLoss(percentage), 'text-error': isLoss(percentage)}">
             <i class="ti" [ngClass]="{'ti-arrow-up': !isLoss(percentage), 'ti-arrow-down': isLoss(percentage)}"></i>
             <span *ngIf="percentage">{{percentage | percent:'1.0-2'}}</span>
             <span *ngIf="!percentage">N/A</span>
             &nbsp;&nbsp;
             <i class="chart-icon-footer ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
+        </span>
+        <span class="advice" [ngClass]="{'text-success': !needToBuy(sellOrBuy), 'text-error': needToBuy(sellOrBuy)}">
+            <a class="popup" href="#" data-toggle="tooltip" data-placement="left" title="This is an advice based on our market forecast.">{{advice}}</a>
         </span>
     </div>
 </div>

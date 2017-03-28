@@ -1,7 +1,12 @@
 <div class="wrapper wrapper-content animated fadeInRight" *ngIf="isLogged()">
-    <div class="row" *ngIf="getPortfolio()">
+    <div class="row" *ngIf="getPortfolio() && getAdvices()">
         <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
-            <app-portfolio-snapshot [assetClassName]="aC.assetClass" [percentage]="aC.percentage" [value]="aC.value"></app-portfolio-snapshot>
+            <app-portfolio-snapshot 
+                [assetClassName]="aC.assetClass" 
+                [percentage]="aC.percentage" 
+                [value]="aC.value"
+                [sellOrBuy]="advices[i]"
+            ></app-portfolio-snapshot>
         </div>
     </div>
 
@@ -9,14 +14,19 @@
         <div class="col-md-3">
             <div class="info-tile">
                 <div class="tile-heading"><span>My Strategy</span></div>
-                <app-strategy [colors]="roboAdviceConfig.PieChartColor" [labels]="roboAdviceConfig.AssetClassLabel"></app-strategy>
+                <app-strategy 
+                    [colors]="roboAdviceConfig.PieChartColor" 
+                    [labels]="roboAdviceConfig.AssetClassLabel"
+                ></app-strategy>
             </div>
         </div>
         <div class="col-md-9 ">
             <div class="info-tile">
                 <div *ngIf="worthHistoryOptions">
                     <div class="tile-heading"><span>Worth history</span></div>
-                    <app-line-chart [data]="worthHistoryOptions"></app-line-chart>
+                    <app-line-chart 
+                        [data]="worthHistoryOptions"
+                    ></app-line-chart>
                 </div>
                 <div *ngIf="!worthHistoryOptions">
                     <h2>Welcome to Robo Advice+!</h2>

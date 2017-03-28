@@ -1,29 +1,44 @@
-import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Router } from "@angular/router";
+
+declare var jQuery: any;
 
 @Component({
-  selector: 'app-portfolio-snapshot',
-  templateUrl: './portfolio-snapshot.component.html',
-  styleUrls: ['./portfolio-snapshot.component.css']
+    selector: 'app-portfolio-snapshot',
+    templateUrl: './portfolio-snapshot.component.html',
+    styleUrls: ['./portfolio-snapshot.component.css']
 })
 export class PortfolioSnapshotComponent implements OnInit {
 
-  constructor(
-    private router: Router,
-  ) { }
+    constructor(
+        private router: Router,
+    ) { }
 
-  @Input() percentage: number;
-  @Input() assetClassName: string;
-  @Input() value: number;
+    @Input() percentage: number;
+    @Input() assetClassName: string;
+    @Input() sellOrBuy: number;
+    @Input() value: number;
 
-  ngOnInit() {
-  }
+    advice: string;
 
-  isLoss(percentage: number): boolean {
-    if (percentage < 0)
-      return true;
-    else
-      return false;
-  }
+    ngOnInit() {
+        console.log(this.sellOrBuy);
+        if (this.sellOrBuy > 0) {
+            this.advice = "Buy";
+        } else if (this.sellOrBuy < 0) {
+            this.advice = "Sell";
+        } else {
+            this.advice = "Maintain";
+        }
+        jQuery('[data-toggle="tooltip"]').tooltip();
+    }
+
+    isLoss(percentage: number): boolean {
+        return (percentage < 0);
+    }
+
+    needToBuy(sellBuy: number): boolean {
+        return (sellBuy > 0);
+    }
 
 }
