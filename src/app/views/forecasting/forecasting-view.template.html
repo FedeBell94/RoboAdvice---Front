@@ -25,7 +25,7 @@
                 <p *ngIf="state == 'trainingNN'">The system is loading. This may take some time, you can continue navigating the application and come back
                     later.</p>
                 <div class="input-group" *ngIf="state == 'ready' || state == 'done'">
-                    <span class="input-group-addon">Days to forecast (1 to 180)</span>
+                    <span class="input-group-addon">Days to forecast</span>
                     <select class="form-control" type="number" #forecastDays name="forecastDays" value="15">
                         <option value="7">1 Week</option>
                         <option value="15">2 Weeks</option>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 import { AuthService } from "../../services/remote/authentication.service";
 import { PortfolioService } from "../../services/portfolio/portfolio.service";
