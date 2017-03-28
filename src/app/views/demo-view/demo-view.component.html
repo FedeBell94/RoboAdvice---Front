@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-12">
             <h1>This is the DEMO page</h1>
-            <h3>To start simulating, choose a start date and an initial strategy, then click on "NEXT".</h3>
-            <p>You can change your strategy day by day. Clicking on next, another day will be computed. Enjoy!</p>
+            <h3>To start simulating, choose a start date and an initial strategy, then click on "START".</h3>
+            <p>You can change your strategy day by day. Clicking on "NEXT", another day will be computed. Enjoy!</p>
         </div>
     </div>
     <div class="row">
@@ -26,7 +26,7 @@
                         <button class="btn btn-default" type="button" (click)="resetDemo()">
                             {{'Reset' | uppercase}}
                         </button>
-                        <button #nextButton class="btn btn-default" type="button" (click)="demoNextDay(lastComputedDay)">
+                        <button #nextButton class="btn btn-default" type="button" (click)="demoNextDay(lastComputedDay)" disabled>
                             {{textButton | uppercase}}
                         </button>
                     </div>

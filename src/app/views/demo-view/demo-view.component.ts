@@ -21,21 +21,45 @@ export class demoViewComponent implements OnInit, OnDestroy {
     private strategy: Strategy;
     private days: number;
 
+
+    private text = "Choose a strategy and then click on 'start' to begin the simulation.";
     textButton: string = "Start";
-    textPreview: string = "Click on 'start' to begin the simulation.";
+    textPreview: string = this.text;
     chartOptions: any;
-    
+
     @ViewChild("inputStartingDate") inputDate: ElementRef;
     @ViewChild("nextButton") nextButton: ElementRef;
 
     private lastComputedDay() { return this.demo.getCurrentDate() };
 
-    resetDemo(){
-        this.textPreview = "Click on 'start' to begin the simulation.";
+    ngOnInit() {
+        //set default date
+        this.initData();
+    }
+
+    ngOnDestroy() {
+        this.resetDemo();
+    }
+
+    private initData() {
+        this.days = 1;
+        let d = new Date();
+        d.setDate(d.getDate() - 1);
+        this.onStartDateChange({
+            target: {
+                value: d.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')
+            }
+        });
+        //set default strategy
+        this.getInitialStrategy();
+    }
+
+    resetDemo() {
+        this.textPreview = this.text;
         this.textButton = "Start";
         this.chartOptions = null;
         this.inputDate.nativeElement.disabled = false;
-        this.nextButton.nativeElement.disabled = false;
+        this.nextButton.nativeElement.disabled = true;
         this.demo.wipeCache();
         this.initData();
     }
@@ -75,14 +99,16 @@ export class demoViewComponent implements OnInit, OnDestroy {
                     this.textButton = "End";
                     return;
                 }
+            } else {
+                this.textPreview = res.data + ".\n Click on 'reset' to restart Demo";
             }
         });
 
     }
 
-    private isLastUtilDate(): boolean{
+    private isLastUtilDate(): boolean {
         let today = new Date();
-        if (this.lastComputedDay() >= today.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-') ){
+        if (this.lastComputedDay() >= today.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')) {
             this.nextButton.nativeElement.disabled = true;
             return false;
         }
@@ -90,8 +116,9 @@ export class demoViewComponent implements OnInit, OnDestroy {
     }
 
     onStrategySave(s: Strategy) {
-        (window as any).swal('Done!', 'Strategy selected', 'success');
+        this.nextButton.nativeElement.disabled = false;
         this.strategy = JSON.parse(JSON.stringify(s));
+        (window as any).swal('Done!', 'Strategy selected', 'success');
     }
 
     onStartDateChange(e) {
@@ -107,33 +134,11 @@ export class demoViewComponent implements OnInit, OnDestroy {
     }
 
     onNumberDaysChange(e) {
-        if (e.target.value <= 0){
+        if (e.target.value <= 0) {
             this.days = 1;
-        }else{
+        } else {
             this.days = e.target.value;
         }
-    }
-
-    ngOnInit() {
-        //set default date
-        this.initData();
-    }
-
-    ngOnDestroy(){
-        this.resetDemo();
-    }
-
-    private initData(){
-        this.days = 1;
-        let d = new Date();
-        d.setDate(d.getDate() - 1);
-        this.onStartDateChange({ 
-            target: { 
-                value: d.toLocaleDateString('eu', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-') 
-            } 
-        });
-        //set default strategy
-        this.getInitialStrategy();
     }
 
     private getInitialStrategy() {
