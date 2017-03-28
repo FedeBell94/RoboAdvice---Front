@@ -36,6 +36,11 @@ export class ForecastingService {
 
     private nnChartOptions: any;
 
+    private rawForecastingDataForNeuralNetwork: any;
+
+    getRawForecastDataForNeuralNetwork(){
+        return this.rawForecastingDataForNeuralNetwork;
+    }
 
     getRawForecastingData(): Observable<GenericResponse> {
       return this.apis.get('forecast').map((res: GenericResponse) => {
@@ -47,8 +52,6 @@ export class ForecastingService {
     getForecastingSimulation(): Observable<GenericResponse> {
         return this.apis.get('forecast').map((res: GenericResponse) => {
             let graph = this.computeData(res.data);
-            // let graph = this.computeData(this.mockAnswerBackend.data);
-            console.log(graph);
             return new GenericResponse(1, 0, "", graph);
         });
     }
@@ -195,6 +198,8 @@ export class ForecastingService {
                 this.portfolio.getWorth().subscribe(resProtfolio=> {
                     if (resProtfolio.response > 0) {
                         if (!resProtfolio.data) resProtfolio.data = RoboAdviceConfig.DefaultInitialWorth;
+                        // save data for 'Recommended Strategy'
+                        this.rawForecastingDataForNeuralNetwork = res.data;
                         this.nnChartOptions = this.computeData(res.data);
                         let diff = resProtfolio.data - this.nnChartOptions.dataProvider[0].value;
                         for (let i = 0; i < this.nnChartOptions.dataProvider.length; i++) {

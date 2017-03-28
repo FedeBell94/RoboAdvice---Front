@@ -28,16 +28,16 @@ export class forecastingViewComponent {
     /* Second type of forecasting */
     private forecastingData: any;
 
-    getForecasting(){
+    getForecasting() {
         if (this.forecastingData) return;
-        this.forecast.getForecastingSimulation().subscribe((res)=>{
+        this.forecast.getForecastingSimulation().subscribe((res) => {
             if (res.response > 0) {
                 this.forecastingData = res.data;
             }
         });
     }
 
-    getChartOptionsSecondType(){
+    getChartOptionsSecondType() {
         return this.forecastingData;
     }
     /* end */
@@ -52,13 +52,21 @@ export class forecastingViewComponent {
     isLogged() {
         return this.auth.isLogged();
     }
-    onRecommendedMeClick(){
-        this.forecast.getRawForecastingData().subscribe((res)=>{
-            if(res.response>0){
-              let recommendedStrategy: Strategy =  this.strategy.getRecommendedStrategy(res.data);
-                console.log(recommendedStrategy);
-            }
-        });
+    onRecommendedMeClick(type: string) {
+        let recommendedStrategy: Strategy;
+        if (type == "svm") {
+            console.log("SVM");
+            this.forecast.getRawForecastingData().subscribe((res) => {
+                if (res.response > 0) {
+                    recommendedStrategy = this.strategy.getRecommendedStrategy(res.data);
+                    console.log(recommendedStrategy);
+                }
+            });
+        } else if (type == "neural") {
+            console.log("NEURAL");
+            recommendedStrategy = this.strategy.getRecommendedStrategy(this.forecast.getRawForecastDataForNeuralNetwork());
+            console.log(recommendedStrategy);
+        }
     }
     hasNNCached() {
         return this.forecast.hasCached();
@@ -69,7 +77,7 @@ export class forecastingViewComponent {
     }
 
     prepareNeuralNetwork() {
-        this.forecast.prepareNN().subscribe(res=> {
+        this.forecast.prepareNN().subscribe(res => {
             if (res.response <= 0) {
                 // TODO: print an error
                 return;
@@ -81,13 +89,13 @@ export class forecastingViewComponent {
             }
 
             // training is made into a web worker, so we need to call NgZone to update the view
-            this._nz.run(()=> {});
+            this._nz.run(() => { });
         });
     }
 
     getForecastingData(days: number) {
         this.chartOptions = null;
-        this.forecast.getForecastChartOptions(days).subscribe(res=> {
+        this.forecast.getForecastChartOptions(days).subscribe(res => {
             if (res.response > 0) {
                 this.chartOptions = res.data;
             }
@@ -97,7 +105,7 @@ export class forecastingViewComponent {
     ngOnInit() {
         if (!this.auth.isLogged()) return;
         if (this.state == 'done') {
-            this.forecast.getForecastChartOptions().subscribe(res=> {
+            this.forecast.getForecastChartOptions().subscribe(res => {
                 if (res.response > 0) {
                     this.chartOptions = res.data;
                 }
