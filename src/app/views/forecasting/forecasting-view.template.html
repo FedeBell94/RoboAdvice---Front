@@ -23,7 +23,8 @@
 
                 <button class="btn btn-default" *ngIf="state == 'none'" (click)="prepareNeuralNetwork()">Prepare NN</button>
                 <p *ngIf="state == 'trainingNN'">The system is loading. This may take some time, you can continue navigating the application and come back
-                    later.</p>
+                    later.
+                </p>
                 <div class="input-group" *ngIf="state == 'ready' || state == 'done'">
                     <span class="input-group-addon">Days to forecast (1 to 180)</span>
                     <select class="form-control" type="number" #forecastDays name="forecastDays" value="15">
@@ -59,9 +60,39 @@
                 <div class="tile-heading"><span>Forecasting With SVM (Machine Learning)</span></div>
                 <app-line-chart [data]="getChartOptionsSecondType()"></app-line-chart>
 
-                <button class="btn btn-default" (click)="onRecommendedMeClick('svm')">{{ 'Recommended Me a Strategy' | uppercase }}</button>
+                <button class="btn btn-default" data-toggle="modal" data-target="#recommendedStrategyModal" (click)="onRecommendedMeClick('svm')">{{ 'Recommended Me a Strategy' | uppercase }}</button>
             </div>
         </div>
     </div>
 
+</div>
+
+
+<!--MODAL-->
+<div class="modal fade" id="recommendedStrategyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" data-hidden="true">
+                    &times;
+				</button>
+                <h4>Recommended Strategy</h4>
+            </div>
+            <div class="modal-body" *ngIf="recommendedPercentageStrategy">
+                <div style="width: 300px; height: 300px">
+                    <app-pie-chart
+                        [values]="recommendedPercentageStrategy"
+                    ></app-pie-chart>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="changeStrategy(recommendedPercentageStrategy)">
+                    I want this strategy
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -25,6 +25,8 @@ export class forecastingViewComponent {
     private roboAdviceConfig = RoboAdviceConfig;
     private chartOptions;
 
+    recommendedPercentageStrategy: number[];
+
     /* Second type of forecasting */
     private forecastingData: any;
 
@@ -52,22 +54,24 @@ export class forecastingViewComponent {
     isLogged() {
         return this.auth.isLogged();
     }
+
     onRecommendedMeClick(type: string) {
-        let recommendedStrategy: Strategy;
         if (type == "svm") {
             console.log("SVM");
             this.forecast.getRawForecastingData().subscribe((res) => {
                 if (res.response > 0) {
-                    recommendedStrategy = this.strategy.getRecommendedStrategy(res.data);
-                    console.log(recommendedStrategy);
+                    this.recommendedPercentageStrategy = this.strategy.getRecommendedStrategy(res.data).getPercentageArray();
+                    console.log(this.recommendedPercentageStrategy);
+                    
                 }
             });
         } else if (type == "neural") {
             console.log("NEURAL");
-            recommendedStrategy = this.strategy.getRecommendedStrategy(this.forecast.getRawForecastDataForNeuralNetwork());
-            console.log(recommendedStrategy);
+            this.recommendedPercentageStrategy = this.strategy.getRecommendedStrategy(this.forecast.getRawForecastDataForNeuralNetwork()).getPercentageArray();
+            console.log(this.recommendedPercentageStrategy);
         }
     }
+
     hasNNCached() {
         return this.forecast.hasCached();
     }
@@ -113,7 +117,15 @@ export class forecastingViewComponent {
         }
 
         this.getForecasting();
+    }
 
+    changeStrategy(values: number[]){
+        let strategy: Strategy = new Strategy();
+        strategy.setStrategyByArrayValues(values);
+
+        this.strategy.saveStrategy(strategy).subscribe((res)=>{
+            (window as any).swal('Done!', 'Strategy Changed', 'success');
+        });
     }
 
 }
