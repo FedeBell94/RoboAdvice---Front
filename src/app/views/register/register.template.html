@@ -8,15 +8,15 @@
     <form class="m-t" role="form">
       <div class="form-group input-group">
         <span class="input-group-addon"><i class="fa fa-envelope icon-width"></i></span>
-        <input type="email" class="form-control" #email placeholder="Email" required>
+        <input type="email" class="form-control" #email placeholder="Email" required (keydown)="validateAll()">
       </div>
       <div class="form-group input-group">
         <span class="input-group-addon"><i class="fa fa-user icon-width"></i></span>
-        <input type="text" class="form-control" #nickname placeholder="Username" required>
+        <input type="text" class="form-control" #nickname placeholder="Username" required (keydown)="validateAll()">
       </div>
       <div class="form-group input-group">
         <span class="input-group-addon"><i class="fa fa-lock icon-width"></i></span>
-        <input type="password" class="form-control" #pwd placeholder="Password" required>
+        <input type="password" class="form-control" #pwd placeholder="Password" required (keydown)="validateAll()">
       </div>
       <!--<div class="form-group">
         <div class="checkbox i-checks white-color"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
@@ -25,6 +25,7 @@
       <button type="button"
               class="btn btn-primary block full-width m-b"
               (click)="submitRegistration(email.value, nickname.value, pwd.value)"
+              [disabled]="!formIsValid"
       >Register</button>
 
       <p class="text-muted text-center white-color"><small>Already have an account?</small></p>
