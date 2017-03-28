@@ -16,7 +16,13 @@
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon">How many days want to simulate each next click?</span>
-                    <input class="form-control" type="number" name="numberDays" min="1" [value]="days" (change)="onNumberDaysChange($event)">
+                    <select class="form-control" type="number" name="numberDays" [value]="days" (change)="onNumberDaysChange($event)">
+                        <option value="1">1 Day</option>
+                        <option value="3">3 Days</option>
+                        <option value="7">1 Week</option>
+                        <option value="15">2 Weeks</option>
+                        <option value="30">1 Month</option>
+                    </select>
                 </div>
                 <br>
                 <div class="input-group">

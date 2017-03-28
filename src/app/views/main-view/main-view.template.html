@@ -1,29 +1,30 @@
 <div class="wrapper wrapper-content animated fadeInRight" *ngIf="isLogged()">
-  <div class="row" *ngIf="getPortfolio()">
-    <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
-      <app-portfolio-snapshot
-          [assetClassName]="aC.assetClass"
-          [percentage]="aC.percentage"
-          [value]="aC.value"
-      ></app-portfolio-snapshot>
+    <div class="row" *ngIf="getPortfolio()">
+        <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
+            <app-portfolio-snapshot [assetClassName]="aC.assetClass" [percentage]="aC.percentage" [value]="aC.value"></app-portfolio-snapshot>
+        </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-3">
-      <div class="info-tile">
-        <div class="tile-heading"><span>My Strategy</span></div>
-        <app-strategy
-          [colors]="roboAdviceConfig.PieChartColor"
-          [labels]="roboAdviceConfig.AssetClassLabel"
-        ></app-strategy>
-      </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="info-tile">
+                <div class="tile-heading"><span>My Strategy</span></div>
+                <app-strategy [colors]="roboAdviceConfig.PieChartColor" [labels]="roboAdviceConfig.AssetClassLabel"></app-strategy>
+            </div>
+        </div>
+        <div class="col-md-9 ">
+            <div class="info-tile">
+                <div *ngIf="worthHistoryOptions">
+                    <div class="tile-heading"><span>Worth history</span></div>
+                    <app-line-chart [data]="worthHistoryOptions"></app-line-chart>
+                </div>
+                <div *ngIf="!worthHistoryOptions">
+                    <h2>Welcome to Robo Advice+!</h2>
+                    <h4>Now that you have a strategy, every night our system will compute your portfolio.</h4>
+                    <p>You can change your strategy whenever you want.</p>
+                    <p>Take a look to the <a [routerLink]="['/demo']">DEMO</a> page if you don't want to wait untill tomorrow to enjoy RoboAdvice+!</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-9 " *ngIf="worthHistoryOptions">
-      <div class="info-tile">
-        <div class="tile-heading"><span>Worth history</span></div>
-        <app-line-chart [data]="worthHistoryOptions"></app-line-chart>
-      </div>
-    </div>
-  </div>
 </div>

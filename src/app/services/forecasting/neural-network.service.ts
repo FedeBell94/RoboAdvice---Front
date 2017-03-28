@@ -24,10 +24,10 @@ export class NeuralNetworkService {
         private strategy: StrategyService,
         private assetService: AssetService,
     ) { }
-    public static TrainingRate = .25;
+    public static TrainingRate = .23;
     public static TrainingIterations = 10000;
     public static ErrorRatio = 0.000007;
-    public static BackDays = 30;
+    public static BackDays = 20;
     public startingTrainingDate: string = "2015-01-27";
 
     private maxValue = 10000;

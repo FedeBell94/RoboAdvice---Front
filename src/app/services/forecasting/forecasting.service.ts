@@ -197,6 +197,7 @@ export class ForecastingService {
             this.getForecastData(days).subscribe((res)=> {
                 this.portfolio.getWorth().subscribe(resProtfolio=> {
                     if (resProtfolio.response > 0) {
+                        if (!resProtfolio.data) resProtfolio.data = RoboAdviceConfig.DefaultInitialWorth;
                         // save data for 'Recommended Strategy'
                         this.rawForecastingDataForNeuralNetwork = res.data;
                         this.nnChartOptions = this.computeData(res.data);
