@@ -38,7 +38,7 @@ export class registerComponent implements OnInit {
 
     validateUsername(val: string) {
         let re = /^[a-zA-Z0-9\s]+$/;
-        return (val.length > 4 && re.test(val) && val.length < 16);
+        return (val.length >= 4 && re.test(val) && val.length < 16);
     }
 
     validatePassword(val: string) {
