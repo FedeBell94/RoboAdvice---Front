@@ -1,4 +1,4 @@
-<div class="info-tile" [ngClass]="{'cursor-pointer': isClickable(), 'tile-success': !isLoss(percentage), 'tile-error': isLoss(percentage)}">
+<div style="overflow: visible" class="info-tile" [ngClass]="{'cursor-pointer': isClickable(), 'tile-success': !isLoss(percentage), 'tile-error': isLoss(percentage)}">
     <div class="tile-icon chart-icon">
         <i class="ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
     </div>
@@ -17,7 +17,7 @@
             <i class="chart-icon-footer ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
         </span>
         <span class="advice" [ngClass]="{'text-success': !needToBuy(sellOrBuy), 'text-error': needToBuy(sellOrBuy)}">
-            <a class="popup" href="#" data-toggle="tooltip" data-placement="left" title="This is an advice based on our market forecast.">{{advice}}</a>
+            <a class="popup" href="#" data-toggle="tooltip" data-placement="bottom" title="This is an advice based on our market forecast.">{{advice}}</a>
         </span>
     </div>
 </div>
