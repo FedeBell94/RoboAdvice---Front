@@ -22,7 +22,6 @@ export class PortfolioSnapshotComponent implements OnInit {
     advice: string;
 
     ngOnInit() {
-        console.log(this.sellOrBuy);
         if (this.sellOrBuy > 0) {
             this.advice = "Buy";
         } else if (this.sellOrBuy < 0) {

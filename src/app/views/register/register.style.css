@@ -224,3 +224,9 @@ li.active:after {
     padding:12px 20px;
   }
 }
+
+.error-message{
+  color: #dd191d !important;
+  top: -15px;
+  position: relative;
+}
