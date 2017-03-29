@@ -61,10 +61,8 @@ export class ApiService {
         ///     errorString: (string di messaggio dell'errore),
         ///     data: (dati se non errori) }
         let body = res.json();
-        console.log(body);
         if (body.response == 0) {
             //error there
-            console.log( new Date().toDateString() + " SERVER API ERROR " + body.errorCode + ": " + body.errorString);
             switch(body.errorCode) {
                 case 999:
                     //auth error

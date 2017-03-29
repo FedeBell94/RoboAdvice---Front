@@ -8,21 +8,21 @@
         <form class="m-t" role="form">
             <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope icon-width"></i></span>
-                <input type="email" class="form-control" #email placeholder="Email" required (keydown)="validateAll()">
+                <input type="email" class="form-control" #email placeholder="Email" required (input)="validateAll()">
             </div>
             <span class="error-message" *ngIf="emailErrorMessage">
                 {{emailErrorMessage}}
             </span>
             <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-user icon-width"></i></span>
-                <input type="text" class="form-control" #nickname placeholder="Username" required (keydown)="validateAll()">
+                <input type="text" class="form-control" #nickname placeholder="Username" required (input)="validateAll()">
             </div>
             <span class="error-message" *ngIf="usernameErrorMessage">
                 {{usernameErrorMessage}}
             </span>
             <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-lock icon-width"></i></span>
-                <input type="password" class="form-control" #pwd placeholder="Password" required (keydown)="validateAll()">
+                <input type="password" class="form-control" #pwd placeholder="Password" required (input)="validateAll()">
             </div>
             <span class="error-message" *ngIf="passwordErrorMessage">
                 {{passwordErrorMessage}}

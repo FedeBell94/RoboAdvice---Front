@@ -68,7 +68,7 @@ export class registerComponent implements OnInit {
     }
 
     validatePassword(val: string) {
-        let re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        let re = /^[a-zA-Z0-9\s!#$%&'*+/=?^._`{|}~-]{6,16}$/;
         let valid = re.test(val);
         if (!valid)
             this.passwordErrorMessage = "Password must be between 6 and 16 characters";

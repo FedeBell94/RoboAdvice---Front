@@ -28,7 +28,7 @@ export class NeuralNetworkService {
     public static TrainingIterations = 10000;
     public static ErrorRatio = 0.000007;
     public static BackDays = 20;
-    public startingTrainingDate: string = "2015-01-27";
+    public startingTrainingDate: string = "2015-01-1";
 
     private maxValue = 100000;
     private trainingData: any;
@@ -36,7 +36,7 @@ export class NeuralNetworkService {
     private currentIteration = 0;
     private assetClassesNumber = 4;
 
-    //@LocalStorage() this require 1.6GB Memory
+    //@LocalStorage() this require too much Memory
     private neuralNetwork;
 
     public wipeCache() {
@@ -120,7 +120,7 @@ export class NeuralNetworkService {
                 schedule: {
                     every: 1,
                     do: (data)=> {
-                        console.log("error", (Math.round(data.error * this.maxValue * 100 * 100) / 100) + "%", "iterations", data.iterations, "rate", data.rate);
+                        //console.log("error", (Math.round(data.error * this.maxValue * 100 * 100) / 100) + "%", "iterations", data.iterations, "rate", data.rate);
                         this.currentIteration++;
                         observer.next(new GenericResponse(1, 0, "", 1));    //sending info about completeness
                     }
