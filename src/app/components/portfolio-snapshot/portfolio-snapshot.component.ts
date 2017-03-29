@@ -33,7 +33,7 @@ export class PortfolioSnapshotComponent implements OnInit {
         } else if (this.sellOrBuy < 0) {
             this.advice = "Sell";
         } else {
-            this.advice = "Maintain";
+            this.advice = "Keep";
         }
         jQuery('[data-toggle="tooltip"]').tooltip();
     }
