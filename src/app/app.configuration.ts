@@ -3,7 +3,7 @@ export const RoboAdviceConfig = {
   PieChartColor: ['#86c7f3','#aed581','#ffa1b5','#ecd25b','#eaeaea'],
   StrategyName: ['BONDS', 'INCOME', 'BALANCED', 'GROWTH', 'STOCKS'],
   DefaultInitialWorth: 10000,
-  Build: "1.0.0",
+  Build: "1.0.1",
 
 
   //ApiUrl: 'http://localhost:8080/securedApi/',

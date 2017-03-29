@@ -26,8 +26,6 @@ export class forecastingViewComponent {
     private roboAdviceConfig = RoboAdviceConfig;
     private chartOptions;
 
-    @ViewChild("pieChart") pieChart: PieChartComponent;
-
     recommendedPercentageStrategy: number[];
 
     /* Second type of forecasting */
@@ -69,10 +67,6 @@ export class forecastingViewComponent {
         } else {    // NEURAL
             this.recommendedPercentageStrategy = this.strategy.getRecommendedStrategy(this.forecast.getRawForecastDataForNeuralNetwork()).getPercentageArray();
         }
-
-        setTimeout(()=>{
-                this.pieChart.rePaint();
-        }, 500);
     }
 
     hasNNCached() {
