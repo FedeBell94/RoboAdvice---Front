@@ -21,9 +21,7 @@ export class ChartUtils {
     }
 
     public static getOptions(data: any[], graphs: GraphDynamicOptions[]) {
-        let enableScroll: boolean = !(document.body.offsetWidth < 480);
-        console.log(enableScroll);
-        
+        let enableScroll: boolean = !(document.body.offsetWidth < 480);        
         let opt = {
             "type": "serial",
             "theme": "none",

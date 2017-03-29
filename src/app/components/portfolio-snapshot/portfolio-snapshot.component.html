@@ -1,4 +1,4 @@
-<div class="info-tile cursor-pointer" [ngClass]="{'tile-success': !isLoss(percentage), 'tile-error': isLoss(percentage)}">
+<div class="info-tile" [ngClass]="{'cursor-pointer': isClickable(), 'tile-success': !isLoss(percentage), 'tile-error': isLoss(percentage)}">
     <div class="tile-icon chart-icon">
         <i class="ti" [ngClass]="{'ti-stats-up': !isLoss(percentage), 'ti-stats-down': isLoss(percentage)}"></i>
     </div>

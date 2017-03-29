@@ -41,11 +41,12 @@
         </div>
     </div>
     <div class="row" *ngIf="getPortfolio()">
-        <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index" (click)="showAsset(i)">
+        <div class="col-md-3" *ngFor="let aC of getPortfolio().assets; let i = index">
             <app-portfolio-snapshot 
                 [assetClassName]="aC.assetClass" 
                 [percentage]="aC.percentage" 
                 [value]="aC.value"
+                [clickable]="false"
             ></app-portfolio-snapshot>
         </div>
     </div>

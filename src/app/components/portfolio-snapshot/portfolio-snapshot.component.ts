@@ -16,12 +16,18 @@ export class PortfolioSnapshotComponent implements OnInit {
 
     @Input() percentage: number;
     @Input() assetClassName: string;
-    @Input() sellOrBuy: number;
+    @Input() sellOrBuy: number = undefined;
     @Input() value: number;
+    @Input() clickable: boolean = true;
 
     advice: string;
 
     ngOnInit() {
+        if (this.sellOrBuy === undefined) {
+            this.advice = "";
+            return;
+        }
+
         if (this.sellOrBuy > 0) {
             this.advice = "Buy";
         } else if (this.sellOrBuy < 0) {
@@ -38,6 +44,10 @@ export class PortfolioSnapshotComponent implements OnInit {
 
     needToBuy(sellBuy: number): boolean {
         return (sellBuy > 0);
+    }
+
+    isClickable(){
+        return this.clickable;
     }
 
 }
