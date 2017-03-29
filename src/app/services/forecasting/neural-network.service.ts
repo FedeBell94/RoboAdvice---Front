@@ -24,11 +24,11 @@ export class NeuralNetworkService {
         private strategy: StrategyService,
         private assetService: AssetService,
     ) { }
-    public static TrainingRate = .23;
-    public static TrainingIterations = 10000;
-    public static ErrorRatio = 0.000007;
-    public static BackDays = 20;
-    public startingTrainingDate: string = "2015-01-1";
+    public static TrainingRate = .25;
+    public static TrainingIterations = 1000;
+    public static ErrorRatio = 0.0000001;
+    public static BackDays = 45;
+    public startingTrainingDate: string = "2016-01-1";
 
     private maxValue = 100000;
     private trainingData: any;
@@ -120,7 +120,7 @@ export class NeuralNetworkService {
                 schedule: {
                     every: 1,
                     do: (data)=> {
-                        //console.log("error", (Math.round(data.error * this.maxValue * 100 * 100) / 100) + "%", "iterations", data.iterations, "rate", data.rate);
+                        console.log("error", (Math.round(data.error * this.maxValue * 100 * 100) / 100) + "%", "iterations", data.iterations, "rate", data.rate);
                         this.currentIteration++;
                         observer.next(new GenericResponse(1, 0, "", 1));    //sending info about completeness
                     }

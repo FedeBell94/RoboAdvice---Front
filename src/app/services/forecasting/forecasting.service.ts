@@ -125,7 +125,7 @@ export class ForecastingService {
             this.loading['_total'] += 1;                                          //configuring the network
             this.loading['_total'] += 5;                                          //creating the network
             this.loading['_total'] += NeuralNetworkService.TrainingIterations;    //iterations of training for the neural network
-            console.log("total: ", + this.loading['_total']);
+            //console.log("total: ", + this.loading['_total']);
             // STEP 2)
             obs = Observable.create(observer=> {
                 //STEP 2.a)
