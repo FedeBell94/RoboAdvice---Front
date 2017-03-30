@@ -58,6 +58,8 @@ export class SurveyComponent implements OnInit {
             }
             console.log(this.strategy);
         });
+
+        document.onkeydown = (event) => { this.submitQuestion() };
     }
 
     getStrategies(){

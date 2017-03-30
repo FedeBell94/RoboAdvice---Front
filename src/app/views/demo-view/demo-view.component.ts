@@ -21,6 +21,8 @@ export class demoViewComponent implements OnInit, OnDestroy {
     private strategy: Strategy;
     private days: number;
 
+    private autoNext: boolean;
+    private seconds: number = 2;
 
     private text = "Choose a strategy and then click on 'start' to begin the simulation.";
     textButton: string = "Start";
@@ -84,7 +86,6 @@ export class demoViewComponent implements OnInit, OnDestroy {
 
         this.textPreview = "Loading data...";
         this.textButton = "Next";
-        this.chartOptions = null;
 
         this.inputDate.nativeElement.disabled = true;
         // disable next button, it'll enable when the call will came back
@@ -97,8 +98,15 @@ export class demoViewComponent implements OnInit, OnDestroy {
 
                 if (!this.isLastUtilDate()) {
                     this.textButton = "End";
+                    (window as any).swal("Completed", "Simulation has ended", "success");
                     return;
+                } else if (this.autoNext) {
+                    setTimeout(() => {
+                        this.chartOptions = null;
+                        this.demoNextDay();
+                    }, this.seconds * 1000);
                 }
+
             } else {
                 this.textPreview = res.data + ".\n Click on 'reset' to restart Demo";
             }
@@ -133,12 +141,16 @@ export class demoViewComponent implements OnInit, OnDestroy {
         }
     }
 
-    onNumberDaysChange(e) {
+    onNumberDaysChange(e: any) {
         if (e.target.value <= 0) {
             this.days = 1;
         } else {
             this.days = e.target.value;
         }
+    }
+
+    onNumberSecondsChange(e: any) {
+        this.seconds = e.target.value;
     }
 
     private getInitialStrategy() {
@@ -151,6 +163,10 @@ export class demoViewComponent implements OnInit, OnDestroy {
         } else {
             setTimeout(this.getInitialStrategy.bind(this), 10);
         }
+    }
+
+    changeAutomaticDemo(e: any) {
+        this.autoNext = e.target.checked;
     }
 
 }
