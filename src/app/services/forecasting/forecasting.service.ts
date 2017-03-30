@@ -230,7 +230,7 @@ export class LoadingBar {
         "Seeking black cats",
         "Building 13th floor",
         "Thinking what to say",
-        "Fearing the chiprel",
+        "Fearing the Chiprel",
         "Studiyng economics",
         "Hiring a witch",
         "Converting matter to gold",
@@ -248,7 +248,9 @@ export class LoadingBar {
         "Innovating",
         "Discovering new technologies",
         "Getting a promotion",
-        "Discussing with the boss"
+        "Discussing with the boss",
+        "Getting a Coffee",
+        "Playing Hide and Seek"
 
     ];
     private static _qIndex = 0;
