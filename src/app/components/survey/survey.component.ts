@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { Question } from "../../model/survey/question";
 import { Strategy } from "../../model/strategy/strategy";
@@ -14,7 +14,7 @@ declare var jQuery: any;
     templateUrl: './survey.component.html',
     styleUrls: ['./survey.component.css']
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, OnDestroy {
 
     questions: Question[];
 
@@ -60,6 +60,10 @@ export class SurveyComponent implements OnInit {
         });
 
         document.onkeydown = (event) => { this.submitQuestion() };
+    }
+
+    ngOnDestroy(){
+        document.onkeydown = null;
     }
 
     getStrategies(){

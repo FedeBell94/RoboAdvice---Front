@@ -87,6 +87,8 @@ export class demoViewComponent implements OnInit, OnDestroy {
         this.textPreview = "Loading data...";
         this.textButton = "Next";
 
+        if (!this.autoNext) this.chartOptions = null;
+
         this.inputDate.nativeElement.disabled = true;
         // disable next button, it'll enable when the call will came back
         this.nextButton.nativeElement.disabled = true;
@@ -98,7 +100,7 @@ export class demoViewComponent implements OnInit, OnDestroy {
 
                 if (!this.isLastUtilDate()) {
                     this.textButton = "End";
-                    (window as any).swal("Completed", "Simulation has ended", "success");
+                    (window as any).swal("Completed!", "Simulation has ended", "success");
                     return;
                 } else if (this.autoNext) {
                     setTimeout(() => {
